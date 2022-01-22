@@ -150,8 +150,10 @@
     <ClCompile Include="src\Solar\Application.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Solar.h" />
     <ClInclude Include="src\Solar\Application.h" />
     <ClInclude Include="src\Solar\Core.h" />
+    <ClInclude Include="src\Solar\EntryPoint.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
