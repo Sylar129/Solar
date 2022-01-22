@@ -16,4 +16,4 @@ namespace Solar {
     Application* CreateApplication();
 }
 
-#endif // _SOLAR_APPLICATION_H_
+#endif // !_SOLAR_APPLICATION_H_

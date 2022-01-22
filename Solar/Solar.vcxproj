@@ -151,9 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Solar\Log.cpp" />
     <ClCompile Include="src\Solar\Application.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Solar\Log.h" />
     <ClInclude Include="src\Solar.h" />
     <ClInclude Include="src\Solar\Application.h" />
     <ClInclude Include="src\Solar\Core.h" />

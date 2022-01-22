@@ -6,12 +6,16 @@
 extern Solar::Application* Solar::CreateApplication();
 
 int main(int argc, char** argv) {
+    Solar::Log::Init();
+    SOLAR_CORE_WARN("Initialized Log!");
+    int a = 5;
+    SOLAR_INFO("Hello!\n a = {0}", a);
+
     auto app = Solar::CreateApplication();
     app->Run();
     delete app;
 }
 
-
 #endif // SOLAR_PLATFORM_WINDOWS
 
-#endif // _SOLAR_ENTRYPOINT_H_
+#endif // !_SOLAR_ENTRYPOINT_H_

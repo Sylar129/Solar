@@ -11,4 +11,4 @@
     #error Solar only support Windwos!
 #endif // SOLAR_PLATFORM_WINDOWS
 
-#endif // _SOLAR_CORE_H_
+#endif // !_SOLAR_CORE_H_
