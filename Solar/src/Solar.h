@@ -1,5 +1,5 @@
-#ifndef _SOLAR_SOLAR_SOLAR_H_
-#define _SOLAR_SOLAR_SOLAR_H_
+#ifndef _SOLAR_H_
+#define _SOLAR_H_
 
 // For use by Solar Application
 #include "Solar/Application.h"
@@ -9,4 +9,4 @@
 #include "Solar/EntryPoint.h"
 // ----------------------------------------
 
-#endif // _SOLAR_SOLAR_SOLAR_H_
+#endif // _SOLAR_H_

@@ -1,5 +1,5 @@
-#ifndef _SOLAR_SANDBOX_APPLICATION_H_
-#define _SOLAR_SANDBOX_APPLICATION_H_
+#ifndef _SOLAR_APPLICATION_H_
+#define _SOLAR_APPLICATION_H_
 #include "Core.h"
 
 namespace Solar {
@@ -16,4 +16,4 @@ namespace Solar {
     Application* CreateApplication();
 }
 
-#endif // _SOLAR_SANDBOX_APPLICATION_H_
+#endif // _SOLAR_APPLICATION_H_

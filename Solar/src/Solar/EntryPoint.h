@@ -1,5 +1,5 @@
-#ifndef _SOLAR_SOLAR_ENTRYPOINT_H_
-#define _SOLAR_SOLAR_ENTRYPOINT_H_
+#ifndef _SOLAR_ENTRYPOINT_H_
+#define _SOLAR_ENTRYPOINT_H_
 
 #ifdef SOLAR_PLATFORM_WINDOWS
 
@@ -14,4 +14,4 @@ int main(int argc, char** argv) {
 
 #endif // SOLAR_PLATFORM_WINDOWS
 
-#endif // _SOLAR_SOLAR_ENTRYPOINT_H_
+#endif // _SOLAR_ENTRYPOINT_H_
