@@ -1,5 +1,4 @@
-#ifndef _SOLAR_ENTRYPOINT_H_
-#define _SOLAR_ENTRYPOINT_H_
+#pragma once
 
 #ifdef SOLAR_PLATFORM_WINDOWS
 
@@ -17,5 +16,3 @@ int main(int argc, char** argv) {
 }
 
 #endif // SOLAR_PLATFORM_WINDOWS
-
-#endif // !_SOLAR_ENTRYPOINT_H_

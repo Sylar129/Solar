@@ -155,6 +155,10 @@
     <ClCompile Include="src\Solar\Application.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Solar\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\Solar\Events\Event.h" />
+    <ClInclude Include="src\Solar\Events\KeyEvent.h" />
+    <ClInclude Include="src\Solar\Events\MouseEvent.h" />
     <ClInclude Include="src\Solar\Log.h" />
     <ClInclude Include="src\Solar.h" />
     <ClInclude Include="src\Solar\Application.h" />

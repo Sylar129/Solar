@@ -1,5 +1,5 @@
-#ifndef _SOLAR_APPLICATION_H_
-#define _SOLAR_APPLICATION_H_
+#pragma once
+
 #include "Core.h"
 
 namespace Solar {
@@ -15,5 +15,3 @@ namespace Solar {
 
     Application* CreateApplication();
 }
-
-#endif // !_SOLAR_APPLICATION_H_

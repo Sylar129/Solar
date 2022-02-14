@@ -1,5 +1,4 @@
-#ifndef _SOLAR_CORE_H_
-#define _SOLAR_CORE_H_
+#pragma once
 
 #ifdef SOLAR_PLATFORM_WINDOWS
     #ifdef SOLAR_BUILD_DLL
@@ -11,4 +10,3 @@
     #error Solar only support Windwos!
 #endif // SOLAR_PLATFORM_WINDOWS
 
-#endif // !_SOLAR_CORE_H_

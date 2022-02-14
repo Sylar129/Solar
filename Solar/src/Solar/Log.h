@@ -1,5 +1,4 @@
-#ifndef _SOLAR_LOG_H
-#define _SOLAR_LOG_H
+#pragma once
 
 #include <memory>
 #include "Core.h"
@@ -37,5 +36,3 @@ namespace Solar {
 #define SOLAR_WARN(...)             ::Solar::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define SOLAR_ERROR(...)            ::Solar::Log::GetClientLogger()->error(__VA_ARGS__)
 #define SOLAR_CRITICAL(...)         ::Solar::Log::GetClientLogger()->critical(__VA_ARGS__)
-
-#endif // !_SOLAR_LOG_H

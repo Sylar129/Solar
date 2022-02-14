@@ -1,5 +1,4 @@
-#ifndef _SOLAR_H_
-#define _SOLAR_H_
+#pragma once
 
 // For use by Solar Application
 #include "Solar/Application.h"
@@ -9,4 +8,3 @@
 #include "Solar/EntryPoint.h"
 // ----------------------------------------
 
-#endif // !_SOLAR_H_
