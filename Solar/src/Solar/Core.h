@@ -10,3 +10,4 @@
     #error Solar only support Windwos!
 #endif // SOLAR_PLATFORM_WINDOWS
 
+#define BIT(x) (1 << x)
