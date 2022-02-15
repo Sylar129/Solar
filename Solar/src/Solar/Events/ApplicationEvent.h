@@ -2,7 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
 namespace Solar {
     class SOLAR_API WindowResizeEvent : public Event {
     public:

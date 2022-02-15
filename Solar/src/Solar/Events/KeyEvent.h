@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Solar {
     class SOLAR_API KeyEvent : public Event {
     public:

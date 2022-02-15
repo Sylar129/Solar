@@ -1,3 +1,4 @@
+#include "solpch.h"
 #include "Application.h"
 
 #include "Solar/Events/ApplicationEvent.h"
