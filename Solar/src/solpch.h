@@ -12,6 +12,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "Solar/Log.h"
+
 #ifdef SOLAR_PLATFORM_WINDOWS
     #include <Windows.h>
 #endif
