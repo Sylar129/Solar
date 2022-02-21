@@ -167,6 +167,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Solar\LayerStack.cpp" />
+    <ClCompile Include="src\Solar\Layer.cpp" />
     <ClCompile Include="src\solpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -182,6 +184,8 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Solar\LayerStack.h" />
+    <ClInclude Include="src\Solar\Layer.h" />
     <ClInclude Include="src\Solar\Window.h" />
     <ClInclude Include="src\solpch.h" />
     <ClInclude Include="src\Solar\Events\ApplicationEvent.h" />
