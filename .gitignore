@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# ThirdParty 
+Solar/ThirdParty/GLFW/
+
 # User-specific files
 *.rsuser
 *.suo
