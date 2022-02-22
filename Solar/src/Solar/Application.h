@@ -17,6 +17,10 @@ namespace Solar {
 
         void PushLayer(Layer* layer);
         void PushOverlay(Layer* layer);
+
+        inline Window& GetWindow() const {
+            return *m_Window;
+        }
     private:
         bool OnWindowClose(WindowCloseEvent& e);
     private:

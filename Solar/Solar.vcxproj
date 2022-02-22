@@ -94,17 +94,17 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SOLAR_PLATFORM_WINDOWS;SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;SOLAR_PLATFORM_WINDOWS;SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\ThirdParty\spdlog\include;$(SolutionDir)Solar\ThirdParty\GLAD\include;$(SolutionDir)Solar\ThirdParty\GLFW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\ThirdParty\imgui;$(SolutionDir)Solar\ThirdParty\imgui\backends;$(SolutionDir)Solar\ThirdParty\spdlog\include;$(SolutionDir)Solar\ThirdParty\GLAD\include;$(SolutionDir)Solar\ThirdParty\GLFW\include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Glad.lib;GLFW.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)-$(Platform)\Glad\;$(SolutionDir)bin\$(Configuration)-$(Platform)\GLFW\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ImGui.lib;Glad.lib;GLFW.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)-$(Platform)\ImGui\;$(SolutionDir)bin\$(Configuration)-$(Platform)\Glad\;$(SolutionDir)bin\$(Configuration)-$(Platform)\GLFW\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -113,9 +113,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SOLAR_PLATFORM_WINDOWS;SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;SOLAR_PLATFORM_WINDOWS;SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\ThirdParty\spdlog\include;$(SolutionDir)Solar\ThirdParty\GLAD\include;$(SolutionDir)Solar\ThirdParty\GLFW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\ThirdParty\imgui;$(SolutionDir)Solar\ThirdParty\imgui\backends;$(SolutionDir)Solar\ThirdParty\spdlog\include;$(SolutionDir)Solar\ThirdParty\GLAD\include;$(SolutionDir)Solar\ThirdParty\GLFW\include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -124,25 +124,25 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Glad.lib;GLFW.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)-$(Platform)\Glad\;$(SolutionDir)bin\$(Configuration)-$(Platform)\GLFW\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ImGui.lib;Glad.lib;GLFW.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)-$(Platform)\ImGui\;$(SolutionDir)bin\$(Configuration)-$(Platform)\Glad\;$(SolutionDir)bin\$(Configuration)-$(Platform)\GLFW\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SOLAR_PLATFORM_WINDOWS;SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;SOLAR_PLATFORM_WINDOWS;SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\ThirdParty\spdlog\include;$(SolutionDir)Solar\ThirdParty\GLAD\include;$(SolutionDir)Solar\ThirdParty\GLFW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\ThirdParty\imgui;$(SolutionDir)Solar\ThirdParty\imgui\backends;$(SolutionDir)Solar\ThirdParty\spdlog\include;$(SolutionDir)Solar\ThirdParty\GLAD\include;$(SolutionDir)Solar\ThirdParty\GLFW\include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Glad.lib;GLFW.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)-$(Platform)\Glad\;$(SolutionDir)bin\$(Configuration)-$(Platform)\GLFW\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ImGui.lib;Glad.lib;GLFW.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)-$(Platform)\ImGui\;$(SolutionDir)bin\$(Configuration)-$(Platform)\Glad\;$(SolutionDir)bin\$(Configuration)-$(Platform)\GLFW\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -151,9 +151,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SOLAR_PLATFORM_WINDOWS;SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;SOLAR_PLATFORM_WINDOWS;SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\ThirdParty\spdlog\include;$(SolutionDir)Solar\ThirdParty\GLAD\include;$(SolutionDir)Solar\ThirdParty\GLFW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\ThirdParty\imgui;$(SolutionDir)Solar\ThirdParty\imgui\backends;$(SolutionDir)Solar\ThirdParty\spdlog\include;$(SolutionDir)Solar\ThirdParty\GLAD\include;$(SolutionDir)Solar\ThirdParty\GLFW\include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -162,11 +162,13 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Glad.lib;GLFW.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)-$(Platform)\Glad\;$(SolutionDir)bin\$(Configuration)-$(Platform)\GLFW\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ImGui.lib;Glad.lib;GLFW.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)-$(Platform)\ImGui\;$(SolutionDir)bin\$(Configuration)-$(Platform)\Glad\;$(SolutionDir)bin\$(Configuration)-$(Platform)\GLFW\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\Solar\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Solar\LayerStack.cpp" />
     <ClCompile Include="src\Solar\Layer.cpp" />
     <ClCompile Include="src\solpch.cpp">
@@ -184,6 +186,8 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h" />
+    <ClInclude Include="src\Solar\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Solar\LayerStack.h" />
     <ClInclude Include="src\Solar\Layer.h" />
     <ClInclude Include="src\Solar\Window.h" />
@@ -205,6 +209,9 @@
     </ProjectReference>
     <ProjectReference Include="ThirdParty\GLFW\GLFW.vcxproj">
       <Project>{7a4f2993-47b6-4233-8d9b-3cc7fa5fceb6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="ThirdParty\imgui\ImGui.vcxproj">
+      <Project>{a7ede9e2-2777-4502-9fb9-bef1da4e98ab}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

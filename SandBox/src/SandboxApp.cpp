@@ -17,6 +17,7 @@ class Sandbox : public Solar::Application {
 public:
     Sandbox() {
         PushLayer(new ExampleLayer());
+        PushOverlay(new Solar::ImGuiLayer());
     }
 
     ~Sandbox() {
