@@ -30,13 +30,18 @@ namespace Solar {
     class SOLAR_API Event {
         friend class EventDispatcher;
     public:
-        bool Handled = false;
         virtual EventType GetEventType() const = 0;
         virtual const char* GetName() const = 0;
         virtual int GetCategoryFlags() const = 0;
-        virtual std::string ToString() const { return GetName(); }
+        virtual std::string ToString() const {
+            return GetName();
+        }
+
         inline bool IsInCategory(EventCategory category) {
             return GetCategoryFlags() & category;
+        }
+        inline bool IsHandled() const {
+            return m_Handled;
         }
     protected:
         bool m_Handled = false;
@@ -52,7 +57,6 @@ namespace Solar {
         bool Dispatch(EventFn<T> func) {
             if (m_Event.GetEventType() == T::GetStaticType()) {
                 m_Event.m_Handled = func(*(T*)&m_Event);
-                m_Event.Handled = m_Event.m_Handled;
                 return true;
             }
             return false;

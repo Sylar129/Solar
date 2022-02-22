@@ -9,8 +9,7 @@ namespace Solar {
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
-    Application::Application()
-        : m_Running(true) {
+    Application::Application() : m_Running(true) {
         m_Window = std::unique_ptr<Window>(Window::Create());
         m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
     }
@@ -39,7 +38,7 @@ namespace Solar {
 
         for (auto it = m_LayerStack.end(); it != m_LayerStack.end(); ) {
             (*--it)->OnEvent(e);
-            if (e.Handled) {
+            if (e.IsHandled()) {
                 break;
             }
         }
