@@ -5,11 +5,11 @@ public:
     ExampleLayer() : Layer("Example") {}
 
     void OnUpdate() override {
-        SOLAR_INFO("ExampleLayer::Update");
+        // SOLAR_INFO("ExampleLayer::Update");
     }
 
     void OnEvent(Solar::Event& event) override {
-        SOLAR_TRACE("{0}", event);
+        SOLAR_TRACE("ExampleLayer: {0}", event);
     }
 };
 
