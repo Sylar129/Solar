@@ -1,9 +1,9 @@
-[submodule "Solar/ThirdParty/spdlog"]
-	path = Solar/ThirdParty/spdlog
+[submodule "Solar/dependence/imgui"]
+	path = Solar/dependence/imgui
+	url = https://github.com/ocornut/imgui
+[submodule "Solar/dependence/spdlog"]
+	path = Solar/dependence/spdlog
 	url = https://github.com/gabime/spdlog
-[submodule "Solar/ThirdParty/GLFW"]
-	path = Solar/ThirdParty/GLFW
-	url = https://github.com/Sylar129/glfw
-[submodule "Solar/ThirdParty/imgui"]
-	path = Solar/ThirdParty/imgui
-	url = https://github.com/Sylar129/imgui
+[submodule "Solar/dependence/glfw"]
+	path = Solar/dependence/glfw
+	url = https://github.com/glfw/glfw
