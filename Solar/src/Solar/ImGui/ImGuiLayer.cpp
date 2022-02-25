@@ -8,6 +8,8 @@
 #include "GLFW/glfw3.h"
 #include "glad/glad.h"
 
+#include "Solar/Application.h"
+
 namespace Solar {
     ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer"), m_Time(0.0f) {
 
@@ -33,7 +35,8 @@ namespace Solar {
 
     void ImGuiLayer::OnUpdate() {
         ImGuiIO& io = ImGui::GetIO();
-        io.DisplaySize = ImVec2(1280, 720);
+        Application& app = Application::Get();
+        io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
 
         float time = (float)glfwGetTime();
         io.DeltaTime = m_Time > 0.0f ? (time - m_Time) : (1.0f / 60.0f);
