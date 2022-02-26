@@ -34,10 +34,6 @@ namespace Solar {
                 layer->OnUpdate();
             }
 
-            float x = Input::GetMouseX();
-            float y = Input::GetMouseY();
-            SOLAR_CORE_TRACE("{0}, {1}", x, y);
-
             m_Window->OnUpdate();
         }
     }

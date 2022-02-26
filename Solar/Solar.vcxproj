@@ -191,8 +191,10 @@
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Solar\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Solar\Input.h" />
+    <ClInclude Include="src\Solar\KeyCodes.h" />
     <ClInclude Include="src\Solar\LayerStack.h" />
     <ClInclude Include="src\Solar\Layer.h" />
+    <ClInclude Include="src\Solar\MouseButtonCodes.h" />
     <ClInclude Include="src\Solar\Window.h" />
     <ClInclude Include="src\solpch.h" />
     <ClInclude Include="src\Solar\Events\ApplicationEvent.h" />

@@ -53,7 +53,7 @@ namespace Solar {
     }
 
     void ImGuiLayer::OnEvent(Event& event) {
-        SOLAR_CORE_TRACE("ImGuiLayer: {0}", event);
+        // SOLAR_CORE_TRACE("ImGuiLayer: {0}", event);
         EventDispatcher dispatcher(event);
         dispatcher.Dispatch<MouseButtonPressedEvent>(SOLAR_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonPressedEvent));
         dispatcher.Dispatch<MouseButtonReleasedEvent>(SOLAR_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonReleasedEvent));

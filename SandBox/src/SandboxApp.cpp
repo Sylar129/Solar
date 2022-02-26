@@ -6,10 +6,13 @@ public:
 
     void OnUpdate() override {
         // SOLAR_INFO("ExampleLayer::Update");
+        if (Solar::Input::IsKeyPressed(SOLAR_KEY_TAB)) {
+            SOLAR_INFO("Tab key is pressed!");
+        }
     }
 
     void OnEvent(Solar::Event& event) override {
-        SOLAR_TRACE("ExampleLayer: {0}", event);
+        // SOLAR_TRACE("ExampleLayer: {0}", event);
     }
 };
 
