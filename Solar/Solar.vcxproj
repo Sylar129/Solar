@@ -167,8 +167,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Platform\OpenGL\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
+    <ClCompile Include="src\Solar\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Solar\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Solar\LayerStack.cpp" />
     <ClCompile Include="src\Solar\Layer.cpp" />
@@ -187,7 +187,6 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Solar\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Solar\Input.h" />

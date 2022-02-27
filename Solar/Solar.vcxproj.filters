@@ -36,10 +36,10 @@
     <ClCompile Include="src\Solar\ImGui\ImGuiLayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\imgui_impl_opengl3.cpp">
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
+    <ClCompile Include="src\Solar\ImGui\ImGuiBuild.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -87,9 +87,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Solar\ImGui\ImGuiLayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Solar\Input.h">

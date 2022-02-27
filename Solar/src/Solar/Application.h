@@ -1,9 +1,11 @@
 #pragma once
 
+#include "Window.h"
+#include "Solar/LayerStack.h"
 #include "Solar/Events/Event.h"
 #include "Solar/Events/ApplicationEvent.h"
-#include "Solar/LayerStack.h"
-#include "Window.h"
+
+#include "Solar/ImGui/ImGuiLayer.h"
 
 namespace Solar {
 
@@ -29,6 +31,7 @@ namespace Solar {
         bool OnWindowClose(WindowCloseEvent& e);
     private:
         std::unique_ptr<Window> m_Window;
+        ImGuiLayer* m_ImGuiLayer;
         bool m_Running;
         LayerStack m_LayerStack;
         static Application* s_Instance;
