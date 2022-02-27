@@ -7,3 +7,6 @@
 [submodule "Solar/dependence/glfw"]
 	path = Solar/dependence/glfw
 	url = https://github.com/glfw/glfw
+[submodule "Solar/dependence/glm"]
+	path = Solar/dependence/glm
+	url = https://github.com/g-truc/glm
