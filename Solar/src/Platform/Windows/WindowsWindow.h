@@ -38,6 +38,8 @@ namespace Solar {
             unsigned int Height;
             bool VSync;
             EventCallbackFn EventCallback;
+
+            WindowData() : Width(0), Height(0), VSync(false) { }
         };
 
         WindowData m_Data;

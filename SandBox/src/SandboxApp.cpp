@@ -17,11 +17,11 @@ public:
         // SOLAR_TRACE("ExampleLayer: {0}", event);
     }
 
-    //void OnImGuiRender() override {
-    //    ImGui::Begin("Example");
-    //    ImGui::Text("Hello world");
-    //    ImGui::End();
-    //}
+    void OnImGuiRender() override {
+        //ImGui::Begin("Example");
+        //ImGui::Text("Hello world");
+        //ImGui::End();
+    }
 };
 
 class Sandbox : public Solar::Application {
