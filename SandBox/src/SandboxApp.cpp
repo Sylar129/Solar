@@ -18,9 +18,9 @@ public:
     }
 
     void OnImGuiRender() override {
-        //ImGui::Begin("Example");
-        //ImGui::Text("Hello world");
-        //ImGui::End();
+        ImGui::Begin("Example");
+        ImGui::Text("Hello world");
+        ImGui::End();
     }
 };
 
