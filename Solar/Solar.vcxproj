@@ -171,6 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Solar\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Solar\ImGui\ImGuiLayer.cpp" />
@@ -191,6 +192,7 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Solar\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Solar\Input.h" />
@@ -198,6 +200,7 @@
     <ClInclude Include="src\Solar\LayerStack.h" />
     <ClInclude Include="src\Solar\Layer.h" />
     <ClInclude Include="src\Solar\MouseButtonCodes.h" />
+    <ClInclude Include="src\Solar\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Solar\Window.h" />
     <ClInclude Include="src\solpch.h" />
     <ClInclude Include="src\Solar\Events\ApplicationEvent.h" />

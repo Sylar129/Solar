@@ -1,8 +1,10 @@
 #pragma once
 
 #include "Solar/Window.h"
+#include "Solar/Renderer/GraphicsContext.h"
 
 #include "GLFW/glfw3.h"
+
 
 namespace Solar {
 
@@ -31,6 +33,7 @@ namespace Solar {
         virtual void Shutdown();
     private:
         GLFWwindow* m_Window;
+        GraphicsContext* m_Context;
 
         struct WindowData {
             std::string Title;
