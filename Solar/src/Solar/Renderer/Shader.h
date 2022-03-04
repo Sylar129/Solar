@@ -9,6 +9,6 @@ namespace Solar {
         void Bind() const;
         void Unbind() const;
     private:
-        unsigned int m_RendererID;
+        uint32_t m_RendererID;
     };
 }

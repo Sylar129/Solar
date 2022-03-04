@@ -175,12 +175,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Solar\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Solar\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Solar\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Solar\LayerStack.cpp" />
     <ClCompile Include="src\Solar\Layer.cpp" />
+    <ClCompile Include="src\Solar\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Solar\Renderer\Shader.cpp" />
     <ClCompile Include="src\solpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -197,6 +200,8 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Solar\Renderer\Renderer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Solar\ImGui\ImGuiLayer.h" />
@@ -205,6 +210,7 @@
     <ClInclude Include="src\Solar\LayerStack.h" />
     <ClInclude Include="src\Solar\Layer.h" />
     <ClInclude Include="src\Solar\MouseButtonCodes.h" />
+    <ClInclude Include="src\Solar\Renderer\Buffer.h" />
     <ClInclude Include="src\Solar\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Solar\Renderer\Shader.h" />
     <ClInclude Include="src\Solar\Window.h" />
