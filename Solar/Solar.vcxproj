@@ -181,6 +181,7 @@
     <ClCompile Include="src\Solar\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Solar\LayerStack.cpp" />
     <ClCompile Include="src\Solar\Layer.cpp" />
+    <ClCompile Include="src\Solar\Renderer\Shader.cpp" />
     <ClCompile Include="src\solpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -205,6 +206,7 @@
     <ClInclude Include="src\Solar\Layer.h" />
     <ClInclude Include="src\Solar\MouseButtonCodes.h" />
     <ClInclude Include="src\Solar\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Solar\Renderer\Shader.h" />
     <ClInclude Include="src\Solar\Window.h" />
     <ClInclude Include="src\solpch.h" />
     <ClInclude Include="src\Solar\Events\ApplicationEvent.h" />

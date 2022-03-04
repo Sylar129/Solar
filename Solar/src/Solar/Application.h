@@ -7,6 +7,8 @@
 
 #include "Solar/ImGui/ImGuiLayer.h"
 
+#include "Solar/Renderer/Shader.h"
+
 namespace Solar {
 
     class SOLAR_API Application {
@@ -38,6 +40,7 @@ namespace Solar {
         unsigned int m_VertexArray;
         unsigned int m_VertexBuffer;
         unsigned int m_IndexBuffer;
+        std::unique_ptr<Shader> m_Shader;
     private:
         static Application* s_Instance;
     };
