@@ -175,7 +175,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\Solar\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Solar\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
@@ -185,6 +187,7 @@
     <ClCompile Include="src\Solar\LayerStack.cpp" />
     <ClCompile Include="src\Solar\Layer.cpp" />
     <ClCompile Include="src\Solar\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Solar\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Solar\Renderer\Shader.cpp" />
     <ClCompile Include="src\Solar\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\solpch.cpp">
@@ -202,6 +205,7 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Solar\Renderer\Renderer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
@@ -215,6 +219,8 @@
     <ClInclude Include="src\Solar\MouseButtonCodes.h" />
     <ClInclude Include="src\Solar\Renderer\Buffer.h" />
     <ClInclude Include="src\Solar\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Solar\Renderer\RendererAPI.h" />
+    <ClInclude Include="src\Solar\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Solar\Renderer\Shader.h" />
     <ClInclude Include="src\Solar\Renderer\VertexArray.h" />
     <ClInclude Include="src\Solar\Window.h" />

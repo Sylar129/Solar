@@ -1,20 +1,17 @@
 #pragma once
 
-namespace Solar {
-    enum class RendererAPI {
-        None = 0,
-        OpenGL = 1
-    };
+#include "RenderCommand.h"
 
+namespace Solar {
     class Renderer {
     public:
-        inline static RendererAPI GetAPI(){
-            return s_RenderAPI;
-        }
+        static void BeginScene();
+        static void EndScene();
 
-    private:
-        static RendererAPI s_RenderAPI;
+        static void Submit(const std::shared_ptr<VertexArray>& vertexArray);
+
+        inline static RendererAPI::API GetAPI() {
+            return RendererAPI::GetAPI();
+        }
     };
 }
-
-
