@@ -8,7 +8,7 @@
 #include "Solar/ImGui/ImGuiLayer.h"
 
 #include "Solar/Renderer/Shader.h"
-#include "Solar/Renderer/Buffer.h"
+#include "Solar/Renderer/VertexArray.h"
 
 namespace Solar {
 
@@ -38,10 +38,11 @@ namespace Solar {
         bool m_Running;
         LayerStack m_LayerStack;
 
-        unsigned int m_VertexArray;
-        std::unique_ptr<VertexBuffer> m_VertexBuffer;
-        std::unique_ptr<IndexBuffer> m_IndexBuffer;
-        std::unique_ptr<Shader> m_Shader;
+        std::shared_ptr<Shader> m_Shader;
+        std::shared_ptr<VertexArray> m_VertexArray;
+
+        std::shared_ptr<Shader> m_SquareShader;
+        std::shared_ptr<VertexArray> m_SquareVA;
     private:
         static Application* s_Instance;
     };

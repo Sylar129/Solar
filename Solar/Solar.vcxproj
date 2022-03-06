@@ -175,6 +175,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Solar\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="src\Solar\Layer.cpp" />
     <ClCompile Include="src\Solar\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Solar\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Solar\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\solpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -200,6 +202,7 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Solar\Renderer\Renderer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
@@ -213,6 +216,7 @@
     <ClInclude Include="src\Solar\Renderer\Buffer.h" />
     <ClInclude Include="src\Solar\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Solar\Renderer\Shader.h" />
+    <ClInclude Include="src\Solar\Renderer\VertexArray.h" />
     <ClInclude Include="src\Solar\Window.h" />
     <ClInclude Include="src\solpch.h" />
     <ClInclude Include="src\Solar\Events\ApplicationEvent.h" />
