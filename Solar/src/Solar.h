@@ -11,6 +11,17 @@
 
 #include "Solar/ImGui/ImGuiLayer.h"
 
+// -------------- --Renderer---------------
+#include "Solar/Renderer/Renderer.h"
+#include "Solar/Renderer/RenderCommand.h"
+
+#include "Solar/Renderer/Buffer.h"
+#include "Solar/Renderer/Shader.h"
+#include "Solar/Renderer/VertexArray.h"
+
+#include "Solar/Renderer/OrthographicCamera.h"
+// ----------------------------------------
+
 // ---------------Entry Point--------------
 #include "Solar/EntryPoint.h"
 // ----------------------------------------

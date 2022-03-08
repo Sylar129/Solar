@@ -7,10 +7,6 @@
 
 #include "Solar/ImGui/ImGuiLayer.h"
 
-#include "Solar/Renderer/Shader.h"
-#include "Solar/Renderer/VertexArray.h"
-#include "Solar/Renderer/OrthographicCamera.h"
-
 namespace Solar {
 
     class SOLAR_API Application {
@@ -38,14 +34,6 @@ namespace Solar {
         ImGuiLayer* m_ImGuiLayer;
         bool m_Running;
         LayerStack m_LayerStack;
-
-        std::shared_ptr<Shader> m_Shader;
-        std::shared_ptr<VertexArray> m_VertexArray;
-
-        std::shared_ptr<Shader> m_SquareShader;
-        std::shared_ptr<VertexArray> m_SquareVA;
-
-        OrthographicCamera m_Camera;
     private:
         static Application* s_Instance;
     };
