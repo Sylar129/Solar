@@ -9,6 +9,7 @@
 
 #include "Solar/Renderer/Shader.h"
 #include "Solar/Renderer/VertexArray.h"
+#include "Solar/Renderer/OrthographicCamera.h"
 
 namespace Solar {
 
@@ -43,6 +44,8 @@ namespace Solar {
 
         std::shared_ptr<Shader> m_SquareShader;
         std::shared_ptr<VertexArray> m_SquareVA;
+
+        OrthographicCamera m_Camera;
     private:
         static Application* s_Instance;
     };

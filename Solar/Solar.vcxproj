@@ -177,6 +177,7 @@
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\Solar\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Solar\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Solar\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
@@ -207,6 +208,7 @@
   <ItemGroup>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="src\Solar\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\Solar\Renderer\Renderer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
