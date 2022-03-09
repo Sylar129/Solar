@@ -3,8 +3,6 @@
 
 #include "Input.h"
 
-#include <GLFW/glfw3.h>
-
 namespace Solar {
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
@@ -30,9 +28,10 @@ namespace Solar {
 
     void Application::Run() {
         while (m_Running) {
-            float time = (float)glfwGetTime(); // Platform::GetTime()
-            TimeStep timeStep = time - m_LastFrameTime;
-            m_LastFrameTime = time;
+            auto now = std::chrono::steady_clock::now();
+            std::chrono::duration<float> duration = now - m_LastFrameTime;
+            TimeStep timeStep = duration.count();
+            m_LastFrameTime = now;
 
             /// <summary>
             /// Layer Update

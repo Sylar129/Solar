@@ -36,7 +36,7 @@ namespace Solar {
         ImGuiLayer* m_ImGuiLayer;
         bool m_Running;
         LayerStack m_LayerStack;
-        float m_LastFrameTime = 0.0f;
+        std::chrono::steady_clock::time_point m_LastFrameTime;
     private:
         static Application* s_Instance;
     };

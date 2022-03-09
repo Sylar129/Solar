@@ -157,6 +157,7 @@ public:
         Solar::Renderer::Submit(m_Shader, m_VertexArray);
 
         Solar::Renderer::EndScene();
+
     }
 
     void OnImGuiRender() override {
