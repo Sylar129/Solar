@@ -5,6 +5,8 @@
 #include "Solar/Layer.h"
 #include "Solar/Log.h"
 
+#include "Solar/Core/Timestep.h"
+
 #include "Solar/Input.h"
 #include "Solar/KeyCodes.h"
 #include "Solar/MouseButtonCodes.h"

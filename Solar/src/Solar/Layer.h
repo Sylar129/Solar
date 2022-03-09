@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Solar/Core.h"
+#include "Solar/Core/Timestep.h"
 #include "Solar/Events/Event.h"
 
 namespace Solar {
@@ -11,7 +12,7 @@ namespace Solar {
 
         virtual void OnAttach() {}
         virtual void OnDetech() {}
-        virtual void OnUpdate() {}
+        virtual void OnUpdate(TimeStep& ts) {}
         virtual void OnImGuiRender() {}
         virtual void OnEvent(Event& event) {}
 

@@ -170,5 +170,8 @@
     <ClInclude Include="src\Solar\Renderer\OrthographicCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Solar\Core\Timestep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

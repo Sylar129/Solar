@@ -208,6 +208,7 @@
   <ItemGroup>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="src\Solar\Core\Timestep.h" />
     <ClInclude Include="src\Solar\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\Solar\Renderer\Renderer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />

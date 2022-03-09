@@ -5,6 +5,8 @@
 #include "Solar/Events/Event.h"
 #include "Solar/Events/ApplicationEvent.h"
 
+#include "Solar/Core/Timestep.h"
+
 #include "Solar/ImGui/ImGuiLayer.h"
 
 namespace Solar {
@@ -34,6 +36,7 @@ namespace Solar {
         ImGuiLayer* m_ImGuiLayer;
         bool m_Running;
         LayerStack m_LayerStack;
+        float m_LastFrameTime = 0.0f;
     private:
         static Application* s_Instance;
     };

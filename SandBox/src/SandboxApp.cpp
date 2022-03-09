@@ -118,27 +118,28 @@ public:
         m_SquareShader.reset(new Solar::Shader(squareVertexSrc, squareFragmentSrc));
     }
 
-    void OnUpdate() override {
+    void OnUpdate(Solar::TimeStep& ts) override {
         // SOLAR_INFO("ExampleLayer::Update");
+        // SOLAR_TRACE("Delta time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMilliseconds());
 
         if (Solar::Input::IsKeyPressed(SOLAR_KEY_LEFT)) {
-            m_CameraPosition.x -= m_CameraSpeed;
+            m_CameraPosition.x -= m_CameraSpeed * ts;
         }
         if (Solar::Input::IsKeyPressed(SOLAR_KEY_RIGHT)) {
-            m_CameraPosition.x += m_CameraSpeed;
+            m_CameraPosition.x += m_CameraSpeed * ts;
         }
         if (Solar::Input::IsKeyPressed(SOLAR_KEY_UP)) {
-            m_CameraPosition.y += m_CameraSpeed;
+            m_CameraPosition.y += m_CameraSpeed * ts;
         }
         if (Solar::Input::IsKeyPressed(SOLAR_KEY_DOWN)) {
-            m_CameraPosition.y -= m_CameraSpeed;
+            m_CameraPosition.y -= m_CameraSpeed * ts;
         }
 
         if (Solar::Input::IsKeyPressed(SOLAR_KEY_Q)) {
-            m_CameraRotation += 0.1f;
+            m_CameraRotation += 0.5f * ts;
         }
         if (Solar::Input::IsKeyPressed(SOLAR_KEY_E)) {
-            m_CameraRotation -= 0.1f;
+            m_CameraRotation -= 0.5f * ts;
         }
 
         /// <summary>
@@ -193,7 +194,7 @@ private:
 
     Solar::OrthographicCamera m_Camera;
     glm::vec3 m_CameraPosition;
-    float m_CameraSpeed = 0.1f;
+    float m_CameraSpeed = 0.5f;
     float m_CameraRotation = 0.0f;
 };
 

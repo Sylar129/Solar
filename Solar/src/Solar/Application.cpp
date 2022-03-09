@@ -3,6 +3,8 @@
 
 #include "Input.h"
 
+#include <GLFW/glfw3.h>
+
 namespace Solar {
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
@@ -28,11 +30,15 @@ namespace Solar {
 
     void Application::Run() {
         while (m_Running) {
+            float time = (float)glfwGetTime(); // Platform::GetTime()
+            TimeStep timeStep = time - m_LastFrameTime;
+            m_LastFrameTime = time;
+
             /// <summary>
             /// Layer Update
             /// </summary>
             for (Layer* layer : m_LayerStack) {
-                layer->OnUpdate();
+                layer->OnUpdate(timeStep);
             }
 
             m_ImGuiLayer->Begin();
