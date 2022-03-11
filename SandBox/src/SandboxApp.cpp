@@ -23,7 +23,7 @@ public:
             0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
             0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
         };
-        std::shared_ptr<Solar::VertexBuffer> vertexBuffer;
+        Solar::Ref<Solar::VertexBuffer> vertexBuffer;
         vertexBuffer.reset(Solar::VertexBuffer::Create(vertices, sizeof(vertices)));
 
         vertexBuffer->SetLayout({
@@ -32,7 +32,7 @@ public:
                                 });
         m_VertexArray->AddVertexBuffer(vertexBuffer);
 
-        std::shared_ptr<Solar::IndexBuffer> indexBuffer;
+        Solar::Ref<Solar::IndexBuffer> indexBuffer;
         uint32_t indices[3] = { 0,1,2 };
         indexBuffer.reset(Solar::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
         m_VertexArray->SetIndexBuffer(indexBuffer);
@@ -84,7 +84,7 @@ public:
             0.5f,  0.5f, 0.0f,
             -0.5f,  0.5f, 0.0f
         };
-        std::shared_ptr<Solar::VertexBuffer> squreVB;
+        Solar::Ref<Solar::VertexBuffer> squreVB;
         squreVB.reset(Solar::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
         squreVB->SetLayout({
@@ -93,7 +93,7 @@ public:
         m_SquareVA->AddVertexBuffer(squreVB);
 
         uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-        std::shared_ptr<Solar::IndexBuffer> squreIB;
+        Solar::Ref<Solar::IndexBuffer> squreIB;
         squreIB.reset(Solar::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
         m_SquareVA->SetIndexBuffer(squreIB);
 
@@ -214,11 +214,11 @@ public:
     }
 
 private:
-    std::shared_ptr<Solar::Shader> m_Shader;
-    std::shared_ptr<Solar::VertexArray> m_VertexArray;
+    Solar::Ref<Solar::Shader> m_Shader;
+    Solar::Ref<Solar::VertexArray> m_VertexArray;
 
-    std::shared_ptr<Solar::Shader> m_SquareShader;
-    std::shared_ptr<Solar::VertexArray> m_SquareVA;
+    Solar::Ref<Solar::Shader> m_SquareShader;
+    Solar::Ref<Solar::VertexArray> m_SquareVA;
 
     Solar::OrthographicCamera m_Camera;
 

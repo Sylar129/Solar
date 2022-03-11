@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #ifdef SOLAR_PLATFORM_WINDOWS
     #if SOLAR_DYNAMIC_LINK
         #ifdef SOLAR_BUILD_DLL
@@ -30,3 +32,11 @@
 #define BIT(x) (1 << x)
 
 #define SOLAR_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+namespace Solar {
+    template<typename T>
+    using Scope = std::unique_ptr<T>;
+
+    template<typename T>
+    using Ref = std::shared_ptr<T>;
+}
