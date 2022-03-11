@@ -1,8 +1,11 @@
 #include <Solar.h>
 
+#include "Platform/OpenGL/OpenGLShader.h"
+
 #include "imgui/imgui.h"
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class ExampleLayer : public Solar::Layer {
 public:
@@ -67,7 +70,7 @@ public:
             }
         )";
 
-        m_Shader.reset(new Solar::Shader(vertexSrc, fragmentSrc));
+        m_Shader.reset(Solar::Shader::Create(vertexSrc, fragmentSrc));
 
 
         /// <summary>
@@ -117,12 +120,14 @@ public:
 
             in vec3 v_Position;
 
+            uniform vec3 u_Color;
+
             void main() {
-                color = vec4(v_Position * 0.5 + 0.5, 1.0);
+                color = vec4(u_Color, 1.0);
             }
         )";
 
-        m_SquareShader.reset(new Solar::Shader(squareVertexSrc, squareFragmentSrc));
+        m_SquareShader.reset(Solar::Shader::Create(squareVertexSrc, squareFragmentSrc));
     }
 
     void OnUpdate(Solar::TimeStep& ts) override {
@@ -162,6 +167,9 @@ public:
 
         static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
+        std::dynamic_pointer_cast<Solar::OpenGLShader>(m_SquareShader)->Bind();
+        std::dynamic_pointer_cast<Solar::OpenGLShader>(m_SquareShader)->UploadUniformFloat3("u_Color", m_SquareColor);
+
         for (int y = 0; y < 20; y++) {
             for (int x = 0; x < 20; x++) {
                 glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
@@ -170,13 +178,16 @@ public:
             }
         }
 
-        //Solar::Renderer::Submit(m_Shader, m_VertexArray);
+        // Solar::Renderer::Submit(m_Shader, m_VertexArray);
 
         Solar::Renderer::EndScene();
 
     }
 
     void OnImGuiRender() override {
+        ImGui::Begin("Settings");
+        ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+        ImGui::End();
     }
 
     void OnEvent(Solar::Event& event) override {
@@ -216,6 +227,8 @@ private:
 
     float m_CameraRotation = 0.0f;
     float m_CameraRotationSpeed = 0.5f;
+
+    glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 };
 
 class Sandbox : public Solar::Application {

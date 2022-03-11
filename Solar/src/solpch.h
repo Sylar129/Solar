@@ -13,6 +13,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include <glm/glm.hpp>
 #include "Solar/Log.h"
 
 #ifdef SOLAR_PLATFORM_WINDOWS
