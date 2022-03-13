@@ -37,6 +37,9 @@ public:
         indexBuffer.reset(Solar::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
         m_VertexArray->SetIndexBuffer(indexBuffer);
 
+        /// <summary>
+        /// Triangle Shader
+        /// </summary>
         std::string vertexSrc = R"(
             #version 330 core
 
@@ -78,18 +81,19 @@ public:
         /// </summary>
         m_SquareVA.reset(Solar::VertexArray::Create());
 
-        float squareVertices[3 * 4] = {
-            -0.5f, -0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-            0.5f,  0.5f, 0.0f,
-            -0.5f,  0.5f, 0.0f
+        float squareVertices[5 * 4] = {
+            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+             0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+             0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+            -0.5f,  0.5f, 0.0f, 0.0f, 1.0f
         };
         Solar::Ref<Solar::VertexBuffer> squreVB;
         squreVB.reset(Solar::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
         squreVB->SetLayout({
             { Solar::ShaderDataType::Float3, "a_Position" },
-                           });
+            { Solar::ShaderDataType::Float2, "a_TexCoord" },
+        });
         m_SquareVA->AddVertexBuffer(squreVB);
 
         uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
@@ -97,6 +101,9 @@ public:
         squreIB.reset(Solar::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
         m_SquareVA->SetIndexBuffer(squreIB);
 
+        /// <summary>
+        /// Square Shader
+        /// </summary>
         std::string squareVertexSrc = R"(
             #version 330 core
 
@@ -128,6 +135,46 @@ public:
         )";
 
         m_SquareShader.reset(Solar::Shader::Create(squareVertexSrc, squareFragmentSrc));
+
+        /// <summary>
+        /// Texture Shader
+        /// </summary>
+        std::string textureShaderVertexSrc = R"(
+            #version 330 core
+
+            layout(location = 0) in vec3 a_Position;
+            layout(location = 1) in vec2 a_TexCoord;
+
+            uniform mat4 u_ViewProjection;
+            uniform mat4 u_Transform;
+
+            out vec2 v_TexCoord;
+
+            void main() {
+                v_TexCoord = a_TexCoord;
+                gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+            }
+        )";
+
+        std::string textureShaderFragmentSrc = R"(
+            #version 330 core
+
+            layout(location = 0) out vec4 color;
+
+            in vec2 v_TexCoord;
+
+            uniform sampler2D u_Texture;
+
+            void main() {
+                color = texture(u_Texture, v_TexCoord);
+            }
+        )";
+
+        m_TextureShader.reset(Solar::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+        m_Texture = Solar::Texture2D::Create("assets/textures/Board.png");
+
+        std::dynamic_pointer_cast<Solar::OpenGLShader>(m_TextureShader)->Bind();
+        std::dynamic_pointer_cast<Solar::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
     }
 
     void OnUpdate(Solar::TimeStep& ts) override {
@@ -178,6 +225,9 @@ public:
             }
         }
 
+        m_Texture->Bind();
+        Solar::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
         // Solar::Renderer::Submit(m_Shader, m_VertexArray);
 
         Solar::Renderer::EndScene();
@@ -217,8 +267,10 @@ private:
     Solar::Ref<Solar::Shader> m_Shader;
     Solar::Ref<Solar::VertexArray> m_VertexArray;
 
-    Solar::Ref<Solar::Shader> m_SquareShader;
+    Solar::Ref<Solar::Shader> m_SquareShader, m_TextureShader;
     Solar::Ref<Solar::VertexArray> m_SquareVA;
+
+    Solar::Ref<Solar::Texture2D> m_Texture;
 
     Solar::OrthographicCamera m_Camera;
 

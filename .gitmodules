@@ -10,3 +10,6 @@
 [submodule "Solar/dependence/glm"]
 	path = Solar/dependence/glm
 	url = https://github.com/g-truc/glm
+[submodule "Solar/dependence/stb"]
+	path = Solar/dependence/stb
+	url = https://github.com/nothings/stb
