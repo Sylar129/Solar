@@ -16,7 +16,7 @@ public:
         /// <summary>
         /// Triangle Renderer
         /// </summary>
-        m_VertexArray.reset(Solar::VertexArray::Create());
+        m_VertexArray = Solar::VertexArray::Create();
 
         float vertices[3 * 7] = {
             -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
@@ -24,7 +24,7 @@ public:
             0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
         };
         Solar::Ref<Solar::VertexBuffer> vertexBuffer;
-        vertexBuffer.reset(Solar::VertexBuffer::Create(vertices, sizeof(vertices)));
+        vertexBuffer = Solar::VertexBuffer::Create(vertices, sizeof(vertices));
 
         vertexBuffer->SetLayout({
             { Solar::ShaderDataType::Float3, "a_Position" },
@@ -34,7 +34,7 @@ public:
 
         Solar::Ref<Solar::IndexBuffer> indexBuffer;
         uint32_t indices[3] = { 0,1,2 };
-        indexBuffer.reset(Solar::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+        indexBuffer = Solar::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
         m_VertexArray->SetIndexBuffer(indexBuffer);
 
         /// <summary>
@@ -73,13 +73,13 @@ public:
             }
         )";
 
-        m_Shader.reset(Solar::Shader::Create(vertexSrc, fragmentSrc));
+        m_Shader = Solar::Shader::Create(vertexSrc, fragmentSrc);
 
 
         /// <summary>
         /// Square Renderer
         /// </summary>
-        m_SquareVA.reset(Solar::VertexArray::Create());
+        m_SquareVA = Solar::VertexArray::Create();
 
         float squareVertices[5 * 4] = {
             -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
@@ -88,7 +88,7 @@ public:
             -0.5f,  0.5f, 0.0f, 0.0f, 1.0f
         };
         Solar::Ref<Solar::VertexBuffer> squreVB;
-        squreVB.reset(Solar::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+        squreVB = Solar::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 
         squreVB->SetLayout({
             { Solar::ShaderDataType::Float3, "a_Position" },
@@ -98,7 +98,7 @@ public:
 
         uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
         Solar::Ref<Solar::IndexBuffer> squreIB;
-        squreIB.reset(Solar::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+        squreIB = Solar::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
         m_SquareVA->SetIndexBuffer(squreIB);
 
         /// <summary>
@@ -134,7 +134,7 @@ public:
             }
         )";
 
-        m_SquareShader.reset(Solar::Shader::Create(squareVertexSrc, squareFragmentSrc));
+        m_SquareShader = Solar::Shader::Create(squareVertexSrc, squareFragmentSrc);
 
         /// <summary>
         /// Texture Shader
@@ -170,7 +170,7 @@ public:
             }
         )";
 
-        m_TextureShader.reset(Solar::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+        m_TextureShader = Solar::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc);
         m_Texture = Solar::Texture2D::Create("assets/textures/Board.png");
 
         std::dynamic_pointer_cast<Solar::OpenGLShader>(m_TextureShader)->Bind();
