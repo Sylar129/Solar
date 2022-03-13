@@ -67,14 +67,14 @@ public:
 
         m_SquareShader = Solar::Shader::Create("assets/shaders/Square.glsl");
 
+        auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
-        m_TextureShader = Solar::Shader::Create("assets/shaders/Texture.glsl");
         m_Texture = Solar::Texture2D::Create("assets/textures/Board.png");
 
         m_LogoTexture = Solar::Texture2D::Create("assets/textures/Logo.png");
 
-        std::dynamic_pointer_cast<Solar::OpenGLShader>(m_TextureShader)->Bind();
-        std::dynamic_pointer_cast<Solar::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+        std::dynamic_pointer_cast<Solar::OpenGLShader>(textureShader)->Bind();
+        std::dynamic_pointer_cast<Solar::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
     }
 
     void OnUpdate(Solar::TimeStep& ts) override {
@@ -125,11 +125,13 @@ public:
             }
         }
 
+        auto textureShader = m_ShaderLibrary.Get("Texture");
+
         m_Texture->Bind();
-        Solar::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+        Solar::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
         m_LogoTexture->Bind();
-        Solar::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+        Solar::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
         // Solar::Renderer::Submit(m_Shader, m_VertexArray);
 
@@ -167,10 +169,11 @@ public:
     }
 
 private:
+    Solar::ShaderLibrary m_ShaderLibrary;
     Solar::Ref<Solar::Shader> m_Shader;
     Solar::Ref<Solar::VertexArray> m_VertexArray;
 
-    Solar::Ref<Solar::Shader> m_SquareShader, m_TextureShader;
+    Solar::Ref<Solar::Shader> m_SquareShader;
     Solar::Ref<Solar::VertexArray> m_SquareVA;
 
     Solar::Ref<Solar::Texture2D> m_Texture, m_LogoTexture;
