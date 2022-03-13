@@ -79,7 +79,7 @@ namespace Solar {
 
     std::string OpenGLShader::ReadFile(const std::string& filepath) {
         std::string result;
-        std::ifstream in(filepath, std::ios::in, std::ios::binary);
+        std::ifstream in(filepath, std::ios::in | std::ios::binary);
         if (in) {
             in.seekg(0, std::ios::end);
             result.resize(in.tellg());
@@ -118,9 +118,11 @@ namespace Solar {
         // Get a program object.
         GLuint program = glCreateProgram();
 
-        std::vector<GLenum> glShaderIDs(shaderSources.size());
+        SOLAR_CORE_ASSERT(shaderSources.size() <= 2, "We only support 2 shaders for now");
+        std::array<GLenum, 2> glShaderIDs;
 
         // Compile Shaders
+        uint32_t glShaderIDIndex = 0;
         for (auto& kv : shaderSources) {
             GLenum shaderType = kv.first;
             const std::string& source = kv.second;
@@ -155,7 +157,7 @@ namespace Solar {
             }
             // Attach our shaders to our program
             glAttachShader(program, shader);
-            glShaderIDs.push_back(shader);
+            glShaderIDs[glShaderIDIndex++] = shader;
         }
 
         // Link our program
