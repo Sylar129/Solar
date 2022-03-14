@@ -8,6 +8,7 @@ namespace Solar {
 
     LayerStack::~LayerStack() {
         for (Layer* layer : m_Layers) {
+            layer->OnDetech();
             delete layer;
         }
     }
