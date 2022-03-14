@@ -11,8 +11,7 @@ class ExampleLayer : public Solar::Layer {
 public:
     ExampleLayer()
       : Layer("Example"),
-        m_Camera(-1.6f, 1.6f, -0.9f, 0.9f),
-        m_CameraPosition(0.0f) {
+        m_CameraController(1280.0f / 720.0f) {
         /// <summary>
         /// Triangle Renderer
         /// </summary>
@@ -81,25 +80,7 @@ public:
         // SOLAR_INFO("ExampleLayer::Update");
         // SOLAR_TRACE("Delta time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMilliseconds());
 
-        if (Solar::Input::IsKeyPressed(SOLAR_KEY_LEFT)) {
-            m_CameraPosition.x -= m_CameraSpeed * ts;
-        }
-        if (Solar::Input::IsKeyPressed(SOLAR_KEY_RIGHT)) {
-            m_CameraPosition.x += m_CameraSpeed * ts;
-        }
-        if (Solar::Input::IsKeyPressed(SOLAR_KEY_UP)) {
-            m_CameraPosition.y += m_CameraSpeed * ts;
-        }
-        if (Solar::Input::IsKeyPressed(SOLAR_KEY_DOWN)) {
-            m_CameraPosition.y -= m_CameraSpeed * ts;
-        }
-
-        if (Solar::Input::IsKeyPressed(SOLAR_KEY_Q)) {
-            m_CameraRotation += m_CameraRotationSpeed * ts;
-        }
-        if (Solar::Input::IsKeyPressed(SOLAR_KEY_E)) {
-            m_CameraRotation -= m_CameraRotationSpeed * ts;
-        }
+        m_CameraController.OnUpdate(ts);
 
         /// <summary>
         /// Renderer
@@ -107,10 +88,7 @@ public:
         Solar::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
         Solar::RenderCommand::Clear();
 
-        m_Camera.SetPosition(m_CameraPosition);
-        m_Camera.SetRotation(m_CameraRotation);
-
-        Solar::Renderer::BeginScene(m_Camera);
+        Solar::Renderer::BeginScene(m_CameraController.GetCamera());
 
         static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
@@ -145,27 +123,9 @@ public:
         ImGui::End();
     }
 
-    void OnEvent(Solar::Event& event) override {
+    void OnEvent(Solar::Event& e) override {
         // SOLAR_TRACE("ExampleLayer: {0}", event);
-        Solar::EventDispatcher dispatcher(event);
-        // dispatcher.Dispatch<Solar::KeyPressdEvent>(SOLAR_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));
-    }
-
-    bool OnKeyPressedEvent(Solar::KeyPressdEvent& event) {
-        if (event.GetKeyCode() == SOLAR_KEY_LEFT) {
-            m_CameraPosition.x -= m_CameraSpeed;
-        }
-        if (event.GetKeyCode() == SOLAR_KEY_RIGHT) {
-            m_CameraPosition.x += m_CameraSpeed;
-        }
-        if (event.GetKeyCode() == SOLAR_KEY_UP) {
-            m_CameraPosition.y += m_CameraSpeed;
-        }
-        if (event.GetKeyCode() == SOLAR_KEY_DOWN) {
-            m_CameraPosition.y -= m_CameraSpeed;
-        }
-
-        return false;
+        m_CameraController.OnEvent(e);
     }
 
 private:
@@ -178,13 +138,7 @@ private:
 
     Solar::Ref<Solar::Texture2D> m_Texture, m_LogoTexture;
 
-    Solar::OrthographicCamera m_Camera;
-
-    glm::vec3 m_CameraPosition;
-    float m_CameraSpeed = 0.5f;
-
-    float m_CameraRotation = 0.0f;
-    float m_CameraRotationSpeed = 0.5f;
+    Solar::OrthographicCameraController m_CameraController;
 
     glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 };

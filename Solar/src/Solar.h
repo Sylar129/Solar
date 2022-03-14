@@ -10,6 +10,8 @@
 #include "Solar/Input.h"
 #include "Solar/KeyCodes.h"
 #include "Solar/MouseButtonCodes.h"
+#include "Solar/OrthographicCameraController.h"
+
 
 #include "Solar/ImGui/ImGuiLayer.h"
 
