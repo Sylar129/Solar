@@ -31,10 +31,12 @@ namespace Solar {
         }
     private:
         bool OnWindowClose(WindowCloseEvent& e);
+        bool OnWindowResize(WindowResizeEvent& e);
     private:
         Scope<Window> m_Window;
         ImGuiLayer* m_ImGuiLayer;
         bool m_Running;
+        bool m_Minimized;
         LayerStack m_LayerStack;
         std::chrono::steady_clock::time_point m_LastFrameTime;
     private:
