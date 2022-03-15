@@ -26,6 +26,6 @@ namespace Solar {
             glm::mat4 ViewProjectionMatrix;
         };
 
-        static SceneData* s_SceneData;
+        static Scope<SceneData> s_SceneData;
     };
 }
