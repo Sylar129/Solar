@@ -23,7 +23,3 @@
 #include "Solar/Renderer/OrthographicCamera.h"
 #include "Solar/Renderer/OrthographicCameraController.h"
 // ----------------------------------------
-
-// ---------------Entry Point--------------
-#include "Solar/Core/EntryPoint.h"
-// ----------------------------------------

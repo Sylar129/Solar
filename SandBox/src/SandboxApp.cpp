@@ -7,6 +7,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Sandbox2D.h"
+#include "Solar/Core/EntryPoint.h"
+
 class ExampleLayer : public Solar::Layer {
 public:
     ExampleLayer()
@@ -114,7 +117,6 @@ public:
         // Solar::Renderer::Submit(m_Shader, m_VertexArray);
 
         Solar::Renderer::EndScene();
-
     }
 
     void OnImGuiRender() override {
@@ -146,7 +148,8 @@ private:
 class Sandbox : public Solar::Application {
 public:
     Sandbox() {
-        PushLayer(new ExampleLayer());
+        // PushLayer(new ExampleLayer());
+        PushLayer(new Sandbox2D());
     }
 
     ~Sandbox() {
