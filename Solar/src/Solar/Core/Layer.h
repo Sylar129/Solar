@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Solar/Core.h"
+#include "Solar/Core/Core.h"
 #include "Solar/Core/Timestep.h"
 #include "Solar/Events/Event.h"
 

@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Solar\Application.cpp">
+    <ClCompile Include="src\Solar\Core\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Log.cpp">
+    <ClCompile Include="src\Solar\Core\Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\solpch.cpp">
@@ -27,10 +27,10 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Layer.cpp">
+    <ClCompile Include="src\Solar\Core\Layer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\LayerStack.cpp">
+    <ClCompile Include="src\Solar\Core\LayerStack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Solar\ImGui\ImGuiLayer.cpp">
@@ -84,24 +84,24 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\OrthographicCameraController.cpp">
+    <ClCompile Include="src\Solar\Renderer\OrthographicCameraController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Solar\Application.h">
+    <ClInclude Include="src\Solar\Core\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Core.h">
+    <ClInclude Include="src\Solar\Core\Core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Solar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\EntryPoint.h">
+    <ClInclude Include="src\Solar\Core\EntryPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Log.h">
+    <ClInclude Include="src\Solar\Core\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Solar\Events\Event.h">
@@ -119,31 +119,31 @@
     <ClInclude Include="src\solpch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Window.h">
+    <ClInclude Include="src\Solar\Core\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Layer.h">
+    <ClInclude Include="src\Solar\Core\Layer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\LayerStack.h">
+    <ClInclude Include="src\Solar\Core\LayerStack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Solar\ImGui\ImGuiLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Input.h">
+    <ClInclude Include="src\Solar\Core\Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\KeyCodes.h">
+    <ClInclude Include="src\Solar\Core\KeyCodes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\MouseButtonCodes.h">
+    <ClInclude Include="src\Solar\Core\MouseButtonCodes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Solar\Renderer\GraphicsContext.h">
@@ -194,7 +194,7 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\OrthographicCameraController.h">
+    <ClInclude Include="src\Solar\Renderer\OrthographicCameraController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "solpch.h"
-#include "Solar/Core.h"
+#include "Solar/Core/Core.h"
 
 namespace Solar {
     enum class EventType {

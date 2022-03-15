@@ -2,7 +2,6 @@
 
 #include "solpch.h"
 
-#include "Solar/Core.h"
 #include "Solar/Events/Event.h"
 
 namespace Solar {

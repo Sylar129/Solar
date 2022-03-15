@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Window.h"
-#include "Solar/LayerStack.h"
+#include "Solar/Core/Window.h"
+#include "Solar/Core/LayerStack.h"
 #include "Solar/Events/Event.h"
 #include "Solar/Events/ApplicationEvent.h"
 

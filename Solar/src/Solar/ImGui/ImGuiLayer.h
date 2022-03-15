@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Solar/Layer.h"
+#include "Solar/Core/Layer.h"
 #include "Solar/Events/ApplicationEvent.h"
 #include "Solar/Events/KeyEvent.h"
 #include "Solar/Events/MouseEvent.h"

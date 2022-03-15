@@ -15,7 +15,7 @@
 #include <unordered_set>
 
 #include <glm/glm.hpp>
-#include "Solar/Log.h"
+#include "Solar/Core/Log.h"
 
 #ifdef SOLAR_PLATFORM_WINDOWS
     #include <Windows.h>

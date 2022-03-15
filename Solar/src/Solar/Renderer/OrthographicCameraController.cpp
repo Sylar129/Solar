@@ -1,8 +1,8 @@
 #include "solpch.h"
 #include "OrthographicCameraController.h"
 
-#include "Solar/Input.h"
-#include "Solar/KeyCodes.h"
+#include "Solar/Core/Input.h"
+#include "Solar/Core/KeyCodes.h"
 
 namespace Solar {
     OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation)

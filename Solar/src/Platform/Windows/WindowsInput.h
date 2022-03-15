@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Solar/Input.h"
+#include "Solar/Core/Input.h"
 
 namespace Solar {
     class WindowsInput : public Input {

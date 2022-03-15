@@ -1,17 +1,13 @@
 #pragma once
 
 // For use by Solar Application
-#include "Solar/Application.h"
-#include "Solar/Layer.h"
-#include "Solar/Log.h"
-
+#include "Solar/Core/Application.h"
+#include "Solar/Core/Input.h"
+#include "Solar/Core/KeyCodes.h"
+#include "Solar/Core/Layer.h"
+#include "Solar/Core/Log.h"
+#include "Solar/Core/MouseButtonCodes.h"
 #include "Solar/Core/Timestep.h"
-
-#include "Solar/Input.h"
-#include "Solar/KeyCodes.h"
-#include "Solar/MouseButtonCodes.h"
-#include "Solar/OrthographicCameraController.h"
-
 
 #include "Solar/ImGui/ImGuiLayer.h"
 
@@ -25,9 +21,9 @@
 #include "Solar/Renderer/VertexArray.h"
 
 #include "Solar/Renderer/OrthographicCamera.h"
+#include "Solar/Renderer/OrthographicCameraController.h"
 // ----------------------------------------
 
 // ---------------Entry Point--------------
-#include "Solar/EntryPoint.h"
+#include "Solar/Core/EntryPoint.h"
 // ----------------------------------------
-

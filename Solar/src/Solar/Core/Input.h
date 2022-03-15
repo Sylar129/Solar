@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Solar/Core.h"
 
 namespace Solar {
     class SOLAR_API Input {

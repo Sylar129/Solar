@@ -1,7 +1,7 @@
 #include "solpch.h"
 #include "WindowsInput.h"
 
-#include "Solar/Application.h"
+#include "Solar/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace Solar {

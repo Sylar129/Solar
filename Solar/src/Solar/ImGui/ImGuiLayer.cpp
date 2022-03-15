@@ -5,7 +5,7 @@
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
 
-#include "Solar/Application.h"
+#include "Solar/Core/Application.h"
 
 // Temporary
 #include "GLFW/glfw3.h"

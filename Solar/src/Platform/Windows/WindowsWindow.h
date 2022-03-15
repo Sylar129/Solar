@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Solar/Window.h"
+#include "Solar/Core/Window.h"
 #include "Solar/Renderer/GraphicsContext.h"
 
 #include "GLFW/glfw3.h"
