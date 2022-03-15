@@ -11,7 +11,7 @@ class ExampleLayer : public Solar::Layer {
 public:
     ExampleLayer()
       : Layer("Example"),
-        m_CameraController(1280.0f / 720.0f) {
+        m_CameraController(1280.0f / 720.0f, true) {
         /// <summary>
         /// Triangle Renderer
         /// </summary>

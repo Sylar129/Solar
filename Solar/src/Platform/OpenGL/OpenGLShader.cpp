@@ -105,18 +105,26 @@ namespace Solar {
 
         const char* typeToken = "#type";
         size_t typeTokenLength = strlen(typeToken);
+        //Start of shader type declaration line
         size_t pos = source.find(typeToken, 0);
         while (pos != std::string::npos) {
+            //End of shader type declaration line
             size_t eol = source.find_first_of("\r\n", pos);
             SOLAR_CORE_ASSERT(eol != std::string::npos, "Syntax error!");
+
+            //Start of shader type name (after "#type " keyword)
             size_t begin = pos + typeTokenLength + 1;
             std::string type = source.substr(begin, eol - begin);
             SOLAR_CORE_ASSERT(ShaderTypeFromString(type), "Invalid shader type specified");
 
+            //Start of shader code after shader type declaration line
             size_t nextLinePos = source.find_first_not_of("\r\n", eol);
+            SOLAR_CORE_ASSERT(nextLinePos != std::string::npos, "Syntax error");
+
+            //Start of next shader type declaration line
             pos = source.find(typeToken, nextLinePos);
-            shaderSources[ShaderTypeFromString(type)] =source.substr(nextLinePos,
-                                                                     pos - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos));
+            shaderSources[ShaderTypeFromString(type)] =
+                source.substr(nextLinePos, pos - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos));
         }
 
         return shaderSources;
