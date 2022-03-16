@@ -13,6 +13,7 @@
 
 // -------------- --Renderer---------------
 #include "Solar/Renderer/Renderer.h"
+#include "Solar/Renderer/Renderer2D.h"
 #include "Solar/Renderer/RenderCommand.h"
 
 #include "Solar/Renderer/Buffer.h"
