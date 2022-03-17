@@ -87,6 +87,9 @@
     <ClCompile Include="src\Solar\Renderer\OrthographicCameraController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Solar\Renderer\Renderer2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Solar\Core\Application.h">
@@ -195,6 +198,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Solar\Renderer\OrthographicCameraController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Solar\Renderer\Renderer2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

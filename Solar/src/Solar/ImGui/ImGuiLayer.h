@@ -13,7 +13,6 @@ namespace Solar {
 
         virtual void OnAttach() override;
         virtual void OnDetech() override;
-        virtual void OnImGuiRender() override;
 
         void Begin();
         void End();

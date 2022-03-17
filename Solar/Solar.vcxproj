@@ -80,7 +80,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\dependence\imgui;$(SolutionDir)Solar\dependence\imgui\backends;$(SolutionDir)Solar\dependence\spdlog\include;$(SolutionDir)Solar\dependence\GLAD\include;$(SolutionDir)Solar\dependence\glfw\include;$(SolutionDir)Solar\dependence\glm;$(SolutionDir)Solar\dependence\stb</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
-      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <PreprocessorDefinitions>SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;SOLAR_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -102,7 +102,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\dependence\imgui;$(SolutionDir)Solar\dependence\imgui\backends;$(SolutionDir)Solar\dependence\spdlog\include;$(SolutionDir)Solar\dependence\GLAD\include;$(SolutionDir)Solar\dependence\glfw\include;$(SolutionDir)Solar\dependence\glm;$(SolutionDir)Solar\dependence\stb</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
-      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -125,7 +125,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\dependence\imgui;$(SolutionDir)Solar\dependence\imgui\backends;$(SolutionDir)Solar\dependence\spdlog\include;$(SolutionDir)Solar\dependence\GLAD\include;$(SolutionDir)Solar\dependence\glfw\include;$(SolutionDir)Solar\dependence\glm;$(SolutionDir)Solar\dependence\stb</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
-      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
