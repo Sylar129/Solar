@@ -203,5 +203,8 @@
     <ClInclude Include="src\Solar\Renderer\Renderer2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Solar\Debug\Instrumentor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

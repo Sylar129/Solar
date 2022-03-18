@@ -177,6 +177,7 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Solar\Core\Timestep.h" />
+    <ClInclude Include="src\Solar\Debug\Instrumentor.h" />
     <ClInclude Include="src\Solar\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\Solar\Renderer\OrthographicCameraController.h" />
     <ClInclude Include="src\Solar\Renderer\Renderer.h" />
