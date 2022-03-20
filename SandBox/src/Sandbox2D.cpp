@@ -10,11 +10,13 @@ Sandbox2D::Sandbox2D() : Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f
 }
 
 void Sandbox2D::OnAttach() {
+    SOLAR_PROFILE_FUNCTION();
+
     m_BoardTexture = Solar::Texture2D::Create("assets/textures/Board.png");
 }
 
 void Sandbox2D::OnDetech() {
-
+    SOLAR_PROFILE_FUNCTION();
 }
 
 void Sandbox2D::OnUpdate(Solar::TimeStep& ts) {
@@ -23,28 +25,26 @@ void Sandbox2D::OnUpdate(Solar::TimeStep& ts) {
 
     SOLAR_PROFILE_FUNCTION();
 
-    {
-        SOLAR_PROFILE_SCOPE("CameraController::OnUpdate");
-        m_CameraController.OnUpdate(ts);
-    }
+
+    m_CameraController.OnUpdate(ts);
 
     /// <summary>
     /// Renderer
     /// </summary>
     {
         SOLAR_PROFILE_SCOPE("Renderer Prep");
+
         Solar::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
         Solar::RenderCommand::Clear();
     }
 
     {
         SOLAR_PROFILE_SCOPE("Renderer Draw");
-        Solar::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
+        Solar::Renderer2D::BeginScene(m_CameraController.GetCamera());
         Solar::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.5f, 0.5f }, { 0.8f, 0.2f, 0.3f, 1.0f });
         Solar::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.5f }, { 0.3f, 0.8f, 0.2f, 1.0f });
         Solar::Renderer2D::DrawQuad({ 0.0f, -0.0f }, { 10.0f, 10.0f }, m_BoardTexture);
-
         Solar::Renderer2D::EndScene();
     }
 }

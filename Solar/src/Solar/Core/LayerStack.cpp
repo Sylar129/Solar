@@ -25,6 +25,7 @@ namespace Solar {
     void LayerStack::PopLayer(Layer* layer) {
         auto it = std::find(m_Layers.begin(), m_Layers.end(), layer);
         if (it != m_Layers.end()) {
+            layer->OnDetech();
             m_Layers.erase(it);
             m_LayerInsertIndex--;
         }
@@ -33,6 +34,7 @@ namespace Solar {
     void LayerStack::PopOverlay(Layer* overlay) {
         auto it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
         if (it != m_Layers.end()) {
+            overlay->OnDetech();
             m_Layers.erase(it);
         }
     }

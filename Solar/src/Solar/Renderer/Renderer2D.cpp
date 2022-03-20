@@ -17,6 +17,8 @@ namespace Solar {
     static Renderer2DStorage* s_Data;
 
     void Renderer2D::Init() {
+        SOLAR_PROFILE_FUNCTION();
+
         s_Data = new Renderer2DStorage();
         s_Data->QuadVertexArray = Solar::VertexArray::Create();
 
@@ -50,16 +52,21 @@ namespace Solar {
         s_Data->TextureShader->SetInt("u_Texture", 0);
     }
 
-    void Renderer2D::Deinit() {
+    void Renderer2D::ShutDown() {
+        SOLAR_PROFILE_FUNCTION();
+
         delete s_Data;
     }
 
     void Renderer2D::BeginScene(const OrthographicCamera& camera) {
+        SOLAR_PROFILE_FUNCTION();
+
         s_Data->TextureShader->Bind();
         s_Data->TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
     }
 
     void Renderer2D::EndScene() {
+        SOLAR_PROFILE_FUNCTION();
     }
 
     void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color) {
@@ -67,6 +74,8 @@ namespace Solar {
     }
 
     void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color) {
+        SOLAR_PROFILE_FUNCTION();
+
         s_Data->TextureShader->SetFloat4("u_Color", color);
         s_Data->WhiteTexture->Bind();
 
@@ -83,6 +92,8 @@ namespace Solar {
     }
 
     void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture) {
+        SOLAR_PROFILE_FUNCTION();
+
         s_Data->TextureShader->SetFloat4("u_Color", glm::vec4(1.0f));
 
         texture->Bind();
@@ -95,4 +106,3 @@ namespace Solar {
         RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
     }
 }
-

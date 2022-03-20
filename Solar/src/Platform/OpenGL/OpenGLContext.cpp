@@ -11,6 +11,8 @@ namespace Solar {
     }
 
     void OpenGLContext::Init() {
+        SOLAR_PROFILE_FUNCTION();
+
         glfwMakeContextCurrent(m_WindowHandle);
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
         SOLAR_CORE_ASSERT(status, "Failed to initialize Glad!");
@@ -31,6 +33,8 @@ namespace Solar {
     }
 
     void OpenGLContext::SwapBuffers() {
+        SOLAR_PROFILE_FUNCTION();
+
         glfwSwapBuffers(m_WindowHandle);
     }
 }

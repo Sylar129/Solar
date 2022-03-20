@@ -10,7 +10,7 @@ namespace Solar {
         ~Renderer2D() = delete;
 
         static void Init();
-        static void Deinit();
+        static void ShutDown();
 
         static void BeginScene(const OrthographicCamera& camera);
         static void EndScene();

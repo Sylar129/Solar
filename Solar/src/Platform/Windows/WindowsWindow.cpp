@@ -20,19 +20,27 @@ namespace Solar {
     }
 
     WindowsWindow::WindowsWindow(const WindowProps& props) {
+        SOLAR_PROFILE_FUNCTION();
+
         Init(props);
     }
 
     WindowsWindow::~WindowsWindow() {
+        SOLAR_PROFILE_FUNCTION();
+
         Shutdown();
     }
 
     void WindowsWindow::OnUpdate() {
+        SOLAR_PROFILE_FUNCTION();
+
         glfwPollEvents();
         m_Context->SwapBuffers();
     }
 
     void WindowsWindow::SetVSync(bool enabled) {
+        SOLAR_PROFILE_FUNCTION();
+
         if (enabled) {
             glfwSwapInterval(1);
         } else {
@@ -46,6 +54,8 @@ namespace Solar {
     }
 
     void WindowsWindow::Init(const WindowProps& props) {
+        SOLAR_PROFILE_FUNCTION();
+
         m_Data.Title = props.Title;
         m_Data.Width = props.Width;
         m_Data.Height = props.Height;
@@ -53,13 +63,19 @@ namespace Solar {
         SOLAR_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
         if (s_GLFWWindowCount == 0) {
+            SOLAR_PROFILE_SCOPE("glfwInit");
+
             SOLAR_CORE_INFO("Initializing GLFW");
             int success = glfwInit();
             SOLAR_CORE_ASSERT(success, "Could not intiliaze GLFW!");
             glfwSetErrorCallback(GLFWErrorCallback);
         }
+        {
+            SOLAR_PROFILE_SCOPE("glfwCreateWindow");
 
-        m_Window = glfwCreateWindow((int)props.Width, props.Height, props.Title.c_str(), nullptr, nullptr);
+            m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, props.Title.c_str(), nullptr, nullptr);
+            s_GLFWWindowCount++;
+        }
 
         m_Context = CreateScope<OpenGLContext>(m_Window);
         m_Context->Init();
@@ -141,6 +157,8 @@ namespace Solar {
     }
 
     void WindowsWindow::Shutdown() {
+        SOLAR_PROFILE_FUNCTION();
+
         glfwDestroyWindow(m_Window);
         s_GLFWWindowCount--;
         if (s_GLFWWindowCount == 0) {
