@@ -101,7 +101,7 @@ namespace Solar {
     };
 }
 
-#define SOLAR_PROFILE 1
+#define SOLAR_PROFILE 0
 
 #if SOLAR_PROFILE
     #define SOLAR_PROFILE_BEGIN_SESSION(name, filepath) ::Solar::Instrumentor::Get().BeginSession(name, filepath)
@@ -109,7 +109,7 @@ namespace Solar {
     #define SOLAR_PROFILE_SCOPE(name) ::Solar::InstrumentationTimer timer##__LINE__(name);
     #define SOLAR_PROFILE_FUNCTION() SOLAR_PROFILE_SCOPE(__FUNCSIG__)
 #else
-    #define SOLAR_PROFILE_BEGIN_SESSION(name, filepath) ::Solar::Instrumentor::BeginSession(name, filepath)
+    #define SOLAR_PROFILE_BEGIN_SESSION(name, filepath)
     #define SOLAR_PROFILE_END_SESSION()
     #define SOLAR_PROFILE_SCOPE(name)
     #define SOLAR_PROFILE_FUNCTION()
