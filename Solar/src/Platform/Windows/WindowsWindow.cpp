@@ -5,6 +5,8 @@
 #include "Solar/Events/KeyEvent.h"
 #include "Solar/Events/MouseEvent.h"
 
+#include "Solar/Renderer/Renderer.h"
+
 #include "Platform/OpenGL/OpenGLContext.h"
 
 namespace Solar {
@@ -72,6 +74,13 @@ namespace Solar {
         }
         {
             SOLAR_PROFILE_SCOPE("glfwCreateWindow");
+
+        #ifdef SOLAR_DEBUG
+            if (Renderer::GetAPI() == RendererAPI::API::OpenGL) {
+                glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+            }
+        #endif // SOLAR_DEBUG
+
 
             m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, props.Title.c_str(), nullptr, nullptr);
             s_GLFWWindowCount++;
