@@ -29,7 +29,7 @@ namespace Solar {
         float m_CameraTranslationSpeed;
 
         bool m_Rotation;
-        float m_CameraRotation;
+        float m_CameraRotation;     // radians
         float m_CameraRotationSpeed;
     };
 }

@@ -20,17 +20,22 @@ namespace Solar {
     void OrthographicCameraController::OnUpdate(TimeStep ts) {
         SOLAR_PROFILE_FUNCTION();
 
+        SOLAR_CORE_TRACE("Rotation: [{0}]", m_CameraRotation);
         if (Input::IsKeyPressed(KeyCode::A)) {
-            m_CameraPosition.x -= m_CameraTranslationSpeed * ts;
+            m_CameraPosition.x -= glm::cos(m_CameraRotation) * m_CameraTranslationSpeed * ts;
+            m_CameraPosition.y -= glm::sin(m_CameraRotation) * m_CameraTranslationSpeed * ts;
         }
         if (Input::IsKeyPressed(KeyCode::D)) {
-            m_CameraPosition.x += m_CameraTranslationSpeed * ts;
+            m_CameraPosition.x += glm::cos(m_CameraRotation) * m_CameraTranslationSpeed * ts;
+            m_CameraPosition.y += glm::sin(m_CameraRotation) * m_CameraTranslationSpeed * ts;
         }
         if (Input::IsKeyPressed(KeyCode::W)) {
-            m_CameraPosition.y += m_CameraTranslationSpeed * ts;
+            m_CameraPosition.x += -glm::sin(m_CameraRotation) * m_CameraTranslationSpeed * ts;
+            m_CameraPosition.y += glm::cos(m_CameraRotation) * m_CameraTranslationSpeed * ts;
         }
         if (Input::IsKeyPressed(KeyCode::S)) {
-            m_CameraPosition.y -= m_CameraTranslationSpeed * ts;
+            m_CameraPosition.x -= -glm::sin(m_CameraRotation) * m_CameraTranslationSpeed * ts;
+            m_CameraPosition.y -= glm::cos(m_CameraRotation) * m_CameraTranslationSpeed * ts;
         }
 
         if (m_Rotation) {
@@ -40,13 +45,6 @@ namespace Solar {
             if (Input::IsKeyPressed(KeyCode::E)) {
                 m_CameraRotation -= m_CameraRotationSpeed * ts;
             }
-
-            if (m_CameraRotation > 180.0f) {
-                m_CameraRotation -= 360.0f;
-            } else if (m_CameraRotation <= -180.0f) {
-                m_CameraRotation += 360.0f;
-            }
-
             m_Camera.SetRotation(m_CameraRotation);
         }
 
