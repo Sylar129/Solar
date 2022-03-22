@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Solar/Core/KeyCodes.h"
+#include "Solar/Core/MouseCodes.h"
 
 namespace Solar {
     class SOLAR_API Input {
@@ -7,11 +9,11 @@ namespace Solar {
         Input(const Input&) = delete;
         Input& operator=(const Input&) = delete;
 
-        inline static bool IsKeyPressed(int keycode) {
+        inline static bool IsKeyPressed(KeyCode keycode) {
             return s_Instance->IsKeyPressedImpl(keycode);
         }
 
-        inline static bool IsMouseButtonPressed(int button) {
+        inline static bool IsMouseButtonPressed(MouseCode button) {
             return s_Instance->IsMouseButtonPressedImpl(button);
         }
 
@@ -28,9 +30,9 @@ namespace Solar {
         }
     protected:
         Input() = default;
-        virtual bool IsKeyPressedImpl(int keycode) = 0;
+        virtual bool IsKeyPressedImpl(KeyCode keycode) = 0;
 
-        virtual bool IsMouseButtonPressedImpl(int button) = 0;
+        virtual bool IsMouseButtonPressedImpl(MouseCode button) = 0;
         virtual std::pair<float, float> GetMousePositionImpl() = 0;
         virtual float GetMouseXImpl() = 0;
         virtual float GetMouseYImpl() = 0;

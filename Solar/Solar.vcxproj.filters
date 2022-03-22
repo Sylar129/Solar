@@ -146,7 +146,7 @@
     <ClInclude Include="src\Solar\Core\KeyCodes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Core\MouseButtonCodes.h">
+    <ClInclude Include="src\Solar\Core\MouseCodes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Solar\Renderer\GraphicsContext.h">

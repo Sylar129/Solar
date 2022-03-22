@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Event.h"
+#include "Solar/Core/MouseCodes.h"
 
 namespace Solar {
     class SOLAR_API MouseMovedEvent : public Event {
@@ -42,18 +43,18 @@ namespace Solar {
 
     class SOLAR_API MouseButtonEvent : public Event {
     public:
-        inline int GetMouseButton() const { return m_Button; }
+        inline MouseCode GetMouseButton() const { return m_Button; }
 
         EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput | EventCategoryMouseButton)
     protected:
-        MouseButtonEvent(int button) : m_Button(button) {}
+        MouseButtonEvent(MouseCode button) : m_Button(button) {}
 
-        int m_Button;
+        MouseCode m_Button;
     };
 
     class SOLAR_API MouseButtonPressedEvent : public MouseButtonEvent {
     public:
-        MouseButtonPressedEvent(int button) : MouseButtonEvent(button){}
+        MouseButtonPressedEvent(MouseCode button) : MouseButtonEvent(button){}
 
         std::string ToString() const override {
             std::stringstream ss;
@@ -66,7 +67,7 @@ namespace Solar {
 
     class SOLAR_API MouseButtonReleasedEvent : public MouseButtonEvent {
     public:
-        MouseButtonReleasedEvent(int button) : MouseButtonEvent(button){}
+        MouseButtonReleasedEvent(MouseCode button) : MouseButtonEvent(button){}
 
         std::string ToString() const override {
             std::stringstream ss;

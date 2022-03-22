@@ -1,6 +1,8 @@
 #include "solpch.h"
 #include "WindowsWindow.h"
 
+#include "Solar/Core/Input.h"
+
 #include "Solar/Events/ApplicationEvent.h"
 #include "Solar/Events/KeyEvent.h"
 #include "Solar/Events/MouseEvent.h"
@@ -111,19 +113,20 @@ namespace Solar {
 
         glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
             WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+            KeyCode keyCode = static_cast<KeyCode>(key);
             switch (action) {
                 case GLFW_PRESS: {
-                    KeyPressdEvent event(key, 0);
+                    KeyPressdEvent event(keyCode, 0);
                     data.EventCallback(event);
                     break;
                 }
                 case GLFW_RELEASE: {
-                    KeyReleasedEvent event(key);
+                    KeyReleasedEvent event(keyCode);
                     data.EventCallback(event);
                     break;
                 }
                 case GLFW_REPEAT: {
-                    KeyPressdEvent event(key, 1);
+                    KeyPressdEvent event(keyCode, 1);
                     data.EventCallback(event);
                     break;
                 }
@@ -132,20 +135,21 @@ namespace Solar {
 
         glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int codepoint) {
             WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-            KeyTypedEvent event(codepoint);
+            KeyTypedEvent event(static_cast<KeyCode>(codepoint));
             data.EventCallback(event);
         });
 
         glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
             WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+            MouseCode mouseCode = static_cast<MouseCode>(button);
             switch (action) {
                 case GLFW_PRESS: {
-                    MouseButtonPressedEvent event(button);
+                    MouseButtonPressedEvent event(mouseCode);
                     data.EventCallback(event);
                     break;
                 }
                 case GLFW_RELEASE: {
-                    MouseButtonReleasedEvent event(button);
+                    MouseButtonReleasedEvent event(mouseCode);
                     data.EventCallback(event);
                     break;
                 }

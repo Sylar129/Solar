@@ -189,7 +189,7 @@
     <ClInclude Include="src\Solar\Core\KeyCodes.h" />
     <ClInclude Include="src\Solar\Core\LayerStack.h" />
     <ClInclude Include="src\Solar\Core\Layer.h" />
-    <ClInclude Include="src\Solar\Core\MouseButtonCodes.h" />
+    <ClInclude Include="src\Solar\Core\MouseCodes.h" />
     <ClInclude Include="src\Solar\Renderer\Buffer.h" />
     <ClInclude Include="src\Solar\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Solar\Renderer\Renderer2D.h" />
