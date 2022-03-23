@@ -20,7 +20,7 @@ namespace Solar {
     void OrthographicCameraController::OnUpdate(TimeStep ts) {
         SOLAR_PROFILE_FUNCTION();
 
-        SOLAR_CORE_TRACE("Rotation: [{0}]", m_CameraRotation);
+        // SOLAR_CORE_TRACE("Rotation: [{0}]", m_CameraRotation);
         if (Input::IsKeyPressed(KeyCode::A)) {
             m_CameraPosition.x -= glm::cos(m_CameraRotation) * m_CameraTranslationSpeed * ts;
             m_CameraPosition.y -= glm::sin(m_CameraRotation) * m_CameraTranslationSpeed * ts;
