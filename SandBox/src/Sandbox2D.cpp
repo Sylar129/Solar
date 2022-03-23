@@ -57,5 +57,6 @@ void Sandbox2D::OnImGuiRender() {
 }
 
 void Sandbox2D::OnEvent(Solar::Event& event) {
+    SOLAR_TRACE("ExampleLayer: {0}", event);
     m_CameraController.OnEvent(event);
 }
