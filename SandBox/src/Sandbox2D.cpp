@@ -42,8 +42,8 @@ void Sandbox2D::OnUpdate(Solar::TimeStep& ts) {
 
         Solar::Renderer2D::BeginScene(m_CameraController.GetCamera());
         Solar::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.5f, 0.5f }, { 0.8f, 0.2f, 0.3f, 1.0f });
-        Solar::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.5f }, { 0.3f, 0.8f, 0.2f, 1.0f });
-        Solar::Renderer2D::DrawQuad({ 0.0f, -0.0f }, { 10.0f, 10.0f }, m_BoardTexture);
+        Solar::Renderer2D::DrawRotateQuad({ 0.5f, -0.5f }, { 0.5f, 0.5f }, glm::radians(45.0f), { 0.3f, 0.8f, 0.2f, 1.0f });
+        Solar::Renderer2D::DrawQuad({ 0.0f, -0.0f }, { 10.0f, 10.0f }, m_BoardTexture, 10.0f, glm::vec4(0.25f, 0.23f, 0.19f, 1.0f));
         Solar::Renderer2D::EndScene();
     }
 }
