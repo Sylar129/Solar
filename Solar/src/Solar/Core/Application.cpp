@@ -39,10 +39,12 @@ namespace Solar {
         while (m_Running) {
             SOLAR_PROFILE_SCOPE("RunLoop");
 
+            static auto lastFrameTime = std::chrono::steady_clock::now();
+
             auto now = std::chrono::steady_clock::now();
-            std::chrono::duration<float> duration = now - m_LastFrameTime;
+            std::chrono::duration<float> duration = now - lastFrameTime;
             TimeStep timeStep = duration.count();
-            m_LastFrameTime = now;
+            lastFrameTime = now;
 
             /// <summary>
             /// Layer Update

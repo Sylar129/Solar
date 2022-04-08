@@ -38,14 +38,17 @@ void Sandbox2D::OnUpdate(Solar::TimeStep& ts) {
     }
 
     {
+        static float rotation = 0.0f;
+        rotation += ts * 20.0f;
+        rotation = rotation > 360.0f ? rotation - 360.0f : rotation;
         SOLAR_PROFILE_SCOPE("Renderer Draw");
 
         Solar::Renderer2D::BeginScene(m_CameraController.GetCamera());
         Solar::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.5f, 0.5f }, { 0.8f, 0.2f, 0.3f, 1.0f });
         Solar::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.5f }, { 0.3f, 0.8f, 0.2f, 1.0f });
-        // Solar::Renderer2D::DrawRotateQuad({ 0.5f, -0.5f }, { 0.5f, 0.5f }, glm::radians(45.0f), { 0.3f, 0.8f, 0.2f, 1.0f });
-        Solar::Renderer2D::DrawQuad({ -5.0f, -5.0f, -0.1f }, { 10.0f, 10.0f }, m_BoardTexture, 10.0f);
-        Solar::Renderer2D::DrawQuad({ -0.5f, -0.5f }, { 1.0f, 1.0f }, m_BoardTexture, 20.0f);
+        Solar::Renderer2D::DrawRotateQuad({ 0.5f, -0.5f }, { 0.5f, 0.5f }, 45.0f, { 0.3f, 0.8f, 0.2f, 1.0f });
+        Solar::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 10.0f, 10.0f }, m_BoardTexture, 10.0f);
+        Solar::Renderer2D::DrawRotateQuad({ 0.0f, 1.0f }, { 1.0f, 1.0f }, rotation, m_BoardTexture, 20.0f);
         Solar::Renderer2D::EndScene();
     }
 }

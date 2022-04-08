@@ -38,7 +38,6 @@ namespace Solar {
         bool m_Running;
         bool m_Minimized;
         LayerStack m_LayerStack;
-        std::chrono::steady_clock::time_point m_LastFrameTime;
     private:
         static Application* s_Instance;
     };
