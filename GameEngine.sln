@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLFW", "Solar\project\GLFW\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImGui", "Solar\project\Imgui\ImGui.vcxproj", "{A7EDE9E2-2777-4502-9FB9-BEF1DA4E98AB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Depedence", "Depedence", "{DC3F449A-516D-4DD2-B4B0-0711EA67ED53}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -53,6 +55,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E54C3292-3B0A-4F78-86F7-31250AAC29FA} = {DC3F449A-516D-4DD2-B4B0-0711EA67ED53}
+		{7A4F2993-47B6-4233-8D9B-3CC7FA5FCEB6} = {DC3F449A-516D-4DD2-B4B0-0711EA67ED53}
+		{A7EDE9E2-2777-4502-9FB9-BEF1DA4E98AB} = {DC3F449A-516D-4DD2-B4B0-0711EA67ED53}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {147B7488-D9C6-48D9-BDCB-04C62582E4DC}
