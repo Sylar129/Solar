@@ -157,6 +157,7 @@
     <ClCompile Include="src\Solar\Renderer\Renderer2D.cpp" />
     <ClCompile Include="src\Solar\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Solar\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Solar\Renderer\SubTexture2D.cpp" />
     <ClCompile Include="src\Solar\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\solpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -196,6 +197,7 @@
     <ClInclude Include="src\Solar\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Solar\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Solar\Renderer\Shader.h" />
+    <ClInclude Include="src\Solar\Renderer\SubTexture2D.h" />
     <ClInclude Include="src\Solar\Renderer\VertexArray.h" />
     <ClInclude Include="src\Solar\Core\Window.h" />
     <ClInclude Include="src\solpch.h" />

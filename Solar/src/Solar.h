@@ -19,6 +19,7 @@
 #include "Solar/Renderer/Buffer.h"
 #include "Solar/Renderer/Shader.h"
 #include "Solar/Renderer/Texture.h"
+#include "Solar/Renderer/SubTexture2D.h"
 #include "Solar/Renderer/VertexArray.h"
 
 #include "Solar/Renderer/OrthographicCamera.h"

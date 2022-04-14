@@ -12,6 +12,11 @@ void Sandbox2D::OnAttach() {
     SOLAR_PROFILE_FUNCTION();
 
     m_BoardTexture = Solar::Texture2D::Create("assets/textures/Board.png");
+    m_SpriteSheet = Solar::Texture2D::Create("assets/game/textures/RPGpack_sheet_2X.png");
+
+    m_TextureStairs = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 7,6 }, { 128,128 });
+    m_TextureGreednLand = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 0,10 }, { 128,128 }, { 3,3 });
+    m_TextureTree = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 2,1 }, { 128,128 }, { 1,2 });
 }
 
 void Sandbox2D::OnDetech() {
@@ -44,6 +49,7 @@ void Sandbox2D::OnUpdate(Solar::TimeStep& ts) {
         rotation = rotation > 360.0f ? rotation - 360.0f : rotation;
         SOLAR_PROFILE_SCOPE("Renderer Draw");
 
+#if 0
         Solar::Renderer2D::BeginScene(m_CameraController.GetCamera());
         Solar::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.5f, 0.5f }, { 0.8f, 0.2f, 0.3f, 1.0f });
         Solar::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.5f }, { 0.3f, 0.2f, 0.8f, 1.0f });
@@ -59,6 +65,14 @@ void Sandbox2D::OnUpdate(Solar::TimeStep& ts) {
                 Solar::Renderer2D::DrawQuad({ x, y }, { 0.45f, 0.45f }, color);
             }
         }
+        Solar::Renderer2D::EndScene();
+#endif
+
+
+        Solar::Renderer2D::BeginScene(m_CameraController.GetCamera());
+        Solar::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.5f }, { 1.0f, 1.0f }, m_TextureStairs);
+        Solar::Renderer2D::DrawQuad({ 1.0f, 0.0f, 0.5f }, { 1.0f, 1.0f }, m_TextureGreednLand);
+        Solar::Renderer2D::DrawQuad({ -1.0f, 0.0f, 0.5f }, { 1.0f, 2.0f }, m_TextureTree);
         Solar::Renderer2D::EndScene();
     }
 }

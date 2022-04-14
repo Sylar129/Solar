@@ -20,5 +20,10 @@ private:
     Solar::Ref<Solar::VertexArray> m_SquareVA;
     Solar::Ref<Solar::Texture2D> m_BoardTexture;
 
+    Solar::Ref<Solar::Texture2D> m_SpriteSheet;
+    Solar::Ref<Solar::SubTexture2D> m_TextureStairs;
+    Solar::Ref<Solar::SubTexture2D> m_TextureGreednLand;
+    Solar::Ref<Solar::SubTexture2D> m_TextureTree;
+
     glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 };
