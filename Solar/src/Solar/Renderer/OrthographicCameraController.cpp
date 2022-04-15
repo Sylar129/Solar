@@ -6,15 +6,16 @@
 
 namespace Solar {
     OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation)
-      : m_AspectRatio(aspectRatio),
+        : m_AspectRatio(aspectRatio),
         m_ZoomLevel(1.0f),
-        m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel),
+        m_Bounds({ -m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel }),
+        m_Camera(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom, m_Bounds.Top),
         m_CameraPosition(0.0f, 0.0f, 0.0f),
         m_CameraTranslationSpeed(1.0f),
         m_Rotation(rotation),
         m_CameraRotation(0.0f),
         m_CameraRotationSpeed(1.0f) {
-
+        
     }
 
     void OrthographicCameraController::OnUpdate(TimeStep ts) {
@@ -60,12 +61,17 @@ namespace Solar {
         dispatcher.Dispatch<WindowResizeEvent>(SOLAR_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
     }
 
+    void OrthographicCameraController::CalculateView() {
+        m_Bounds = { -m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel };
+        m_Camera.SetProjection(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom, m_Bounds.Top);
+    }
+
     bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e) {
         SOLAR_PROFILE_FUNCTION();
 
         m_ZoomLevel -= e.GetYOffset() * 0.1f;
         m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
-        m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+        CalculateView();
         return false;
     }
 
@@ -73,7 +79,7 @@ namespace Solar {
         SOLAR_PROFILE_FUNCTION();
 
         m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
-        m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+        CalculateView();
         return false;
     }
 }

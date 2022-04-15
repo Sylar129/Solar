@@ -5,6 +5,19 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <Platform/OpenGL/OpenGLShader.h>
 
+static uint32_t s_MapWidth = 16;
+static const char* s_MapTiles =
+"WWWWWWWWWWWWWWWW"
+"WWWWWWWWDDDDDDWW"
+"WWWWWDDDDDDDDDDD"
+"WWWDDDDDDDDDDDDD"
+"WWDDDDDDDDDDDDDD"
+"WWDDDDWWDDDDWWWD"
+"WWDDDWWWWWDDDWWD"
+"WWWWDDDDDDDDDDDW"
+"WWWWWWWWWWWWWWWW";
+
+
 Sandbox2D::Sandbox2D() : Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f, true) {
 }
 
@@ -17,6 +30,14 @@ void Sandbox2D::OnAttach() {
     m_TextureStairs = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 7,6 }, { 128,128 });
     m_TextureGreednLand = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 0,10 }, { 128,128 }, { 3,3 });
     m_TextureTree = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 2,1 }, { 128,128 }, { 1,2 });
+
+
+    m_MapWidth = s_MapWidth;
+    m_MapHeight = strlen(s_MapTiles) / s_MapWidth;
+    s_TextureMap['D'] = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 6,11 }, { 128,128 });
+    s_TextureMap['W'] = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 11,11 }, { 128,128 });
+
+    m_CameraController.SetZoomLevel(6.0f);
 }
 
 void Sandbox2D::OnDetech() {
@@ -68,11 +89,23 @@ void Sandbox2D::OnUpdate(Solar::TimeStep& ts) {
         Solar::Renderer2D::EndScene();
 #endif
 
-
         Solar::Renderer2D::BeginScene(m_CameraController.GetCamera());
-        Solar::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.5f }, { 1.0f, 1.0f }, m_TextureStairs);
-        Solar::Renderer2D::DrawQuad({ 1.0f, 0.0f, 0.5f }, { 1.0f, 1.0f }, m_TextureGreednLand);
-        Solar::Renderer2D::DrawQuad({ -1.0f, 0.0f, 0.5f }, { 1.0f, 2.0f }, m_TextureTree);
+
+        for (uint32_t x = 0; x < m_MapWidth; ++x) {
+            for (uint32_t y = 0; y < m_MapHeight; ++y) {
+                char tileType = s_MapTiles[x + y * m_MapWidth];
+                Solar::Ref<Solar::SubTexture2D> texture;
+                if (s_TextureMap.find(tileType) != s_TextureMap.end()) {
+                    texture = s_TextureMap[tileType];
+                } else {
+                    texture = m_TextureTree;
+                }
+                Solar::Renderer2D::DrawQuad({ (float)x - (float)m_MapWidth / 2.0, (float)m_MapHeight / 2.0 - (float)y, 0.5f }, { 1.0f, 1.0f }, texture);
+            }
+        }
+        //Solar::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.5f }, { 1.0f, 1.0f }, m_TextureStairs);
+        //Solar::Renderer2D::DrawQuad({ 1.0f, 0.0f, 0.5f }, { 1.0f, 1.0f }, m_TextureGreednLand);
+        //Solar::Renderer2D::DrawQuad({ -1.0f, 0.0f, 0.5f }, { 1.0f, 2.0f }, m_TextureTree);
         Solar::Renderer2D::EndScene();
     }
 }
