@@ -138,10 +138,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\Solar\Renderer\Framebuffer.cpp" />
     <ClCompile Include="src\Solar\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Solar\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Solar\Renderer\RenderCommand.cpp" />
@@ -173,12 +175,14 @@
     <ClCompile Include="src\Solar\Renderer\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Solar\Core\Timestep.h" />
     <ClInclude Include="src\Solar\Debug\Instrumentor.h" />
+    <ClInclude Include="src\Solar\Renderer\Framebuffer.h" />
     <ClInclude Include="src\Solar\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\Solar\Renderer\OrthographicCameraController.h" />
     <ClInclude Include="src\Solar\Renderer\Renderer.h" />

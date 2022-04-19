@@ -38,6 +38,11 @@ void Sandbox2D::OnAttach() {
     s_TextureMap['W'] = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 11,11 }, { 128,128 });
 
     m_CameraController.SetZoomLevel(6.0f);
+
+    Solar::FramebufferSpecification fbSpec;
+    fbSpec.Width = 1280;
+    fbSpec.Height = 720;
+    m_Framebuffer = Solar::Framebuffer::Create(fbSpec);
 }
 
 void Sandbox2D::OnDetech() {
@@ -59,7 +64,7 @@ void Sandbox2D::OnUpdate(Solar::TimeStep& ts) {
     Solar::Renderer2D::ResetStats();
     {
         SOLAR_PROFILE_SCOPE("Renderer Prep");
-
+        m_Framebuffer->Bind();
         Solar::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
         Solar::RenderCommand::Clear();
     }
@@ -109,6 +114,7 @@ void Sandbox2D::OnUpdate(Solar::TimeStep& ts) {
         //Solar::Renderer2D::DrawQuad({ -1.0f, 0.0f, 0.5f }, { 1.0f, 2.0f }, m_TextureTree);
         Solar::Renderer2D::EndScene();
 #endif
+        m_Framebuffer->Unbind();
     }
 }
 
@@ -186,8 +192,9 @@ void Sandbox2D::OnImGuiRender() {
     ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
     ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
-    uint32_t textureID = m_BoardTexture->GetRendererID();
-    ImGui::Image((void*)textureID, ImVec2(64.0f, 64.0f));
+    // uint32_t textureID = m_BoardTexture->GetRendererID();
+    uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
+    ImGui::Image((void*)textureID, ImVec2(1280.0f, 720.0f));
 
     ImGui::End();
 

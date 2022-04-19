@@ -25,6 +25,8 @@ private:
     Solar::Ref<Solar::SubTexture2D> m_TextureGreednLand;
     Solar::Ref<Solar::SubTexture2D> m_TextureTree;
 
+    Solar::Ref<Solar::Framebuffer> m_Framebuffer;
+
     glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 
     uint32_t m_MapWidth, m_MapHeight;
