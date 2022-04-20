@@ -13,7 +13,7 @@ namespace Solar {
 
     class SOLAR_API Application {
     public:
-        Application();
+        Application(const std::string& name = "Solar App");
         virtual ~Application();
 
         void Run();
