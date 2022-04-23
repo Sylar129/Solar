@@ -18,7 +18,7 @@
     <ClCompile Include="src\EditorLayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\SolarEditorApp.cpp">
+    <ClCompile Include="src\SolariumApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -4,20 +4,20 @@
 #include "EditorLayer.h"
 
 namespace Solar {
-    class SolarEditor : public Application {
+    class Solarium : public Application {
     public:
-        SolarEditor() : Application("Solar Editor") {
+        Solarium() : Application("Solarium") {
             // PushLayer(new ExampleLayer());
             PushLayer(new EditorLayer());
         }
 
-        ~SolarEditor() {
+        ~Solarium() {
 
         }
     };
 
     Application* CreateApplication() {
-        return new SolarEditor();
+        return new Solarium();
     }
 }
 

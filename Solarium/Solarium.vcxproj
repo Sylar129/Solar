@@ -20,7 +20,7 @@
     <ProjectGuid>{4C99B9F0-7D74-4A1F-A8EC-F3DC700F00C8}</ProjectGuid>
     <RootNamespace>SandBox</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>SolarEditor</ProjectName>
+    <ProjectName>Solarium</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -142,7 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EditorLayer.cpp" />
-    <ClCompile Include="src\SolarEditorApp.cpp" />
+    <ClCompile Include="src\SolariumApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EditorLayer.h" />
