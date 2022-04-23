@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Solar/Renderer//Buffer.h"
+#include "Solar/Renderer/Buffer.h"
 
 namespace Solar {
     class OpenGLVertexBuffer : public VertexBuffer {

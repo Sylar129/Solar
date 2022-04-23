@@ -26,8 +26,9 @@ namespace Solar {
     void EditorLayer::OnUpdate(TimeStep& ts) {
         SOLAR_PROFILE_FUNCTION();
 
-
-        m_CameraController.OnUpdate(ts);
+        if (m_ViewportFocused) {
+            m_CameraController.OnUpdate(ts);
+        }
 
         /// <summary>
         /// Renderer
@@ -144,6 +145,11 @@ namespace Solar {
 
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0,0 });
         ImGui::Begin("Viewport");
+
+        m_ViewportFocused = ImGui::IsWindowFocused();
+        m_ViewportHOvered = ImGui::IsWindowHovered();
+        Application::Get().GetImGuiLayer()->SetBlockEvents(!m_ViewportFocused || !m_ViewportHOvered);
+
         ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
         if (m_ViewportSize != *((glm::vec2*)&viewportPanelSize)) {
             m_Framebuffer->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
