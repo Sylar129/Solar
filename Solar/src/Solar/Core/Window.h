@@ -18,7 +18,7 @@ namespace Solar {
     };
 
     // Interface representing a desktop system based window
-    class SOLAR_API Window {
+    class Window {
     public:
         using EventCallbackFn = std::function<void(Event&)>;
 

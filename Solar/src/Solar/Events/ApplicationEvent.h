@@ -3,7 +3,7 @@
 #include "Event.h"
 
 namespace Solar {
-    class SOLAR_API WindowResizeEvent : public Event {
+    class WindowResizeEvent : public Event {
     public:
         WindowResizeEvent(unsigned int width, unsigned int height)
           : m_Width(width), m_Height(height) {}
@@ -22,7 +22,7 @@ namespace Solar {
         unsigned int m_Width, m_Height;
     };
 
-    class SOLAR_API WindowCloseEvent : public Event {
+    class WindowCloseEvent : public Event {
     public:
         WindowCloseEvent() {}
 
@@ -30,7 +30,7 @@ namespace Solar {
         EVENT_CLASS_CATEGORY(EventCategoryApplication)
     };
 
-    class SOLAR_API AppTickEvent : public Event {
+    class AppTickEvent : public Event {
     public:
         AppTickEvent() {}
 
@@ -38,7 +38,7 @@ namespace Solar {
         EVENT_CLASS_CATEGORY(EventCategoryApplication)
     };
 
-    class SOLAR_API AppUpdateEvent : public Event {
+    class AppUpdateEvent : public Event {
     public:
         AppUpdateEvent() {}
 
@@ -46,7 +46,7 @@ namespace Solar {
         EVENT_CLASS_CATEGORY(EventCategoryApplication)
     };
 
-    class SOLAR_API AppRenderEvent : public Event {
+    class AppRenderEvent : public Event {
     public:
         AppRenderEvent() {}
 

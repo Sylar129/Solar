@@ -11,7 +11,7 @@
 
 namespace Solar {
 
-    class SOLAR_API Application {
+    class Application {
     public:
         Application(const std::string& name = "Solar App");
         virtual ~Application();

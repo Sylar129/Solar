@@ -5,7 +5,7 @@
 #include "spdlog/fmt/ostr.h"
 
 namespace Solar {
-    class SOLAR_API Log {
+    class Log {
     public:
         static void Init();
 

@@ -4,7 +4,7 @@
 
 
 namespace Solar {
-    class SOLAR_API LayerStack {
+    class LayerStack {
     public:
         LayerStack();
         ~LayerStack();

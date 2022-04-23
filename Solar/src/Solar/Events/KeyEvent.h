@@ -4,7 +4,7 @@
 #include "Solar/Core/KeyCodes.h"
 
 namespace Solar {
-    class SOLAR_API KeyEvent : public Event {
+    class KeyEvent : public Event {
     public:
         inline KeyCode GetKeyCode() const { return m_KeyCode; }
 
@@ -15,7 +15,7 @@ namespace Solar {
         KeyCode m_KeyCode;
     };
 
-    class SOLAR_API KeyPressdEvent :public KeyEvent {
+    class KeyPressdEvent :public KeyEvent {
     public:
         KeyPressdEvent(KeyCode keycode, int repeatCount)
           : KeyEvent(keycode), m_RepeatCount(repeatCount) {}
@@ -33,7 +33,7 @@ namespace Solar {
         int m_RepeatCount;
     };
 
-    class SOLAR_API KeyReleasedEvent :public KeyEvent {
+    class KeyReleasedEvent :public KeyEvent {
     public:
         KeyReleasedEvent(KeyCode keycode) : KeyEvent(keycode) {}
 
@@ -46,7 +46,7 @@ namespace Solar {
         EVENT_CLASS_TYPE(KeyReleased)
     };
 
-    class SOLAR_API KeyTypedEvent :public KeyEvent {
+    class KeyTypedEvent :public KeyEvent {
     public:
         KeyTypedEvent(KeyCode keycode) : KeyEvent(keycode) {}
 

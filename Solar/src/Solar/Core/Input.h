@@ -4,7 +4,7 @@
 #include "Solar/Core/MouseCodes.h"
 
 namespace Solar {
-    class SOLAR_API Input {
+    class Input {
     public:
         virtual ~Input() = default;
 

@@ -6,7 +6,7 @@
 #include "Solar/Events/MouseEvent.h"
 
 namespace Solar {
-    class SOLAR_API ImGuiLayer : public Layer {
+    class ImGuiLayer : public Layer {
     public:
         ImGuiLayer();
         ~ImGuiLayer();

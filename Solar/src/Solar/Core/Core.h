@@ -43,20 +43,6 @@
     #error "Unknown platform!"
 #endif // End of platform detection
 
-// DLL support
-#ifdef SOLAR_PLATFORM_WINDOWS
-    #if SOLAR_DYNAMIC_LINK
-        #ifdef SOLAR_BUILD_DLL
-            #define SOLAR_API __declspec(dllexport)
-        #else
-            #define SOLAR_API __declspec(dllimport)
-        #endif
-    #else
-        #define SOLAR_API
-    #endif
-#else
-    #error Solar only supports Windows!
-#endif // End of DLL support
 
 #ifdef SOLAR_DEBUG
     #ifdef SOLAR_PLATFORM_WINDOWS

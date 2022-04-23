@@ -4,7 +4,7 @@
 #include "Solar/Core/MouseCodes.h"
 
 namespace Solar {
-    class SOLAR_API MouseMovedEvent : public Event {
+    class MouseMovedEvent : public Event {
     public:
         MouseMovedEvent(float x, float y) : m_MouseX(x), m_MouseY(y) {}
 
@@ -22,7 +22,7 @@ namespace Solar {
         float m_MouseX, m_MouseY;
     };
 
-    class SOLAR_API MouseScrolledEvent : public Event {
+    class MouseScrolledEvent : public Event {
     public:
         MouseScrolledEvent(float xOffset, float yOffset)
           : m_XOffset(xOffset), m_YOffset(yOffset) {}
@@ -41,7 +41,7 @@ namespace Solar {
         float m_XOffset, m_YOffset;
     };
 
-    class SOLAR_API MouseButtonEvent : public Event {
+    class MouseButtonEvent : public Event {
     public:
         inline MouseCode GetMouseButton() const { return m_Button; }
 
@@ -52,7 +52,7 @@ namespace Solar {
         MouseCode m_Button;
     };
 
-    class SOLAR_API MouseButtonPressedEvent : public MouseButtonEvent {
+    class MouseButtonPressedEvent : public MouseButtonEvent {
     public:
         MouseButtonPressedEvent(MouseCode button) : MouseButtonEvent(button){}
 
@@ -65,7 +65,7 @@ namespace Solar {
         EVENT_CLASS_TYPE(MouseButtonPressed)
     };
 
-    class SOLAR_API MouseButtonReleasedEvent : public MouseButtonEvent {
+    class MouseButtonReleasedEvent : public MouseButtonEvent {
     public:
         MouseButtonReleasedEvent(MouseCode button) : MouseButtonEvent(button){}
 
