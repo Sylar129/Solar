@@ -22,6 +22,10 @@ namespace Solar {
         Ref<Texture2D> m_BoardTexture;
 
         Ref<Framebuffer> m_Framebuffer;
+
+        Ref<Scene> m_ActiveScene;
+        entt::entity m_SquareEntity;
+
         bool m_ViewportFocused = false;
         bool m_ViewportHOvered = false;
 

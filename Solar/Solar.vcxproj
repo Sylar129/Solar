@@ -77,7 +77,7 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\dependence\imgui;$(SolutionDir)Solar\dependence\imgui\backends;$(SolutionDir)Solar\dependence\spdlog\include;$(SolutionDir)Solar\dependence\GLAD\include;$(SolutionDir)Solar\dependence\glfw\include;$(SolutionDir)Solar\dependence\glm;$(SolutionDir)Solar\dependence\stb</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\dependence\imgui;$(SolutionDir)Solar\dependence\imgui\backends;$(SolutionDir)Solar\dependence\spdlog\include;$(SolutionDir)Solar\dependence\GLAD\include;$(SolutionDir)Solar\dependence\glfw\include;$(SolutionDir)Solar\dependence\glm;$(SolutionDir)Solar\dependence\stb;$(SolutionDir)Solar\dependence\entt\include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -99,7 +99,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;SOLAR_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\dependence\imgui;$(SolutionDir)Solar\dependence\imgui\backends;$(SolutionDir)Solar\dependence\spdlog\include;$(SolutionDir)Solar\dependence\GLAD\include;$(SolutionDir)Solar\dependence\glfw\include;$(SolutionDir)Solar\dependence\glm;$(SolutionDir)Solar\dependence\stb</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\dependence\imgui;$(SolutionDir)Solar\dependence\imgui\backends;$(SolutionDir)Solar\dependence\spdlog\include;$(SolutionDir)Solar\dependence\GLAD\include;$(SolutionDir)Solar\dependence\glfw\include;$(SolutionDir)Solar\dependence\glm;$(SolutionDir)Solar\dependence\stb;$(SolutionDir)Solar\dependence\entt\include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -122,7 +122,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;SOLAR_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\dependence\imgui;$(SolutionDir)Solar\dependence\imgui\backends;$(SolutionDir)Solar\dependence\spdlog\include;$(SolutionDir)Solar\dependence\GLAD\include;$(SolutionDir)Solar\dependence\glfw\include;$(SolutionDir)Solar\dependence\glm;$(SolutionDir)Solar\dependence\stb</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\dependence\imgui;$(SolutionDir)Solar\dependence\imgui\backends;$(SolutionDir)Solar\dependence\spdlog\include;$(SolutionDir)Solar\dependence\GLAD\include;$(SolutionDir)Solar\dependence\glfw\include;$(SolutionDir)Solar\dependence\glm;$(SolutionDir)Solar\dependence\stb;$(SolutionDir)Solar\dependence\entt\include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -161,6 +161,7 @@
     <ClCompile Include="src\Solar\Renderer\Shader.cpp" />
     <ClCompile Include="src\Solar\Renderer\SubTexture2D.cpp" />
     <ClCompile Include="src\Solar\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\Solar\Scene\Scene.cpp" />
     <ClCompile Include="src\solpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -175,6 +176,7 @@
     <ClCompile Include="src\Solar\Renderer\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dependence\entt\include\entt.hpp" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -204,6 +206,8 @@
     <ClInclude Include="src\Solar\Renderer\SubTexture2D.h" />
     <ClInclude Include="src\Solar\Renderer\VertexArray.h" />
     <ClInclude Include="src\Solar\Core\Window.h" />
+    <ClInclude Include="src\Solar\Scene\Components.h" />
+    <ClInclude Include="src\Solar\Scene\Scene.h" />
     <ClInclude Include="src\solpch.h" />
     <ClInclude Include="src\Solar\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Solar\Events\Event.h" />

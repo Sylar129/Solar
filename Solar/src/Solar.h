@@ -11,6 +11,9 @@
 
 #include "Solar/ImGui/ImGuiLayer.h"
 
+#include "Solar/Scene/Scene.h"
+#include "Solar/Scene/Components.h"
+
 // -------------- --Renderer---------------
 #include "Solar/Renderer/Renderer.h"
 #include "Solar/Renderer/Renderer2D.h"
