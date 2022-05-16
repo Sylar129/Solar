@@ -4,6 +4,8 @@
 #include "Components.h"
 #include "Solar/Renderer/Renderer2D.h"
 
+#include "Entity.h"
+
 namespace Solar {
 
     static void DoMath(const glm::mat4 tranform) {
@@ -11,28 +13,19 @@ namespace Solar {
     }
 
     Scene::Scene() {
-        //struct TransformComponent {
-        //    glm::mat4 Transform;
 
-        //    TransformComponent() = default;
-        //    TransformComponent(const TransformComponent&) = default;
-        //    TransformComponent(const glm::mat4 transform)
-        //      : Transform(transform) {}
-        //};
-
-        //TransformComponent transform;
-        //DoMath(transform.Transform);
-
-
-        //entt::entity entity = m_Registry.create();
     }
 
     Scene::~Scene() {
 
     }
 
-    entt::entity Scene::CreateEntity() {
-        return m_Registry.create();
+    Entity Scene::CreateEntity(const std::string& name) {
+        Entity entity = { m_Registry.create(),this };
+        entity.AddComponent<TransformComponent>();
+        auto& tag = entity.AddComponent<TagComponent>();
+        tag.Tag = name.empty() ? "Entity" : name;
+        return entity;
     }
 
     void Scene::OnUpdate(TimeStep& ts) {

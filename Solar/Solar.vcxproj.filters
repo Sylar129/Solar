@@ -102,6 +102,9 @@
     <ClCompile Include="src\Solar\Scene\Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Solar\Scene\Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Solar\Core\Application.h">
@@ -234,6 +237,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Solar\Scene\Components.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Solar\Scene\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

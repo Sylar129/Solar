@@ -24,7 +24,7 @@ namespace Solar {
         Ref<Framebuffer> m_Framebuffer;
 
         Ref<Scene> m_ActiveScene;
-        entt::entity m_SquareEntity;
+        Entity m_SquareEntity;
 
         bool m_ViewportFocused = false;
         bool m_ViewportHOvered = false;
