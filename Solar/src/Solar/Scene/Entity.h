@@ -38,7 +38,7 @@ namespace Solar {
 
         operator bool() const { return m_Scene->m_Registry.valid(m_EntityHandle); }
     private:
-        entt::entity m_EntityHandle{ 0 };
+        entt::entity m_EntityHandle{ entt::null };
         Scene* m_Scene = nullptr;
     };
 }
