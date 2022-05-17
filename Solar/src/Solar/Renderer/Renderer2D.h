@@ -3,6 +3,7 @@
 #include "OrthographicCamera.h"
 #include "Texture.h"
 #include "SubTexture2D.h"
+#include "Camera.h"
 
 namespace Solar {
     class Renderer2D {
@@ -13,7 +14,8 @@ namespace Solar {
         static void Init();
         static void ShutDown();
 
-        static void BeginScene(const OrthographicCamera& camera);
+        static void BeginScene(const Camera& camera, const glm::mat4 transform);
+        static void BeginScene(const OrthographicCamera& camera); // TODO: Remove
         static void EndScene();
         static void Flush();
 

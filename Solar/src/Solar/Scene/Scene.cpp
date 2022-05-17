@@ -29,12 +29,31 @@ namespace Solar {
     }
 
     void Scene::OnUpdate(TimeStep& ts) {
-        auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-        for (auto entity : group) {
-            auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+        // Render 2D
+        Camera* mainCamera = nullptr;
+        glm::mat4* cameraTransform = nullptr;
+        {
+            auto group = m_Registry.view<CameraComponent, TransformComponent>();
+            for (auto entity : group) {
+                auto [transform, camera] = group.get<TransformComponent, CameraComponent>(entity);
 
-            Renderer2D::DrawQuad(transform.Transform, sprite.Color);
+                if (camera.Primary) {
+                    mainCamera = &camera.Camera;
+                    cameraTransform = &transform.Transform;
+                    break;
+                }
+            }
+        }
+
+        if (mainCamera) {
+            Renderer2D::BeginScene(mainCamera->GetProjection(), *cameraTransform);
+            auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+            for (auto entity : group) {
+                auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+
+                Renderer2D::DrawQuad(transform.Transform, sprite.Color);
+            }
+            Renderer2D::EndScene();
         }
     }
-
 }

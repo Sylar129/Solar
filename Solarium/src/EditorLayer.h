@@ -23,8 +23,12 @@ namespace Solar {
 
         Ref<Framebuffer> m_Framebuffer;
 
+        // Entity
         Ref<Scene> m_ActiveScene;
         Entity m_SquareEntity;
+        Entity m_CameraEntity;
+        Entity m_SecondCamera;
+        bool m_PrimaryCamera = true;
 
         bool m_ViewportFocused = false;
         bool m_ViewportHOvered = false;
