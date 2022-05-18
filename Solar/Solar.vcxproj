@@ -163,6 +163,7 @@
     <ClCompile Include="src\Solar\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\Solar\Scene\Entity.cpp" />
     <ClCompile Include="src\Solar\Scene\Scene.cpp" />
+    <ClCompile Include="src\Solar\Scene\SceneCamera.cpp" />
     <ClCompile Include="src\solpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -211,6 +212,7 @@
     <ClInclude Include="src\Solar\Scene\Components.h" />
     <ClInclude Include="src\Solar\Scene\Entity.h" />
     <ClInclude Include="src\Solar\Scene\Scene.h" />
+    <ClInclude Include="src\Solar\Scene\SceneCamera.h" />
     <ClInclude Include="src\solpch.h" />
     <ClInclude Include="src\Solar\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Solar\Events\Event.h" />

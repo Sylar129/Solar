@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 
-#include "Solar/Renderer/Camera.h"
+#include "SceneCamera.h"
 
 namespace Solar {
 
@@ -37,13 +37,11 @@ namespace Solar {
     };
 
     struct CameraComponent {
-        Solar::Camera Camera;
+        SceneCamera Camera;
         bool Primary = true; // TODO: Move to the scene
+        bool FixedAspectRatio = false;
 
         CameraComponent() = default;
         CameraComponent(const CameraComponent&) = default;
-        CameraComponent(const glm::mat4& projection)
-            : Camera(projection) {
-        }
     };
 }
