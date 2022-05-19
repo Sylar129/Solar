@@ -251,5 +251,8 @@
     <ClInclude Include="src\Solar\Scene\SceneCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Solar\Scene\ScriptableEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

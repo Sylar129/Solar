@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 
 #include "SceneCamera.h"
+#include "ScriptableEntity.h"
 
 namespace Solar {
 
@@ -43,5 +44,26 @@ namespace Solar {
 
         CameraComponent() = default;
         CameraComponent(const CameraComponent&) = default;
+    };
+
+    struct NativeScriptComponent {
+        ScriptableEntity* Instance = nullptr;
+
+        std::function<void()> InstantiateFunction;
+        std::function<void()> DestoryInstanceFunction;
+
+        std::function<void(ScriptableEntity*)> OnCreateFunction;
+        std::function<void(ScriptableEntity*)> OnDestoryFunction;
+        std::function<void(ScriptableEntity* , TimeStep)> OnUpdateFunction;
+
+        template<typename T>
+        void Bind() {
+            InstantiateFunction = [&]() { Instance = new T(); };
+            DestoryInstanceFunction = [&]() { delete (T*)Instance; Instance = nullptr; };
+
+            OnCreateFunction = [](ScriptableEntity* instance) { ((T*)instance)->OnCreate(); };
+            OnDestoryFunction = [](ScriptableEntity* instance) { ((T*)instance)->OnDestory(); };
+            OnUpdateFunction = [](ScriptableEntity* instance, TimeStep ts) { ((T*)instance)->OnUpdate(ts); };
+        }
     };
 }

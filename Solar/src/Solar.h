@@ -13,6 +13,7 @@
 
 #include "Solar/Scene/Scene.h"
 #include "Solar/Scene/Entity.h"
+#include "Solar/Scene/ScriptableEntity.h"
 #include "Solar/Scene/Components.h"
 
 // -------------- --Renderer---------------

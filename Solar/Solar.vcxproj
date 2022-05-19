@@ -213,6 +213,7 @@
     <ClInclude Include="src\Solar\Scene\Entity.h" />
     <ClInclude Include="src\Solar\Scene\Scene.h" />
     <ClInclude Include="src\Solar\Scene\SceneCamera.h" />
+    <ClInclude Include="src\Solar\Scene\ScriptableEntity.h" />
     <ClInclude Include="src\solpch.h" />
     <ClInclude Include="src\Solar\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Solar\Events\Event.h" />
