@@ -8,10 +8,6 @@
 
 namespace Solar {
 
-    static void DoMath(const glm::mat4 tranform) {
-
-    }
-
     Scene::Scene() {
 
     }
@@ -31,14 +27,15 @@ namespace Solar {
     void Scene::OnUpdate(TimeStep& ts) {
         // Update scripts
         {
+            // TODO: Move to Scene::OnScenePlay
             m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc) {
                 if (!nsc.Instance) {
-                    nsc.InstantiateFunction();
+                    nsc.Instance = nsc.InstantiateScript();
                     nsc.Instance->m_Entity = Entity{ entity,this };
-                    nsc.OnCreateFunction(nsc.Instance);
+                    nsc.Instance->OnCreate();
                 }
-                nsc.OnUpdateFunction(nsc.Instance, ts);
-                                                          });
+                nsc.Instance->OnUpdate(ts);
+            });
         }
 
         // Render 2D
