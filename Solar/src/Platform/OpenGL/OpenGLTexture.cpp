@@ -6,7 +6,7 @@
 
 namespace Solar {
     OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
-      : m_Width(width), m_Height(height), m_InternaleFormat(GL_RGBA8), m_DataFormat(GL_RGBA) {
+        : m_Width(width), m_Height(height), m_InternaleFormat(GL_RGBA8), m_DataFormat(GL_RGBA) {
         SOLAR_PROFILE_FUNCTION();
 
         glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
@@ -20,7 +20,7 @@ namespace Solar {
     }
 
     OpenGLTexture2D::OpenGLTexture2D(const std::string& path)
-      : m_Path(path) {
+        : m_Path(path) {
         SOLAR_PROFILE_FUNCTION();
 
         int width, height, channels;

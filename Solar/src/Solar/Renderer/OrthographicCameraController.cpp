@@ -15,7 +15,7 @@ namespace Solar {
         m_Rotation(rotation),
         m_CameraRotation(0.0f),
         m_CameraRotationSpeed(1.0f) {
-        
+
     }
 
     void OrthographicCameraController::OnUpdate(TimeStep ts) {

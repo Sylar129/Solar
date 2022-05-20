@@ -5,8 +5,8 @@
 #include "glad/glad.h"
 
 namespace Solar {
-    OpenGLContext::OpenGLContext(GLFWwindow* windowHandle) 
-      : m_WindowHandle(windowHandle) {
+    OpenGLContext::OpenGLContext(GLFWwindow* windowHandle)
+        : m_WindowHandle(windowHandle) {
         SOLAR_CORE_ASSERT(windowHandle, "Window handle is null!");
     }
 

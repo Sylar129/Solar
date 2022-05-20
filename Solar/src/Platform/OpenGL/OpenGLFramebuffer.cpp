@@ -7,7 +7,7 @@ namespace Solar {
     static const uint32_t s_MaxFramebufferSize = 8192;
 
     OpenGLFramebuffer::OpenGLFramebuffer(const FramebufferSpecification& spec)
-      : m_RendererID(0), m_ColorAttachment(0), m_DepthAttachment(0), m_Specification(spec) {
+        : m_RendererID(0), m_ColorAttachment(0), m_DepthAttachment(0), m_Specification(spec) {
         Invalidate();
     }
 
@@ -42,7 +42,7 @@ namespace Solar {
         return m_ColorAttachment;
     }
 
-    const Solar::FramebufferSpecification& OpenGLFramebuffer::GetSpecification() const {
+    const FramebufferSpecification& OpenGLFramebuffer::GetSpecification() const {
         return m_Specification;
     }
 

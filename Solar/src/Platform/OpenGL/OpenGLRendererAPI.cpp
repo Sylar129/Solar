@@ -18,13 +18,13 @@ namespace Solar {
     void OpenGLRendererAPI::Init() {
         SOLAR_PROFILE_FUNCTION();
 
-    #ifdef SOLAR_DEBUG
+#ifdef SOLAR_DEBUG
         glEnable(GL_DEBUG_OUTPUT);
         glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
         glDebugMessageCallback(OpenGLMessageCallback, nullptr);
 
         glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, nullptr, GL_FALSE);
-    #endif // SOLAR_DEBUG
+#endif // SOLAR_DEBUG
 
 
         glEnable(GL_BLEND);

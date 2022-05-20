@@ -18,7 +18,7 @@ namespace Solar {
     class KeyPressdEvent :public KeyEvent {
     public:
         KeyPressdEvent(KeyCode keycode, int repeatCount)
-          : KeyEvent(keycode), m_RepeatCount(repeatCount) {}
+            : KeyEvent(keycode), m_RepeatCount(repeatCount) {}
 
         inline int GetRepeatCount() const { return m_RepeatCount; }
 

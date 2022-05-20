@@ -25,7 +25,7 @@ namespace Solar {
     class MouseScrolledEvent : public Event {
     public:
         MouseScrolledEvent(float xOffset, float yOffset)
-          : m_XOffset(xOffset), m_YOffset(yOffset) {}
+            : m_XOffset(xOffset), m_YOffset(yOffset) {}
 
         inline float GetXOffset() const { return m_XOffset; }
         inline float GetYOffset() const { return m_YOffset; }
@@ -54,7 +54,7 @@ namespace Solar {
 
     class MouseButtonPressedEvent : public MouseButtonEvent {
     public:
-        MouseButtonPressedEvent(MouseCode button) : MouseButtonEvent(button){}
+        MouseButtonPressedEvent(MouseCode button) : MouseButtonEvent(button) {}
 
         std::string ToString() const override {
             std::stringstream ss;
@@ -67,7 +67,7 @@ namespace Solar {
 
     class MouseButtonReleasedEvent : public MouseButtonEvent {
     public:
-        MouseButtonReleasedEvent(MouseCode button) : MouseButtonEvent(button){}
+        MouseButtonReleasedEvent(MouseCode button) : MouseButtonEvent(button) {}
 
         std::string ToString() const override {
             std::stringstream ss;

@@ -35,7 +35,7 @@ namespace Solar {
                     nsc.Instance->OnCreate();
                 }
                 nsc.Instance->OnUpdate(ts);
-            });
+                                                          });
         }
 
         // Render 2D

@@ -12,7 +12,7 @@ namespace Solar {
     Application* Application::s_Instance = nullptr;
 
     Application::Application(const std::string& name)
-      : m_ImGuiLayer(nullptr),
+        : m_ImGuiLayer(nullptr),
         m_Running(true),
         m_Minimized(false) {
         SOLAR_PROFILE_FUNCTION();
@@ -57,7 +57,7 @@ namespace Solar {
                         layer->OnUpdate(timeStep);
                     }
                 }
-                
+
                 m_ImGuiLayer->Begin();
                 {
                     SOLAR_PROFILE_SCOPE("LayerStack OnImGuiRender");

@@ -4,7 +4,7 @@ namespace Solar {
     class TimeStep {
     public:
         TimeStep(float time = 0.0f)
-          : m_Time(time) {
+            : m_Time(time) {
 
         }
 

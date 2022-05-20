@@ -33,7 +33,7 @@ namespace Solar {
     }
 
     OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
-      : m_Name(name) {
+        : m_Name(name) {
         SOLAR_PROFILE_FUNCTION();
 
         std::unordered_map<GLenum, std::string> sources;

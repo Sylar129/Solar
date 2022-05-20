@@ -36,10 +36,10 @@ namespace Solar {
         bool Normalized;
 
         BufferElement()
-          : Type(ShaderDataType::None), Size(0), Offset(0), Normalized(false) {}
+            : Type(ShaderDataType::None), Size(0), Offset(0), Normalized(false) {}
 
         BufferElement(ShaderDataType type, const std::string& name, bool normalized = false)
-          : Name(name), Type(type), Size(ShaderDataTypeSize(type)), Offset(0), Normalized(normalized) {}
+            : Name(name), Type(type), Size(ShaderDataTypeSize(type)), Offset(0), Normalized(normalized) {}
 
         uint32_t GetComponentCount() const {
             switch (Type) {
@@ -65,7 +65,7 @@ namespace Solar {
         BufferLayout() : m_Stride(0) {}
 
         BufferLayout(const std::initializer_list<BufferElement>& elements)
-          : m_Elements(elements), m_Stride(0) {
+            : m_Elements(elements), m_Stride(0) {
             CalculateOffsetAndStride();
         }
 

@@ -53,7 +53,7 @@ namespace Solar {
             { ShaderDataType::Float2, "a_TexCoord" },
             { ShaderDataType::Float, "a_TexIndex" },
             { ShaderDataType::Float, "a_TilingFactor" }
-        });
+                                           });
         s_Data.QuadVertexArray->AddVertexBuffer(s_Data.QuadVertexBuffer);
 
         s_Data.QuadVertexBufferBase = new QuadVertex[s_Data.MaxVertices];
@@ -92,8 +92,8 @@ namespace Solar {
         s_Data.TextureSlots[0] = s_Data.WhiteTexture;
 
         s_Data.QuadVertexPositions[0] = { -0.5f, -0.5f, 0.0f, 1.0f };
-        s_Data.QuadVertexPositions[1] = {  0.5f, -0.5f, 0.0f, 1.0f };
-        s_Data.QuadVertexPositions[2] = {  0.5f,  0.5f, 0.0f, 1.0f };
+        s_Data.QuadVertexPositions[1] = { 0.5f, -0.5f, 0.0f, 1.0f };
+        s_Data.QuadVertexPositions[2] = { 0.5f,  0.5f, 0.0f, 1.0f };
         s_Data.QuadVertexPositions[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
     }
 
@@ -168,7 +168,7 @@ namespace Solar {
 
 
         glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-                            * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+            * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
         DrawQuad(transform, texture, tilingFactor, tintColor);
     }
@@ -312,8 +312,8 @@ namespace Solar {
         constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 
         glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-                            * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-                            * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+            * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
+            * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
         for (uint32_t i = 0; i < quadVertexCount; ++i) {
             s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[i];
@@ -364,8 +364,8 @@ namespace Solar {
         }
 
         glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-                            * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-                            * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+            * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
+            * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
         for (uint32_t i = 0; i < quadVertexCount; ++i) {
             s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[i];
