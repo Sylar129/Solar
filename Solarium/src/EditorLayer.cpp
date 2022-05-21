@@ -63,6 +63,8 @@ namespace Solar {
         };
 
         m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+
+        m_SceneHierarchyPanel.SetContext(m_ActiveScene);
     }
 
     void EditorLayer::OnDetech() {
@@ -165,6 +167,8 @@ namespace Solar {
             ImGui::EndMenuBar();
         }
 
+        // Panels
+        m_SceneHierarchyPanel.OnImGuiRender();
 
         ImGui::Begin("Settings");
         auto stats = Renderer2D::GetStats();
