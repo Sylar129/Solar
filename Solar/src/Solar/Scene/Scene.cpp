@@ -40,7 +40,7 @@ namespace Solar {
 
         // Render 2D
         Camera* mainCamera = nullptr;
-        glm::mat4* cameraTransform = nullptr;
+        glm::mat4 cameraTransform;
         {
             auto view = m_Registry.view<CameraComponent, TransformComponent>();
             for (auto entity : view) {
@@ -48,19 +48,19 @@ namespace Solar {
 
                 if (camera.Primary) {
                     mainCamera = &camera.Camera;
-                    cameraTransform = &transform.Transform;
+                    cameraTransform = transform.GetTranform();
                     break;
                 }
             }
         }
 
         if (mainCamera) {
-            Renderer2D::BeginScene(mainCamera->GetProjection(), *cameraTransform);
+            Renderer2D::BeginScene(*mainCamera, cameraTransform);
             auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
             for (auto entity : group) {
                 auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
-                Renderer2D::DrawQuad(transform.Transform, sprite.Color);
+                Renderer2D::DrawQuad(transform.GetTranform(), sprite.Color);
             }
             Renderer2D::EndScene();
         }
