@@ -204,6 +204,3 @@ namespace Solar {
         m_CameraController.OnEvent(event);
     }
 }
-
-
-
