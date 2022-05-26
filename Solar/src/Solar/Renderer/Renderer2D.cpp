@@ -111,9 +111,7 @@ namespace Solar {
         s_Data.TextureShader->Bind();
         s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
 
-        s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
-        s_Data.QuadIndexCount = 0;
-        s_Data.TextureSlotIndex = 1;
+        StartBatch();
     }
 
     void Renderer2D::BeginScene(const OrthographicCamera& camera) {
@@ -122,21 +120,22 @@ namespace Solar {
         s_Data.TextureShader->Bind();
         s_Data.TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 
-        s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
-        s_Data.QuadIndexCount = 0;
-        s_Data.TextureSlotIndex = 1;
+        StartBatch();
     }
 
     void Renderer2D::EndScene() {
         SOLAR_PROFILE_FUNCTION();
 
-        uint32_t dataSize = (uint8_t*)s_Data.QuadVertexBufferPtr - (uint8_t*)s_Data.QuadVertexBufferBase;
-        s_Data.QuadVertexBuffer->SetData(s_Data.QuadVertexBufferBase, dataSize);
-
         Flush();
     }
 
     void Renderer2D::Flush() {
+        if (0 == s_Data.QuadIndexCount)
+            return;
+
+        uint32_t dataSize = (uint32_t)((uint8_t*)s_Data.QuadVertexBufferPtr - (uint8_t*)s_Data.QuadVertexBufferBase);
+        s_Data.QuadVertexBuffer->SetData(s_Data.QuadVertexBufferBase, dataSize);
+
         // Bind textures
         for (uint32_t i = 0; i < s_Data.TextureSlotIndex; ++i) {
             s_Data.TextureSlots[i]->Bind(i);
@@ -181,7 +180,7 @@ namespace Solar {
         SOLAR_PROFILE_FUNCTION();
 
         if (s_Data.QuadIndexCount >= s_Data.MaxIndices) {
-            FlushAndReset();
+            NextBatch();
         }
 
         constexpr size_t quadVertexCount = 4;
@@ -200,7 +199,7 @@ namespace Solar {
 
         if (textureIndex == 0.0f) {
             if (s_Data.TextureSlotIndex >= Renderer2DData::MaxTextureSlots) {
-                FlushAndReset();
+                NextBatch();
             }
 
             textureIndex = (float)s_Data.TextureSlotIndex;
@@ -229,7 +228,7 @@ namespace Solar {
         SOLAR_PROFILE_FUNCTION();
 
         if (s_Data.QuadIndexCount >= s_Data.MaxIndices) {
-            FlushAndReset();
+            NextBatch();
         }
 
         constexpr float textureIndex = 0.0f;    // White texture
@@ -255,7 +254,7 @@ namespace Solar {
         SOLAR_PROFILE_FUNCTION();
 
         if (s_Data.QuadIndexCount >= s_Data.MaxIndices) {
-            FlushAndReset();
+            NextBatch();
         }
 
         constexpr size_t quadVertexCount = 4;
@@ -273,7 +272,7 @@ namespace Solar {
 
         if (textureIndex == 0.0f) {
             if (s_Data.TextureSlotIndex >= Renderer2DData::MaxTextureSlots) {
-                FlushAndReset();
+                NextBatch();
             }
 
             textureIndex = (float)s_Data.TextureSlotIndex;
@@ -303,7 +302,7 @@ namespace Solar {
         SOLAR_PROFILE_FUNCTION();
 
         if (s_Data.QuadIndexCount >= s_Data.MaxIndices) {
-            FlushAndReset();
+            NextBatch();
         }
 
         const float textureIndex = 0.0f;    // White texture
@@ -337,7 +336,7 @@ namespace Solar {
         SOLAR_PROFILE_FUNCTION();
 
         if (s_Data.QuadIndexCount >= s_Data.MaxIndices) {
-            FlushAndReset();
+            NextBatch();
         }
 
         constexpr size_t quadVertexCount = 4;
@@ -355,7 +354,7 @@ namespace Solar {
 
         if (textureIndex == 0.0f) {
             if (s_Data.TextureSlotIndex >= Renderer2DData::MaxTextureSlots) {
-                FlushAndReset();
+                NextBatch();
             }
 
             textureIndex = (float)s_Data.TextureSlotIndex;
@@ -389,7 +388,7 @@ namespace Solar {
         SOLAR_PROFILE_FUNCTION();
 
         if (s_Data.QuadIndexCount >= s_Data.MaxIndices) {
-            FlushAndReset();
+            NextBatch();
         }
 
         constexpr size_t quadVertexCount = 4;
@@ -408,7 +407,7 @@ namespace Solar {
 
         if (textureIndex == 0.0f) {
             if (s_Data.TextureSlotIndex >= Renderer2DData::MaxTextureSlots) {
-                FlushAndReset();
+                NextBatch();
             }
 
             textureIndex = (float)s_Data.TextureSlotIndex;
@@ -442,11 +441,14 @@ namespace Solar {
         return s_Data.Stats;
     }
 
-    void Renderer2D::FlushAndReset() {
-        EndScene();
-
+    void Renderer2D::StartBatch() {
         s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
         s_Data.QuadIndexCount = 0;
         s_Data.TextureSlotIndex = 1;
+    }
+
+    void Renderer2D::NextBatch() {
+        Flush();
+        StartBatch();
     }
 }
