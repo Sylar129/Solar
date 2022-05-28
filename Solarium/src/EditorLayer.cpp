@@ -4,6 +4,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Solar/Scene/SceneSerializer.h"
+
 namespace Solar {
     EditorLayer::EditorLayer() : Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f) {
     }
@@ -20,6 +22,7 @@ namespace Solar {
 
         m_ActiveScene = CreateRef<Scene>();
 
+#if 0
         // Entity
         auto square = m_ActiveScene->CreateEntity("Green Square"); 
         square.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
@@ -66,7 +69,7 @@ namespace Solar {
         };
 
         m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
-
+#endif
         m_SceneHierarchyPanel.SetContext(m_ActiveScene);
     }
 
@@ -166,6 +169,16 @@ namespace Solar {
                 // which we can't undo at the moment without finer window depth/z control.
                 ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen);
                 ImGui::MenuItem("Padding", NULL, &opt_padding);
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Serializer")) {
+                    SceneSerializer serializer(m_ActiveScene);
+                     serializer.Serialize("assets/scenes/Example.yaml");
+                }
+                if (ImGui::MenuItem("Deserializer")) {
+                    SceneSerializer serializer(m_ActiveScene);
+                    serializer.Deserialize("assets/scenes/Example.yaml");
+                }
                 ImGui::Separator();
 
                 if (ImGui::MenuItem("Exit")) { Application::Get().Close(); }

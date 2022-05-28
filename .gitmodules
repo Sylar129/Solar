@@ -13,3 +13,6 @@
 [submodule "Solar/dependence/stb"]
 	path = Solar/dependence/stb
 	url = https://github.com/nothings/stb
+[submodule "Solar/dependence/yaml-cpp"]
+	path = Solar/dependence/yaml-cpp
+	url = https://github.com/jbeder/yaml-cpp
