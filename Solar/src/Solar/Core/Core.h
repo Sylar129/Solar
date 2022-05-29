@@ -1,7 +1,6 @@
 #pragma once
 
 #include <memory>
-#include "Solar/Core/PlatformDetection.h"
 
 #ifdef SOLAR_DEBUG
     #ifdef SOLAR_PLATFORM_WINDOWS

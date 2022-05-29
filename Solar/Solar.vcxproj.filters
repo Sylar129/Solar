@@ -233,9 +233,6 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Core\PlatformDetection.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Solar\Scene\Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
