@@ -5,6 +5,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Solar/Scene/SceneSerializer.h"
+#include "Solar/Utils/PlatformUtils.h"
 
 namespace Solar {
     EditorLayer::EditorLayer() : Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f) {
@@ -171,13 +172,16 @@ namespace Solar {
                 ImGui::MenuItem("Padding", NULL, &opt_padding);
                 ImGui::Separator();
 
-                if (ImGui::MenuItem("Serializer")) {
-                    SceneSerializer serializer(m_ActiveScene);
-                     serializer.Serialize("assets/scenes/Example.yaml");
+                if (ImGui::MenuItem("New", "Ctrl+N")) {
+                    NewScene();
                 }
-                if (ImGui::MenuItem("Deserializer")) {
-                    SceneSerializer serializer(m_ActiveScene);
-                    serializer.Deserialize("assets/scenes/Example.yaml");
+
+                if (ImGui::MenuItem("Open... ", "Ctrl+O")) {
+                    OpenScene();
+                }
+
+                if (ImGui::MenuItem("Save As...", "Ctrl+Shift+S")) {
+                    SaveSceneAs();
                 }
                 ImGui::Separator();
 
@@ -220,5 +224,65 @@ namespace Solar {
     void EditorLayer::OnEvent(Event& event) {
         // SOLAR_TRACE("ExampleLayer: {0}", event);
         m_CameraController.OnEvent(event);
+
+        EventDispatcher dispatcher(event);
+        dispatcher.Dispatch<KeyPressdEvent>(SOLAR_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
+    }
+
+    bool EditorLayer::OnKeyPressed(KeyPressdEvent& e) {
+        // Shortcuts
+        if (e.GetRepeatCount() > 0)
+            return false;
+
+        bool control = Input::IsKeyPressed(KeyCode::LeftControl) || Input::IsKeyPressed(KeyCode::RightControl);
+        bool shift = Input::IsKeyPressed(KeyCode::LeftShift) || Input::IsKeyPressed(KeyCode::RightShift);
+        switch (e.GetKeyCode()) {
+            case KeyCode::N:
+                if (control) {
+                    NewScene();
+                }
+                break;
+
+            case KeyCode::O:
+                if (control) {
+                    OpenScene();
+                }
+                break;
+            case KeyCode::S:
+                if (control && shift) {
+                    SaveSceneAs();
+                }
+                break;
+
+
+            default:
+                break;
+        }
+    }
+
+    void EditorLayer::NewScene() {
+        m_ActiveScene = CreateRef<Scene>();
+        m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+        m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+    }
+
+    void EditorLayer::OpenScene() {
+        std::string filepath = FileDialogs::OpenFile("Solar Scene(*.solar)\0*.solar\0");
+        if (!filepath.empty()) {
+            m_ActiveScene = CreateRef<Scene>();
+            m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+            m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+
+            SceneSerializer serializer(m_ActiveScene);
+            serializer.Deserialize(filepath);
+        }
+    }
+
+    void EditorLayer::SaveSceneAs() {
+        std::string filepath = FileDialogs::SaveFile("Solar Scene(*.solar)\0*.solar\0");
+        if (!filepath.empty()) {
+            SceneSerializer serializer(m_ActiveScene);
+            serializer.Serialize(filepath);
+        }
     }
 }

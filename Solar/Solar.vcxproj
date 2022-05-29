@@ -158,6 +158,7 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsPlatformUtils.cpp" />
     <ClCompile Include="src\Solar\Renderer\Framebuffer.cpp" />
     <ClCompile Include="src\Solar\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Solar\Renderer\OrthographicCameraController.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="src\Solar\Scene\SceneCamera.h" />
     <ClInclude Include="src\Solar\Scene\SceneSerializer.h" />
     <ClInclude Include="src\Solar\Scene\ScriptableEntity.h" />
+    <ClInclude Include="src\Solar\Utils\PlatformUtils.h" />
     <ClInclude Include="src\solpch.h" />
     <ClInclude Include="src\Solar\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Solar\Events\Event.h" />
