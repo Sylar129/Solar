@@ -1,15 +1,17 @@
 #include "solpch.h"
 #include "ImGuiLayer.h"
 
-#include "imgui.h"
-#include "backends/imgui_impl_glfw.h"
-#include "backends/imgui_impl_opengl3.h"
+#include <imgui.h>
+#include <backends/imgui_impl_glfw.h>
+#include <backends/imgui_impl_opengl3.h>
 
 #include "Solar/Core/Application.h"
 
 // Temporary
-#include "GLFW/glfw3.h"
-#include "glad/glad.h"
+#include <GLFW/glfw3.h>
+#include <glad/glad.h>
+
+#include <ImGuizmo.h>
 
 namespace Solar {
     ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer"), m_Time(0.0f) {
@@ -80,6 +82,7 @@ namespace Solar {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+        ImGuizmo::BeginFrame();
     }
 
     void ImGuiLayer::End() {

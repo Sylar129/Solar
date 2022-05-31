@@ -16,3 +16,6 @@
 [submodule "Solar/dependence/yaml-cpp"]
 	path = Solar/dependence/yaml-cpp
 	url = https://github.com/jbeder/yaml-cpp
+[submodule "Solar/dependence/ImGuizmo"]
+	path = Solar/dependence/ImGuizmo
+	url = https://github.com/CedricGuillemet/ImGuizmo
