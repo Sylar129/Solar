@@ -26,7 +26,7 @@ namespace Solar {
         m_Registry.destroy(entity);
     }
 
-    void Scene::OnUpdate(TimeStep& ts) {
+    void Scene::OnUpdateRuntime(TimeStep& ts) {
         // Update scripts
         {
             // TODO: Move to Scene::OnScenePlay
@@ -37,7 +37,7 @@ namespace Solar {
                     nsc.Instance->OnCreate();
                 }
                 nsc.Instance->OnUpdate(ts);
-                                                          });
+            });
         }
 
         // Render 2D
@@ -66,6 +66,17 @@ namespace Solar {
             }
             Renderer2D::EndScene();
         }
+    }
+
+    void Scene::OnUpdateEditor(TimeStep& ts, EditorCamera& camera) {
+        Renderer2D::BeginScene(camera);
+        auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+        for (auto entity : group) {
+            auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+
+            Renderer2D::DrawQuad(transform.GetTranform(), sprite.Color);
+        }
+        Renderer2D::EndScene();
     }
 
     void Scene::OnViewportResize(uint32_t width, uint32_t height) {

@@ -3,6 +3,8 @@
 #include <Solar.h>
 #include "Panels/SceneHierarchyPanel.h"
 
+#include "Solar/Renderer/EditorCamera.h"
+
 namespace Solar {
     class EditorLayer : public Layer {
     public:
@@ -26,7 +28,6 @@ namespace Solar {
 
         Ref<Shader> m_FlatColorShader;
         Ref<VertexArray> m_SquareVA;
-        Ref<Texture2D> m_BoardTexture;
 
         Ref<Framebuffer> m_Framebuffer;
 
@@ -36,6 +37,8 @@ namespace Solar {
         Entity m_CameraEntity;
         Entity m_SecondCamera;
         bool m_PrimaryCamera = true;
+
+        EditorCamera m_EditorCamera;
 
         bool m_ViewportFocused = false;
         bool m_ViewportHOvered = false;

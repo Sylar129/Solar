@@ -3,6 +3,8 @@
 #include "entt.hpp"
 #include "Solar/Core/Timestep.h"
 
+#include "Solar/Renderer/EditorCamera.h"
+
 namespace Solar {
 
     class Entity;
@@ -15,7 +17,8 @@ namespace Solar {
         Entity CreateEntity(const std::string& name = std::string());
         void DestoryEntity(Entity entity);
 
-        void OnUpdate(TimeStep& ts);
+        void OnUpdateRuntime(TimeStep& ts);
+        void OnUpdateEditor(TimeStep& ts, EditorCamera& camera);
         void OnViewportResize(uint32_t width, uint32_t height);
 
         Entity GetPrimaryCameraEntity();
