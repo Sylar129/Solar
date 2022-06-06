@@ -13,15 +13,19 @@ namespace Solar {
 
         virtual void Resize(uint32_t width, uint32_t height) override;
 
-        virtual uint32_t GetColorAttachmentRendererID() const override;
+        virtual uint32_t GetColorAttachmentRendererID(uint32_t index = 0) const override;
 
         virtual const FramebufferSpecification& GetSpecification() const override;
 
         void Invalidate();
     private:
         uint32_t m_RendererID;
-        uint32_t m_ColorAttachment;
-        uint32_t m_DepthAttachment;
         FramebufferSpecification m_Specification;
+
+        std::vector<FramebufferTextureSpecification> m_ColorAttachmentSpecifications;
+        FramebufferTextureSpecification m_DepthAttachmentSpecifications;
+
+        std::vector<uint32_t> m_ColorAttachments;
+        uint32_t m_DepthAttachment;
     };
 }
