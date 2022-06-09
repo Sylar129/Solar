@@ -125,7 +125,11 @@ namespace Solar {
 
         if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y) {
             int pixelData = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
-            SOLAR_CORE_WARN("pixelData = {0}", pixelData);
+            if (-1 == pixelData) {
+                m_HoveredEntity = {};
+            } else {
+                m_HoveredEntity = { (entt::entity)pixelData, m_ActiveScene.get()};
+            }
         }
 
         m_Framebuffer->Unbind();
@@ -217,7 +221,15 @@ namespace Solar {
         // Panels
         m_SceneHierarchyPanel.OnImGuiRender();
 
+        // Stats
         ImGui::Begin("Stats");
+
+        std::string name = "None";
+        if (m_HoveredEntity) {
+            name = m_HoveredEntity.GetComponent<TagComponent>().Tag;
+        }
+        ImGui::Text("Hovered Entity: %s", name.c_str());
+
         auto stats = Renderer2D::GetStats();
         ImGui::Text("Renderer2D stats:");
         ImGui::Text("Draw calls: %d", stats.DrawCalls);
@@ -226,6 +238,7 @@ namespace Solar {
         ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
         ImGui::End();
 
+        // Viewport
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0,0 });
         ImGui::Begin("Viewport");
         auto viewportOffset = ImGui::GetCursorPos();    // Includes tab bar

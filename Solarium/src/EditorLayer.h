@@ -38,13 +38,15 @@ namespace Solar {
         Entity m_SecondCamera;
         bool m_PrimaryCamera = true;
 
+        Entity m_HoveredEntity;
+
         EditorCamera m_EditorCamera;
 
         bool m_ViewportFocused = false;
         bool m_ViewportHOvered = false;
 
         glm::vec2 m_ViewportSize = {0.0f, 0.0f};
-        glm::vec2 m_ViewportBounds[2];
+        glm::vec2 m_ViewportBounds[2];  // 0 stands for min bound, 1 stands for max bound
 
         glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 

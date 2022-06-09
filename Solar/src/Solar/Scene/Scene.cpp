@@ -62,7 +62,8 @@ namespace Solar {
             for (auto entity : group) {
                 auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
-                Renderer2D::DrawQuad(transform.GetTranform(), sprite.Color);
+                // Renderer2D::DrawQuad(transform.GetTranform(), sprite.Color);
+                Renderer2D::DrawSprite(transform.GetTranform(), sprite, (int)entity);
             }
             Renderer2D::EndScene();
         }
@@ -74,7 +75,8 @@ namespace Solar {
         for (auto entity : group) {
             auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
-            Renderer2D::DrawQuad(transform.GetTranform(), sprite.Color);
+            // Renderer2D::DrawQuad(transform.GetTranform(), sprite.Color);
+            Renderer2D::DrawSprite(transform.GetTranform(), sprite, (int)entity);
         }
         Renderer2D::EndScene();
     }
