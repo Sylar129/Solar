@@ -244,8 +244,8 @@ namespace Solar {
         auto viewportOffset = ImGui::GetCursorPos();    // Includes tab bar
 
         m_ViewportFocused = ImGui::IsWindowFocused();
-        m_ViewportHOvered = ImGui::IsWindowHovered();
-        Application::Get().GetImGuiLayer()->SetBlockEvents(!m_ViewportFocused && !m_ViewportHOvered);
+        m_ViewportHovered = ImGui::IsWindowHovered();
+        Application::Get().GetImGuiLayer()->SetBlockEvents(!m_ViewportFocused && !m_ViewportHovered);
 
         ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
         m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
@@ -326,6 +326,7 @@ namespace Solar {
 
         EventDispatcher dispatcher(event);
         dispatcher.Dispatch<KeyPressdEvent>(SOLAR_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
+        dispatcher.Dispatch<MouseButtonPressedEvent>(SOLAR_BIND_EVENT_FN(EditorLayer::OnMouseButtonPressed));
     }
 
     bool EditorLayer::OnKeyPressed(KeyPressdEvent& e) {
@@ -368,6 +369,15 @@ namespace Solar {
                 break;
             default:
                 break;
+        }
+        return false;
+    }
+
+    bool EditorLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e) {
+        // TODO: call function to detect state
+        if (e.GetMouseButton() == MouseCode::ButtonLeft && !Input::IsKeyPressed(KeyCode::LeftAlt)) {
+            if (m_ViewportHovered && !ImGuizmo::IsOver())
+                m_SceneHierarchyPanel.SetSelectedEntity(m_HoveredEntity);
         }
         return false;
     }

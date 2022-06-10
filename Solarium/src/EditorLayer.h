@@ -19,6 +19,7 @@ namespace Solar {
         virtual void OnEvent(Event& event) override;
     private:
         bool OnKeyPressed(KeyPressdEvent& e);
+        bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
 
         void NewScene();
         void OpenScene();
@@ -43,7 +44,7 @@ namespace Solar {
         EditorCamera m_EditorCamera;
 
         bool m_ViewportFocused = false;
-        bool m_ViewportHOvered = false;
+        bool m_ViewportHovered = false;
 
         glm::vec2 m_ViewportSize = {0.0f, 0.0f};
         glm::vec2 m_ViewportBounds[2];  // 0 stands for min bound, 1 stands for max bound
