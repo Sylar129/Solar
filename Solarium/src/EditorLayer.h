@@ -6,54 +6,56 @@
 #include "Solar/Renderer/EditorCamera.h"
 
 namespace Solar {
-    class EditorLayer : public Layer {
-    public:
-        EditorLayer();
-        virtual ~EditorLayer() = default;
 
-        virtual void OnAttach() override;
-        virtual void OnDetech() override;
+class EditorLayer : public Layer {
+public:
+    EditorLayer();
+    virtual ~EditorLayer() = default;
 
-        virtual void OnUpdate(TimeStep& ts) override;
-        virtual void OnImGuiRender() override;
-        virtual void OnEvent(Event& event) override;
-    private:
-        bool OnKeyPressed(KeyPressdEvent& e);
-        bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
+    virtual void OnAttach() override;
+    virtual void OnDetech() override;
 
-        void NewScene();
-        void OpenScene();
-        void SaveSceneAs();
-    private:
-        OrthographicCameraController m_CameraController;
+    virtual void OnUpdate(TimeStep& ts) override;
+    virtual void OnImGuiRender() override;
+    virtual void OnEvent(Event& event) override;
+private:
+    bool OnKeyPressed(KeyPressdEvent& e);
+    bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
 
-        Ref<Shader> m_FlatColorShader;
-        Ref<VertexArray> m_SquareVA;
+    void NewScene();
+    void OpenScene();
+    void SaveSceneAs();
+private:
+    OrthographicCameraController m_CameraController;
 
-        Ref<Framebuffer> m_Framebuffer;
+    Ref<Shader> m_FlatColorShader;
+    Ref<VertexArray> m_SquareVA;
 
-        // Entity
-        Ref<Scene> m_ActiveScene;
-        Entity m_SquareEntity;
-        Entity m_CameraEntity;
-        Entity m_SecondCamera;
-        bool m_PrimaryCamera = true;
+    Ref<Framebuffer> m_Framebuffer;
 
-        Entity m_HoveredEntity;
+    // Entity
+    Ref<Scene> m_ActiveScene;
+    Entity m_SquareEntity;
+    Entity m_CameraEntity;
+    Entity m_SecondCamera;
+    bool m_PrimaryCamera = true;
 
-        EditorCamera m_EditorCamera;
+    Entity m_HoveredEntity;
 
-        bool m_ViewportFocused = false;
-        bool m_ViewportHovered = false;
+    EditorCamera m_EditorCamera;
 
-        glm::vec2 m_ViewportSize = {0.0f, 0.0f};
-        glm::vec2 m_ViewportBounds[2];  // 0 stands for min bound, 1 stands for max bound
+    bool m_ViewportFocused = false;
+    bool m_ViewportHovered = false;
 
-        glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
+    glm::vec2 m_ViewportSize = {0.0f, 0.0f};
+    glm::vec2 m_ViewportBounds[2];  // 0 stands for min bound, 1 stands for max bound
 
-        int m_GizmoType = -1;
+    glm::vec4 m_SquareColor = {0.2f, 0.3f, 0.8f, 1.0f};
 
-        // Panels
-        SceneHierarchyPanel m_SceneHierarchyPanel;
-    };
-}
+    int m_GizmoType = -1;
+
+    // Panels
+    SceneHierarchyPanel m_SceneHierarchyPanel;
+};
+
+} // namespace Solar

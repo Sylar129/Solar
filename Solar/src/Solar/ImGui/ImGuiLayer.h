@@ -7,25 +7,28 @@
 #include "Solar/Events/MouseEvent.h"
 
 namespace Solar {
-    class ImGuiLayer : public Layer {
-    public:
-        ImGuiLayer();
-        ~ImGuiLayer();
 
-        virtual void OnAttach() override;
-        virtual void OnDetech() override;
-        virtual void OnEvent(Event& e) override;
+class ImGuiLayer : public Layer {
+public:
+    ImGuiLayer();
+    ~ImGuiLayer();
 
-        void Begin();
-        void End();
+    virtual void OnAttach() override;
+    virtual void OnDetech() override;
+    virtual void OnEvent(Event& e) override;
 
-        void SetBlockEvents(bool block) {
-            m_BlockEvents = block;
-        }
+    void Begin();
+    void End();
 
-        void SetDarkThemeColors();
-    private:
-        bool m_BlockEvents = true;
-        float m_Time;
-    };
-}
+    void SetBlockEvents(bool block)
+    {
+        m_BlockEvents = block;
+    }
+
+    void SetDarkThemeColors();
+private:
+    bool m_BlockEvents = true;
+    float m_Time;
+};
+
+} // namespace Solar

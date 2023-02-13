@@ -5,9 +5,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <Platform/OpenGL/OpenGLShader.h>
 
-ExampleLayer::ExampleLayer() 
-  : Layer("Example"),
-    m_CameraController(1280.0f / 720.0f, true) {
+ExampleLayer::ExampleLayer()
+    : Layer("Example")
+    , m_CameraController(1280.0f / 720.0f, true)
+{
     /// <summary>
     /// Triangle Renderer
     /// </summary>
@@ -24,11 +25,11 @@ ExampleLayer::ExampleLayer()
     vertexBuffer->SetLayout({
         { Solar::ShaderDataType::Float3, "a_Position" },
         { Solar::ShaderDataType::Float4, "a_Color" }
-    });
+        });
     m_VertexArray->AddVertexBuffer(vertexBuffer);
 
     Solar::Ref<Solar::IndexBuffer> indexBuffer;
-    uint32_t indices[3] = { 0,1,2 };
+    uint32_t indices[3] = {0,1,2};
     indexBuffer = Solar::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
     m_VertexArray->SetIndexBuffer(indexBuffer);
 
@@ -52,10 +53,10 @@ ExampleLayer::ExampleLayer()
     squreVB->SetLayout({
         { Solar::ShaderDataType::Float3, "a_Position" },
         { Solar::ShaderDataType::Float2, "a_TexCoord" },
-    });
+        });
     m_SquareVA->AddVertexBuffer(squreVB);
 
-    uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
+    uint32_t squareIndices[6] = {0, 1, 2, 2, 3, 0};
     Solar::Ref<Solar::IndexBuffer> squreIB;
     squreIB = Solar::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
     m_SquareVA->SetIndexBuffer(squreIB);
@@ -72,7 +73,8 @@ ExampleLayer::ExampleLayer()
     std::dynamic_pointer_cast<Solar::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 }
 
-void ExampleLayer::OnUpdate(Solar::TimeStep& ts)  {
+void ExampleLayer::OnUpdate(Solar::TimeStep& ts)
+{
     // SOLAR_INFO("ExampleLayer::Update");
     // SOLAR_TRACE("Delta time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMilliseconds());
 
@@ -81,7 +83,7 @@ void ExampleLayer::OnUpdate(Solar::TimeStep& ts)  {
     /// <summary>
     /// Renderer
     /// </summary>
-    Solar::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+    Solar::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
     Solar::RenderCommand::Clear();
 
     Solar::Renderer::BeginScene(m_CameraController.GetCamera());
@@ -112,13 +114,15 @@ void ExampleLayer::OnUpdate(Solar::TimeStep& ts)  {
     Solar::Renderer::EndScene();
 }
 
-void ExampleLayer::OnImGuiRender() {
+void ExampleLayer::OnImGuiRender()
+{
     ImGui::Begin("Settings");
     ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
     ImGui::End();
 }
 
-void ExampleLayer::OnEvent(Solar::Event& e) {
+void ExampleLayer::OnEvent(Solar::Event& e)
+{
     // SOLAR_TRACE("ExampleLayer: {0}", event);
     m_CameraController.OnEvent(e);
 }

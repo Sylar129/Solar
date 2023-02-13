@@ -18,33 +18,37 @@ static const char* s_MapTiles =
 "WWWWWWWWWWWWWWWW";
 
 
-Sandbox2D::Sandbox2D() : Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f, true) {
-}
+Sandbox2D::Sandbox2D()
+    : Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f, true)
+{}
 
-void Sandbox2D::OnAttach() {
+void Sandbox2D::OnAttach()
+{
     SOLAR_PROFILE_FUNCTION();
 
     m_BoardTexture = Solar::Texture2D::Create("assets/textures/Board.png");
     m_SpriteSheet = Solar::Texture2D::Create("assets/game/textures/RPGpack_sheet_2X.png");
 
-    m_TextureStairs = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 7,6 }, { 128,128 });
-    m_TextureGreednLand = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 0,10 }, { 128,128 }, { 3,3 });
-    m_TextureTree = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 2,1 }, { 128,128 }, { 1,2 });
+    m_TextureStairs = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, {7,6}, {128,128});
+    m_TextureGreednLand = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, {0,10}, {128,128}, {3,3});
+    m_TextureTree = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, {2,1}, {128,128}, {1,2});
 
 
     m_MapWidth = s_MapWidth;
     m_MapHeight = strlen(s_MapTiles) / s_MapWidth;
-    s_TextureMap['D'] = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 6,11 }, { 128,128 });
-    s_TextureMap['W'] = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 11,11 }, { 128,128 });
+    s_TextureMap['D'] = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, {6,11}, {128,128});
+    s_TextureMap['W'] = Solar::SubTexture2D::CreateFromCoords(m_SpriteSheet, {11,11}, {128,128});
 
     m_CameraController.SetZoomLevel(6.0f);
 }
 
-void Sandbox2D::OnDetech() {
+void Sandbox2D::OnDetech()
+{
     SOLAR_PROFILE_FUNCTION();
 }
 
-void Sandbox2D::OnUpdate(Solar::TimeStep& ts) {
+void Sandbox2D::OnUpdate(Solar::TimeStep& ts)
+{
     // SOLAR_INFO("ExampleLayer::Update");
     // SOLAR_TRACE("Delta time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMilliseconds());
 
@@ -59,7 +63,7 @@ void Sandbox2D::OnUpdate(Solar::TimeStep& ts) {
     Solar::Renderer2D::ResetStats();
     {
         SOLAR_PROFILE_SCOPE("Renderer Prep");
-        Solar::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+        Solar::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
         Solar::RenderCommand::Clear();
     }
 
@@ -71,18 +75,18 @@ void Sandbox2D::OnUpdate(Solar::TimeStep& ts) {
 
 #if 1
         Solar::Renderer2D::BeginScene(m_CameraController.GetCamera());
-        Solar::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.5f, 0.5f }, { 0.8f, 0.2f, 0.3f, 1.0f });
-        Solar::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.5f }, { 0.3f, 0.2f, 0.8f, 1.0f });
-        Solar::Renderer2D::DrawRotateQuad({ 0.5f, -0.5f }, { 0.5f, 0.5f }, 45.0f, { 0.3f, 0.8f, 0.2f, 1.0f });
-        Solar::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 20.0f, 20.0f }, m_BoardTexture, 10.0f);
-        Solar::Renderer2D::DrawRotateQuad({ 0.0f, 1.0f }, { 1.0f, 1.0f }, rotation, m_BoardTexture, 20.0f);
+        Solar::Renderer2D::DrawQuad({-1.0f, 0.0f}, {0.5f, 0.5f}, {0.8f, 0.2f, 0.3f, 1.0f});
+        Solar::Renderer2D::DrawQuad({0.5f, -0.5f}, {0.5f, 0.5f}, {0.3f, 0.2f, 0.8f, 1.0f});
+        Solar::Renderer2D::DrawRotateQuad({0.5f, -0.5f}, {0.5f, 0.5f}, 45.0f, {0.3f, 0.8f, 0.2f, 1.0f});
+        Solar::Renderer2D::DrawQuad({0.0f, 0.0f, -0.1f}, {20.0f, 20.0f}, m_BoardTexture, 10.0f);
+        Solar::Renderer2D::DrawRotateQuad({0.0f, 1.0f}, {1.0f, 1.0f}, rotation, m_BoardTexture, 20.0f);
         Solar::Renderer2D::EndScene();
 
         Solar::Renderer2D::BeginScene(m_CameraController.GetCamera());
         for (float y = -5.0f; y < 5.0f; y += 0.5f) {
             for (float x = -5.0f; x < 5.0f; x += 0.5f) {
-                glm::vec4 color = { (x + 5.0f) / 10.0f, (y + 5.0f) / 10.0f, 0.4f, 0.7f };
-                Solar::Renderer2D::DrawQuad({ x, y }, { 0.45f, 0.45f }, color);
+                glm::vec4 color = {(x + 5.0f) / 10.0f, (y + 5.0f) / 10.0f, 0.4f, 0.7f};
+                Solar::Renderer2D::DrawQuad({x, y}, {0.45f, 0.45f}, color);
             }
         }
         Solar::Renderer2D::EndScene();
@@ -100,7 +104,7 @@ void Sandbox2D::OnUpdate(Solar::TimeStep& ts) {
                 } else {
                     texture = m_TextureTree;
                 }
-                Solar::Renderer2D::DrawQuad({ (float)x - (float)m_MapWidth / 2.0, (float)m_MapHeight / 2.0 - (float)y, 0.5f }, { 1.0f, 1.0f }, texture);
+                Solar::Renderer2D::DrawQuad({(float)x - (float)m_MapWidth / 2.0, (float)m_MapHeight / 2.0 - (float)y, 0.5f}, {1.0f, 1.0f}, texture);
             }
         }
         //Solar::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.5f }, { 1.0f, 1.0f }, m_TextureStairs);
@@ -111,7 +115,8 @@ void Sandbox2D::OnUpdate(Solar::TimeStep& ts) {
     }
 }
 
-void Sandbox2D::OnImGuiRender() {
+void Sandbox2D::OnImGuiRender()
+{
     SOLAR_PROFILE_FUNCTION();
 
     ImGui::Begin("Settings");
@@ -127,7 +132,8 @@ void Sandbox2D::OnImGuiRender() {
     ImGui::End();
 }
 
-void Sandbox2D::OnEvent(Solar::Event& event) {
+void Sandbox2D::OnEvent(Solar::Event& event)
+{
     // SOLAR_TRACE("ExampleLayer: {0}", event);
     m_CameraController.OnEvent(event);
 }

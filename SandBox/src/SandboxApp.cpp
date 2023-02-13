@@ -6,16 +6,19 @@
 
 class Sandbox : public Solar::Application {
 public:
-    Sandbox() {
+    Sandbox()
+    {
         // PushLayer(new ExampleLayer());
         PushLayer(new Sandbox2D());
     }
 
-    ~Sandbox() {
+    ~Sandbox()
+    {
 
     }
 };
 
-Solar::Application* Solar::CreateApplication() {
+Solar::Application* Solar::CreateApplication()
+{
     return new Sandbox();
 }

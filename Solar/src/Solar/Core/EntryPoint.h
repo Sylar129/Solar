@@ -4,7 +4,8 @@
 
 extern Solar::Application* Solar::CreateApplication();
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     Solar::Log::Init();
     SOLAR_CORE_WARN("Initialized Log!");
     SOLAR_INFO("Hello! Solar Engine.");

@@ -24,5 +24,5 @@ private:
 
     Solar::OrthographicCameraController m_CameraController;
 
-    glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
+    glm::vec3 m_SquareColor = {0.2f, 0.3f, 0.8f};
 };

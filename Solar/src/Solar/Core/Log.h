@@ -5,23 +5,27 @@
 #include "spdlog/fmt/ostr.h"
 
 namespace Solar {
-    class Log {
-    public:
-        static void Init();
 
-        inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() {
-            return s_CoreLogger;
-        }
+class Log {
+public:
+    static void Init();
 
-        inline static std::shared_ptr<spdlog::logger>& GetClientLogger() {
-            return s_ClientLogger;
-        }
+    inline static std::shared_ptr<spdlog::logger>& GetCoreLogger()
+    {
+        return s_CoreLogger;
+    }
 
-    private:
-        static std::shared_ptr<spdlog::logger> s_CoreLogger;
-        static std::shared_ptr<spdlog::logger> s_ClientLogger;
-    };
-}
+    inline static std::shared_ptr<spdlog::logger>& GetClientLogger()
+    {
+        return s_ClientLogger;
+    }
+
+private:
+    static std::shared_ptr<spdlog::logger> s_CoreLogger;
+    static std::shared_ptr<spdlog::logger> s_ClientLogger;
+};
+
+} // namespace Solar
 
 // Core log macros
 #define SOLAR_CORE_TRACE(...)       ::Solar::Log::GetCoreLogger()->trace(__VA_ARGS__)
