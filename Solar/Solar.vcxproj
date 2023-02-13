@@ -80,7 +80,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\dependence\imgui;$(SolutionDir)Solar\dependence\imgui\backends;$(SolutionDir)Solar\dependence\spdlog\include;$(SolutionDir)Solar\dependence\GLAD\include;$(SolutionDir)Solar\dependence\glfw\include;$(SolutionDir)Solar\dependence\glm;$(SolutionDir)Solar\dependence\stb;$(SolutionDir)Solar\dependence\entt\include;$(SolutionDir)Solar\dependence\yaml-cpp\include;$(SolutionDir)Solar\dependence\ImGuizmo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <PreprocessorDefinitions>SOLAR_PLATFORM_WINDOWS;YAML_CPP_STATIC_DEFINE;SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;SOLAR_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
@@ -107,7 +107,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\dependence\imgui;$(SolutionDir)Solar\dependence\imgui\backends;$(SolutionDir)Solar\dependence\spdlog\include;$(SolutionDir)Solar\dependence\GLAD\include;$(SolutionDir)Solar\dependence\glfw\include;$(SolutionDir)Solar\dependence\glm;$(SolutionDir)Solar\dependence\stb;$(SolutionDir)Solar\dependence\entt\include;$(SolutionDir)Solar\dependence\yaml-cpp\include;$(SolutionDir)Solar\dependence\ImGuizmo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
     </ClCompile>
@@ -135,7 +135,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\dependence\imgui;$(SolutionDir)Solar\dependence\imgui\backends;$(SolutionDir)Solar\dependence\spdlog\include;$(SolutionDir)Solar\dependence\GLAD\include;$(SolutionDir)Solar\dependence\glfw\include;$(SolutionDir)Solar\dependence\glm;$(SolutionDir)Solar\dependence\stb;$(SolutionDir)Solar\dependence\entt\include;$(SolutionDir)Solar\dependence\yaml-cpp\include;$(SolutionDir)Solar\dependence\ImGuizmo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
     </ClCompile>

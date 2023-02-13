@@ -21,9 +21,9 @@ void OpenGLContext::Init()
     SOLAR_CORE_ASSERT(status, "Failed to initialize Glad!");
 
     SOLAR_CORE_INFO("OpenGL Info:");
-    SOLAR_CORE_INFO("    Vendor: {0}", glGetString(GL_VENDOR));
-    SOLAR_CORE_INFO("    Renderer: {0}", glGetString(GL_RENDERER));
-    SOLAR_CORE_INFO("    Version: {0}", glGetString(GL_VERSION));
+    SOLAR_CORE_INFO("    Vendor: {0}", (char*)glGetString(GL_VENDOR));
+    SOLAR_CORE_INFO("    Renderer: {0}", (char*)glGetString(GL_RENDERER));
+    SOLAR_CORE_INFO("    Version: {0}", (char*)glGetString(GL_VERSION));
 
 #ifdef SOLAR_ENABLE_ASSERT
     int versionMajor;
