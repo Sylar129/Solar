@@ -5,24 +5,25 @@
 
 namespace Solar {
 
-class  Entity {
+class Entity {
 public:
     Entity() = default;
     Entity(entt::entity handle, Scene* scene);
     Entity(const Entity& other) = default;
 
-    template<typename T, typename... Args>
+    template <typename T, typename... Args>
     T& AddComponent(Args&&... args)
     {
         SOLAR_CORE_ASSERT(!HasComponent<T>(), "Entity already has component!");
-        T& component = m_Scene->m_Registry.emplace<T>(m_EntityHandle, std::forward<Args>(args)...);
+        T& component = m_Scene->m_Registry.emplace<T>(
+            m_EntityHandle, std::forward<Args>(args)...);
 
         m_Scene->OnComponentAdded<T>(*this, component);
 
         return component;
     }
 
-    template<typename T>
+    template <typename T>
     T& GetComponent()
     {
         SOLAR_CORE_ASSERT(HasComponent<T>(), "Entity does not have component!");
@@ -30,13 +31,13 @@ public:
         return m_Scene->m_Registry.get<T>(m_EntityHandle);
     }
 
-    template<typename T>
+    template <typename T>
     bool HasComponent()
     {
         return m_Scene->m_Registry.any_of<T>(m_EntityHandle);
     }
 
-    template<typename T>
+    template <typename T>
     void RemoveComponent()
     {
         SOLAR_CORE_ASSERT(HasComponent<T>(), "Entity does not have component!");
@@ -50,12 +51,11 @@ public:
 
     bool operator==(const Entity& other) const
     {
-        return m_EntityHandle == other.m_EntityHandle && m_Scene == other.m_Scene;
+        return m_EntityHandle == other.m_EntityHandle &&
+               m_Scene == other.m_Scene;
     }
-    bool operator!=(const Entity& other) const
-    {
-        return !operator==(other);
-    }
+    bool operator!=(const Entity& other) const { return !operator==(other); }
+
 private:
     entt::entity m_EntityHandle{entt::null};
     Scene* m_Scene = nullptr;

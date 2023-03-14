@@ -7,7 +7,7 @@
 
 namespace YAML {
 
-template<>
+template <>
 struct convert<glm::vec3> {
     static Node encode(const glm::vec3& rhs)
     {
@@ -30,7 +30,7 @@ struct convert<glm::vec3> {
     }
 };
 
-template<>
+template <>
 struct convert<glm::vec4> {
     static Node encode(const glm::vec4& rhs)
     {
@@ -55,7 +55,7 @@ struct convert<glm::vec4> {
     }
 };
 
-} // namespace Solar
+} // namespace YAML
 
 namespace Solar {
 
@@ -73,12 +73,11 @@ YAML::Emitter& operator<<(YAML::Emitter& out, const glm::vec4& v)
     return out;
 }
 
-SceneSerializer::SceneSerializer(const Ref<Scene>& scene)
-    :m_Scene(scene) {}
+SceneSerializer::SceneSerializer(const Ref<Scene>& scene) : m_Scene(scene) {}
 
 static void SerializeEntity(YAML::Emitter& out, Entity entity)
 {
-    out << YAML::BeginMap;  // Entity
+    out << YAML::BeginMap; // Entity
     out << YAML::Key << "Entity" << YAML::Value << "710288202";
 
     // TagComponent
@@ -98,8 +97,10 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity)
         out << YAML::BeginMap;
 
         auto& transformComponent = entity.GetComponent<TransformComponent>();
-        out << YAML::Key << "Translation" << YAML::Value << transformComponent.Translation;
-        out << YAML::Key << "Rotation" << YAML::Value << transformComponent.Rotation;
+        out << YAML::Key << "Translation" << YAML::Value
+            << transformComponent.Translation;
+        out << YAML::Key << "Rotation" << YAML::Value
+            << transformComponent.Rotation;
         out << YAML::Key << "Scale" << YAML::Value << transformComponent.Scale;
 
         out << YAML::EndMap;
@@ -115,18 +116,26 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity)
 
         out << YAML::Key << "Camera" << YAML::Value;
         out << YAML::BeginMap;
-        out << YAML::Key << "ProjectionType" << YAML::Value << (int)camera.GetProjectionType();
-        out << YAML::Key << "PerspectiveFOV" << YAML::Value << camera.GetPerspectiveVerticalFOV();
-        out << YAML::Key << "PerspectiveNear" << YAML::Value << camera.GetPerspectiveNearClip();
-        out << YAML::Key << "PerspectiveFar" << YAML::Value << camera.GetPerspectiveFarClip();
-        out << YAML::Key << "OrthographicSize" << YAML::Value << camera.GetOrthographicSize();
-        out << YAML::Key << "OrthographicNear" << YAML::Value << camera.GetOrthographicNearClip();
-        out << YAML::Key << "OrthographicFar" << YAML::Value << camera.GetOrthographicFarClip();
+        out << YAML::Key << "ProjectionType" << YAML::Value
+            << (int)camera.GetProjectionType();
+        out << YAML::Key << "PerspectiveFOV" << YAML::Value
+            << camera.GetPerspectiveVerticalFOV();
+        out << YAML::Key << "PerspectiveNear" << YAML::Value
+            << camera.GetPerspectiveNearClip();
+        out << YAML::Key << "PerspectiveFar" << YAML::Value
+            << camera.GetPerspectiveFarClip();
+        out << YAML::Key << "OrthographicSize" << YAML::Value
+            << camera.GetOrthographicSize();
+        out << YAML::Key << "OrthographicNear" << YAML::Value
+            << camera.GetOrthographicNearClip();
+        out << YAML::Key << "OrthographicFar" << YAML::Value
+            << camera.GetOrthographicFarClip();
 
         out << YAML::EndMap;
 
         out << YAML::Key << "Primary" << YAML::Value << cameraComponent.Primary;
-        out << YAML::Key << "FixedAspectRatio" << YAML::Value << cameraComponent.FixedAspectRatio;
+        out << YAML::Key << "FixedAspectRatio" << YAML::Value
+            << cameraComponent.FixedAspectRatio;
 
         out << YAML::EndMap;
     }
@@ -136,13 +145,15 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity)
         out << YAML::Key << "SpriteRendererComponent";
         out << YAML::BeginMap;
 
-        auto& spriteRendererComponent = entity.GetComponent<SpriteRendererComponent>();
-        out << YAML::Key << "Color" << YAML::Value << spriteRendererComponent.Color;
+        auto& spriteRendererComponent =
+            entity.GetComponent<SpriteRendererComponent>();
+        out << YAML::Key << "Color" << YAML::Value
+            << spriteRendererComponent.Color;
 
         out << YAML::EndMap;
     }
 
-    out << YAML::EndMap;    // Entity
+    out << YAML::EndMap; // Entity
 }
 
 void SceneSerializer::Serialize(const std::string& filepath)
@@ -151,19 +162,17 @@ void SceneSerializer::Serialize(const std::string& filepath)
     out << YAML::BeginMap;
     out << YAML::Key << "Scene" << YAML::Value << "TODO: SceneName";
     out << YAML::Key << "Entities" << YAML::Value << YAML::BeginSeq;
-    m_Scene->m_Registry.each([&](auto entityID)
-    {
+    m_Scene->m_Registry.each([&](auto entityID) {
         Entity entity = {entityID, m_Scene.get()};
-    if (!entity)
-        return;
-    SerializeEntity(out, entity);
+        if (!entity)
+            return;
+        SerializeEntity(out, entity);
     });
     out << YAML::EndSeq;
     out << YAML::EndMap;
 
     std::ofstream fout(filepath);
     fout << out.c_str();
-
 }
 
 bool SceneSerializer::Deserialize(const std::string& filepath)
@@ -189,7 +198,8 @@ bool SceneSerializer::Deserialize(const std::string& filepath)
             if (tagComponent)
                 name = tagComponent["Tag"].as<std::string>();
 
-            SOLAR_CORE_TRACE("Deserialized entity with ID = {0}, name = {1}", uuid, name);
+            SOLAR_CORE_TRACE("Deserialized entity with ID = {0}, name = {1}",
+                             uuid, name);
 
             Entity deserializedEntity = m_Scene->CreateEntity(name);
 
@@ -197,8 +207,10 @@ bool SceneSerializer::Deserialize(const std::string& filepath)
             auto transformComponent = entity["TransformComponent"];
             if (transformComponent) {
                 // Entities always have transforms
-                auto& tc = deserializedEntity.GetComponent<TransformComponent>();
-                tc.Translation = transformComponent["Translation"].as<glm::vec3>();
+                auto& tc =
+                    deserializedEntity.GetComponent<TransformComponent>();
+                tc.Translation =
+                    transformComponent["Translation"].as<glm::vec3>();
                 tc.Rotation = transformComponent["Rotation"].as<glm::vec3>();
                 tc.Scale = transformComponent["Scale"].as<glm::vec3>();
             }
@@ -209,24 +221,34 @@ bool SceneSerializer::Deserialize(const std::string& filepath)
                 auto& cc = deserializedEntity.AddComponent<CameraComponent>();
 
                 auto cameraProps = cameraComponent["Camera"];
-                cc.Camera.SetProjectionType((SceneCamera::ProjectionType)cameraProps["ProjectionType"].as<int>());
+                cc.Camera.SetProjectionType(
+                    (SceneCamera::ProjectionType)cameraProps["ProjectionType"]
+                        .as<int>());
 
-                cc.Camera.SetPerspectiveVerticalFOV(cameraProps["PerspectiveFOV"].as<float>());
-                cc.Camera.SetPerspectiveNearClip(cameraProps["PerspectiveNear"].as<float>());
-                cc.Camera.SetPerspectiveFarClip(cameraProps["PerspectiveFar"].as<float>());
+                cc.Camera.SetPerspectiveVerticalFOV(
+                    cameraProps["PerspectiveFOV"].as<float>());
+                cc.Camera.SetPerspectiveNearClip(
+                    cameraProps["PerspectiveNear"].as<float>());
+                cc.Camera.SetPerspectiveFarClip(
+                    cameraProps["PerspectiveFar"].as<float>());
 
-                cc.Camera.SetOrthographicSize(cameraProps["OrthographicSize"].as<float>());
-                cc.Camera.SetOrthographicNearClip(cameraProps["OrthographicNear"].as<float>());
-                cc.Camera.SetOrthographicFarClip(cameraProps["OrthographicFar"].as<float>());
+                cc.Camera.SetOrthographicSize(
+                    cameraProps["OrthographicSize"].as<float>());
+                cc.Camera.SetOrthographicNearClip(
+                    cameraProps["OrthographicNear"].as<float>());
+                cc.Camera.SetOrthographicFarClip(
+                    cameraProps["OrthographicFar"].as<float>());
 
                 cc.Primary = cameraComponent["Primary"].as<bool>();
-                cc.FixedAspectRatio = cameraComponent["FixedAspectRatio"].as<bool>();
+                cc.FixedAspectRatio =
+                    cameraComponent["FixedAspectRatio"].as<bool>();
             }
 
             // SpriteRendererComponent
             auto spriteRendererComponent = entity["SpriteRendererComponent"];
             if (spriteRendererComponent) {
-                auto& src = deserializedEntity.AddComponent<SpriteRendererComponent>();
+                auto& src =
+                    deserializedEntity.AddComponent<SpriteRendererComponent>();
                 src.Color = spriteRendererComponent["Color"].as<glm::vec4>();
             }
         }

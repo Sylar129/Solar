@@ -3,10 +3,7 @@
 
 namespace Solar {
 
-LayerStack::LayerStack() : m_LayerInsertIndex(0)
-{
-
-}
+LayerStack::LayerStack() : m_LayerInsertIndex(0) {}
 
 LayerStack::~LayerStack()
 {
@@ -22,10 +19,7 @@ void LayerStack::PushLayer(Layer* layer)
     m_LayerInsertIndex++;
 }
 
-void LayerStack::PushOverlay(Layer* overlay)
-{
-    m_Layers.emplace_back(overlay);
-}
+void LayerStack::PushOverlay(Layer* overlay) { m_Layers.emplace_back(overlay); }
 
 void LayerStack::PopLayer(Layer* layer)
 {

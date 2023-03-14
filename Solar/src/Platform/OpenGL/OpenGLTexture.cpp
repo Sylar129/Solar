@@ -7,8 +7,8 @@
 namespace Solar {
 
 OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
-    : m_Width(width), m_Height(height)
-    , m_InternaleFormat(GL_RGBA8), m_DataFormat(GL_RGBA)
+    : m_Width(width), m_Height(height), m_InternaleFormat(GL_RGBA8),
+      m_DataFormat(GL_RGBA)
 {
     SOLAR_PROFILE_FUNCTION();
 
@@ -22,8 +22,7 @@ OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
     glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
 }
 
-OpenGLTexture2D::OpenGLTexture2D(const std::string& path)
-    : m_Path(path)
+OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : m_Path(path)
 {
     SOLAR_PROFILE_FUNCTION();
 
@@ -63,8 +62,8 @@ OpenGLTexture2D::OpenGLTexture2D(const std::string& path)
     glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-
-    glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, dataFormat, GL_UNSIGNED_BYTE, data);
+    glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, dataFormat,
+                        GL_UNSIGNED_BYTE, data);
 
     stbi_image_free(data);
 }
@@ -81,8 +80,10 @@ void OpenGLTexture2D::SetData(void* data, uint32_t size)
     SOLAR_PROFILE_FUNCTION();
 
     uint32_t bytesPerPixel = m_DataFormat == GL_RGBA ? 4 : 3;
-    SOLAR_CORE_ASSERT(size == m_Width * m_Height * bytesPerPixel, "Data nust be entire texture!");
-    glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
+    SOLAR_CORE_ASSERT(size == m_Width * m_Height * bytesPerPixel,
+                      "Data nust be entire texture!");
+    glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat,
+                        GL_UNSIGNED_BYTE, data);
 }
 
 void OpenGLTexture2D::Bind(uint32_t slot) const

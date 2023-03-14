@@ -20,12 +20,10 @@ public:
     void Begin();
     void End();
 
-    void SetBlockEvents(bool block)
-    {
-        m_BlockEvents = block;
-    }
+    void SetBlockEvents(bool block) { m_BlockEvents = block; }
 
     void SetDarkThemeColors();
+
 private:
     bool m_BlockEvents = true;
     float m_Time;

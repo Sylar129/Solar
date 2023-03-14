@@ -8,40 +8,35 @@
 
 namespace Solar {
 
-Scene::Scene()
-{}
+Scene::Scene() {}
 
-Scene::~Scene()
-{}
+Scene::~Scene() {}
 
 Entity Scene::CreateEntity(const std::string& name)
 {
-    Entity entity = {m_Registry.create(),this};
+    Entity entity = {m_Registry.create(), this};
     entity.AddComponent<TransformComponent>();
     auto& tag = entity.AddComponent<TagComponent>();
     tag.Tag = name.empty() ? "Entity" : name;
     return entity;
 }
 
-void Scene::DestoryEntity(Entity entity)
-{
-    m_Registry.destroy(entity);
-}
+void Scene::DestoryEntity(Entity entity) { m_Registry.destroy(entity); }
 
 void Scene::OnUpdateRuntime(TimeStep& ts)
 {
     // Update scripts
     {
         // TODO: Move to Scene::OnScenePlay
-        m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
-        {
-            if (!nsc.Instance) {
-                nsc.Instance = nsc.InstantiateScript();
-                nsc.Instance->m_Entity = Entity{entity,this};
-                nsc.Instance->OnCreate();
-            }
-        nsc.Instance->OnUpdate(ts);
-        });
+        m_Registry.view<NativeScriptComponent>().each(
+            [=](auto entity, auto& nsc) {
+                if (!nsc.Instance) {
+                    nsc.Instance = nsc.InstantiateScript();
+                    nsc.Instance->m_Entity = Entity{entity, this};
+                    nsc.Instance->OnCreate();
+                }
+                nsc.Instance->OnUpdate(ts);
+            });
     }
 
     // Render 2D
@@ -50,7 +45,8 @@ void Scene::OnUpdateRuntime(TimeStep& ts)
     {
         auto view = m_Registry.view<CameraComponent, TransformComponent>();
         for (auto entity : view) {
-            auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
+            auto [transform, camera] =
+                view.get<TransformComponent, CameraComponent>(entity);
 
             if (camera.Primary) {
                 mainCamera = &camera.Camera;
@@ -62,12 +58,15 @@ void Scene::OnUpdateRuntime(TimeStep& ts)
 
     if (mainCamera) {
         Renderer2D::BeginScene(*mainCamera, cameraTransform);
-        auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+        auto group = m_Registry.group<TransformComponent>(
+            entt::get<SpriteRendererComponent>);
         for (auto entity : group) {
-            auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+            auto [transform, sprite] =
+                group.get<TransformComponent, SpriteRendererComponent>(entity);
 
             // Renderer2D::DrawQuad(transform.GetTranform(), sprite.Color);
-            Renderer2D::DrawSprite(transform.GetTranform(), sprite, (int)entity);
+            Renderer2D::DrawSprite(transform.GetTranform(), sprite,
+                                   (int)entity);
         }
         Renderer2D::EndScene();
     }
@@ -76,9 +75,11 @@ void Scene::OnUpdateRuntime(TimeStep& ts)
 void Scene::OnUpdateEditor(TimeStep& ts, EditorCamera& camera)
 {
     Renderer2D::BeginScene(camera);
-    auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+    auto group = m_Registry.group<TransformComponent>(
+        entt::get<SpriteRendererComponent>);
     for (auto entity : group) {
-        auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+        auto [transform, sprite] =
+            group.get<TransformComponent, SpriteRendererComponent>(entity);
 
         // Renderer2D::DrawQuad(transform.GetTranform(), sprite.Color);
         Renderer2D::DrawSprite(transform.GetTranform(), sprite, (int)entity);
@@ -113,40 +114,41 @@ Entity Scene::GetPrimaryCameraEntity()
     return Entity();
 }
 
-template<typename T>
+template <typename T>
 void Scene::OnComponentAdded(Entity entity, T& component)
 {
     // static_assert(false);
 }
 
-template<>
-void Scene::OnComponentAdded<TransformComponent>(Entity entity, TransformComponent& component)
+template <>
+void Scene::OnComponentAdded<TransformComponent>(Entity entity,
+                                                 TransformComponent& component)
 {
-
 }
 
-template<>
-void Scene::OnComponentAdded<CameraComponent>(Entity entity, CameraComponent& component)
+template <>
+void Scene::OnComponentAdded<CameraComponent>(Entity entity,
+                                              CameraComponent& component)
 {
     component.Camera.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
 }
 
-template<>
-void Scene::OnComponentAdded<SpriteRendererComponent>(Entity entity, SpriteRendererComponent& component)
+template <>
+void Scene::OnComponentAdded<SpriteRendererComponent>(
+    Entity entity, SpriteRendererComponent& component)
 {
-
 }
 
-template<>
-void Scene::OnComponentAdded<TagComponent>(Entity entity, TagComponent& component)
+template <>
+void Scene::OnComponentAdded<TagComponent>(Entity entity,
+                                           TagComponent& component)
 {
-
 }
 
-template<>
-void Scene::OnComponentAdded<NativeScriptComponent>(Entity entity, NativeScriptComponent& component)
+template <>
+void Scene::OnComponentAdded<NativeScriptComponent>(
+    Entity entity, NativeScriptComponent& component)
 {
-
 }
 
 } // namespace Solar

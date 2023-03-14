@@ -15,9 +15,7 @@ struct TagComponent {
 
     TagComponent() = default;
     TagComponent(const TagComponent&) = default;
-    TagComponent(const std::string& tag)
-        : Tag(tag)
-    {}
+    TagComponent(const std::string& tag) : Tag(tag) {}
 };
 
 struct TransformComponent {
@@ -27,28 +25,25 @@ struct TransformComponent {
 
     TransformComponent() = default;
     TransformComponent(const TransformComponent&) = default;
-    TransformComponent(const glm::vec3& translation)
-        : Translation(translation)
-    {}
+    TransformComponent(const glm::vec3& translation) : Translation(translation)
+    {
+    }
 
     glm::mat4 GetTranform() const
     {
         glm::mat4 rotation = glm::toMat4(glm::quat(Rotation));
 
-        return glm::translate(glm::mat4(1.0f), Translation)
-            * rotation
-            * glm::scale(glm::mat4(1.0f), Scale);
+        return glm::translate(glm::mat4(1.0f), Translation) * rotation *
+               glm::scale(glm::mat4(1.0f), Scale);
     }
 };
 
 struct SpriteRendererComponent {
-    glm::vec4 Color{1.0f,1.0f,1.0f,1.0f};
+    glm::vec4 Color{1.0f, 1.0f, 1.0f, 1.0f};
 
     SpriteRendererComponent() = default;
     SpriteRendererComponent(const SpriteRendererComponent&) = default;
-    SpriteRendererComponent(const glm::vec4& color)
-        : Color(color)
-    {}
+    SpriteRendererComponent(const glm::vec4& color) : Color(color) {}
 };
 
 struct CameraComponent {
@@ -66,11 +61,16 @@ struct NativeScriptComponent {
     ScriptableEntity* (*InstantiateScript)() = nullptr;
     void (*DestoryScript)(NativeScriptComponent*) = nullptr;
 
-    template<typename T>
+    template <typename T>
     void Bind()
     {
-        InstantiateScript = []() { return static_cast<ScriptableEntity*>(new T()); };
-        DestoryScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
+        InstantiateScript = []() {
+            return static_cast<ScriptableEntity*>(new T());
+        };
+        DestoryScript = [](NativeScriptComponent* nsc) {
+            delete nsc->Instance;
+            nsc->Instance = nullptr;
+        };
     }
 };
 

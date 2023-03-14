@@ -9,11 +9,12 @@
 
 namespace Solar {
 
-EditorCamera::EditorCamera(float fov, float aspectRatio, float nearClip, float farClip)
-    : m_FOV(fov), m_AspectRatio(aspectRatio)
-    , m_NearClip(nearClip), m_FarClip(farClip)
-    , Camera(glm::perspective(glm::radians(fov)
-    , aspectRatio, nearClip, farClip))
+EditorCamera::EditorCamera(float fov, float aspectRatio, float nearClip,
+                           float farClip)
+    : m_FOV(fov), m_AspectRatio(aspectRatio), m_NearClip(nearClip),
+      m_FarClip(farClip),
+      Camera(
+          glm::perspective(glm::radians(fov), aspectRatio, nearClip, farClip))
 {
     UpdateView();
 }
@@ -21,7 +22,8 @@ EditorCamera::EditorCamera(float fov, float aspectRatio, float nearClip, float f
 void EditorCamera::UpdateProjection()
 {
     m_AspectRatio = m_ViewportWidth / m_ViewportHeight;
-    m_Projection = glm::perspective(glm::radians(m_FOV), m_AspectRatio, m_NearClip, m_FarClip);
+    m_Projection = glm::perspective(glm::radians(m_FOV), m_AspectRatio,
+                                    m_NearClip, m_FarClip);
 }
 
 void EditorCamera::UpdateView()
@@ -30,7 +32,8 @@ void EditorCamera::UpdateView()
     m_Position = CalculatePosition();
 
     glm::quat orientation = GetOrientation();
-    m_ViewMatrix = glm::translate(glm::mat4(1.0f), m_Position) * glm::toMat4(orientation);
+    m_ViewMatrix =
+        glm::translate(glm::mat4(1.0f), m_Position) * glm::toMat4(orientation);
     m_ViewMatrix = glm::inverse(m_ViewMatrix);
 }
 
@@ -45,10 +48,7 @@ std::pair<float, float> EditorCamera::PanSpeed() const
     return {xFactor, yFactor};
 }
 
-float EditorCamera::RotationSpeed() const
-{
-    return 0.8f;
-}
+float EditorCamera::RotationSpeed() const { return 0.8f; }
 
 float EditorCamera::ZoomSpeed() const
 {
@@ -80,7 +80,8 @@ void EditorCamera::OnUpdate(TimeStep& ts)
 void EditorCamera::OnEvent(Event& e)
 {
     EventDispatcher dispatcher(e);
-    dispatcher.Dispatch<MouseScrolledEvent>(SOLAR_BIND_EVENT_FN(EditorCamera::OnMouseScroll));
+    dispatcher.Dispatch<MouseScrolledEvent>(
+        SOLAR_BIND_EVENT_FN(EditorCamera::OnMouseScroll));
 }
 
 bool EditorCamera::OnMouseScroll(MouseScrolledEvent& e)

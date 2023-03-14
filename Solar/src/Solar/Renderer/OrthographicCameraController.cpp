@@ -6,14 +6,15 @@
 
 namespace Solar {
 
-OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation)
-    : m_AspectRatio(aspectRatio), m_ZoomLevel(1.0f)
-    , m_Bounds({-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel})
-    , m_Camera(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom, m_Bounds.Top)
-    , m_CameraPosition(0.0f, 0.0f, 0.0f), m_CameraTranslationSpeed(1.0f)
-    , m_Rotation(rotation), m_CameraRotation(0.0f), m_CameraRotationSpeed(1.0f)
+OrthographicCameraController::OrthographicCameraController(float aspectRatio,
+                                                           bool rotation)
+    : m_AspectRatio(aspectRatio), m_ZoomLevel(1.0f),
+      m_Bounds({-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel,
+                -m_ZoomLevel, m_ZoomLevel}),
+      m_Camera(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom, m_Bounds.Top),
+      m_CameraPosition(0.0f, 0.0f, 0.0f), m_CameraTranslationSpeed(1.0f),
+      m_Rotation(rotation), m_CameraRotation(0.0f), m_CameraRotationSpeed(1.0f)
 {
-
 }
 
 void OrthographicCameraController::OnUpdate(TimeStep ts)
@@ -22,20 +23,28 @@ void OrthographicCameraController::OnUpdate(TimeStep ts)
 
     // SOLAR_CORE_TRACE("Rotation: [{0}]", m_CameraRotation);
     if (Input::IsKeyPressed(KeyCode::A)) {
-        m_CameraPosition.x -= glm::cos(m_CameraRotation) * m_CameraTranslationSpeed * ts;
-        m_CameraPosition.y -= glm::sin(m_CameraRotation) * m_CameraTranslationSpeed * ts;
+        m_CameraPosition.x -=
+            glm::cos(m_CameraRotation) * m_CameraTranslationSpeed * ts;
+        m_CameraPosition.y -=
+            glm::sin(m_CameraRotation) * m_CameraTranslationSpeed * ts;
     }
     if (Input::IsKeyPressed(KeyCode::D)) {
-        m_CameraPosition.x += glm::cos(m_CameraRotation) * m_CameraTranslationSpeed * ts;
-        m_CameraPosition.y += glm::sin(m_CameraRotation) * m_CameraTranslationSpeed * ts;
+        m_CameraPosition.x +=
+            glm::cos(m_CameraRotation) * m_CameraTranslationSpeed * ts;
+        m_CameraPosition.y +=
+            glm::sin(m_CameraRotation) * m_CameraTranslationSpeed * ts;
     }
     if (Input::IsKeyPressed(KeyCode::W)) {
-        m_CameraPosition.x += -glm::sin(m_CameraRotation) * m_CameraTranslationSpeed * ts;
-        m_CameraPosition.y += glm::cos(m_CameraRotation) * m_CameraTranslationSpeed * ts;
+        m_CameraPosition.x +=
+            -glm::sin(m_CameraRotation) * m_CameraTranslationSpeed * ts;
+        m_CameraPosition.y +=
+            glm::cos(m_CameraRotation) * m_CameraTranslationSpeed * ts;
     }
     if (Input::IsKeyPressed(KeyCode::S)) {
-        m_CameraPosition.x -= -glm::sin(m_CameraRotation) * m_CameraTranslationSpeed * ts;
-        m_CameraPosition.y -= glm::cos(m_CameraRotation) * m_CameraTranslationSpeed * ts;
+        m_CameraPosition.x -=
+            -glm::sin(m_CameraRotation) * m_CameraTranslationSpeed * ts;
+        m_CameraPosition.y -=
+            glm::cos(m_CameraRotation) * m_CameraTranslationSpeed * ts;
     }
 
     if (m_Rotation) {
@@ -57,8 +66,10 @@ void OrthographicCameraController::OnEvent(Event& e)
     SOLAR_PROFILE_FUNCTION();
 
     EventDispatcher dispatcher(e);
-    dispatcher.Dispatch<MouseScrolledEvent>(SOLAR_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
-    dispatcher.Dispatch<WindowResizeEvent>(SOLAR_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
+    dispatcher.Dispatch<MouseScrolledEvent>(
+        SOLAR_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
+    dispatcher.Dispatch<WindowResizeEvent>(
+        SOLAR_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
 }
 
 void OrthographicCameraController::OnResize(float width, float height)
@@ -69,8 +80,10 @@ void OrthographicCameraController::OnResize(float width, float height)
 
 void OrthographicCameraController::CalculateView()
 {
-    m_Bounds = {-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel};
-    m_Camera.SetProjection(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom, m_Bounds.Top);
+    m_Bounds = {-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel,
+                -m_ZoomLevel, m_ZoomLevel};
+    m_Camera.SetProjection(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom,
+                           m_Bounds.Top);
 }
 
 bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
@@ -91,4 +104,4 @@ bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e)
     return false;
 }
 
-}  // namespace Solar
+} // namespace Solar

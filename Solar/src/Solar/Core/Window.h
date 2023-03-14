@@ -12,10 +12,10 @@ struct WindowProps {
     uint32_t Height;
 
     WindowProps(const std::string& title = "Solar Engine",
-        uint32_t width = 1600,
-        uint32_t height = 900)
+                uint32_t width = 1600, uint32_t height = 900)
         : Title(title), Width(width), Height(height)
-    {}
+    {
+    }
 };
 
 // Interface representing a desktop system based window

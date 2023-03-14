@@ -14,4 +14,4 @@ public:
     static float GetMouseY();
 };
 
-}
+} // namespace Solar

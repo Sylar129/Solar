@@ -10,7 +10,8 @@ Ref<Shader> Shader::Create(const std::string& filepath)
 {
     switch (Renderer::GetAPI()) {
     case RendererAPI::API::None:
-        SOLAR_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
+        SOLAR_CORE_ASSERT(false,
+                          "RendererAPI::None is currently not supported!");
         return nullptr;
     case RendererAPI::API::OpenGL:
         return CreateRef<OpenGLShader>(filepath);
@@ -19,11 +20,14 @@ Ref<Shader> Shader::Create(const std::string& filepath)
     return nullptr;
 }
 
-Ref<Shader> Shader::Create(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
+Ref<Shader> Shader::Create(const std::string& name,
+                           const std::string& vertexSrc,
+                           const std::string& fragmentSrc)
 {
     switch (Renderer::GetAPI()) {
     case RendererAPI::API::None:
-        SOLAR_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
+        SOLAR_CORE_ASSERT(false,
+                          "RendererAPI::None is currently not supported!");
         return nullptr;
     case RendererAPI::API::OpenGL:
         return CreateRef<OpenGLShader>(name, vertexSrc, fragmentSrc);
@@ -51,7 +55,8 @@ Ref<Shader> ShaderLibrary::Load(const std::string& filepath)
     return shader;
 }
 
-Ref<Shader> ShaderLibrary::Load(const std::string& name, const std::string& filepath)
+Ref<Shader> ShaderLibrary::Load(const std::string& name,
+                                const std::string& filepath)
 {
     auto shader = Shader::Create(filepath);
     Add(name, shader);

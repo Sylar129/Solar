@@ -16,7 +16,8 @@ std::string FileDialogs::OpenFile(const char* filter)
     CHAR szFile[260] = {0};
     ZeroMemory(&ofn, sizeof(OPENFILENAMEA));
     ofn.lStructSize = sizeof(OPENFILENAMEA);
-    ofn.hwndOwner = glfwGetWin32Window((GLFWwindow*)Application::Get().GetWindow().GetNativeWindow());
+    ofn.hwndOwner = glfwGetWin32Window(
+        (GLFWwindow*)Application::Get().GetWindow().GetNativeWindow());
     ofn.lpstrFile = szFile;
     ofn.nMaxFile = sizeof(szFile);
     ofn.lpstrFilter = filter;
@@ -34,7 +35,8 @@ std::string FileDialogs::SaveFile(const char* filter)
     CHAR szFile[260] = {0};
     ZeroMemory(&ofn, sizeof(OPENFILENAME));
     ofn.lStructSize = sizeof(OPENFILENAME);
-    ofn.hwndOwner = glfwGetWin32Window((GLFWwindow*)Application::Get().GetWindow().GetNativeWindow());
+    ofn.hwndOwner = glfwGetWin32Window(
+        (GLFWwindow*)Application::Get().GetWindow().GetNativeWindow());
     ofn.lpstrFile = szFile;
     ofn.nMaxFile = sizeof(szFile);
     ofn.lpstrFilter = filter;
@@ -46,4 +48,4 @@ std::string FileDialogs::SaveFile(const char* filter)
     return std::string();
 }
 
-}// namespace Solar
+} // namespace Solar

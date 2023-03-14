@@ -5,7 +5,6 @@
 
 #include "GLFW/glfw3.h"
 
-
 namespace Solar {
 
 class WindowsWindow : public Window {
@@ -26,13 +25,12 @@ public:
     void SetVSync(bool enabled) override;
     bool IsVSync() const override;
 
-    inline virtual void* GetNativeWindow() const override
-    {
-        return m_Window;
-    }
+    inline virtual void* GetNativeWindow() const override { return m_Window; }
+
 private:
     virtual void Init(const WindowProps& props);
     virtual void Shutdown();
+
 private:
     GLFWwindow* m_Window;
     Scope<GraphicsContext> m_Context;

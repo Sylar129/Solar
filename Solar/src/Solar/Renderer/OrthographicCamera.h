@@ -18,8 +18,10 @@ public:
     const glm::mat4& GetProjectionMatrix() const;
     const glm::mat4& GetViewMatrix() const;
     const glm::mat4& GetViewProjectionMatrix() const;
+
 private:
     void RecalculateViewMatrix();
+
 private:
     glm::mat4 m_ProjectionMatrix;
     glm::mat4 m_ViewMatrix;
@@ -29,4 +31,4 @@ private:
     float m_Rotation;
 };
 
-}  // namespace Solar
+} // namespace Solar

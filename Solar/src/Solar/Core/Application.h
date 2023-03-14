@@ -22,31 +22,25 @@ public:
     void PushLayer(Layer* layer);
     void PushOverlay(Layer* layer);
 
-    inline Window& GetWindow()
-    {
-        return *m_Window;
-    }
+    inline Window& GetWindow() { return *m_Window; }
 
     void Close();
 
-    ImGuiLayer* GetImGuiLayer()
-    {
-        return m_ImGuiLayer;
-    }
+    ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
 
-    inline static Application& Get()
-    {
-        return *s_Instance;
-    }
+    inline static Application& Get() { return *s_Instance; }
+
 private:
     bool OnWindowClose(WindowCloseEvent& e);
     bool OnWindowResize(WindowResizeEvent& e);
+
 private:
     Scope<Window> m_Window;
     ImGuiLayer* m_ImGuiLayer;
     bool m_Running;
     bool m_Minimized;
     LayerStack m_LayerStack;
+
 private:
     static Application* s_Instance;
 };

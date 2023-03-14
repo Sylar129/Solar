@@ -5,7 +5,8 @@
 
 namespace Solar::Math {
 
-bool DecomposeTranform(const glm::mat4& transform, glm::vec3& outTranslation, glm::vec3& outRotation, glm::vec3& outScale)
+bool DecomposeTranform(const glm::mat4& transform, glm::vec3& outTranslation,
+                       glm::vec3& outRotation, glm::vec3& outScale)
 {
     // From glm::decompose in matrix_decompose.inl
 
@@ -19,12 +20,12 @@ bool DecomposeTranform(const glm::mat4& transform, glm::vec3& outTranslation, gl
         return false;
 
     // First, isolate perspective.  This is the messiest.
-    if (
-        epsilonNotEqual(LocalMatrix[0][3], static_cast<T>(0), epsilon<T>()) ||
+    if (epsilonNotEqual(LocalMatrix[0][3], static_cast<T>(0), epsilon<T>()) ||
         epsilonNotEqual(LocalMatrix[1][3], static_cast<T>(0), epsilon<T>()) ||
         epsilonNotEqual(LocalMatrix[2][3], static_cast<T>(0), epsilon<T>())) {
         // Clear the perspective partition
-        LocalMatrix[0][3] = LocalMatrix[1][3] = LocalMatrix[2][3] = static_cast<T>(0);
+        LocalMatrix[0][3] = LocalMatrix[1][3] = LocalMatrix[2][3] =
+            static_cast<T>(0);
         LocalMatrix[3][3] = static_cast<T>(1);
     }
 

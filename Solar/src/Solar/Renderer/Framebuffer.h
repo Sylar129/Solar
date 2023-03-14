@@ -12,7 +12,7 @@ enum class FramebufferTextureFormat {
     // Depth/stencil
     DEPTH24STENCIL8,
 
-    //Defaults
+    // Defaults
     Depth = DEPTH24STENCIL8
 };
 
@@ -21,9 +21,9 @@ struct FramebufferTextureSpecification {
     // TODO: filtering/wrap
 
     FramebufferTextureSpecification() = default;
-    FramebufferTextureSpecification(FramebufferTextureFormat format) : TextureFormat(format)
+    FramebufferTextureSpecification(FramebufferTextureFormat format)
+        : TextureFormat(format)
     {
-
     }
 };
 
@@ -31,10 +31,10 @@ struct FramebufferAttachmentSpecification {
     std::vector<FramebufferTextureSpecification> Attachments;
 
     FramebufferAttachmentSpecification() = default;
-    FramebufferAttachmentSpecification(std::initializer_list<FramebufferTextureSpecification> attachments)
+    FramebufferAttachmentSpecification(
+        std::initializer_list<FramebufferTextureSpecification> attachments)
         : Attachments(attachments)
     {
-
     }
 };
 

@@ -12,9 +12,7 @@ namespace Solar {
 Application* Application::s_Instance = nullptr;
 
 Application::Application(const std::string& name)
-    : m_ImGuiLayer(nullptr)
-    , m_Running(true)
-    , m_Minimized(false)
+    : m_ImGuiLayer(nullptr), m_Running(true), m_Minimized(false)
 {
     SOLAR_PROFILE_FUNCTION();
 
@@ -30,10 +28,7 @@ Application::Application(const std::string& name)
     PushOverlay(m_ImGuiLayer);
 }
 
-Application::~Application()
-{
-    SOLAR_PROFILE_FUNCTION();
-}
+Application::~Application() { SOLAR_PROFILE_FUNCTION(); }
 
 void Application::Run()
 {
@@ -72,7 +67,6 @@ void Application::Run()
             m_ImGuiLayer->End();
         }
 
-
         m_Window->OnUpdate();
     }
 }
@@ -110,10 +104,7 @@ void Application::PushOverlay(Layer* layer)
     layer->OnAttach();
 }
 
-void Application::Close()
-{
-    m_Running = false;
-}
+void Application::Close() { m_Running = false; }
 
 bool Application::OnWindowClose(WindowCloseEvent& e)
 {

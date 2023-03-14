@@ -6,9 +6,9 @@ namespace Solar {
 
 class ScriptableEntity {
 public:
-    virtual ~ScriptableEntity() {};
+    virtual ~ScriptableEntity(){};
 
-    template<typename T>
+    template <typename T>
     T& GetComponent()
     {
         return m_Entity.GetComponent<T>();

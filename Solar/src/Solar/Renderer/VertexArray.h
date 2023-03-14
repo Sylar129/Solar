@@ -20,4 +20,4 @@ public:
     static Ref<VertexArray> Create();
 };
 
-}
+} // namespace Solar

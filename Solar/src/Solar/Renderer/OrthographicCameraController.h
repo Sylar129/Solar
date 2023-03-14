@@ -28,25 +28,21 @@ public:
     OrthographicCamera& GetCamera() { return m_Camera; }
     const OrthographicCamera& GetCamera() const { return m_Camera; }
 
-    float GetZoomLevel() const
-    {
-        return m_ZoomLevel;
-    }
+    float GetZoomLevel() const { return m_ZoomLevel; }
     void SetZoomLevel(float level)
     {
         m_ZoomLevel = level;
         CalculateView();
     }
 
-    const OrthographicCameraBounds& GetBounds() const
-    {
-        return m_Bounds;
-    }
+    const OrthographicCameraBounds& GetBounds() const { return m_Bounds; }
+
 private:
     void CalculateView();
 
     bool OnMouseScrolled(MouseScrolledEvent& e);
     bool OnWindowResized(WindowResizeEvent& e);
+
 private:
     float m_AspectRatio;
     float m_ZoomLevel;
@@ -57,7 +53,7 @@ private:
     float m_CameraTranslationSpeed;
 
     bool m_Rotation;
-    float m_CameraRotation;     // radians
+    float m_CameraRotation; // radians
     float m_CameraRotationSpeed;
 };
 

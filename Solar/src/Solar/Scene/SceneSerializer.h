@@ -13,6 +13,7 @@ public:
 
     void SerializeRuntime(const std::string& filepath);
     bool DeserializeRuntime(const std::string& filepath);
+
 private:
     Ref<Scene> m_Scene;
 };

@@ -51,8 +51,10 @@ private:
     std::pair<float, float> PanSpeed() const;
     float RotationSpeed() const;
     float ZoomSpeed() const;
+
 private:
-    float m_FOV = 45.0f, m_AspectRatio = 1.778f, m_NearClip = 0.1f, m_FarClip = 1000.0f;
+    float m_FOV = 45.0f, m_AspectRatio = 1.778f, m_NearClip = 0.1f,
+          m_FarClip = 1000.0f;
 
     glm::mat4 m_ViewMatrix;
     glm::vec3 m_Position = {0.0f, 0.0f, 0.0f};

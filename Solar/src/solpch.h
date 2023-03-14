@@ -20,5 +20,5 @@
 #include "Solar/Debug/Instrumentor.h"
 
 #ifdef SOLAR_PLATFORM_WINDOWS
-    #include <Windows.h>
+#include <Windows.h>
 #endif

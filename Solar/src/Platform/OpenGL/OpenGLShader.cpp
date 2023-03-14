@@ -31,11 +31,14 @@ OpenGLShader::OpenGLShader(const std::string& filepath)
     auto lastSlash = filepath.find_last_of("/\\");
     lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
     auto lastDot = filepath.rfind('.');
-    auto count = lastDot == std::string::npos ? filepath.size() - lastSlash : lastDot - lastSlash;
+    auto count = lastDot == std::string::npos ? filepath.size() - lastSlash
+                                              : lastDot - lastSlash;
     m_Name = filepath.substr(lastSlash, count);
 }
 
-OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
+OpenGLShader::OpenGLShader(const std::string& name,
+                           const std::string& vertexSrc,
+                           const std::string& fragmentSrc)
     : m_Name(name)
 {
     SOLAR_PROFILE_FUNCTION();
@@ -74,7 +77,8 @@ void OpenGLShader::SetInt(const std::string& name, int value)
     UploadUniformInt(name, value);
 }
 
-void OpenGLShader::SetIntArray(const std::string& name, int* values, uint32_t count)
+void OpenGLShader::SetIntArray(const std::string& name, int* values,
+                               uint32_t count)
 {
     SOLAR_PROFILE_FUNCTION();
 
@@ -122,7 +126,8 @@ void OpenGLShader::UploadUniformInt(const std::string& name, int value)
     glUniform1i(location, value);
 }
 
-void OpenGLShader::UploadUniformIntArray(const std::string& name, int* values, uint32_t count)
+void OpenGLShader::UploadUniformIntArray(const std::string& name, int* values,
+                                         uint32_t count)
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniform1iv(location, count, values);
@@ -134,31 +139,36 @@ void OpenGLShader::UploadUniformFloat(const std::string& name, float value)
     glUniform1f(location, value);
 }
 
-void OpenGLShader::UploadUniformFloat2(const std::string& name, const glm::vec2& values)
+void OpenGLShader::UploadUniformFloat2(const std::string& name,
+                                       const glm::vec2& values)
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniform2f(location, values.x, values.y);
 }
 
-void OpenGLShader::UploadUniformFloat3(const std::string& name, const glm::vec3& values)
+void OpenGLShader::UploadUniformFloat3(const std::string& name,
+                                       const glm::vec3& values)
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniform3f(location, values.x, values.y, values.z);
 }
 
-void OpenGLShader::UploadUniformFloat4(const std::string& name, const glm::vec4& values)
+void OpenGLShader::UploadUniformFloat4(const std::string& name,
+                                       const glm::vec4& values)
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniform4f(location, values.x, values.y, values.z, values.w);
 }
 
-void OpenGLShader::UploadUniformMat3(const std::string& name, const glm::mat3& matrix)
+void OpenGLShader::UploadUniformMat3(const std::string& name,
+                                     const glm::mat3& matrix)
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
-void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
+void OpenGLShader::UploadUniformMat4(const std::string& name,
+                                     const glm::mat4& matrix)
 {
     GLint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
@@ -182,7 +192,8 @@ std::string OpenGLShader::ReadFile(const std::string& filepath)
     return result;
 }
 
-std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& source)
+std::unordered_map<GLenum, std::string>
+OpenGLShader::PreProcess(const std::string& source)
 {
     SOLAR_PROFILE_FUNCTION();
 
@@ -190,39 +201,44 @@ std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::stri
 
     const char* typeToken = "#type";
     size_t typeTokenLength = strlen(typeToken);
-    //Start of shader type declaration line
+    // Start of shader type declaration line
     size_t pos = source.find(typeToken, 0);
     while (pos != std::string::npos) {
-        //End of shader type declaration line
+        // End of shader type declaration line
         size_t eol = source.find_first_of("\r\n", pos);
         SOLAR_CORE_ASSERT(eol != std::string::npos, "Syntax error!");
 
-        //Start of shader type name (after "#type " keyword)
+        // Start of shader type name (after "#type " keyword)
         size_t begin = pos + typeTokenLength + 1;
         std::string type = source.substr(begin, eol - begin);
-        SOLAR_CORE_ASSERT(ShaderTypeFromString(type), "Invalid shader type specified");
+        SOLAR_CORE_ASSERT(ShaderTypeFromString(type),
+                          "Invalid shader type specified");
 
-        //Start of shader code after shader type declaration line
+        // Start of shader code after shader type declaration line
         size_t nextLinePos = source.find_first_not_of("\r\n", eol);
         SOLAR_CORE_ASSERT(nextLinePos != std::string::npos, "Syntax error");
 
-        //Start of next shader type declaration line
+        // Start of next shader type declaration line
         pos = source.find(typeToken, nextLinePos);
         shaderSources[ShaderTypeFromString(type)] =
-            source.substr(nextLinePos, pos - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos));
+            source.substr(nextLinePos, pos - (nextLinePos == std::string::npos
+                                                  ? source.size() - 1
+                                                  : nextLinePos));
     }
 
     return shaderSources;
 }
 
-void OpenGLShader::Compile(std::unordered_map<GLenum, std::string>& shaderSources)
+void OpenGLShader::Compile(
+    std::unordered_map<GLenum, std::string>& shaderSources)
 {
     SOLAR_PROFILE_FUNCTION();
 
     // Get a program object.
     GLuint program = glCreateProgram();
 
-    SOLAR_CORE_ASSERT(shaderSources.size() <= 2, "We only support 2 shaders for now");
+    SOLAR_CORE_ASSERT(shaderSources.size() <= 2,
+                      "We only support 2 shaders for now");
     std::array<GLenum, 2> glShaderIDs;
 
     // Compile Shaders
