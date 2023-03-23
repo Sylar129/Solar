@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Solar/Core/Core.h"
-#include "Solar/Scene/Scene.h"
-#include "Solar/Scene/Entity.h"
+#include "Core/Base/Core.h"
+#include "Core/Scene/Scene.h"
+#include "Core/Scene/Entity.h"
 
 namespace Solar {
 

@@ -14,6 +14,111 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Core\Base\Application.cpp" />
+    <ClCompile Include="Core\Base\Layer.cpp" />
+    <ClCompile Include="Core\Base\LayerStack.cpp" />
+    <ClCompile Include="Core\Base\Log.cpp" />
+    <ClCompile Include="Core\ImGui\backends\imgui_impl_glfw.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Core\ImGui\backends\imgui_impl_opengl3.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Core\ImGui\ImGuiLayer.cpp" />
+    <ClCompile Include="Core\Math\Math.cpp" />
+    <ClCompile Include="Core\Renderer\Buffer.cpp" />
+    <ClCompile Include="Core\Renderer\EditorCamera.cpp" />
+    <ClCompile Include="Core\Renderer\Framebuffer.cpp" />
+    <ClCompile Include="Core\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="Core\Renderer\OrthographicCameraController.cpp" />
+    <ClCompile Include="Core\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="Core\Renderer\Renderer.cpp" />
+    <ClCompile Include="Core\Renderer\Renderer2D.cpp" />
+    <ClCompile Include="Core\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="Core\Renderer\Shader.cpp" />
+    <ClCompile Include="Core\Renderer\SubTexture2D.cpp" />
+    <ClCompile Include="Core\Renderer\Texture.cpp" />
+    <ClCompile Include="Core\Renderer\VertexArray.cpp" />
+    <ClCompile Include="Core\Scene\Entity.cpp" />
+    <ClCompile Include="Core\Scene\Scene.cpp" />
+    <ClCompile Include="Core\Scene\SceneCamera.cpp" />
+    <ClCompile Include="Core\Scene\SceneSerializer.cpp" />
+    <ClCompile Include="Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="Platform\OpenGL\OpenGLFramebuffer.cpp" />
+    <ClCompile Include="Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="Platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="Platform\OpenGL\OpenGLTexture.cpp" />
+    <ClCompile Include="Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="Platform\Windows\WindowsInput.cpp" />
+    <ClCompile Include="Platform\Windows\WindowsPlatformUtils.cpp" />
+    <ClCompile Include="Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="solpch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Base\Application.h" />
+    <ClInclude Include="Core\Base\Core.h" />
+    <ClInclude Include="Core\Base\EntryPoint.h" />
+    <ClInclude Include="Core\Base\Input.h" />
+    <ClInclude Include="Core\Base\KeyCodes.h" />
+    <ClInclude Include="Core\Base\Layer.h" />
+    <ClInclude Include="Core\Base\LayerStack.h" />
+    <ClInclude Include="Core\Base\Log.h" />
+    <ClInclude Include="Core\Base\MouseCodes.h" />
+    <ClInclude Include="Core\Base\Timestep.h" />
+    <ClInclude Include="Core\Base\Window.h" />
+    <ClInclude Include="Core\Debug\Instrumentor.h" />
+    <ClInclude Include="Core\Events\ApplicationEvent.h" />
+    <ClInclude Include="Core\Events\Event.h" />
+    <ClInclude Include="Core\Events\KeyEvent.h" />
+    <ClInclude Include="Core\Events\MouseEvent.h" />
+    <ClInclude Include="Core\ImGui\backends\imgui_impl_glfw.h" />
+    <ClInclude Include="Core\ImGui\backends\imgui_impl_opengl3.h" />
+    <ClInclude Include="Core\ImGui\backends\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="Core\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="Core\Math\Math.h" />
+    <ClInclude Include="Core\Renderer\Buffer.h" />
+    <ClInclude Include="Core\Renderer\Camera.h" />
+    <ClInclude Include="Core\Renderer\EditorCamera.h" />
+    <ClInclude Include="Core\Renderer\Framebuffer.h" />
+    <ClInclude Include="Core\Renderer\GraphicsContext.h" />
+    <ClInclude Include="Core\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="Core\Renderer\OrthographicCameraController.h" />
+    <ClInclude Include="Core\Renderer\RenderCommand.h" />
+    <ClInclude Include="Core\Renderer\Renderer.h" />
+    <ClInclude Include="Core\Renderer\Renderer2D.h" />
+    <ClInclude Include="Core\Renderer\RendererAPI.h" />
+    <ClInclude Include="Core\Renderer\Shader.h" />
+    <ClInclude Include="Core\Renderer\SubTexture2D.h" />
+    <ClInclude Include="Core\Renderer\Texture.h" />
+    <ClInclude Include="Core\Renderer\VertexArray.h" />
+    <ClInclude Include="Core\Scene\Components.h" />
+    <ClInclude Include="Core\Scene\Entity.h" />
+    <ClInclude Include="Core\Scene\Scene.h" />
+    <ClInclude Include="Core\Scene\SceneCamera.h" />
+    <ClInclude Include="Core\Scene\SceneSerializer.h" />
+    <ClInclude Include="Core\Scene\ScriptableEntity.h" />
+    <ClInclude Include="Core\Utils\PlatformUtils.h" />
+    <ClInclude Include="Platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="Platform\OpenGL\OpenGLFramebuffer.h" />
+    <ClInclude Include="Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="Platform\OpenGL\OpenGLTexture.h" />
+    <ClInclude Include="Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="Solar.h" />
+    <ClInclude Include="solpch.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -80,7 +185,7 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\dependence\imgui;$(SolutionDir)Solar\dependence\imgui\backends;$(SolutionDir)Solar\dependence\spdlog\include;$(SolutionDir)Solar\dependence\GLAD\include;$(SolutionDir)Solar\dependence\glfw\include;$(SolutionDir)Solar\dependence\glm;$(SolutionDir)Solar\dependence\stb;$(SolutionDir)Solar\dependence\entt\include;$(SolutionDir)Solar\dependence\yaml-cpp\include;$(SolutionDir)Solar\dependence\ImGuizmo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Solar;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -109,7 +214,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SOLAR_PLATFORM_WINDOWS;YAML_CPP_STATIC_DEFINE;SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;SOLAR_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\dependence\imgui;$(SolutionDir)Solar\dependence\imgui\backends;$(SolutionDir)Solar\dependence\spdlog\include;$(SolutionDir)Solar\dependence\GLAD\include;$(SolutionDir)Solar\dependence\glfw\include;$(SolutionDir)Solar\dependence\glm;$(SolutionDir)Solar\dependence\stb;$(SolutionDir)Solar\dependence\entt\include;$(SolutionDir)Solar\dependence\yaml-cpp\include;$(SolutionDir)Solar\dependence\ImGuizmo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Solar;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -139,7 +244,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SOLAR_PLATFORM_WINDOWS;YAML_CPP_STATIC_DEFINE;SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;SOLAR_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Solar\src;$(SolutionDir)Solar\dependence\imgui;$(SolutionDir)Solar\dependence\imgui\backends;$(SolutionDir)Solar\dependence\spdlog\include;$(SolutionDir)Solar\dependence\GLAD\include;$(SolutionDir)Solar\dependence\glfw\include;$(SolutionDir)Solar\dependence\glm;$(SolutionDir)Solar\dependence\stb;$(SolutionDir)Solar\dependence\entt\include;$(SolutionDir)Solar\dependence\yaml-cpp\include;$(SolutionDir)Solar\dependence\ImGuizmo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Solar;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -161,114 +266,6 @@
       </AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
-    <ClCompile Include="src\Platform\Windows\WindowsPlatformUtils.cpp" />
-    <ClCompile Include="src\Solar\ImGui\backends\imgui_impl_glfw.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="src\Solar\ImGui\backends\imgui_impl_opengl3.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="src\Solar\Math\Math.cpp" />
-    <ClCompile Include="src\Solar\Renderer\EditorCamera.cpp" />
-    <ClCompile Include="src\Solar\Renderer\Framebuffer.cpp" />
-    <ClCompile Include="src\Solar\Renderer\OrthographicCamera.cpp" />
-    <ClCompile Include="src\Solar\Renderer\OrthographicCameraController.cpp" />
-    <ClCompile Include="src\Solar\Renderer\RenderCommand.cpp" />
-    <ClCompile Include="src\Solar\Renderer\Renderer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
-    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
-    <ClCompile Include="src\Solar\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\Solar\Core\LayerStack.cpp" />
-    <ClCompile Include="src\Solar\Core\Layer.cpp" />
-    <ClCompile Include="src\Solar\Renderer\Buffer.cpp" />
-    <ClCompile Include="src\Solar\Renderer\Renderer2D.cpp" />
-    <ClCompile Include="src\Solar\Renderer\RendererAPI.cpp" />
-    <ClCompile Include="src\Solar\Renderer\Shader.cpp" />
-    <ClCompile Include="src\Solar\Renderer\SubTexture2D.cpp" />
-    <ClCompile Include="src\Solar\Renderer\VertexArray.cpp" />
-    <ClCompile Include="src\Solar\Scene\Entity.cpp" />
-    <ClCompile Include="src\Solar\Scene\Scene.cpp" />
-    <ClCompile Include="src\Solar\Scene\SceneCamera.cpp" />
-    <ClCompile Include="src\Solar\Scene\SceneSerializer.cpp" />
-    <ClCompile Include="src\solpch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">solpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">solpch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">solpch.h</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="src\Solar\Core\Log.cpp" />
-    <ClCompile Include="src\Solar\Core\Application.cpp" />
-    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
-    <ClCompile Include="src\Solar\Renderer\Texture.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="src\Solar\ImGui\backends\imgui_impl_glfw.h" />
-    <ClInclude Include="src\Solar\ImGui\backends\imgui_impl_opengl3.h" />
-    <ClInclude Include="src\Solar\ImGui\backends\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="src\Solar\Math\Math.h" />
-    <ClInclude Include="src\Solar\Renderer\Camera.h" />
-    <ClInclude Include="src\Solar\Core\Timestep.h" />
-    <ClInclude Include="src\Solar\Debug\Instrumentor.h" />
-    <ClInclude Include="src\Solar\Renderer\EditorCamera.h" />
-    <ClInclude Include="src\Solar\Renderer\Framebuffer.h" />
-    <ClInclude Include="src\Solar\Renderer\OrthographicCamera.h" />
-    <ClInclude Include="src\Solar\Renderer\OrthographicCameraController.h" />
-    <ClInclude Include="src\Solar\Renderer\Renderer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
-    <ClInclude Include="src\Solar\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\Solar\Core\Input.h" />
-    <ClInclude Include="src\Solar\Core\KeyCodes.h" />
-    <ClInclude Include="src\Solar\Core\LayerStack.h" />
-    <ClInclude Include="src\Solar\Core\Layer.h" />
-    <ClInclude Include="src\Solar\Core\MouseCodes.h" />
-    <ClInclude Include="src\Solar\Renderer\Buffer.h" />
-    <ClInclude Include="src\Solar\Renderer\GraphicsContext.h" />
-    <ClInclude Include="src\Solar\Renderer\Renderer2D.h" />
-    <ClInclude Include="src\Solar\Renderer\RendererAPI.h" />
-    <ClInclude Include="src\Solar\Renderer\RenderCommand.h" />
-    <ClInclude Include="src\Solar\Renderer\Shader.h" />
-    <ClInclude Include="src\Solar\Renderer\SubTexture2D.h" />
-    <ClInclude Include="src\Solar\Renderer\VertexArray.h" />
-    <ClInclude Include="src\Solar\Core\Window.h" />
-    <ClInclude Include="src\Solar\Scene\Components.h" />
-    <ClInclude Include="src\Solar\Scene\Entity.h" />
-    <ClInclude Include="src\Solar\Scene\Scene.h" />
-    <ClInclude Include="src\Solar\Scene\SceneCamera.h" />
-    <ClInclude Include="src\Solar\Scene\SceneSerializer.h" />
-    <ClInclude Include="src\Solar\Scene\ScriptableEntity.h" />
-    <ClInclude Include="src\Solar\Utils\PlatformUtils.h" />
-    <ClInclude Include="src\solpch.h" />
-    <ClInclude Include="src\Solar\Events\ApplicationEvent.h" />
-    <ClInclude Include="src\Solar\Events\Event.h" />
-    <ClInclude Include="src\Solar\Events\KeyEvent.h" />
-    <ClInclude Include="src\Solar\Events\MouseEvent.h" />
-    <ClInclude Include="src\Solar\Core\Log.h" />
-    <ClInclude Include="src\Solar.h" />
-    <ClInclude Include="src\Solar\Core\Application.h" />
-    <ClInclude Include="src\Solar\Core\Core.h" />
-    <ClInclude Include="src\Solar\Core\EntryPoint.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
-    <ClInclude Include="src\Solar\Renderer\Texture.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
