@@ -128,7 +128,7 @@
     <ClInclude Include="Core\Base\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Base\Core.h">
+    <ClInclude Include="Core\Base\Sundry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Base\EntryPoint.h">

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "solpch.h"
-#include "Core/Base/Core.h"
+#include "Core/Base/Sundry.h"
 
 namespace Solar {
 
