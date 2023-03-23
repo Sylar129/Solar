@@ -39,9 +39,6 @@
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\ImGui\ImGuiBuild.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -114,13 +111,16 @@
     <ClCompile Include="src\Platform\Windows\WindowsPlatformUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dependence\ImGuizmo\ImGuizmo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Solar\Math\Math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Solar\Renderer\EditorCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Solar\ImGui\backends\imgui_impl_glfw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Solar\ImGui\backends\imgui_impl_opengl3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -269,13 +269,19 @@
     <ClInclude Include="src\Solar\Utils\PlatformUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependence\ImGuizmo\ImGuizmo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Solar\Math\Math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Solar\Renderer\EditorCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Solar\ImGui\backends\imgui_impl_opengl3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Solar\ImGui\backends\imgui_impl_glfw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Solar\ImGui\backends\imgui_impl_opengl3_loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

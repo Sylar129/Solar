@@ -1,6 +1,6 @@
 #pragma once
 
-#include "entt.hpp"
+#include <entt/entt.hpp>
 #include "Solar/Core/Timestep.h"
 
 #include "Solar/Renderer/EditorCamera.h"

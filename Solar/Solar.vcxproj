@@ -72,6 +72,9 @@
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)intermediate\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>false</VcpkgEnableManifest>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -92,8 +95,10 @@
       <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)-$(Platform)\ImGui\;$(SolutionDir)bin\$(Configuration)-$(Platform)\Glad\;$(SolutionDir)bin\$(Configuration)-$(Platform)\GLFW\;$(SolutionDir)bin\$(Configuration)-$(Platform)\yaml-cpp\</AdditionalLibraryDirectories>
     </Link>
     <Lib>
-      <AdditionalDependencies>yaml-cpp.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)-$(Platform)\yaml-cpp\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -120,8 +125,10 @@
       <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)-$(Platform)\ImGui\;$(SolutionDir)bin\$(Configuration)-$(Platform)\Glad\;$(SolutionDir)bin\$(Configuration)-$(Platform)\GLFW\;$(SolutionDir)bin\$(Configuration)-$(Platform)\yaml-cpp\</AdditionalLibraryDirectories>
     </Link>
     <Lib>
-      <AdditionalDependencies>yaml-cpp.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)-$(Platform)\yaml-cpp\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -148,22 +155,29 @@
       <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)-$(Platform)\ImGui\;$(SolutionDir)bin\$(Configuration)-$(Platform)\Glad\;$(SolutionDir)bin\$(Configuration)-$(Platform)\GLFW\;$(SolutionDir)bin\$(Configuration)-$(Platform)\yaml-cpp\</AdditionalLibraryDirectories>
     </Link>
     <Lib>
-      <AdditionalDependencies>yaml-cpp.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)-$(Platform)\yaml-cpp\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dependence\ImGuizmo\ImGuizmo.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsPlatformUtils.cpp" />
+    <ClCompile Include="src\Solar\ImGui\backends\imgui_impl_glfw.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Solar\ImGui\backends\imgui_impl_opengl3.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\Solar\Math\Math.cpp" />
     <ClCompile Include="src\Solar\Renderer\EditorCamera.cpp" />
     <ClCompile Include="src\Solar\Renderer\Framebuffer.cpp" />
@@ -174,7 +188,6 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
-    <ClCompile Include="src\Solar\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Solar\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Solar\Core\LayerStack.cpp" />
     <ClCompile Include="src\Solar\Core\Layer.cpp" />
@@ -202,12 +215,14 @@
     <ClCompile Include="src\Solar\Renderer\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dependence\ImGuizmo\ImGuizmo.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="src\Solar\ImGui\backends\imgui_impl_glfw.h" />
+    <ClInclude Include="src\Solar\ImGui\backends\imgui_impl_opengl3.h" />
+    <ClInclude Include="src\Solar\ImGui\backends\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="src\Solar\Math\Math.h" />
     <ClInclude Include="src\Solar\Renderer\Camera.h" />
     <ClInclude Include="src\Solar\Core\Timestep.h" />
@@ -253,17 +268,6 @@
     <ClInclude Include="src\Solar\Core\EntryPoint.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Solar\Renderer\Texture.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="project\Glad\GLAD.vcxproj">
-      <Project>{e54c3292-3b0a-4f78-86f7-31250aac29fa}</Project>
-    </ProjectReference>
-    <ProjectReference Include="project\GLFW\GLFW.vcxproj">
-      <Project>{7a4f2993-47b6-4233-8d9b-3cc7fa5fceb6}</Project>
-    </ProjectReference>
-    <ProjectReference Include="project\Imgui\ImGui.vcxproj">
-      <Project>{a7ede9e2-2777-4502-9fb9-bef1da4e98ab}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
