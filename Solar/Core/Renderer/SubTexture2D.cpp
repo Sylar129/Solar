@@ -18,8 +18,8 @@ Ref<SubTexture2D> SubTexture2D::CreateFromCoords(const Ref<Texture2D>& texture,
                                                  const glm::vec2 cellSize,
                                                  const glm::vec2 spriteSize)
 {
-    float sheetWidth = texture->GetWidth();
-    float sheetHeight = texture->GetHeight();
+    auto sheetWidth = texture->GetWidth();
+    auto sheetHeight = texture->GetHeight();
 
     glm::vec2 min = {(coords.x * cellSize.x) / sheetWidth,
                      (coords.y * cellSize.y) / sheetHeight};

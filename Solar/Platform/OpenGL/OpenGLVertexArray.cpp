@@ -102,8 +102,8 @@ void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
             break;
         case ShaderDataType::Mat3:
         case ShaderDataType::Mat4: {
-            uint8_t count = element.GetComponentCount();
-            for (uint8_t i = 0; i < count; i++) {
+            auto count = element.GetComponentCount();
+            for (auto i{0u}; i < count; i++) {
                 glEnableVertexAttribArray(m_VertexBufferIndex);
                 glVertexAttribPointer(
                     m_VertexBufferIndex, count,

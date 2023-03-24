@@ -243,7 +243,7 @@ void OpenGLShader::Compile(
 
     // Compile Shaders
     uint32_t glShaderIDIndex = 0;
-    for (auto& kv : shaderSources) {
+    for (const auto& kv : shaderSources) {
         GLenum shaderType = kv.first;
         const std::string& source = kv.second;
 
@@ -297,7 +297,7 @@ void OpenGLShader::Compile(
         // We don't need the program anymore.
         glDeleteProgram(program);
         // Don't leak shaders either.
-        for (auto id : glShaderIDs) {
+        for (const auto& id : glShaderIDs) {
             glDeleteShader(id);
         }
 
@@ -307,7 +307,7 @@ void OpenGLShader::Compile(
     }
 
     // Always detach shaders after a successful link.
-    for (auto id : glShaderIDs) {
+    for (const auto& id : glShaderIDs) {
         glDetachShader(program, id);
         glDeleteShader(id);
     }

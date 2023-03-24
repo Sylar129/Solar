@@ -190,7 +190,7 @@ bool SceneSerializer::Deserialize(const std::string& filepath)
 
     auto entities = data["Entities"];
     if (entities) {
-        for (auto entity : entities) {
+        for (const auto& entity : entities) {
             uint64_t uuid = entity["Entity"].as<uint64_t>(); // TODO
 
             std::string name;

@@ -107,7 +107,7 @@ OpenGLFramebuffer::OpenGLFramebuffer(
     const FramebufferSpecification& specification)
     : m_RendererID(0), m_DepthAttachment(0), m_Specification(specification)
 {
-    for (auto spec : m_Specification.Attachments.Attachments) {
+    for (const auto& spec : m_Specification.Attachments.Attachments) {
         if (!Utils::IsDepthFormat(spec.TextureFormat)) {
             m_ColorAttachmentSpecifications.emplace_back(spec);
         } else {
@@ -204,7 +204,7 @@ void OpenGLFramebuffer::Invalidate()
         Utils::CreateTextures(multisample, m_ColorAttachments.data(),
                               m_ColorAttachments.size());
 
-        for (size_t i = 0; i < m_ColorAttachmentSpecifications.size(); i++) {
+        for (auto i{1}; i < m_ColorAttachmentSpecifications.size(); i++) {
             Utils::BindTexture(multisample, m_ColorAttachments[i]);
             switch (m_ColorAttachmentSpecifications[i].TextureFormat) {
             case FramebufferTextureFormat::RGBA8:

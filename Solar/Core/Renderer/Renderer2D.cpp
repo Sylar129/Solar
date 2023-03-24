@@ -67,7 +67,7 @@ void Renderer2D::Init()
     uint32_t* quadIndices = new uint32_t[s_Data.MaxIndices];
 
     uint32_t offset = 0;
-    for (int i = 0; i < s_Data.MaxIndices; i += 6) {
+    for (auto i{0}; i < s_Data.MaxIndices; i += 6) {
         quadIndices[i + 0] = offset + 0;
         quadIndices[i + 1] = offset + 1;
         quadIndices[i + 2] = offset + 2;
@@ -88,7 +88,7 @@ void Renderer2D::Init()
     s_Data.WhiteTexture->SetData(&whiteTextureData, sizeof(whiteTextureData));
 
     int32_t samplers[s_Data.MaxTextureSlots];
-    for (uint32_t i = 0; i < s_Data.MaxTextureSlots; ++i) {
+    for (auto i{0}; i < s_Data.MaxTextureSlots; ++i) {
         samplers[i] = i;
     }
 
@@ -164,7 +164,7 @@ void Renderer2D::Flush()
     s_Data.QuadVertexBuffer->SetData(s_Data.QuadVertexBufferBase, dataSize);
 
     // Bind textures
-    for (uint32_t i = 0; i < s_Data.TextureSlotIndex; ++i) {
+    for (auto i{0u}; i < s_Data.TextureSlotIndex; ++i) {
         s_Data.TextureSlots[i]->Bind(i);
     }
 
@@ -234,7 +234,7 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
 
     float textureIndex = 0.0f;
 
-    for (uint32_t i = 1; i < s_Data.TextureSlotIndex; i++) {
+    for (auto i{1u}; i < s_Data.TextureSlotIndex; i++) {
         if (*s_Data.TextureSlots[i].get() == *texture.get()) {
             textureIndex = (float)i;
             break;
@@ -254,7 +254,7 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
     glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
                           glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
 
-    for (uint32_t i = 0; i < quadVertexCount; ++i) {
+    for (auto i{0}; i < quadVertexCount; ++i) {
         s_Data.QuadVertexBufferPtr->Position =
             transform * s_Data.QuadVertexPositions[i];
         s_Data.QuadVertexBufferPtr->Color = color;
@@ -284,7 +284,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color,
     constexpr glm::vec2 textureCoords[] = {
         {0.0f, 0.0f}, {1.0f, 0.0f}, {1.0f, 1.0f}, {0.0f, 1.0f}};
 
-    for (uint32_t i = 0; i < quadVertexCount; ++i) {
+    for (auto i{0}; i < quadVertexCount; ++i) {
         s_Data.QuadVertexBufferPtr->Position =
             transform * s_Data.QuadVertexPositions[i];
         s_Data.QuadVertexBufferPtr->Color = color;
@@ -317,7 +317,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform,
 
     float textureIndex = 0.0f;
 
-    for (uint32_t i = 1; i < s_Data.TextureSlotIndex; i++) {
+    for (auto i{1u}; i < s_Data.TextureSlotIndex; i++) {
         if (*s_Data.TextureSlots[i].get() == *texture.get()) {
             textureIndex = (float)i;
             break;
@@ -334,7 +334,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform,
         s_Data.TextureSlotIndex++;
     }
 
-    for (uint32_t i = 0; i < quadVertexCount; ++i) {
+    for (auto i{0}; i < quadVertexCount; ++i) {
         s_Data.QuadVertexBufferPtr->Position =
             transform * s_Data.QuadVertexPositions[i];
         s_Data.QuadVertexBufferPtr->Color = color;
@@ -378,7 +378,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                       {0.0f, 0.0f, 1.0f}) *
                           glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
 
-    for (uint32_t i = 0; i < quadVertexCount; ++i) {
+    for (auto i{0}; i < quadVertexCount; ++i) {
         s_Data.QuadVertexBufferPtr->Position =
             transform * s_Data.QuadVertexPositions[i];
         s_Data.QuadVertexBufferPtr->Color = color;
@@ -420,7 +420,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
 
     float textureIndex = 0.0f;
 
-    for (uint32_t i = 1; i < s_Data.TextureSlotIndex; i++) {
+    for (auto i{1u}; i < s_Data.TextureSlotIndex; i++) {
         if (*s_Data.TextureSlots[i].get() == *texture.get()) {
             textureIndex = (float)i;
             break;
@@ -442,7 +442,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                       {0.0f, 0.0f, 1.0f}) *
                           glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
 
-    for (uint32_t i = 0; i < quadVertexCount; ++i) {
+    for (auto i{0}; i < quadVertexCount; ++i) {
         s_Data.QuadVertexBufferPtr->Position =
             transform * s_Data.QuadVertexPositions[i];
         s_Data.QuadVertexBufferPtr->Color = color;
@@ -484,7 +484,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
 
     float textureIndex = 0.0f;
 
-    for (uint32_t i = 1; i < s_Data.TextureSlotIndex; i++) {
+    for (auto i{1u}; i < s_Data.TextureSlotIndex; i++) {
         if (*s_Data.TextureSlots[i].get() == *texture.get()) {
             textureIndex = (float)i;
             break;
@@ -506,7 +506,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                       {0.0f, 0.0f, 1.0f}) *
                           glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
 
-    for (uint32_t i = 0; i < quadVertexCount; ++i) {
+    for (auto i{0}; i < quadVertexCount; ++i) {
         s_Data.QuadVertexBufferPtr->Position =
             transform * s_Data.QuadVertexPositions[i];
         s_Data.QuadVertexBufferPtr->Color = color;

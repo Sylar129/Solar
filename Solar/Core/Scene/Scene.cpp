@@ -44,7 +44,7 @@ void Scene::OnUpdateRuntime(TimeStep& ts)
     glm::mat4 cameraTransform;
     {
         auto view = m_Registry.view<CameraComponent, TransformComponent>();
-        for (auto entity : view) {
+        for (const auto& entity : view) {
             auto [transform, camera] =
                 view.get<TransformComponent, CameraComponent>(entity);
 
@@ -60,7 +60,7 @@ void Scene::OnUpdateRuntime(TimeStep& ts)
         Renderer2D::BeginScene(*mainCamera, cameraTransform);
         auto group = m_Registry.group<TransformComponent>(
             entt::get<SpriteRendererComponent>);
-        for (auto entity : group) {
+        for (const auto& entity : group) {
             auto [transform, sprite] =
                 group.get<TransformComponent, SpriteRendererComponent>(entity);
 
@@ -77,7 +77,7 @@ void Scene::OnUpdateEditor(TimeStep& ts, EditorCamera& camera)
     Renderer2D::BeginScene(camera);
     auto group = m_Registry.group<TransformComponent>(
         entt::get<SpriteRendererComponent>);
-    for (auto entity : group) {
+    for (const auto& entity : group) {
         auto [transform, sprite] =
             group.get<TransformComponent, SpriteRendererComponent>(entity);
 
@@ -94,7 +94,7 @@ void Scene::OnViewportResize(uint32_t width, uint32_t height)
 
     // Resize our non-FixedAspectRatio cameras
     auto view = m_Registry.view<CameraComponent>();
-    for (auto entity : view) {
+    for (const auto& entity : view) {
         auto& cameraComponent = view.get<CameraComponent>(entity);
         if (!cameraComponent.FixedAspectRatio) {
             cameraComponent.Camera.SetViewportSize(width, height);
@@ -105,7 +105,7 @@ void Scene::OnViewportResize(uint32_t width, uint32_t height)
 Entity Scene::GetPrimaryCameraEntity()
 {
     auto view = m_Registry.view<CameraComponent>();
-    for (auto entity : view) {
+    for (const auto& entity : view) {
         const auto& camera = view.get<CameraComponent>(entity);
         if (camera.Primary) {
             return Entity{entity, this};
