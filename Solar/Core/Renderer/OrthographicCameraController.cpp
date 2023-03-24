@@ -67,9 +67,9 @@ void OrthographicCameraController::OnEvent(Event& e)
 
     EventDispatcher dispatcher(e);
     dispatcher.Dispatch<MouseScrolledEvent>(
-        SOLAR_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
+        SOLAR_BIND_EVENT_FN(OnMouseScrolled));
     dispatcher.Dispatch<WindowResizeEvent>(
-        SOLAR_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
+        SOLAR_BIND_EVENT_FN(OnWindowResized));
 }
 
 void OrthographicCameraController::OnResize(float width, float height)

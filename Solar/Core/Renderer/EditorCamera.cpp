@@ -81,7 +81,7 @@ void EditorCamera::OnEvent(Event& e)
 {
     EventDispatcher dispatcher(e);
     dispatcher.Dispatch<MouseScrolledEvent>(
-        SOLAR_BIND_EVENT_FN(EditorCamera::OnMouseScroll));
+        SOLAR_BIND_EVENT_FN(OnMouseScroll));
 }
 
 bool EditorCamera::OnMouseScroll(MouseScrolledEvent& e)
