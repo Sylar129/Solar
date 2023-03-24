@@ -178,7 +178,7 @@
     <IntDir>$(SolutionDir)intermediate\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
-    <VcpkgEnableManifest>false</VcpkgEnableManifest>
+    <VcpkgEnableManifest>true</VcpkgEnableManifest>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -190,7 +190,7 @@
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <PreprocessorDefinitions>SOLAR_PLATFORM_WINDOWS;YAML_CPP_STATIC_DEFINE;SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;SOLAR_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SOLAR_PLATFORM_WINDOWS;SOLAR_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
@@ -212,7 +212,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SOLAR_PLATFORM_WINDOWS;YAML_CPP_STATIC_DEFINE;SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;SOLAR_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SOLAR_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;SOLAR_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Solar;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -242,7 +242,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SOLAR_PLATFORM_WINDOWS;YAML_CPP_STATIC_DEFINE;SOLAR_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;SOLAR_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SOLAR_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;SOLAR_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Solar;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>

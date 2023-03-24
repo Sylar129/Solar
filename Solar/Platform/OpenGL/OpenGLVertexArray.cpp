@@ -1,7 +1,7 @@
 #include "solpch.h"
 #include "OpenGLVertexArray.h"
 
-#include "glad/glad.h"
+#include <glad/glad.h>
 
 namespace Solar {
 
