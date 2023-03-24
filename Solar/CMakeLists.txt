@@ -1,14 +1,13 @@
 project(Solar)
 
-add_library(${PROJECT_NAME} STATIC solpch.cpp)
+
+include_directories(${PROJECT_SOURCE_DIR})
+
+file(GLOB_RECURSE SRC_FILES "./*.cpp")
+file(GLOB_RECURSE HEADER_FILES "./*.h")
+
+add_library(${PROJECT_NAME} STATIC ${SRC_FILES} ${HEADER_FILES})
 add_library(Solar::Solar ALIAS ${PROJECT_NAME})
-
-target_include_directories( ${PROJECT_NAME}
-    PUBLIC ${PROJECT_SOURCE_DIR}
-)
-
-add_subdirectory(Core)
-add_subdirectory(Platform)
 
 # 3rd libraries
 find_package(EnTT CONFIG REQUIRED)
@@ -28,11 +27,8 @@ PRIVATE
     imguizmo::imguizmo
     spdlog::spdlog
     spdlog::spdlog_header_only
-    yaml-cpp
-###############
-    Solar::OpenGL
-    Solar::Windows)
+    yaml-cpp)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${Stb_INCLUDE_DIR})
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE solpch.h)
+target_precompile_headers(${PROJECT_NAME} PUBLIC solpch.h)
