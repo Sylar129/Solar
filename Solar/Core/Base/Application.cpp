@@ -24,7 +24,7 @@ Application::Application(const std::string& name)
 
     Renderer::Init();
 
-    m_ImGuiLayer = new ImGuiLayer();
+    m_ImGuiLayer = CreateRef<ImGuiLayer>();
     PushOverlay(m_ImGuiLayer);
 }
 
@@ -51,7 +51,7 @@ void Application::Run()
             {
                 SOLAR_PROFILE_SCOPE("LayerStack OnOpdate");
 
-                for (Layer* layer : m_LayerStack) {
+                for (auto& layer : m_LayerStack) {
                     layer->OnUpdate(timeStep);
                 }
             }
@@ -60,7 +60,7 @@ void Application::Run()
             {
                 SOLAR_PROFILE_SCOPE("LayerStack OnImGuiRender");
 
-                for (Layer* layer : m_LayerStack) {
+                for (auto& layer : m_LayerStack) {
                     layer->OnImGuiRender();
                 }
             }
@@ -88,7 +88,7 @@ void Application::OnEvent(Event& e)
     }
 }
 
-void Application::PushLayer(Layer* layer)
+void Application::PushLayer(Ref<Layer> layer)
 {
     SOLAR_PROFILE_FUNCTION();
 
@@ -96,7 +96,7 @@ void Application::PushLayer(Layer* layer)
     layer->OnAttach();
 }
 
-void Application::PushOverlay(Layer* layer)
+void Application::PushOverlay(Ref<Layer> layer)
 {
     SOLAR_PROFILE_FUNCTION();
 

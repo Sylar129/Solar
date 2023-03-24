@@ -10,18 +10,12 @@ public:
     Solarium() : Application("Solarium")
     {
         // PushLayer(new ExampleLayer());
-        PushLayer(new EditorLayer());
+        PushLayer(std::make_shared<EditorLayer>());
     }
 
-    ~Solarium()
-    {
-
-    }
+    ~Solarium() {}
 };
 
-Application* CreateApplication()
-{
-    return new Solarium();
-}
+Application* CreateApplication() { return new Solarium(); }
 
 } // namespace Solar

@@ -19,14 +19,14 @@ public:
     void Run();
     void OnEvent(Event& e);
 
-    void PushLayer(Layer* layer);
-    void PushOverlay(Layer* layer);
+    void PushLayer(Ref<Layer> layer);
+    void PushOverlay(Ref<Layer> layer);
 
     inline Window& GetWindow() { return *m_Window; }
 
     void Close();
 
-    ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
+    Ref<ImGuiLayer> GetImGuiLayer() { return m_ImGuiLayer; }
 
     inline static Application& Get() { return *s_Instance; }
 
@@ -36,7 +36,7 @@ private:
 
 private:
     Scope<Window> m_Window;
-    ImGuiLayer* m_ImGuiLayer;
+    Ref<ImGuiLayer> m_ImGuiLayer;
     bool m_Running;
     bool m_Minimized;
     LayerStack m_LayerStack;
