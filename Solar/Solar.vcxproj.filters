@@ -15,267 +15,273 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Solar\Core\Application.cpp">
+    <ClCompile Include="Core\Base\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Core\Log.cpp">
+    <ClCompile Include="Core\Base\Layer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\solpch.cpp">
+    <ClCompile Include="Core\Base\LayerStack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+    <ClCompile Include="Core\Base\Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Core\Layer.cpp">
+    <ClCompile Include="Core\ImGui\backends\imgui_impl_glfw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Core\LayerStack.cpp">
+    <ClCompile Include="Core\ImGui\backends\imgui_impl_opengl3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\ImGui\ImGuiLayer.cpp">
+    <ClCompile Include="Core\ImGui\ImGuiLayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
+    <ClCompile Include="Core\Math\Math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\ImGui\ImGuiBuild.cpp">
+    <ClCompile Include="Core\Renderer\Buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+    <ClCompile Include="Core\Renderer\EditorCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Renderer\Shader.cpp">
+    <ClCompile Include="Core\Renderer\Framebuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Renderer\Buffer.cpp">
+    <ClCompile Include="Core\Renderer\OrthographicCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
+    <ClCompile Include="Core\Renderer\OrthographicCameraController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Renderer\Renderer.cpp">
+    <ClCompile Include="Core\Renderer\RenderCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Renderer\VertexArray.cpp">
+    <ClCompile Include="Core\Renderer\Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
+    <ClCompile Include="Core\Renderer\Renderer2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Renderer\RendererAPI.cpp">
+    <ClCompile Include="Core\Renderer\RendererAPI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Renderer\RenderCommand.cpp">
+    <ClCompile Include="Core\Renderer\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
+    <ClCompile Include="Core\Renderer\SubTexture2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Renderer\OrthographicCamera.cpp">
+    <ClCompile Include="Core\Renderer\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp">
+    <ClCompile Include="Core\Renderer\VertexArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Renderer\Texture.cpp">
+    <ClCompile Include="Core\Scene\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
+    <ClCompile Include="Core\Scene\Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Renderer\OrthographicCameraController.cpp">
+    <ClCompile Include="Core\Scene\SceneCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Renderer\Renderer2D.cpp">
+    <ClCompile Include="Core\Scene\SceneSerializer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Renderer\SubTexture2D.cpp">
+    <ClCompile Include="Platform\OpenGL\OpenGLBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Renderer\Framebuffer.cpp">
+    <ClCompile Include="Platform\OpenGL\OpenGLContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp">
+    <ClCompile Include="Platform\OpenGL\OpenGLFramebuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Scene\Scene.cpp">
+    <ClCompile Include="Platform\OpenGL\OpenGLRendererAPI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Scene\Entity.cpp">
+    <ClCompile Include="Platform\OpenGL\OpenGLShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Scene\SceneCamera.cpp">
+    <ClCompile Include="Platform\OpenGL\OpenGLTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Scene\SceneSerializer.cpp">
+    <ClCompile Include="Platform\OpenGL\OpenGLVertexArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\Windows\WindowsPlatformUtils.cpp">
+    <ClCompile Include="Platform\Windows\WindowsInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dependence\ImGuizmo\ImGuizmo.cpp">
+    <ClCompile Include="Platform\Windows\WindowsPlatformUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Math\Math.cpp">
+    <ClCompile Include="Platform\Windows\WindowsWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Solar\Renderer\EditorCamera.cpp">
+    <ClCompile Include="solpch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Solar\Core\Application.h">
+    <ClInclude Include="Core\Base\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Core\Core.h">
+    <ClInclude Include="Core\Base\Sundry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar.h">
+    <ClInclude Include="Core\Base\EntryPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Core\EntryPoint.h">
+    <ClInclude Include="Core\Base\Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Core\Log.h">
+    <ClInclude Include="Core\Base\KeyCodes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Events\Event.h">
+    <ClInclude Include="Core\Base\Layer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Events\ApplicationEvent.h">
+    <ClInclude Include="Core\Base\LayerStack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Events\KeyEvent.h">
+    <ClInclude Include="Core\Base\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Events\MouseEvent.h">
+    <ClInclude Include="Core\Base\MouseCodes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\solpch.h">
+    <ClInclude Include="Core\Base\Timestep.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Core\Window.h">
+    <ClInclude Include="Core\Base\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+    <ClInclude Include="Core\Debug\Instrumentor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Core\Layer.h">
+    <ClInclude Include="Core\Events\ApplicationEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Core\LayerStack.h">
+    <ClInclude Include="Core\Events\Event.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\ImGui\ImGuiLayer.h">
+    <ClInclude Include="Core\Events\KeyEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Core\Input.h">
+    <ClInclude Include="Core\Events\MouseEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Core\KeyCodes.h">
+    <ClInclude Include="Core\ImGui\backends\imgui_impl_glfw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Core\MouseCodes.h">
+    <ClInclude Include="Core\ImGui\backends\imgui_impl_opengl3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Renderer\GraphicsContext.h">
+    <ClInclude Include="Core\ImGui\backends\imgui_impl_opengl3_loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+    <ClInclude Include="Core\ImGui\ImGuiLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Renderer\Shader.h">
+    <ClInclude Include="Core\Math\Math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Renderer\Buffer.h">
+    <ClInclude Include="Core\Renderer\Buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
+    <ClInclude Include="Core\Renderer\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Renderer\Renderer.h">
+    <ClInclude Include="Core\Renderer\EditorCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Renderer\VertexArray.h">
+    <ClInclude Include="Core\Renderer\Framebuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
+    <ClInclude Include="Core\Renderer\GraphicsContext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Renderer\RendererAPI.h">
+    <ClInclude Include="Core\Renderer\OrthographicCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Renderer\RenderCommand.h">
+    <ClInclude Include="Core\Renderer\OrthographicCameraController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
+    <ClInclude Include="Core\Renderer\RenderCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Renderer\OrthographicCamera.h">
+    <ClInclude Include="Core\Renderer\Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Core\Timestep.h">
+    <ClInclude Include="Core\Renderer\Renderer2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
+    <ClInclude Include="Core\Renderer\RendererAPI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Renderer\Texture.h">
+    <ClInclude Include="Core\Renderer\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
+    <ClInclude Include="Core\Renderer\SubTexture2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Renderer\OrthographicCameraController.h">
+    <ClInclude Include="Core\Renderer\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Renderer\Renderer2D.h">
+    <ClInclude Include="Core\Renderer\VertexArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Debug\Instrumentor.h">
+    <ClInclude Include="Core\Scene\Components.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Renderer\SubTexture2D.h">
+    <ClInclude Include="Core\Scene\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Renderer\Framebuffer.h">
+    <ClInclude Include="Core\Scene\Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h">
+    <ClInclude Include="Core\Scene\SceneCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Scene\Scene.h">
+    <ClInclude Include="Core\Scene\SceneSerializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Scene\Components.h">
+    <ClInclude Include="Core\Scene\ScriptableEntity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Scene\Entity.h">
+    <ClInclude Include="Core\Utils\PlatformUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Renderer\Camera.h">
+    <ClInclude Include="Platform\OpenGL\OpenGLBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Scene\SceneCamera.h">
+    <ClInclude Include="Platform\OpenGL\OpenGLContext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Scene\ScriptableEntity.h">
+    <ClInclude Include="Platform\OpenGL\OpenGLFramebuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Scene\SceneSerializer.h">
+    <ClInclude Include="Platform\OpenGL\OpenGLRendererAPI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Utils\PlatformUtils.h">
+    <ClInclude Include="Platform\OpenGL\OpenGLShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dependence\ImGuizmo\ImGuizmo.h">
+    <ClInclude Include="Platform\OpenGL\OpenGLTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Math\Math.h">
+    <ClInclude Include="Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Solar\Renderer\EditorCamera.h">
+    <ClInclude Include="Platform\Windows\WindowsWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Solar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solpch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,8 +3,11 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# ThirdParty 
-Solar/ThirdParty/GLFW/
+# Custom 
+.idea/
+.vscode/
+build/
+vcpkg_installed/
 
 # User-specific files
 *.rsuser

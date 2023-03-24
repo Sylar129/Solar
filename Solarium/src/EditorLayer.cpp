@@ -1,14 +1,14 @@
 #include "EditorLayer.h"
 
-#include <imgui/imgui.h>
+#include <imgui.h>
 #include <ImGuizmo.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "Solar/Scene/SceneSerializer.h"
-#include "Solar/Utils/PlatformUtils.h"
+#include "Core/Scene/SceneSerializer.h"
+#include "Core/Utils/PlatformUtils.h"
 
-#include "Solar/Math/Math.h"
+#include "Core/Math/Math.h"
 
 namespace Solar {
 

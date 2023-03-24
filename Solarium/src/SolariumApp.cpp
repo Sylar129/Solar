@@ -1,5 +1,5 @@
 #include <Solar.h>
-#include <Solar/Core/EntryPoint.h>
+#include <Core/Base/EntryPoint.h>
 
 #include "EditorLayer.h"
 
