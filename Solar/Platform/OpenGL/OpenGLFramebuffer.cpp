@@ -204,7 +204,7 @@ void OpenGLFramebuffer::Invalidate()
         Utils::CreateTextures(multisample, m_ColorAttachments.data(),
                               m_ColorAttachments.size());
 
-        for (auto i{1}; i < m_ColorAttachmentSpecifications.size(); i++) {
+        for (auto i{0}; i < m_ColorAttachmentSpecifications.size(); i++) {
             Utils::BindTexture(multisample, m_ColorAttachments[i]);
             switch (m_ColorAttachmentSpecifications[i].TextureFormat) {
             case FramebufferTextureFormat::RGBA8:
