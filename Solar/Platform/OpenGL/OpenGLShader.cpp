@@ -6,6 +6,24 @@
 
 namespace Solar {
 
+namespace Utils {
+
+static constexpr auto GetCacheDirectory()
+{
+    // TODO: make sure the assets directory is valid
+    return "assets/cache/shader/opengl";
+}
+
+static void CreateCacheDirectoryIfNeeded()
+{
+    const auto cacheDirectory = GetCacheDirectory();
+    if (!std::filesystem::exists(cacheDirectory)) {
+        std::filesystem::create_directories(cacheDirectory);
+    }
+}
+
+} // namespace Utils
+
 static GLenum ShaderTypeFromString(const std::string& type)
 {
     if (type == "vertex") {
@@ -22,6 +40,8 @@ static GLenum ShaderTypeFromString(const std::string& type)
 OpenGLShader::OpenGLShader(const std::string& filepath)
 {
     SOLAR_PROFILE_FUNCTION();
+
+    Utils::CreateCacheDirectoryIfNeeded();
 
     std::string source = ReadFile(filepath);
     auto shaderSources = PreProcess(source);
