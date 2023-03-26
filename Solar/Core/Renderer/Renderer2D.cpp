@@ -21,10 +21,10 @@ struct QuadVertex {
 };
 
 struct Renderer2DData {
-    static const uint32_t MaxQuads = 10000;
-    static const uint32_t MaxVertices = MaxQuads * 4;
-    static const uint32_t MaxIndices = MaxQuads * 6;
-    static const uint32_t MaxTextureSlots = 32; // TODO: Render capability
+    static constexpr uint32_t MaxQuads = 10000;
+    static constexpr uint32_t MaxVertices = MaxQuads * 4;
+    static constexpr uint32_t MaxIndices = MaxQuads * 6;
+    static constexpr uint32_t MaxTextureSlots = 32; // TODO: Render capability
 
     Ref<VertexArray> QuadVertexArray;
     Ref<VertexBuffer> QuadVertexBuffer;
@@ -367,8 +367,8 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
         NextBatch();
     }
 
-    const float textureIndex = 0.0f; // White texture
-    const float tilingFactor = 1.0f;
+    constexpr float textureIndex = 0.0f; // White texture
+    constexpr float tilingFactor = 1.0f;
     constexpr size_t quadVertexCount = 4;
     constexpr glm::vec2 textureCoords[] = {
         {0.0f, 0.0f}, {1.0f, 0.0f}, {1.0f, 1.0f}, {0.0f, 1.0f}};
