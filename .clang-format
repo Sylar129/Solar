@@ -111,10 +111,6 @@ IncludeCategories:
    Priority:        3
    SortPriority:    0
    CaseSensitive:   false
- - Regex:           '^".*pch.h'
-   Priority:        -1
-   SortPriority:    0
-   CaseSensitive:   false
  - Regex:           '.*'
    Priority:        1
    SortPriority:    0
@@ -163,7 +159,7 @@ RemoveBracesLLVM: false
 RequiresClausePosition: OwnLine
 SeparateDefinitionBlocks: Leave
 ShortNamespaceLines: 1
-SortIncludes:    false
+SortIncludes:    true
 SortJavaStaticImport: Before
 SortUsingDeclarations: true
 SpaceAfterCStyleCast: false
