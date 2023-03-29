@@ -463,7 +463,7 @@ void OpenGLShader::CreateProgram()
 
     for (auto id : shaderIDs) {
         glDetachShader(program, id);
-        glDeleteShader(program);
+        glDeleteShader(id);
     }
 
     m_RendererID = program;
