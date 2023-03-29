@@ -311,12 +311,10 @@ void OpenGLShader::CompileOrGetVulkanBinaries(
 {
     SOLAR_PROFILE_FUNCTION();
 
-    GLuint program = glCreateProgram();
-
     shaderc::Compiler compiler;
     shaderc::CompileOptions options;
     options.SetTargetEnvironment(shaderc_target_env_vulkan,
-                                 shaderc_env_version_vulkan_1_2);
+                                 shaderc_env_version_vulkan_1_3);
     constexpr bool optimize = true;
     if constexpr (optimize) {
         options.SetOptimizationLevel(shaderc_optimization_level_performance);
@@ -378,7 +376,7 @@ void OpenGLShader::CompileOrGetOpenGLBInaries()
     shaderc::CompileOptions options;
     options.SetTargetEnvironment(shaderc_target_env_opengl,
                                  shaderc_env_version_opengl_4_5);
-    constexpr bool optimize = true;
+    constexpr bool optimize = false;
     if constexpr (optimize) {
         options.SetOptimizationLevel(shaderc_optimization_level_performance);
     }
@@ -411,7 +409,7 @@ void OpenGLShader::CompileOrGetOpenGLBInaries()
 
             shaderc::SpvCompilationResult module = compiler.CompileGlslToSpv(
                 source, Utils::GLShaderStageToShaderc(stage),
-                m_FilePath.c_str(),options);
+                m_FilePath.c_str());
             if (module.GetCompilationStatus() !=
                 shaderc_compilation_status_success) {
                 SOLAR_CORE_ERROR(module.GetErrorMessage());
