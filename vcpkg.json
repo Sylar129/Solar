@@ -1,24 +1,24 @@
 {
-    "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
-    "name": "solar",
-    "version": "0.0.1",
-    "description": "Solar Engine",
-    "dependencies": [
-        {
-            "name": "imgui",
-            "default-features": false,
-            "features": [
-                "docking-experimental"
-            ]
-        },
-        "entt",
-        "glad",
-        "glfw3",
-        "glm",
-        "imgui",
-        "imguizmo",
-        "spdlog",
-        "stb",
-        "yaml-cpp"
-    ]
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "solar",
+  "version": "0.0.1",
+  "description": "Solar Engine",
+  "dependencies": [
+    {
+      "name": "imgui",
+      "default-features": false,
+      "features": [
+        "docking-experimental"
+      ]
+    },
+    "entt",
+    "glad",
+    "glfw3",
+    "glm",
+    "imgui",
+    "imguizmo",
+    "spdlog",
+    "stb",
+    "yaml-cpp"
+  ]
 }

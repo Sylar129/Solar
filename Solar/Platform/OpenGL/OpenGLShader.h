@@ -7,6 +7,7 @@ typedef unsigned int GLenum;
 
 namespace Solar {
 
+using TShaderSources = std::unordered_map<GLenum, std::string>;
 class OpenGLShader : public Shader {
 public:
     OpenGLShader(const std::string& filepath);
@@ -45,13 +46,22 @@ public:
 
 private:
     std::string ReadFile(const std::string& filepath);
-    std::unordered_map<GLenum, std::string>
-    PreProcess(const std::string& source);
-    void Compile(std::unordered_map<GLenum, std::string>& shaderSources);
+    TShaderSources PreProcess(const std::string& source);
+
+    void CompileOrGetVulkanBinaries(const TShaderSources& shaderSources);
+    void CompileOrGetOpenGLBInaries();
+    void CreateProgram();
+    void Reflect(GLenum stage, const std::vector<uint32_t>& shaderData);
 
 private:
-    uint32_t m_RendererID = 0;
-    std::string m_Name;
+    uint32_t m_RendererID{0};
+    std::string m_FilePath{};
+    std::string m_Name{};
+
+    std::unordered_map<GLenum, std::vector<uint32_t>> m_VulkanSPIRV{};
+    std::unordered_map<GLenum, std::vector<uint32_t>> m_OpenGLSPIRV{};
+
+    std::unordered_map<GLenum, std::string> m_OpenGLSourceCode{};
 };
 
 } // namespace Solar

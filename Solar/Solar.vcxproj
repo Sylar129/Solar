@@ -74,6 +74,7 @@
     <ClInclude Include="Core\Base\LayerStack.h" />
     <ClInclude Include="Core\Base\Log.h" />
     <ClInclude Include="Core\Base\MouseCodes.h" />
+    <ClInclude Include="Core\Base\Timer.h" />
     <ClInclude Include="Core\Base\Timestep.h" />
     <ClInclude Include="Core\Base\Window.h" />
     <ClInclude Include="Core\Debug\Instrumentor.h" />
@@ -194,7 +195,7 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Solar;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;$(VK_SDK_PATH)\Include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -223,7 +224,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SOLAR_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;SOLAR_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Solar;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;$(VK_SDK_PATH)\Include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -253,7 +254,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SOLAR_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;SOLAR_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Solar;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;$(VK_SDK_PATH)\Include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>solpch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
