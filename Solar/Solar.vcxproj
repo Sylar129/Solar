@@ -43,6 +43,7 @@
     <ClCompile Include="Core\Renderer\Shader.cpp" />
     <ClCompile Include="Core\Renderer\SubTexture2D.cpp" />
     <ClCompile Include="Core\Renderer\Texture.cpp" />
+    <ClCompile Include="Core\Renderer\UniformBuffer.cpp" />
     <ClCompile Include="Core\Renderer\VertexArray.cpp" />
     <ClCompile Include="Core\Scene\Entity.cpp" />
     <ClCompile Include="Core\Scene\Scene.cpp" />
@@ -54,6 +55,7 @@
     <ClCompile Include="Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="Platform\OpenGL\OpenGLTexture.cpp" />
+    <ClCompile Include="Platform\OpenGL\OpenGLUniformBuffer.cpp" />
     <ClCompile Include="Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="Platform\Windows\WindowsPlatformUtils.cpp" />
@@ -101,6 +103,7 @@
     <ClInclude Include="Core\Renderer\Shader.h" />
     <ClInclude Include="Core\Renderer\SubTexture2D.h" />
     <ClInclude Include="Core\Renderer\Texture.h" />
+    <ClInclude Include="Core\Renderer\UniformBuffer.h" />
     <ClInclude Include="Core\Renderer\VertexArray.h" />
     <ClInclude Include="Core\Scene\Components.h" />
     <ClInclude Include="Core\Scene\Entity.h" />
@@ -115,6 +118,7 @@
     <ClInclude Include="Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="Platform\OpenGL\OpenGLTexture.h" />
+    <ClInclude Include="Platform\OpenGL\OpenGLUniformBuffer.h" />
     <ClInclude Include="Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="Solar.h" />
