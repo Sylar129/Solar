@@ -23,11 +23,10 @@ void SceneHierarchyPanel::OnImGuiRender()
     // Scene Hierarchy
     ImGui::Begin("Scene Hierarchy");
 
-    m_Context->m_Registry.each([&](auto entityID)
-    {
+    for (auto [entityID, _] : m_Context->m_Registry.storage<Entity>().each()) {
         Entity entity{entityID, m_Context.get()};
-    DrawEntityNode(entity);
-    });
+        DrawEntityNode(entity);
+    }
 
     if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered()) {
         m_SelectionContext = {};
