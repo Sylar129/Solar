@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Camera.h"
+#include <glm/glm.hpp>
+
+#include "Core/Renderer/Camera.h"
 #include "Core/Base/Timestep.h"
 #include "Core/Events/MouseEvent.h"
 

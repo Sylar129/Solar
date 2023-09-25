@@ -1,7 +1,8 @@
-#include "solpch.h"
-#include "OrthographicCamera.h"
+#include "Core/Renderer/OrthographicCamera.h"
 
 #include <glm/gtc/matrix_transform.hpp>
+
+#include "Core/Debug/Instrumentor.h"
 
 namespace Solar {
 

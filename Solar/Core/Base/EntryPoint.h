@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Core/Debug/Instrumentor.h>
+
 #ifdef SOLAR_PLATFORM_WINDOWS
 
 extern Solar::Application* Solar::CreateApplication();

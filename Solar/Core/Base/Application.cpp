@@ -1,8 +1,9 @@
-#include "solpch.h"
-#include "Application.h"
+#include "Core/Base/Application.h"
 
-#include "Input.h"
+#include <chrono>
 
+#include "Core/Base/Input.h"
+#include "Core/Debug/Instrumentor.h"
 #include "Core/Renderer/Renderer.h"
 
 namespace Solar {

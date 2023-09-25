@@ -1,5 +1,4 @@
-#include "solpch.h"
-#include "Math.h"
+#include "Core/Math/Math.h"
 
 #include <glm/gtx/matrix_decompose.hpp>
 

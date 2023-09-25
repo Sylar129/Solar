@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "Core/Base/Sundry.h"
 #include "Core/Base/Timestep.h"
 #include "Core/Events/Event.h"

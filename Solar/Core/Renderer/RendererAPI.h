@@ -1,6 +1,8 @@
 #pragma once
 
-#include "VertexArray.h"
+#include "Core/Renderer/VertexArray.h"
+
+#include <glm/vec4.hpp>
 
 namespace Solar {
 

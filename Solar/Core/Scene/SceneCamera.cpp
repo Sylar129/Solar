@@ -1,5 +1,4 @@
-#include "solpch.h"
-#include "SceneCamera.h"
+#include "Core/Scene/SceneCamera.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 

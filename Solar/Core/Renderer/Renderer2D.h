@@ -1,10 +1,10 @@
 #pragma once
 
-#include "OrthographicCamera.h"
-#include "Texture.h"
-#include "SubTexture2D.h"
-#include "Camera.h"
-#include "EditorCamera.h"
+#include "Core/Renderer/OrthographicCamera.h"
+#include "Core/Renderer/Texture.h"
+#include "Core/Renderer/SubTexture2D.h"
+#include "Core/Renderer/Camera.h"
+#include "Core/Renderer/EditorCamera.h"
 #include "Core/Scene/Components.h"
 
 namespace Solar {

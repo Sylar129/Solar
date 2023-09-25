@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+
 namespace Solar {
 
 enum class KeyCode : uint16_t {

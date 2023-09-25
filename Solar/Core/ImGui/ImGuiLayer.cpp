@@ -1,17 +1,17 @@
-#include "solpch.h"
-#include "ImGuiLayer.h"
+#include "Core/ImGui/ImGuiLayer.h"
 
 #include <imgui.h>
-#include "backends/imgui_impl_opengl3.h"
-#include "backends/imgui_impl_glfw.h"
-
-#include "Core/Base/Application.h"
+#include <backends/imgui_impl_opengl3.h>
+#include <backends/imgui_impl_glfw.h>
 
 // Temporary
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include <ImGuizmo.h>
+
+#include "Core/Base/Application.h"
+#include "Core/Debug/Instrumentor.h"
 
 namespace Solar {
 

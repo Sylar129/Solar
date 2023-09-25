@@ -1,9 +1,12 @@
-#include "solpch.h"
-#include "SceneSerializer.h"
+#include "Core/Scene/SceneSerializer.h"
+
+#include <ostream>
 
 #include <yaml-cpp/yaml.h>
-#include "Entity.h"
-#include "Components.h"
+
+#include "Core/Scene/Entity.h"
+#include "Core/Scene/Components.h"
+#include "Core/Base/Log.h"
 
 namespace YAML {
 

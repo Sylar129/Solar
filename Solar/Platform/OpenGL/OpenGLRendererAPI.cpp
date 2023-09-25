@@ -1,7 +1,9 @@
-#include "solpch.h"
-#include "OpenGLRendererAPI.h"
+#include "Platform/OpenGL/OpenGLRendererAPI.h"
 
 #include <glad/glad.h>
+
+#include "Core/Base/Log.h"
+#include "Core/Debug/Instrumentor.h"
 
 namespace Solar {
 

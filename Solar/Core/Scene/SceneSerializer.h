@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Scene.h"
+#include "Core/Scene/Scene.h"
 
 namespace Solar {
 

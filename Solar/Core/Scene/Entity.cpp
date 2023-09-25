@@ -1,5 +1,4 @@
-#include "solpch.h"
-#include "Entity.h"
+#include "Core/Scene/Entity.h"
 
 namespace Solar {
 

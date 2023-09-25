@@ -1,7 +1,6 @@
-#include "solpch.h"
-#include "Framebuffer.h"
+#include "Core/Renderer/Framebuffer.h"
 
-#include "Renderer.h"
+#include "Core/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLFramebuffer.h"
 
 namespace Solar {

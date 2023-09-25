@@ -1,8 +1,9 @@
 #pragma once
 
+#include <spdlog/spdlog.h>
+#include <spdlog/fmt/ostr.h>
+
 #include "Core/Base/Sundry.h"
-#include "spdlog/spdlog.h"
-#include "spdlog/fmt/ostr.h"
 
 namespace Solar {
 

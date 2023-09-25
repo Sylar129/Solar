@@ -1,10 +1,9 @@
-#include "solpch.h"
-#include "Scene.h"
+#include "Core/Scene/Scene.h"
 
-#include "Components.h"
+#include "Core/Scene/Components.h"
 #include "Core/Renderer/Renderer2D.h"
 
-#include "Entity.h"
+#include "Core/Scene/Entity.h"
 
 namespace Solar {
 

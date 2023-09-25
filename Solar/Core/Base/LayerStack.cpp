@@ -1,5 +1,4 @@
-#include "solpch.h"
-#include "LayerStack.h"
+#include "Core/Base/LayerStack.h"
 
 namespace Solar {
 

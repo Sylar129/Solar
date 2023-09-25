@@ -1,6 +1,9 @@
 #pragma once
 
-#include "solpch.h"
+#include <functional>
+#include <ostream>
+#include <string>
+
 #include "Core/Base/Sundry.h"
 
 namespace Solar {

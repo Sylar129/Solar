@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+
 namespace Solar {
 
 enum class MouseCode : uint16_t {

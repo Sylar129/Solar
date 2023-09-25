@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Core/Renderer/VertexArray.h"
 
 namespace Solar {

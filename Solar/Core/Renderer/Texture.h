@@ -1,5 +1,9 @@
 #pragma once
 
+#include <string>
+
+#include "Core/Base/Sundry.h"
+
 namespace Solar {
 
 class Texture {

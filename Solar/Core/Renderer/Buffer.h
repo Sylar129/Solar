@@ -1,5 +1,10 @@
 #pragma once
 
+#include <string>
+#include <vector>
+
+#include "Core/Base/Sundry.h"
+
 namespace Solar {
 
 enum class ShaderDataType {

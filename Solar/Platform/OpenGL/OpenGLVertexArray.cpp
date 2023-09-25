@@ -1,7 +1,8 @@
-#include "solpch.h"
-#include "OpenGLVertexArray.h"
+#include "Platform/OpenGL/OpenGLVertexArray.h"
 
 #include <glad/glad.h>
+
+#include "Core/Debug/Instrumentor.h"
 
 namespace Solar {
 

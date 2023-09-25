@@ -1,7 +1,6 @@
-#include "solpch.h"
-#include "VertexArray.h"
+#include "Core/Renderer/VertexArray.h"
 
-#include "Renderer.h"
+#include "Core/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLVertexArray.h"
 
 namespace Solar {

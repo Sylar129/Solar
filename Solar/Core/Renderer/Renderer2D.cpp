@@ -1,11 +1,12 @@
-#include "solpch.h"
-#include "Renderer2D.h"
+#include "Core/Renderer/Renderer2D.h"
 
-#include "VertexArray.h"
-#include "Shader.h"
+#include <glm/gtc/matrix_transform.hpp>
+
+#include "Core/Renderer/VertexArray.h"
+#include "Core/Renderer/Shader.h"
 
 #include "Core/Renderer/RenderCommand.h"
-#include "glm/gtc/matrix_transform.hpp"
+#include "Core/Debug/Instrumentor.h"
 
 namespace Solar {
 

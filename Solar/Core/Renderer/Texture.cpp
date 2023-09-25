@@ -1,7 +1,6 @@
-#include "solpch.h"
-#include "Texture.h"
+#include "Core/Renderer/Texture.h"
 
-#include "Renderer.h"
+#include "Core/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLTexture.h"
 
 namespace Solar {

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Core/Renderer/Texture.h"
-
 #include <glad/glad.h>
+
+#include "Core/Renderer/Texture.h"
 
 namespace Solar {
 

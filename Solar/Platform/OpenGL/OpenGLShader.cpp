@@ -1,8 +1,9 @@
-#include "solpch.h"
-#include "OpenGLShader.h"
+#include "Platform/OpenGL/OpenGLShader.h"
 
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>
+
+#include "Core/Debug/Instrumentor.h"
 
 namespace Solar {
 

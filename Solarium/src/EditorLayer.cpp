@@ -9,6 +9,7 @@
 #include "Core/Utils/PlatformUtils.h"
 
 #include "Core/Math/Math.h"
+#include "Core/Debug/Instrumentor.h"
 
 namespace Solar {
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "solpch.h"
+#include <string>
 
 #include "Core/Events/Event.h"
 

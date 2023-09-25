@@ -1,9 +1,9 @@
 #pragma once
 
-#include "RenderCommand.h"
+#include "Core/Renderer/RenderCommand.h"
 
-#include "OrthographicCamera.h"
-#include "Shader.h"
+#include "Core/Renderer/OrthographicCamera.h"
+#include "Core/Renderer/Shader.h"
 
 namespace Solar {
 

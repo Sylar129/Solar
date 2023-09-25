@@ -1,5 +1,4 @@
-#include "solpch.h"
-#include "SubTexture2D.h"
+#include "Core/Renderer/SubTexture2D.h"
 
 namespace Solar {
 

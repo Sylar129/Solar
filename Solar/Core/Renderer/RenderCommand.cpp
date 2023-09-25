@@ -1,5 +1,4 @@
-#include "solpch.h"
-#include "RenderCommand.h"
+#include "Core/Renderer/RenderCommand.h"
 
 #include "Platform/OpenGL/OpenGLRendererAPI.h"
 

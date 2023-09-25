@@ -1,8 +1,10 @@
-#include "solpch.h"
-#include "OrthographicCameraController.h"
+#include "Core/Renderer/OrthographicCameraController.h"
+
+#include <glm/glm.hpp>
 
 #include "Core/Base/Input.h"
 #include "Core/Base/KeyCodes.h"
+#include "Core/Debug/Instrumentor.h"
 
 namespace Solar {
 

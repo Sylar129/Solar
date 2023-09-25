@@ -1,5 +1,4 @@
-#include "solpch.h"
-#include "EditorCamera.h"
+#include "Core/Renderer/EditorCamera.h"
 
 #include <glm/gtx/quaternion.hpp>
 

@@ -1,6 +1,9 @@
 #pragma once
 
 #include <iomanip>
+#include <ostream>
+
+#include "Core/Base/Log.h"
 
 namespace Solar {
 

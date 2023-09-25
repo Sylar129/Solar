@@ -1,8 +1,8 @@
-#include "solpch.h"
 #include "Core/Base/Input.h"
 
-#include "Core/Base/Application.h"
 #include <GLFW/glfw3.h>
+
+#include "Core/Base/Application.h"
 
 namespace Solar {
 

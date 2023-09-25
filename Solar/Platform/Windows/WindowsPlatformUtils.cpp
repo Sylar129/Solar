@@ -1,6 +1,6 @@
-#include "solpch.h"
 #include "Core/Utils/PlatformUtils.h"
 
+#include <Windows.h>
 #include <commdlg.h>
 #include <GLFW/glfw3.h>
 #define GLFW_EXPOSE_NATIVE_WIN32

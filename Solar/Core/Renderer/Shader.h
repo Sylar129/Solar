@@ -1,5 +1,12 @@
 #pragma once
 
+#include <string>
+#include <unordered_map>
+
+#include <glm/glm.hpp>
+
+#include "Core/Base/Sundry.h"
+
 namespace Solar {
 
 class Shader {

@@ -1,6 +1,9 @@
 #pragma once
 
-#include "Event.h"
+#include <sstream>
+#include <string>
+
+#include "Core/Events/Event.h"
 #include "Core/Base/MouseCodes.h"
 
 namespace Solar {
