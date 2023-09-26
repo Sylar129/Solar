@@ -1,61 +1,64 @@
 #pragma once
 
 #include <Solar.h>
-#include "Panels/SceneHierarchyPanel.h"
 
 #include "Core/Renderer/EditorCamera.h"
+#include "Panels/SceneHierarchyPanel.h"
 
 namespace Solar {
 
 class EditorLayer : public Layer {
-public:
-    EditorLayer();
-    virtual ~EditorLayer() = default;
+ public:
+  EditorLayer();
+  virtual ~EditorLayer() = default;
 
-    virtual void OnAttach() override;
-    virtual void OnDetech() override;
+  virtual void OnAttach() override;
+  virtual void OnDetech() override;
 
-    virtual void OnUpdate(TimeStep& ts) override;
-    virtual void OnImGuiRender() override;
-    virtual void OnEvent(Event& event) override;
-private:
-    bool OnKeyPressed(KeyPressdEvent& e);
-    bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
+  virtual void OnUpdate(TimeStep& ts) override;
+  virtual void OnImGuiRender() override;
+  virtual void OnEvent(Event& event) override;
 
-    void NewScene();
-    void OpenScene();
-    void SaveSceneAs();
-private:
-    OrthographicCameraController m_CameraController;
+ private:
+  bool OnKeyPressed(KeyPressdEvent& e);
+  bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
 
-    Ref<Shader> m_FlatColorShader;
-    Ref<VertexArray> m_SquareVA;
+  void NewScene();
+  void OpenScene();
+  void SaveSceneAs();
 
-    Ref<Framebuffer> m_Framebuffer;
+ private:
+  OrthographicCameraController m_CameraController;
 
-    // Entity
-    Ref<Scene> m_ActiveScene;
-    Entity m_SquareEntity;
-    Entity m_CameraEntity;
-    Entity m_SecondCamera;
-    bool m_PrimaryCamera = true;
+  Ref<Shader> m_FlatColorShader;
+  Ref<VertexArray> m_SquareVA;
 
-    Entity m_HoveredEntity;
+  Ref<Framebuffer> m_Framebuffer;
 
-    EditorCamera m_EditorCamera;
+  // Entity
+  Ref<Scene> m_ActiveScene;
+  Entity m_SquareEntity;
+  Entity m_CameraEntity;
+  Entity m_SecondCamera;
+  bool m_PrimaryCamera = true;
 
-    bool m_ViewportFocused = false;
-    bool m_ViewportHovered = false;
+  Entity m_HoveredEntity;
 
-    glm::vec2 m_ViewportSize = {0.0f, 0.0f};
-    glm::vec2 m_ViewportBounds[2];  // 0 stands for min bound, 1 stands for max bound
+  EditorCamera m_EditorCamera;
 
-    glm::vec4 m_SquareColor = {0.2f, 0.3f, 0.8f, 1.0f};
+  bool m_ViewportFocused = false;
+  bool m_ViewportHovered = false;
 
-    int m_GizmoType = -1;
+  glm::vec2 m_ViewportSize = {0.0f, 0.0f};
+  glm::vec2
+      m_ViewportBounds[2];  // 0 stands for min bound, 1 stands for max bound
 
-    // Panels
-    SceneHierarchyPanel m_SceneHierarchyPanel;
+  glm::vec4 m_SquareColor = {0.2f, 0.3f, 0.8f, 1.0f};
+
+  int m_GizmoType = -1;
+
+  // Panels
+  SceneHierarchyPanel m_SceneHierarchyPanel;
 };
 
-} // namespace Solar
+}  // namespace Solar

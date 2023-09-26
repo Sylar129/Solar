@@ -5,23 +5,22 @@
 namespace Solar {
 
 class ScriptableEntity {
-public:
-    virtual ~ScriptableEntity(){};
+ public:
+  virtual ~ScriptableEntity(){};
 
-    template <typename T>
-    T& GetComponent()
-    {
-        return m_Entity.GetComponent<T>();
-    }
+  template <typename T>
+  T& GetComponent() {
+    return m_Entity.GetComponent<T>();
+  }
 
-protected:
-    virtual void OnCreate() {}
-    virtual void OnDestroy() {}
-    virtual void OnUpdate(TimeStep ts) {}
+ protected:
+  virtual void OnCreate() {}
+  virtual void OnDestroy() {}
+  virtual void OnUpdate(TimeStep ts) {}
 
-private:
-    Entity m_Entity;
-    friend class Scene;
+ private:
+  Entity m_Entity;
+  friend class Scene;
 };
 
-} // namespace Solar
+}  // namespace Solar

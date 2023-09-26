@@ -1,37 +1,37 @@
 #pragma once
 
-#include <glm/mat4x4.hpp>
-#include <glm/vec3.hpp>
+#include "glm/mat4x4.hpp"
+#include "glm/vec3.hpp"
 
 namespace Solar {
 
 class OrthographicCamera {
-public:
-    OrthographicCamera(float left, float right, float bottom, float top);
-    ~OrthographicCamera();
+ public:
+  OrthographicCamera(float left, float right, float bottom, float top);
+  ~OrthographicCamera();
 
-    void SetProjection(float left, float right, float bottom, float top);
+  void SetProjection(float left, float right, float bottom, float top);
 
-    const glm::vec3& GetPosition() const;
-    void SetPosition(const glm::vec3& position);
+  const glm::vec3& GetPosition() const;
+  void SetPosition(const glm::vec3& position);
 
-    float GetRotation() const;
-    void SetRotation(float rotation);
+  float GetRotation() const;
+  void SetRotation(float rotation);
 
-    const glm::mat4& GetProjectionMatrix() const;
-    const glm::mat4& GetViewMatrix() const;
-    const glm::mat4& GetViewProjectionMatrix() const;
+  const glm::mat4& GetProjectionMatrix() const;
+  const glm::mat4& GetViewMatrix() const;
+  const glm::mat4& GetViewProjectionMatrix() const;
 
-private:
-    void RecalculateViewMatrix();
+ private:
+  void RecalculateViewMatrix();
 
-private:
-    glm::mat4 m_ProjectionMatrix;
-    glm::mat4 m_ViewMatrix;
-    glm::mat4 m_ViewProjectionMatrix;
+ private:
+  glm::mat4 m_ProjectionMatrix;
+  glm::mat4 m_ViewMatrix;
+  glm::mat4 m_ViewProjectionMatrix;
 
-    glm::vec3 m_Position;
-    float m_Rotation;
+  glm::vec3 m_Position;
+  float m_Rotation;
 };
 
-} // namespace Solar
+}  // namespace Solar
