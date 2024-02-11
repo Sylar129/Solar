@@ -1,6 +1,4 @@
-// clang-format off
 #include "Platform/Windows/WindowsWindow.h"
-// clang-format on
 
 #include <Windows.h>
 

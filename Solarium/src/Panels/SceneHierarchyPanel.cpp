@@ -1,9 +1,11 @@
 #include "SceneHierarchyPanel.h"
 
+#include <imgui.h>
+#include <imgui_internal.h>
+
+#include <glm/gtc/type_ptr.hpp>
+
 #include "Core/Scene/Components.h"
-#include "glm/gtc/type_ptr.hpp"
-#include "imgui.h"
-#include "imgui_internal.h"
 
 namespace Solar {
 

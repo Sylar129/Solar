@@ -2,8 +2,9 @@
 #include "Core/Base/Input.h"
 // clang-format on
 
+#include <GLFW/glfw3.h>
+
 #include "Core/Base/Application.h"
-#include "GLFW/glfw3.h"
 
 namespace Solar {
 

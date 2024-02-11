@@ -1,7 +1,8 @@
 #include "Platform/OpenGL/OpenGLFramebuffer.h"
 
+#include <glad/glad.h>
+
 #include "Core/Base/Log.h"
-#include "glad/glad.h"
 
 namespace Solar {
 

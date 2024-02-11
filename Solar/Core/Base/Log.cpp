@@ -1,6 +1,6 @@
 #include "Core/Base/Log.h"
 
-#include "spdlog/sinks/stdout_color_sinks.h"
+#include <spdlog/sinks/stdout_color_sinks.h>
 
 namespace Solar {
 

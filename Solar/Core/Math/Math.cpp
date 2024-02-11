@@ -1,6 +1,6 @@
 #include "Core/Math/Math.h"
 
-#include "glm/gtx/matrix_decompose.hpp"
+#include <glm/gtx/matrix_decompose.hpp>
 
 namespace Solar::Math {
 

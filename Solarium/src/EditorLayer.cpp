@@ -1,17 +1,17 @@
 #include "EditorLayer.h"
 
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+// clang-format off
+#include <imgui.h>
+#include <ImGuizmo.h>
+// clang-format on
+
 #include "Core/Debug/Instrumentor.h"
 #include "Core/Math/Math.h"
 #include "Core/Scene/SceneSerializer.h"
 #include "Core/Utils/PlatformUtils.h"
-
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtc/type_ptr.hpp"
-
-// clang-format off
-#include "imgui.h"
-#include "ImGuizmo.h"
-// clang-format on
 
 namespace Solar {
 

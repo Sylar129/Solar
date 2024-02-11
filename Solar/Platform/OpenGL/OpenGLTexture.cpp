@@ -1,11 +1,9 @@
 #include "Platform/OpenGL/OpenGLTexture.h"
 
-#include "Core/Debug/Instrumentor.h"
-
-// clang-format off
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-// clang-format on
+#include <stb_image.h>
+
+#include "Core/Debug/Instrumentor.h"
 
 namespace Solar {
 

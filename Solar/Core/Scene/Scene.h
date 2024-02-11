@@ -1,8 +1,9 @@
 #pragma once
 
+#include <entt/entt.hpp>
+
 #include "Core/Base/Timestep.h"
 #include "Core/Renderer/EditorCamera.h"
-#include "entt/entt.hpp"
 
 namespace Solar {
 

@@ -1,12 +1,12 @@
 #include "Platform/OpenGL/OpenGLContext.h"
 
+// clang-format off
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+// clang-format on
+
 #include "Core/Base/Log.h"
 #include "Core/Debug/Instrumentor.h"
-
-// clang-format off
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
-// clang-format on
 
 namespace Solar {
 

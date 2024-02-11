@@ -1,9 +1,10 @@
 #include "Core/Renderer/EditorCamera.h"
 
+#include <glm/gtx/quaternion.hpp>
+
 #include "Core/Base/Input.h"
 #include "Core/Base/KeyCodes.h"
 #include "Core/Base/MouseCodes.h"
-#include "glm/gtx/quaternion.hpp"
 
 namespace Solar {
 
