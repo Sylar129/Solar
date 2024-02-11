@@ -20,7 +20,8 @@ void SceneHierarchyPanel::OnImGuiRender() {
   // Scene Hierarchy
   ImGui::Begin("Scene Hierarchy");
 
-  for (auto [entityID, _] : m_Context->m_Registry.storage<Entity>().each()) {
+  for (auto [entityID, _] :
+       m_Context->m_Registry.view<TransformComponent>().each()) {
     Entity entity{entityID, m_Context.get()};
     DrawEntityNode(entity);
   }
