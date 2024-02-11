@@ -28,7 +28,6 @@ add_executable(Solarium
   Solarium/src/Panels/SceneHierarchyPanel.h
 )
 
-add_compile_definitions(GLM_ENABLE_EXPERIMENTAL)
 
 
 # Solar
