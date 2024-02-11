@@ -36,4 +36,5 @@ target_link_libraries(Solarium PUBLIC Solar)
 
 if(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
   add_compile_definitions(SOLAR_PLATFORM_WINDOWS)
+  set_target_properties(Solarium PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}")
 endif()
