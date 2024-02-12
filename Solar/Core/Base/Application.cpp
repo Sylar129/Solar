@@ -80,7 +80,7 @@ void Application::OnEvent(Event& e) {
 
   for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it) {
     (*it)->OnEvent(e);
-    if (e.Handled) {
+    if (e.handled) {
       break;
     }
   }

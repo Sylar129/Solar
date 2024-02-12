@@ -7,58 +7,60 @@ namespace Solar {
 
 class KeyEvent : public Event {
  public:
-  inline KeyCode GetKeyCode() const { return m_KeyCode; }
+  inline KeyCode GetKeyCode() const { return keycode_; }
 
-  EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
+  EVENT_CLASS_CATEGORY(kEventCategoryKeyboard | kEventCategoryInput);
+
  protected:
-  KeyEvent(KeyCode keycode) : m_KeyCode(keycode) {}
+  explicit KeyEvent(KeyCode keycode) : keycode_(keycode) {}
 
-  KeyCode m_KeyCode;
+  KeyCode keycode_;
 };
 
 class KeyPressdEvent : public KeyEvent {
  public:
-  KeyPressdEvent(KeyCode keycode, int repeatCount)
-      : KeyEvent(keycode), m_RepeatCount(repeatCount) {}
+  KeyPressdEvent(KeyCode keycode, int repeat_count)
+      : KeyEvent(keycode), repeat_count_(repeat_count) {}
 
-  inline int GetRepeatCount() const { return m_RepeatCount; }
+  inline int GetRepeatCount() const { return repeat_count_; }
 
   std::string ToString() const override {
     std::stringstream ss;
-    ss << "KeyPressedEvent: " << m_KeyCode << " (" << m_RepeatCount
+    ss << "KeyPressedEvent: " << keycode_ << " (" << repeat_count_
        << " repeats)";
     return ss.str();
   }
 
-  EVENT_CLASS_TYPE(KeyPressed)
+  EVENT_CLASS_TYPE(kKeyPressed);
+
  private:
-  int m_RepeatCount;
+  int repeat_count_;
 };
 
 class KeyReleasedEvent : public KeyEvent {
  public:
-  KeyReleasedEvent(KeyCode keycode) : KeyEvent(keycode) {}
+  explicit KeyReleasedEvent(KeyCode keycode) : KeyEvent(keycode) {}
 
   std::string ToString() const override {
     std::stringstream ss;
-    ss << "KeyReleasedEvent: " << m_KeyCode;
+    ss << "KeyReleasedEvent: " << keycode_;
     return ss.str();
   }
 
-  EVENT_CLASS_TYPE(KeyReleased)
+  EVENT_CLASS_TYPE(kKeyReleased);
 };
 
 class KeyTypedEvent : public KeyEvent {
  public:
-  KeyTypedEvent(KeyCode keycode) : KeyEvent(keycode) {}
+  explicit KeyTypedEvent(KeyCode keycode) : KeyEvent(keycode) {}
 
   std::string ToString() const override {
     std::stringstream ss;
-    ss << "KeyTypedEvent: " << m_KeyCode;
+    ss << "KeyTypedEvent: " << keycode_;
     return ss.str();
   }
 
-  EVENT_CLASS_TYPE(KeyTyped)
+  EVENT_CLASS_TYPE(kKeyTyped);
 };
 
 }  // namespace Solar
