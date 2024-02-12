@@ -22,7 +22,7 @@ enum class ShaderDataType {
   Bool
 };
 
-static uint32_t ShaderDataTypeSize(ShaderDataType type) {
+constexpr uint32_t ShaderDataTypeSize(ShaderDataType type) {
   switch (type) {
     case ShaderDataType::Float:
       return 4;
@@ -46,6 +46,8 @@ static uint32_t ShaderDataTypeSize(ShaderDataType type) {
       return 4 * 4;
     case ShaderDataType::Bool:
       return 1;
+    case ShaderDataType::None:
+      break;
   }
 
   SOLAR_CORE_ASSERT(false, "Unknown Shader Data Type!");
@@ -134,7 +136,6 @@ class BufferLayout {
     }
   }
 
- private:
   std::vector<BufferElement> m_Elements;
   uint32_t m_Stride;
 };

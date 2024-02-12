@@ -6,34 +6,30 @@
 
 namespace Solar {
 
-static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type) {
+namespace {
+constexpr GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type) {
   switch (type) {
     case ShaderDataType::Float:
-      return GL_FLOAT;
     case ShaderDataType::Float2:
-      return GL_FLOAT;
     case ShaderDataType::Float3:
-      return GL_FLOAT;
     case ShaderDataType::Float4:
-      return GL_FLOAT;
     case ShaderDataType::Mat3:
-      return GL_FLOAT;
     case ShaderDataType::Mat4:
       return GL_FLOAT;
     case ShaderDataType::Int:
-      return GL_INT;
     case ShaderDataType::Int2:
-      return GL_INT;
     case ShaderDataType::Int3:
-      return GL_INT;
     case ShaderDataType::Int4:
       return GL_INT;
     case ShaderDataType::Bool:
       return GL_BOOL;
+    case ShaderDataType::None:
+      break;
   }
   SOLAR_CORE_ASSERT(false, "Unknown Shader Data Type!");
   return 0;
 }
+}  // namespace
 
 OpenGLVertexArray::OpenGLVertexArray() {
   SOLAR_PROFILE_FUNCTION();
@@ -59,16 +55,17 @@ void OpenGLVertexArray::Unbind() const {
   glBindVertexArray(0);
 }
 
-void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) {
+void OpenGLVertexArray::AddVertexBuffer(
+    const Ref<VertexBuffer>& vertex_buffer) {
   SOLAR_PROFILE_FUNCTION();
 
-  SOLAR_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(),
+  SOLAR_CORE_ASSERT(vertex_buffer->GetLayout().GetElements().size(),
                     "Vertex Buffer has no layout!");
 
   glBindVertexArray(m_RendererID);
-  vertexBuffer->Bind();
+  vertex_buffer->Bind();
 
-  const auto& layout = vertexBuffer->GetLayout();
+  const auto& layout = vertex_buffer->GetLayout();
   for (const auto& element : layout) {
     switch (element.Type) {
       case ShaderDataType::Float:
@@ -111,16 +108,16 @@ void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) {
         SOLAR_CORE_ASSERT(false, "Unknown ShaderDataType!");
     }
   }
-  m_VertexBuffers.push_back(vertexBuffer);
+  m_VertexBuffers.push_back(vertex_buffer);
 }
 
-void OpenGLVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) {
+void OpenGLVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& index_buffer) {
   SOLAR_PROFILE_FUNCTION();
 
   glBindVertexArray(m_RendererID);
-  indexBuffer->Bind();
+  index_buffer->Bind();
 
-  m_IndexBuffer = indexBuffer;
+  m_IndexBuffer = index_buffer;
 }
 
 const std::vector<Ref<VertexBuffer>>& OpenGLVertexArray::GetVertexBuffers()

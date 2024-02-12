@@ -11,7 +11,7 @@ namespace Solar {
 
 class Application {
  public:
-  Application(const std::string& name = "Solar App");
+  explicit Application(const std::string& name = "Solar App");
   virtual ~Application();
 
   void Run();
@@ -32,14 +32,12 @@ class Application {
   bool OnWindowClose(WindowCloseEvent& e);
   bool OnWindowResize(WindowResizeEvent& e);
 
- private:
   Scope<Window> m_Window;
   Ref<ImGuiLayer> m_ImGuiLayer;
   bool m_Running;
   bool m_Minimized;
   LayerStack m_LayerStack;
 
- private:
   static Application* s_Instance;
 };
 

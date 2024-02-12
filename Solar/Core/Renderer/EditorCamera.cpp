@@ -21,7 +21,7 @@ EditorCamera::EditorCamera(float fov, float aspectRatio, float nearClip,
 
 void EditorCamera::UpdateProjection() {
   m_AspectRatio = m_ViewportWidth / m_ViewportHeight;
-  m_Projection = glm::perspective(glm::radians(m_FOV), m_AspectRatio,
+  projection_ = glm::perspective(glm::radians(m_FOV), m_AspectRatio,
                                   m_NearClip, m_FarClip);
 }
 

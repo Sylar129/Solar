@@ -26,7 +26,7 @@ class EditorCamera : public Camera {
   }
 
   const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
-  glm::mat4 GetViewProjection() const { return m_Projection * m_ViewMatrix; }
+  glm::mat4 GetViewProjection() const { return projection_ * m_ViewMatrix; }
 
   glm::vec3 GetUpDirection() const;
   glm::vec3 GetRightDirection() const;
