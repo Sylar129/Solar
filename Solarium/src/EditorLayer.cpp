@@ -22,11 +22,11 @@ void EditorLayer::OnAttach() {
   SOLAR_PROFILE_FUNCTION();
 
   FramebufferSpecification fbSpec;
-  fbSpec.Attachments = {FramebufferTextureFormat::RGBA8,
-                        FramebufferTextureFormat::RED_INTEGER,
-                        FramebufferTextureFormat::Depth};
-  fbSpec.Width = 1280;
-  fbSpec.Height = 720;
+  fbSpec.attachments = {FramebufferTextureFormat::kRGBA8,
+                        FramebufferTextureFormat::kRED_INTEGER,
+                        FramebufferTextureFormat::kDepth};
+  fbSpec.width = 1280;
+  fbSpec.height = 720;
   m_Framebuffer = Framebuffer::Create(fbSpec);
 
   m_ActiveScene = CreateRef<Scene>();
@@ -96,7 +96,7 @@ void EditorLayer::OnUpdate(TimeStep& ts) {
   if (FramebufferSpecification spec = m_Framebuffer->GetSpecification();
       m_ViewportSize.x > 0.0f &&
       m_ViewportSize.y > 0.0f  // zero sized framebuffer is invalid
-      && (spec.Width != m_ViewportSize.x || spec.Height != m_ViewportSize.y)) {
+      && (spec.width != m_ViewportSize.x || spec.height != m_ViewportSize.y)) {
     m_Framebuffer->Resize((uint32_t)m_ViewportSize.x,
                           (uint32_t)m_ViewportSize.y);
     m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
@@ -269,7 +269,7 @@ void EditorLayer::OnImGuiRender() {
 
   ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
   m_ViewportSize = {viewportPanelSize.x, viewportPanelSize.y};
-  uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
+  uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID(0);
   ImGui::Image((void*)textureID, ImVec2(m_ViewportSize.x, m_ViewportSize.y),
                ImVec2{0, 1}, ImVec2{1, 0});
 
