@@ -55,7 +55,7 @@ void SceneHierarchyPanel::SetSelectedEntity(Entity entity) {
 }
 
 void SceneHierarchyPanel::DrawEntityNode(Entity entity) {
-  auto& tag = entity.GetComponent<TagComponent>().Tag;
+  auto& tag = entity.GetComponent<TagComponent>().tag;
 
   ImGuiTreeNodeFlags flags =
       ((m_SelectionContext == entity) ? ImGuiTreeNodeFlags_Selected : 0) |
@@ -208,7 +208,7 @@ static void DrawComponent(const std::string& label, Entity entity,
 
 void SceneHierarchyPanel::DrawComponents(Entity entity) {
   if (entity.HasComponent<TagComponent>()) {
-    auto& tag = entity.GetComponent<TagComponent>().Tag;
+    auto& tag = entity.GetComponent<TagComponent>().tag;
 
     char buffer[256];
     memset(buffer, 0, sizeof(buffer));
@@ -239,19 +239,19 @@ void SceneHierarchyPanel::DrawComponents(Entity entity) {
   ImGui::PopItemWidth();
 
   DrawComponent<TransformComponent>("Transform", entity, [](auto& component) {
-    DrawVec3Control("Translation", component.Translation);
+    DrawVec3Control("Translation", component.translation);
 
-    glm::vec3 rotation = glm::degrees(component.Rotation);
+    glm::vec3 rotation = glm::degrees(component.rotation);
     DrawVec3Control("Rotation", rotation);
-    component.Rotation = glm::radians(rotation);
+    component.rotation = glm::radians(rotation);
 
-    DrawVec3Control("Scale", component.Scale, 1.0f);
+    DrawVec3Control("Scale", component.scale, 1.0f);
   });
 
   DrawComponent<CameraComponent>("Camera", entity, [](auto& component) {
-    auto& camera = component.Camera;
+    auto& camera = component.camera;
 
-    ImGui::Checkbox("Primary", &component.Primary);
+    ImGui::Checkbox("Primary", &component.primary);
 
     const char* projectionTypeStrings[] = {"Perspective", "Orthographic"};
     const char* currentProjectionTypeString =
@@ -307,13 +307,13 @@ void SceneHierarchyPanel::DrawComponents(Entity entity) {
         camera.SetOrthographicFarClip(orthoFar);
       }
 
-      ImGui::Checkbox("Fixed Aspect Ratio", &component.FixedAspectRatio);
+      ImGui::Checkbox("Fixed Aspect Ratio", &component.fixed_aspect_ratio);
     }
   });
 
   DrawComponent<SpriteRendererComponent>(
       "Sprite Renderer", entity, [](auto& component) {
-        ImGui::ColorEdit4("Color", glm::value_ptr(component.Color));
+        ImGui::ColorEdit4("Color", glm::value_ptr(component.color));
       });
 }
 

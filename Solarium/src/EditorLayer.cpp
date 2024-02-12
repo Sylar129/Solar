@@ -245,7 +245,7 @@ void EditorLayer::OnImGuiRender() {
 
   std::string name = "None";
   if (m_HoveredEntity) {
-    name = m_HoveredEntity.GetComponent<TagComponent>().Tag;
+    name = m_HoveredEntity.GetComponent<TagComponent>().tag;
   }
   ImGui::Text("Hovered Entity: %s", name.c_str());
 
@@ -329,10 +329,10 @@ void EditorLayer::OnImGuiRender() {
       glm::vec3 translation, rotation, scale;
       Math::DecomposeTranform(transform, translation, rotation, scale);
 
-      glm::vec3 deltaRotation = rotation - tc.Rotation;
-      tc.Translation = translation;
-      tc.Rotation += deltaRotation;
-      tc.Scale = scale;
+      glm::vec3 deltaRotation = rotation - tc.rotation;
+      tc.translation = translation;
+      tc.rotation += deltaRotation;
+      tc.scale = scale;
     }
   }
 

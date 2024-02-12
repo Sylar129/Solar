@@ -14,7 +14,7 @@ Entity Scene::CreateEntity(const std::string& name) {
   Entity entity = {m_Registry.create(), this};
   entity.AddComponent<TransformComponent>();
   auto& tag = entity.AddComponent<TagComponent>();
-  tag.Tag = name.empty() ? "Entity" : name;
+  tag.tag = name.empty() ? "Entity" : name;
   return entity;
 }
 
@@ -25,12 +25,12 @@ void Scene::OnUpdateRuntime(TimeStep& ts) {
   {
     // TODO: Move to Scene::OnScenePlay
     m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc) {
-      if (!nsc.Instance) {
-        nsc.Instance = nsc.InstantiateScript();
-        nsc.Instance->m_Entity = Entity{entity, this};
-        nsc.Instance->OnCreate();
+      if (!nsc.instance) {
+        nsc.instance = nsc.instantiate_script();
+        nsc.instance->m_Entity = Entity{entity, this};
+        nsc.instance->OnCreate();
       }
-      nsc.Instance->OnUpdate(ts);
+      nsc.instance->OnUpdate(ts);
     });
   }
 
@@ -43,8 +43,8 @@ void Scene::OnUpdateRuntime(TimeStep& ts) {
       auto [transform, camera] =
           view.get<TransformComponent, CameraComponent>(entity);
 
-      if (camera.Primary) {
-        mainCamera = &camera.Camera;
+      if (camera.primary) {
+        mainCamera = &camera.camera;
         cameraTransform = transform.GetTranform();
         break;
       }
@@ -88,8 +88,8 @@ void Scene::OnViewportResize(uint32_t width, uint32_t height) {
   auto view = m_Registry.view<CameraComponent>();
   for (const auto& entity : view) {
     auto& cameraComponent = view.get<CameraComponent>(entity);
-    if (!cameraComponent.FixedAspectRatio) {
-      cameraComponent.Camera.SetViewportSize(width, height);
+    if (!cameraComponent.fixed_aspect_ratio) {
+      cameraComponent.camera.SetViewportSize(width, height);
     }
   }
 }
@@ -98,7 +98,7 @@ Entity Scene::GetPrimaryCameraEntity() {
   auto view = m_Registry.view<CameraComponent>();
   for (const auto& entity : view) {
     const auto& camera = view.get<CameraComponent>(entity);
-    if (camera.Primary) {
+    if (camera.primary) {
       return Entity{entity, this};
     }
   }
@@ -117,7 +117,7 @@ void Scene::OnComponentAdded<TransformComponent>(
 template <>
 void Scene::OnComponentAdded<CameraComponent>(Entity entity,
                                               CameraComponent& component) {
-  component.Camera.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
+  component.camera.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
 }
 
 template <>

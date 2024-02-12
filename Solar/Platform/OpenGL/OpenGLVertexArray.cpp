@@ -9,21 +9,21 @@ namespace Solar {
 namespace {
 constexpr GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type) {
   switch (type) {
-    case ShaderDataType::Float:
-    case ShaderDataType::Float2:
-    case ShaderDataType::Float3:
-    case ShaderDataType::Float4:
-    case ShaderDataType::Mat3:
-    case ShaderDataType::Mat4:
+    case ShaderDataType::kFloat:
+    case ShaderDataType::kFloat2:
+    case ShaderDataType::kFloat3:
+    case ShaderDataType::kFloat4:
+    case ShaderDataType::kMat3:
+    case ShaderDataType::kMat4:
       return GL_FLOAT;
-    case ShaderDataType::Int:
-    case ShaderDataType::Int2:
-    case ShaderDataType::Int3:
-    case ShaderDataType::Int4:
+    case ShaderDataType::kInt:
+    case ShaderDataType::kInt2:
+    case ShaderDataType::kInt3:
+    case ShaderDataType::kInt4:
       return GL_INT;
-    case ShaderDataType::Bool:
+    case ShaderDataType::kBool:
       return GL_BOOL;
-    case ShaderDataType::None:
+    case ShaderDataType::kNone:
       break;
   }
   SOLAR_CORE_ASSERT(false, "Unknown Shader Data Type!");
@@ -67,39 +67,39 @@ void OpenGLVertexArray::AddVertexBuffer(
 
   const auto& layout = vertex_buffer->GetLayout();
   for (const auto& element : layout) {
-    switch (element.Type) {
-      case ShaderDataType::Float:
-      case ShaderDataType::Float2:
-      case ShaderDataType::Float3:
-      case ShaderDataType::Float4: {
+    switch (element.type) {
+      case ShaderDataType::kFloat:
+      case ShaderDataType::kFloat2:
+      case ShaderDataType::kFloat3:
+      case ShaderDataType::kFloat4: {
         glEnableVertexAttribArray(m_VertexBufferIndex);
         glVertexAttribPointer(m_VertexBufferIndex, element.GetComponentCount(),
-                              ShaderDataTypeToOpenGLBaseType(element.Type),
-                              element.Normalized ? GL_TRUE : GL_FALSE,
-                              layout.GetStride(), (const void*)element.Offset);
+                              ShaderDataTypeToOpenGLBaseType(element.type),
+                              element.normalized ? GL_TRUE : GL_FALSE,
+                              layout.GetStride(), (const void*)element.offset);
         m_VertexBufferIndex++;
       } break;
-      case ShaderDataType::Int:
-      case ShaderDataType::Int2:
-      case ShaderDataType::Int3:
-      case ShaderDataType::Int4:
-      case ShaderDataType::Bool:
+      case ShaderDataType::kInt:
+      case ShaderDataType::kInt2:
+      case ShaderDataType::kInt3:
+      case ShaderDataType::kInt4:
+      case ShaderDataType::kBool:
         glEnableVertexAttribArray(m_VertexBufferIndex);
         glVertexAttribIPointer(m_VertexBufferIndex, element.GetComponentCount(),
-                               ShaderDataTypeToOpenGLBaseType(element.Type),
-                               layout.GetStride(), (const void*)element.Offset);
+                               ShaderDataTypeToOpenGLBaseType(element.type),
+                               layout.GetStride(), (const void*)element.offset);
         m_VertexBufferIndex++;
         break;
-      case ShaderDataType::Mat3:
-      case ShaderDataType::Mat4: {
+      case ShaderDataType::kMat3:
+      case ShaderDataType::kMat4: {
         auto count = element.GetComponentCount();
         for (auto i{0u}; i < count; i++) {
           glEnableVertexAttribArray(m_VertexBufferIndex);
           glVertexAttribPointer(
               m_VertexBufferIndex, count,
-              ShaderDataTypeToOpenGLBaseType(element.Type),
-              element.Normalized ? GL_TRUE : GL_FALSE, layout.GetStride(),
-              (const void*)(element.Offset + sizeof(float) * count * i));
+              ShaderDataTypeToOpenGLBaseType(element.type),
+              element.normalized ? GL_TRUE : GL_FALSE, layout.GetStride(),
+              (const void*)(element.offset + sizeof(float) * count * i));
           glVertexAttribDivisor(m_VertexBufferIndex, 1);
           m_VertexBufferIndex++;
         }

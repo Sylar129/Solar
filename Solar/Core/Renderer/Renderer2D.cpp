@@ -52,12 +52,12 @@ void Renderer2D::Init() {
 
   s_Data.QuadVertexBuffer =
       VertexBuffer::Create(s_Data.MaxVertices * sizeof(QuadVertex));
-  s_Data.QuadVertexBuffer->SetLayout({{ShaderDataType::Float3, "a_Position"},
-                                      {ShaderDataType::Float4, "a_Color"},
-                                      {ShaderDataType::Float2, "a_TexCoord"},
-                                      {ShaderDataType::Float, "a_TexIndex"},
-                                      {ShaderDataType::Float, "a_TilingFactor"},
-                                      {ShaderDataType::Int, "a_EntityID"}});
+  s_Data.QuadVertexBuffer->SetLayout({{ShaderDataType::kFloat3, "a_Position"},
+                                      {ShaderDataType::kFloat4, "a_Color"},
+                                      {ShaderDataType::kFloat2, "a_TexCoord"},
+                                      {ShaderDataType::kFloat, "a_TexIndex"},
+                                      {ShaderDataType::kFloat, "a_TilingFactor"},
+                                      {ShaderDataType::kInt, "a_EntityID"}});
   s_Data.QuadVertexArray->AddVertexBuffer(s_Data.QuadVertexBuffer);
 
   s_Data.QuadVertexBufferBase = new QuadVertex[s_Data.MaxVertices];
@@ -503,7 +503,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
 
 void Renderer2D::DrawSprite(const glm::mat4& transform,
                             SpriteRendererComponent& src, int entityID) {
-  DrawQuad(transform, src.Color, entityID);
+  DrawQuad(transform, src.color, entityID);
 }
 
 void Renderer2D::ResetStats() {

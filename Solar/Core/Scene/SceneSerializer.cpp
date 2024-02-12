@@ -79,7 +79,7 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity) {
     out << YAML::Key << "TagComponent";
     out << YAML::BeginMap;
 
-    auto& tag = entity.GetComponent<TagComponent>().Tag;
+    auto& tag = entity.GetComponent<TagComponent>().tag;
     out << YAML::Key << "Tag" << YAML::Value << tag;
 
     out << YAML::EndMap;
@@ -92,10 +92,10 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity) {
 
     auto& transformComponent = entity.GetComponent<TransformComponent>();
     out << YAML::Key << "Translation" << YAML::Value
-        << transformComponent.Translation;
+        << transformComponent.translation;
     out << YAML::Key << "Rotation" << YAML::Value
-        << transformComponent.Rotation;
-    out << YAML::Key << "Scale" << YAML::Value << transformComponent.Scale;
+        << transformComponent.rotation;
+    out << YAML::Key << "Scale" << YAML::Value << transformComponent.scale;
 
     out << YAML::EndMap;
   }
@@ -106,7 +106,7 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity) {
     out << YAML::BeginMap;
 
     auto& cameraComponent = entity.GetComponent<CameraComponent>();
-    auto& camera = cameraComponent.Camera;
+    auto& camera = cameraComponent.camera;
 
     out << YAML::Key << "Camera" << YAML::Value;
     out << YAML::BeginMap;
@@ -127,9 +127,9 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity) {
 
     out << YAML::EndMap;
 
-    out << YAML::Key << "Primary" << YAML::Value << cameraComponent.Primary;
+    out << YAML::Key << "Primary" << YAML::Value << cameraComponent.primary;
     out << YAML::Key << "FixedAspectRatio" << YAML::Value
-        << cameraComponent.FixedAspectRatio;
+        << cameraComponent.fixed_aspect_ratio;
 
     out << YAML::EndMap;
   }
@@ -141,7 +141,7 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity) {
 
     auto& spriteRendererComponent =
         entity.GetComponent<SpriteRendererComponent>();
-    out << YAML::Key << "Color" << YAML::Value << spriteRendererComponent.Color;
+    out << YAML::Key << "Color" << YAML::Value << spriteRendererComponent.color;
 
     out << YAML::EndMap;
   }
@@ -196,9 +196,9 @@ bool SceneSerializer::Deserialize(const std::string& filepath) {
       if (transformComponent) {
         // Entities always have transforms
         auto& tc = deserializedEntity.GetComponent<TransformComponent>();
-        tc.Translation = transformComponent["Translation"].as<glm::vec3>();
-        tc.Rotation = transformComponent["Rotation"].as<glm::vec3>();
-        tc.Scale = transformComponent["Scale"].as<glm::vec3>();
+        tc.translation = transformComponent["Translation"].as<glm::vec3>();
+        tc.rotation = transformComponent["Rotation"].as<glm::vec3>();
+        tc.scale = transformComponent["Scale"].as<glm::vec3>();
       }
 
       // CameraComponent
@@ -207,33 +207,33 @@ bool SceneSerializer::Deserialize(const std::string& filepath) {
         auto& cc = deserializedEntity.AddComponent<CameraComponent>();
 
         auto cameraProps = cameraComponent["Camera"];
-        cc.Camera.SetProjectionType(
+        cc.camera.SetProjectionType(
             (SceneCamera::ProjectionType)cameraProps["ProjectionType"]
                 .as<int>());
 
-        cc.Camera.SetPerspectiveVerticalFOV(
+        cc.camera.SetPerspectiveVerticalFOV(
             cameraProps["PerspectiveFOV"].as<float>());
-        cc.Camera.SetPerspectiveNearClip(
+        cc.camera.SetPerspectiveNearClip(
             cameraProps["PerspectiveNear"].as<float>());
-        cc.Camera.SetPerspectiveFarClip(
+        cc.camera.SetPerspectiveFarClip(
             cameraProps["PerspectiveFar"].as<float>());
 
-        cc.Camera.SetOrthographicSize(
+        cc.camera.SetOrthographicSize(
             cameraProps["OrthographicSize"].as<float>());
-        cc.Camera.SetOrthographicNearClip(
+        cc.camera.SetOrthographicNearClip(
             cameraProps["OrthographicNear"].as<float>());
-        cc.Camera.SetOrthographicFarClip(
+        cc.camera.SetOrthographicFarClip(
             cameraProps["OrthographicFar"].as<float>());
 
-        cc.Primary = cameraComponent["Primary"].as<bool>();
-        cc.FixedAspectRatio = cameraComponent["FixedAspectRatio"].as<bool>();
+        cc.primary = cameraComponent["Primary"].as<bool>();
+        cc.fixed_aspect_ratio = cameraComponent["FixedAspectRatio"].as<bool>();
       }
 
       // SpriteRendererComponent
       auto spriteRendererComponent = entity["SpriteRendererComponent"];
       if (spriteRendererComponent) {
         auto& src = deserializedEntity.AddComponent<SpriteRendererComponent>();
-        src.Color = spriteRendererComponent["Color"].as<glm::vec4>();
+        src.color = spriteRendererComponent["Color"].as<glm::vec4>();
       }
     }
   }
