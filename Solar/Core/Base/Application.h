@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Core/Base/LayerStack.h"
-#include "Core/Base/Timestep.h"
 #include "Core/Base/Window.h"
 #include "Core/Events/ApplicationEvent.h"
 #include "Core/Events/Event.h"
@@ -20,11 +19,11 @@ class Application {
   void PushLayer(Ref<Layer> layer);
   void PushOverlay(Ref<Layer> layer);
 
-  inline Window& GetWindow() { return *m_Window; }
+  inline Window& GetWindow() { return *window_; }
 
   void Close();
 
-  Ref<ImGuiLayer> GetImGuiLayer() { return m_ImGuiLayer; }
+  Ref<ImGuiLayer> GetImGuiLayer() { return imgui_layer_; }
 
   inline static Application& Get() { return *s_Instance; }
 
@@ -32,11 +31,11 @@ class Application {
   bool OnWindowClose(WindowCloseEvent& e);
   bool OnWindowResize(WindowResizeEvent& e);
 
-  Scope<Window> m_Window;
-  Ref<ImGuiLayer> m_ImGuiLayer;
-  bool m_Running;
-  bool m_Minimized;
-  LayerStack m_LayerStack;
+  Scope<Window> window_;
+  Ref<ImGuiLayer> imgui_layer_;
+  bool running_;
+  bool minimized_;
+  LayerStack layer_stack_;
 
   static Application* s_Instance;
 };

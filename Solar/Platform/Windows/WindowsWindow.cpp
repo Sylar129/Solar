@@ -58,12 +58,12 @@ bool WindowsWindow::IsVSync() const { return m_Data.VSync; }
 void WindowsWindow::Init(const WindowProps& props) {
   SOLAR_PROFILE_FUNCTION();
 
-  m_Data.Title = props.Title;
-  m_Data.Width = props.Width;
-  m_Data.Height = props.Height;
+  m_Data.Title = props.title;
+  m_Data.Width = props.width;
+  m_Data.Height = props.height;
 
-  SOLAR_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width,
-                  props.Height);
+  SOLAR_CORE_INFO("Creating window {0} ({1}, {2})", props.title, props.width,
+                  props.height);
 
   if (s_GLFWWindowCount == 0) {
     SOLAR_PROFILE_SCOPE("glfwInit");
@@ -82,8 +82,8 @@ void WindowsWindow::Init(const WindowProps& props) {
     }
 #endif  // SOLAR_DEBUG
 
-    m_Window = glfwCreateWindow((int)props.Width, (int)props.Height,
-                                props.Title.c_str(), nullptr, nullptr);
+    m_Window = glfwCreateWindow((int)props.width, (int)props.height,
+                                props.title.c_str(), nullptr, nullptr);
     s_GLFWWindowCount++;
   }
 

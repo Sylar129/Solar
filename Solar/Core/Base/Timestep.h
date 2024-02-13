@@ -4,7 +4,7 @@ namespace Solar {
 
 class TimeStep {
  public:
-  explicit TimeStep(float time = 0.0f) : time_(time) {}
+  explicit TimeStep(float time) : time_(time) {}
 
   operator float() const { return time_; }
 
