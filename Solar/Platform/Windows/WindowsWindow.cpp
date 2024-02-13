@@ -2,13 +2,11 @@
 
 #include <Windows.h>
 
-#include "Core/Base/Input.h"
 #include "Core/Base/Log.h"
 #include "Core/Debug/Instrumentor.h"
 #include "Core/Events/ApplicationEvent.h"
 #include "Core/Events/KeyEvent.h"
 #include "Core/Events/MouseEvent.h"
-#include "Core/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLContext.h"
 
 namespace Solar {
