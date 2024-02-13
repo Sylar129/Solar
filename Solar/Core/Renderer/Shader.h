@@ -1,10 +1,12 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
+#include <glm/glm.hpp>
 #include <string>
 #include <unordered_map>
 
 #include "Core/Base/Sundry.h"
-#include "glm/glm.hpp"
 
 namespace Solar {
 
@@ -28,8 +30,8 @@ class Shader {
 
   static Ref<Shader> Create(const std::string& filepath);
   static Ref<Shader> Create(const std::string& name,
-                            const std::string& vertexSrc,
-                            const std::string& fragmentSrc);
+                            const std::string& vertex_src,
+                            const std::string& fragment_src);
 };
 
 class ShaderLibrary {
@@ -44,7 +46,7 @@ class ShaderLibrary {
   bool Exists(const std::string& name) const;
 
  private:
-  std::unordered_map<std::string, Ref<Shader>> m_Shaders;
+  std::unordered_map<std::string, Ref<Shader>> shaders_;
 };
 
 }  // namespace Solar

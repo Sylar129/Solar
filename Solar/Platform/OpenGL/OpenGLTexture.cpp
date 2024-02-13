@@ -1,35 +1,37 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Platform/OpenGL/OpenGLTexture.h"
 
-#include "Core/Debug/Instrumentor.h"
-
-// clang-format off
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-// clang-format on
+#include <stb_image.h>
+
+#include "Core/Debug/Instrumentor.h"
 
 namespace Solar {
 
 OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
-    : m_Width(width),
-      m_Height(height),
-      m_InternaleFormat(GL_RGBA8),
-      m_DataFormat(GL_RGBA) {
+    : width_(width),
+      height_(height),
+      internale_format_(GL_RGBA8),
+      data_format_(GL_RGBA) {
   SOLAR_PROFILE_FUNCTION();
 
-  glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
-  glTextureStorage2D(m_RendererID, 1, m_InternaleFormat, m_Width, m_Height);
+  glCreateTextures(GL_TEXTURE_2D, 1, &renderer_id_);
+  glTextureStorage2D(renderer_id_, 1, internale_format_, width_, height_);
 
-  glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+  glTextureParameteri(renderer_id_, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTextureParameteri(renderer_id_, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-  glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
-  glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+  glTextureParameteri(renderer_id_, GL_TEXTURE_WRAP_S, GL_REPEAT);
+  glTextureParameteri(renderer_id_, GL_TEXTURE_WRAP_T, GL_REPEAT);
 }
 
-OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : m_Path(path) {
+OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : path_(path) {
   SOLAR_PROFILE_FUNCTION();
 
-  int width, height, channels;
+  int width;
+  int height;
+  int channels;
   stbi_set_flip_vertically_on_load(1);
   stbi_uc* data = nullptr;
   {
@@ -37,35 +39,35 @@ OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : m_Path(path) {
     data = stbi_load(path.c_str(), &width, &height, &channels, 0);
   }
   SOLAR_CORE_ASSERT(data, "Failed to load image!");
-  m_Width = width;
-  m_Height = height;
+  width_ = width;
+  height_ = height;
 
-  GLenum internalFormat = 0;
-  GLenum dataFormat = 0;
+  GLenum internal_format = 0;
+  GLenum data_format = 0;
 
   if (channels == 4) {
-    internalFormat = GL_RGBA8;
-    dataFormat = GL_RGBA;
+    internal_format = GL_RGBA8;
+    data_format = GL_RGBA;
   } else if (channels == 3) {
-    internalFormat = GL_RGB8;
-    dataFormat = GL_RGB;
+    internal_format = GL_RGB8;
+    data_format = GL_RGB;
   }
 
-  m_InternaleFormat = internalFormat;
-  m_DataFormat = dataFormat;
+  internale_format_ = internal_format;
+  data_format_ = data_format;
 
-  SOLAR_CORE_ASSERT(internalFormat && dataFormat, "Format not supported!!");
+  SOLAR_CORE_ASSERT(internal_format && data_format, "Format not supported!!");
 
-  glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
-  glTextureStorage2D(m_RendererID, 1, internalFormat, m_Width, m_Height);
+  glCreateTextures(GL_TEXTURE_2D, 1, &renderer_id_);
+  glTextureStorage2D(renderer_id_, 1, internal_format, width_, height_);
 
-  glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+  glTextureParameteri(renderer_id_, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTextureParameteri(renderer_id_, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-  glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
-  glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+  glTextureParameteri(renderer_id_, GL_TEXTURE_WRAP_S, GL_REPEAT);
+  glTextureParameteri(renderer_id_, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-  glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, dataFormat,
+  glTextureSubImage2D(renderer_id_, 0, 0, 0, width_, height_, data_format,
                       GL_UNSIGNED_BYTE, data);
 
   stbi_image_free(data);
@@ -74,23 +76,23 @@ OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : m_Path(path) {
 OpenGLTexture2D::~OpenGLTexture2D() {
   SOLAR_PROFILE_FUNCTION();
 
-  glDeleteTextures(1, &m_RendererID);
+  glDeleteTextures(1, &renderer_id_);
 }
 
 void OpenGLTexture2D::SetData(void* data, uint32_t size) {
   SOLAR_PROFILE_FUNCTION();
 
-  uint32_t bytesPerPixel = m_DataFormat == GL_RGBA ? 4 : 3;
-  SOLAR_CORE_ASSERT(size == m_Width * m_Height * bytesPerPixel,
+  uint32_t bytes_per_pixel = data_format_ == GL_RGBA ? 4 : 3;
+  SOLAR_CORE_ASSERT(size == width_ * height_ * bytes_per_pixel,
                     "Data nust be entire texture!");
-  glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat,
+  glTextureSubImage2D(renderer_id_, 0, 0, 0, width_, height_, data_format_,
                       GL_UNSIGNED_BYTE, data);
 }
 
 void OpenGLTexture2D::Bind(uint32_t slot) const {
   SOLAR_PROFILE_FUNCTION();
 
-  glBindTextureUnit(slot, m_RendererID);
+  glBindTextureUnit(slot, renderer_id_);
 }
 
 }  // namespace Solar

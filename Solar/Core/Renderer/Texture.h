@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include <string>
@@ -16,7 +18,7 @@ class Texture {
 
   virtual void SetData(void* data, uint32_t size) = 0;
 
-  virtual void Bind(uint32_t slot = 0) const = 0;
+  virtual void Bind(uint32_t slot) const = 0;
 
   virtual bool operator==(const Texture& other) const = 0;
 };

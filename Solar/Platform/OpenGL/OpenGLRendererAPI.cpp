@@ -1,14 +1,17 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Platform/OpenGL/OpenGLRendererAPI.h"
+
+#include <glad/glad.h>
 
 #include "Core/Base/Log.h"
 #include "Core/Debug/Instrumentor.h"
-#include "glad/glad.h"
 
 namespace Solar {
 
 void OpenGLMessageCallback(unsigned int source, unsigned int type,
                            unsigned int id, unsigned int serverity, int length,
-                           const char* message, const void* userParam) {
+                           const char* message, const void* user_param) {
   switch (serverity) {
     case GL_DEBUG_SEVERITY_HIGH:
       SOLAR_CORE_CRITICAL(message);
@@ -57,10 +60,11 @@ void OpenGLRendererAPI::Clear() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void OpenGLRendererAPI::DrawIndexed(const Ref<VertexArray>& vertexArray,
-                                    uint32_t indexCount) {
-  uint32_t count =
-      indexCount ? indexCount : vertexArray->GetIndexBuffer()->GetCount();
+void OpenGLRendererAPI::DrawIndexed(const Ref<VertexArray>& vertex_array,
+                                    uint32_t index_count) {
+  uint32_t count = index_count != 0
+                       ? index_count
+                       : vertex_array->GetIndexBuffer()->GetCount();
 
   glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
   glBindTexture(GL_TEXTURE_2D, 0);

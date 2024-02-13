@@ -1,15 +1,16 @@
-// clang-format off
-#include "Core/Utils/PlatformUtils.h"
+// Copyright (c) 2024 Sylar129
 
+// clang-format off
 #include <Windows.h>
 #include <commdlg.h>
 
-#include "GLFW/glfw3.h"
+#include <GLFW/glfw3.h>
 #define GLFW_EXPOSE_NATIVE_WIN32
-#include "GLFW/glfw3native.h"
+#include <GLFW/glfw3native.h>
+// clang-format on
 
 #include "Core/Base/Application.h"
-// clang-format off
+#include "Core/Utils/PlatformUtils.h"
 
 namespace Solar {
 

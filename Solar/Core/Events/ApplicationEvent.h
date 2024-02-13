@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include <sstream>
@@ -10,52 +12,53 @@ namespace Solar {
 class WindowResizeEvent : public Event {
  public:
   WindowResizeEvent(unsigned int width, unsigned int height)
-      : m_Width(width), m_Height(height) {}
+      : width_(width), height_(height) {}
 
-  inline unsigned int GetWidth() const { return m_Width; }
-  inline unsigned int GetHeight() const { return m_Height; }
+  inline unsigned int GetWidth() const { return width_; }
+  inline unsigned int GetHeight() const { return height_; }
 
   std::string ToString() const override {
     std::stringstream ss;
-    ss << "WindowResizeEvent: " << m_Width << ", " << m_Height;
+    ss << "WindowResizeEvent: " << width_ << ", " << height_;
     return ss.str();
   }
-  EVENT_CLASS_TYPE(WindowResize)
-  EVENT_CLASS_CATEGORY(EventCategoryApplication)
+  EVENT_CLASS_TYPE(kWindowResize);
+  EVENT_CLASS_CATEGORY(kEventCategoryApplication);
  private:
-  unsigned int m_Width, m_Height;
+  unsigned int width_;
+  unsigned int height_;
 };
 
 class WindowCloseEvent : public Event {
  public:
   WindowCloseEvent() {}
 
-  EVENT_CLASS_TYPE(WindowClose)
-  EVENT_CLASS_CATEGORY(EventCategoryApplication)
+  EVENT_CLASS_TYPE(kWindowClose);
+  EVENT_CLASS_CATEGORY(kEventCategoryApplication);
 };
 
 class AppTickEvent : public Event {
  public:
   AppTickEvent() {}
 
-  EVENT_CLASS_TYPE(Apptick)
-  EVENT_CLASS_CATEGORY(EventCategoryApplication)
+  EVENT_CLASS_TYPE(kApptick);
+  EVENT_CLASS_CATEGORY(kEventCategoryApplication);
 };
 
 class AppUpdateEvent : public Event {
  public:
   AppUpdateEvent() {}
 
-  EVENT_CLASS_TYPE(AppUpdate)
-  EVENT_CLASS_CATEGORY(EventCategoryApplication)
+  EVENT_CLASS_TYPE(kAppUpdate);
+  EVENT_CLASS_CATEGORY(kEventCategoryApplication);
 };
 
 class AppRenderEvent : public Event {
  public:
   AppRenderEvent() {}
 
-  EVENT_CLASS_TYPE(AppRender)
-  EVENT_CLASS_CATEGORY(EventCategoryApplication)
+  EVENT_CLASS_TYPE(kAppRender);
+  EVENT_CLASS_CATEGORY(kEventCategoryApplication);
 };
 
 }  // namespace Solar

@@ -1,9 +1,8 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include "Core/Base/Layer.h"
-#include "Core/Events/ApplicationEvent.h"
-#include "Core/Events/KeyEvent.h"
-#include "Core/Events/MouseEvent.h"
 
 namespace Solar {
 
@@ -19,13 +18,13 @@ class ImGuiLayer : public Layer {
   void Begin();
   void End();
 
-  void SetBlockEvents(bool block) { m_BlockEvents = block; }
+  void SetBlockEvents(bool block) { block_events_ = block; }
 
   void SetDarkThemeColors();
 
  private:
-  bool m_BlockEvents = true;
-  float m_Time;
+  bool block_events_ = true;
+  float time_;
 };
 
 }  // namespace Solar

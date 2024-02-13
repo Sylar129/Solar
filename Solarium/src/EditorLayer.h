@@ -1,8 +1,11 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include <Solar.h>
 
 #include "Core/Renderer/EditorCamera.h"
+#include "Core/Events/KeyEvent.h"
 #include "Panels/SceneHierarchyPanel.h"
 
 namespace Solar {
@@ -27,38 +30,37 @@ class EditorLayer : public Layer {
   void OpenScene();
   void SaveSceneAs();
 
- private:
-  OrthographicCameraController m_CameraController;
+  OrthographicCameraController camera_controller_;
 
-  Ref<Shader> m_FlatColorShader;
-  Ref<VertexArray> m_SquareVA;
+  Ref<Shader> flat_color_shader_;
+  Ref<VertexArray> square_va_;
 
-  Ref<Framebuffer> m_Framebuffer;
+  Ref<Framebuffer> framebuffer_;
 
   // Entity
-  Ref<Scene> m_ActiveScene;
-  Entity m_SquareEntity;
-  Entity m_CameraEntity;
-  Entity m_SecondCamera;
-  bool m_PrimaryCamera = true;
+  Ref<Scene> active_scene_;
+  Entity square_entity_;
+  Entity camera_entity_;
+  Entity second_camera_;
+  bool primary_camera_ = true;
 
-  Entity m_HoveredEntity;
+  Entity hovered_entity_;
 
-  EditorCamera m_EditorCamera;
+  EditorCamera editor_camera_;
 
-  bool m_ViewportFocused = false;
-  bool m_ViewportHovered = false;
+  bool viewport_focused_ = false;
+  bool viewport_hovered_ = false;
 
-  glm::vec2 m_ViewportSize = {0.0f, 0.0f};
+  glm::vec2 viewport_size_ = {0.0f, 0.0f};
   glm::vec2
-      m_ViewportBounds[2];  // 0 stands for min bound, 1 stands for max bound
+      viewport_bounds_[2];  // 0 stands for min bound, 1 stands for max bound
 
-  glm::vec4 m_SquareColor = {0.2f, 0.3f, 0.8f, 1.0f};
+  glm::vec4 square_color_ = {0.2f, 0.3f, 0.8f, 1.0f};
 
-  int m_GizmoType = -1;
+  int gizmo_type_ = -1;
 
   // Panels
-  SceneHierarchyPanel m_SceneHierarchyPanel;
+  SceneHierarchyPanel scene_hierarchy_panel_;
 };
 
 }  // namespace Solar

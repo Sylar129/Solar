@@ -1,23 +1,25 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Core/ImGui/ImGuiLayer.h"
+
+// clang-format off
+
+#include <imgui.h>
+#include <ImGuizmo.h>
+#include <backends/imgui_impl_glfw.h>
+#include <backends/imgui_impl_opengl3.h>
+
+// Temporary
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+// clang-format on
 
 #include "Core/Base/Application.h"
 #include "Core/Debug/Instrumentor.h"
 
-// clang-format off
-
-#include "imgui.h"
-#include "ImGuizmo.h"
-#include "backends/imgui_impl_glfw.h"
-#include "backends/imgui_impl_opengl3.h"
-
-// Temporary
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
-// clang-format on
-
 namespace Solar {
 
-ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer"), m_Time(0.0f) {}
+ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer"), time_(0.0f) {}
 
 ImGuiLayer::~ImGuiLayer() {}
 
@@ -76,10 +78,11 @@ void ImGuiLayer::OnDetech() {
 }
 
 void ImGuiLayer::OnEvent(Event& e) {
-  if (m_BlockEvents) {
+  if (block_events_) {
     ImGuiIO& io = ImGui::GetIO();
-    e.Handled |= e.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
-    e.Handled |= e.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
+    e.handled |= e.IsInCategory(EventCategory::kEventCategoryMouse) & io.WantCaptureMouse;
+    e.handled |= e.IsInCategory(EventCategory::kEventCategoryKeyboard) &
+                 io.WantCaptureKeyboard;
   }
 }
 

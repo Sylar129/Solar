@@ -1,19 +1,21 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
-#include "glm/mat4x4.hpp"
+#include <glm/mat4x4.hpp>
 
 namespace Solar {
 
 class Camera {
  public:
   Camera() = default;
-  Camera(const glm::mat4& projection) : m_Projection(projection) {}
+  explicit Camera(const glm::mat4& projection) : projection_(projection) {}
   virtual ~Camera() = default;
 
-  const glm::mat4& GetProjection() const { return m_Projection; }
+  const glm::mat4& GetProjection() const { return projection_; }
 
  protected:
-  glm::mat4 m_Projection = glm::mat4(1.0f);
+  glm::mat4 projection_ = glm::mat4(1.0f);
 };
 
 }  // namespace Solar

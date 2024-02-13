@@ -1,17 +1,20 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Core/Renderer/OrthographicCamera.h"
 
+#include <glm/gtc/matrix_transform.hpp>
+
 #include "Core/Debug/Instrumentor.h"
-#include "glm/gtc/matrix_transform.hpp"
 
 namespace Solar {
 
 OrthographicCamera::OrthographicCamera(float left, float right, float bottom,
                                        float top)
-    : m_ProjectionMatrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)),
-      m_ViewMatrix(1.0f),
-      m_ViewProjectionMatrix(m_ProjectionMatrix * m_ViewMatrix),
-      m_Position({0.0f, 0.0f, 0.0f}),
-      m_Rotation(0.0f) {}
+    : projection_matrix_(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)),
+      view_matrix_(1.0f),
+      view_projection_matrix_(projection_matrix_ * view_matrix_),
+      position_({0.0f, 0.0f, 0.0f}),
+      rotation_(0.0f) {}
 
 OrthographicCamera::~OrthographicCamera() {}
 
@@ -19,45 +22,45 @@ void OrthographicCamera::SetProjection(float left, float right, float bottom,
                                        float top) {
   SOLAR_PROFILE_FUNCTION();
 
-  m_ProjectionMatrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
-  m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+  projection_matrix_ = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
+  view_projection_matrix_ = projection_matrix_ * view_matrix_;
 }
 
-const glm::vec3& OrthographicCamera::GetPosition() const { return m_Position; }
+const glm::vec3& OrthographicCamera::GetPosition() const { return position_; }
 
 void OrthographicCamera::SetPosition(const glm::vec3& position) {
-  m_Position = position;
+  position_ = position;
   RecalculateViewMatrix();
 }
 
-float OrthographicCamera::GetRotation() const { return m_Rotation; }
+float OrthographicCamera::GetRotation() const { return rotation_; }
 
 void OrthographicCamera::SetRotation(float rotation) {
-  m_Rotation = rotation;
+  rotation_ = rotation;
   RecalculateViewMatrix();
 }
 
 const glm::mat4& OrthographicCamera::GetProjectionMatrix() const {
-  return m_ProjectionMatrix;
+  return projection_matrix_;
 }
 
 const glm::mat4& OrthographicCamera::GetViewMatrix() const {
-  return m_ViewMatrix;
+  return view_matrix_;
 }
 
 const glm::mat4& OrthographicCamera::GetViewProjectionMatrix() const {
-  return m_ViewProjectionMatrix;
+  return view_projection_matrix_;
 }
 
 void OrthographicCamera::RecalculateViewMatrix() {
   SOLAR_PROFILE_FUNCTION();
 
   glm::mat4 transform =
-      glm::translate(glm::mat4(1.0f), m_Position) *
-      glm::rotate(glm::mat4(1.0f), m_Rotation, glm::vec3(0, 0, 1));
+      glm::translate(glm::mat4(1.0f), position_) *
+      glm::rotate(glm::mat4(1.0f), rotation_, glm::vec3(0, 0, 1));
 
-  m_ViewMatrix = glm::inverse(transform);
-  m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+  view_matrix_ = glm::inverse(transform);
+  view_projection_matrix_ = projection_matrix_ * view_matrix_;
 }
 
 }  // namespace Solar

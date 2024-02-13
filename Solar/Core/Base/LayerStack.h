@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include <vector>
@@ -16,21 +18,21 @@ class LayerStack {
   void PopLayer(Ref<Layer> layer);
   void PopOverlay(Ref<Layer> overlay);
 
-  auto begin() { return m_Layers.begin(); }
-  auto begin() const { return m_Layers.begin(); }
+  auto begin() { return layers_.begin(); }
+  auto begin() const { return layers_.begin(); }
 
-  auto end() { return m_Layers.end(); }
-  auto end() const { return m_Layers.end(); }
+  auto end() { return layers_.end(); }
+  auto end() const { return layers_.end(); }
 
-  auto rbegin() { return m_Layers.rbegin(); }
-  auto rbegin() const { return m_Layers.rbegin(); }
+  auto rbegin() { return layers_.rbegin(); }
+  auto rbegin() const { return layers_.rbegin(); }
 
-  auto rend() { return m_Layers.rend(); }
-  auto rend() const { return m_Layers.rend(); }
+  auto rend() { return layers_.rend(); }
+  auto rend() const { return layers_.rend(); }
 
  private:
-  std::vector<Ref<Layer>> m_Layers;
-  unsigned int m_LayerInsertIndex;
+  std::vector<Ref<Layer>> layers_;
+  unsigned int layer_insert_index_;
 };
 
 }  // namespace Solar

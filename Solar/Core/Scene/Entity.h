@@ -1,7 +1,10 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
+#include <entt/entt.hpp>
+
 #include "Core/Scene/Scene.h"
-#include "entt/entt.hpp"
 
 namespace Solar {
 
@@ -14,10 +17,10 @@ class Entity {
   template <typename T, typename... Args>
   T& AddComponent(Args&&... args) {
     SOLAR_CORE_ASSERT(!HasComponent<T>(), "Entity already has component!");
-    T& component = m_Scene->m_Registry.emplace<T>(m_EntityHandle,
-                                                  std::forward<Args>(args)...);
+    T& component = scene_->registry_.emplace<T>(entity_handle_,
+                                                 std::forward<Args>(args)...);
 
-    m_Scene->OnComponentAdded<T>(*this, component);
+    scene_->OnComponentAdded<T>(*this, component);
 
     return component;
   }
@@ -26,33 +29,33 @@ class Entity {
   T& GetComponent() {
     SOLAR_CORE_ASSERT(HasComponent<T>(), "Entity does not have component!");
 
-    return m_Scene->m_Registry.get<T>(m_EntityHandle);
+    return scene_->registry_.get<T>(entity_handle_);
   }
 
   template <typename T>
   bool HasComponent() {
-    return m_Scene->m_Registry.any_of<T>(m_EntityHandle);
+    return scene_->registry_.any_of<T>(entity_handle_);
   }
 
   template <typename T>
   void RemoveComponent() {
     SOLAR_CORE_ASSERT(HasComponent<T>(), "Entity does not have component!");
 
-    m_Scene->m_Registry.remove<T>(m_EntityHandle);
+    scene_->registry_.remove<T>(entity_handle_);
   }
 
-  operator bool() const { return m_EntityHandle != entt::null; }
-  operator uint32_t() const { return (uint32_t)m_EntityHandle; }
-  operator entt::entity() const { return m_EntityHandle; }
+  operator bool() const { return entity_handle_ != entt::null; }
+  operator uint32_t() const { return (uint32_t)entity_handle_; }
+  operator entt::entity() const { return entity_handle_; }
 
   bool operator==(const Entity& other) const {
-    return m_EntityHandle == other.m_EntityHandle && m_Scene == other.m_Scene;
+    return entity_handle_ == other.entity_handle_ && scene_ == other.scene_;
   }
   bool operator!=(const Entity& other) const { return !operator==(other); }
 
  private:
-  entt::entity m_EntityHandle{entt::null};
-  Scene* m_Scene = nullptr;
+  entt::entity entity_handle_{entt::null};
+  Scene* scene_ = nullptr;
 };
 
 }  // namespace Solar

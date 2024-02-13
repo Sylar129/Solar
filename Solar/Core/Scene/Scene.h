@@ -1,8 +1,11 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
+
+#include <entt/entt.hpp>
 
 #include "Core/Base/Timestep.h"
 #include "Core/Renderer/EditorCamera.h"
-#include "entt/entt.hpp"
 
 namespace Solar {
 
@@ -26,9 +29,9 @@ class Scene {
   template <typename T>
   void OnComponentAdded(Entity entity, T& component);
 
- private:
-  entt::registry m_Registry;
-  uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
+  entt::registry registry_;
+  uint32_t viewport_width_ = 0;
+  uint32_t viewport_height_ = 0;
 
   friend class Entity;
   friend class SceneSerializer;

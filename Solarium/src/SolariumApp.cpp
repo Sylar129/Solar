@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #include <Solar.h>
 
 #include "Core/Base/EntryPoint.h"

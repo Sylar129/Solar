@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include <string>
@@ -8,44 +10,46 @@
 namespace Solar {
 
 enum class ShaderDataType {
-  None = 0,
-  Float,
-  Float2,
-  Float3,
-  Float4,
-  Mat3,
-  Mat4,
-  Int,
-  Int2,
-  Int3,
-  Int4,
-  Bool
+  kNone = 0,
+  kFloat,
+  kFloat2,
+  kFloat3,
+  kFloat4,
+  kMat3,
+  kMat4,
+  kInt,
+  kInt2,
+  kInt3,
+  kInt4,
+  kBool
 };
 
-static uint32_t ShaderDataTypeSize(ShaderDataType type) {
+constexpr uint32_t ShaderDataTypeSize(ShaderDataType type) {
   switch (type) {
-    case ShaderDataType::Float:
+    case ShaderDataType::kFloat:
       return 4;
-    case ShaderDataType::Float2:
+    case ShaderDataType::kFloat2:
       return 4 * 2;
-    case ShaderDataType::Float3:
+    case ShaderDataType::kFloat3:
       return 4 * 3;
-    case ShaderDataType::Float4:
+    case ShaderDataType::kFloat4:
       return 4 * 4;
-    case ShaderDataType::Mat3:
+    case ShaderDataType::kMat3:
       return 4 * 3 * 3;
-    case ShaderDataType::Mat4:
+    case ShaderDataType::kMat4:
       return 4 * 4 * 4;
-    case ShaderDataType::Int:
+    case ShaderDataType::kInt:
       return 4;
-    case ShaderDataType::Int2:
+    case ShaderDataType::kInt2:
       return 4 * 2;
-    case ShaderDataType::Int3:
+    case ShaderDataType::kInt3:
       return 4 * 3;
-    case ShaderDataType::Int4:
+    case ShaderDataType::kInt4:
       return 4 * 4;
-    case ShaderDataType::Bool:
+    case ShaderDataType::kBool:
       return 1;
+    case ShaderDataType::kNone:
+      break;
   }
 
   SOLAR_CORE_ASSERT(false, "Unknown Shader Data Type!");
@@ -53,47 +57,49 @@ static uint32_t ShaderDataTypeSize(ShaderDataType type) {
 }
 
 struct BufferElement {
-  std::string Name;
-  ShaderDataType Type;
-  uint32_t Size;
-  uint32_t Offset;
-  bool Normalized;
+  std::string name;
+  ShaderDataType type;
+  uint32_t size;
+  uint32_t offset;
+  bool normalized;
 
   BufferElement()
-      : Type(ShaderDataType::None), Size(0), Offset(0), Normalized(false) {}
+      : type(ShaderDataType::kNone), size(0), offset(0), normalized(false) {}
 
   BufferElement(ShaderDataType type, const std::string& name,
                 bool normalized = false)
-      : Name(name),
-        Type(type),
-        Size(ShaderDataTypeSize(type)),
-        Offset(0),
-        Normalized(normalized) {}
+      : name(name),
+        type(type),
+        size(ShaderDataTypeSize(type)),
+        offset(0),
+        normalized(normalized) {}
 
   uint32_t GetComponentCount() const {
-    switch (Type) {
-      case ShaderDataType::Float:
+    switch (type) {
+      case ShaderDataType::kFloat:
         return 1;
-      case ShaderDataType::Float2:
+      case ShaderDataType::kFloat2:
         return 2;
-      case ShaderDataType::Float3:
+      case ShaderDataType::kFloat3:
         return 3;
-      case ShaderDataType::Float4:
+      case ShaderDataType::kFloat4:
         return 4;
-      case ShaderDataType::Mat3:
+      case ShaderDataType::kMat3:
         return 3 * 3;
-      case ShaderDataType::Mat4:
+      case ShaderDataType::kMat4:
         return 4 * 4;
-      case ShaderDataType::Int:
+      case ShaderDataType::kInt:
         return 1;
-      case ShaderDataType::Int2:
+      case ShaderDataType::kInt2:
         return 2;
-      case ShaderDataType::Int3:
+      case ShaderDataType::kInt3:
         return 3;
-      case ShaderDataType::Int4:
+      case ShaderDataType::kInt4:
         return 4;
-      case ShaderDataType::Bool:
+      case ShaderDataType::kBool:
         return 1;
+      case ShaderDataType::kNone:
+        break;
     }
     SOLAR_CORE_ASSERT(false, "Unknown Shader Data Type!");
     return 0;
@@ -102,41 +108,40 @@ struct BufferElement {
 
 class BufferLayout {
  public:
-  BufferLayout() : m_Stride(0) {}
+  BufferLayout() : stride_(0) {}
 
   BufferLayout(const std::initializer_list<BufferElement>& elements)
-      : m_Elements(elements), m_Stride(0) {
+      : elements_(elements), stride_(0) {
     CalculateOffsetAndStride();
   }
 
-  inline uint32_t GetStride() const { return m_Stride; }
+  inline uint32_t GetStride() const { return stride_; }
   inline const std::vector<BufferElement>& GetElements() const {
-    return m_Elements;
+    return elements_;
   }
 
-  std::vector<BufferElement>::iterator begin() { return m_Elements.begin(); }
-  std::vector<BufferElement>::iterator end() { return m_Elements.end(); }
+  std::vector<BufferElement>::iterator begin() { return elements_.begin(); }
+  std::vector<BufferElement>::iterator end() { return elements_.end(); }
   std::vector<BufferElement>::const_iterator begin() const {
-    return m_Elements.begin();
+    return elements_.begin();
   }
   std::vector<BufferElement>::const_iterator end() const {
-    return m_Elements.end();
+    return elements_.end();
   }
 
  private:
   void CalculateOffsetAndStride() {
     uint32_t offset = 0;
-    m_Stride = 0;
-    for (auto& element : m_Elements) {
-      element.Offset = offset;
-      offset += element.Size;
-      m_Stride += element.Size;
+    stride_ = 0;
+    for (auto& element : elements_) {
+      element.offset = offset;
+      offset += element.size;
+      stride_ += element.size;
     }
   }
 
- private:
-  std::vector<BufferElement> m_Elements;
-  uint32_t m_Stride;
+  std::vector<BufferElement> elements_;
+  uint32_t stride_;
 };
 
 class VertexBuffer {

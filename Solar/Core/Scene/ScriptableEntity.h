@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include "Core/Scene/Entity.h"
@@ -10,7 +12,7 @@ class ScriptableEntity {
 
   template <typename T>
   T& GetComponent() {
-    return m_Entity.GetComponent<T>();
+    return entity_.GetComponent<T>();
   }
 
  protected:
@@ -19,7 +21,7 @@ class ScriptableEntity {
   virtual void OnUpdate(TimeStep ts) {}
 
  private:
-  Entity m_Entity;
+  Entity entity_;
   friend class Scene;
 };
 

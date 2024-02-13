@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include "Core/Renderer/Shader.h"
@@ -9,9 +11,9 @@ namespace Solar {
 
 class OpenGLShader : public Shader {
  public:
-  OpenGLShader(const std::string& filepath);
-  OpenGLShader(const std::string& name, const std::string& vertexSrc,
-               const std::string& fragmentSrc);
+  explicit OpenGLShader(const std::string& filepath);
+  OpenGLShader(const std::string& name, const std::string& vertex_src,
+               const std::string& fragment_src);
   virtual ~OpenGLShader();
 
   virtual void Bind() const override;
@@ -30,7 +32,7 @@ class OpenGLShader : public Shader {
   virtual void SetMat4(const std::string& name,
                        const glm::mat4& value) override;
 
-  virtual const std::string& GetName() const override { return m_Name; }
+  virtual const std::string& GetName() const override { return name_; }
 
   void UploadUniformInt(const std::string& name, int value);
   void UploadUniformIntArray(const std::string& name, int* values,
@@ -46,11 +48,10 @@ class OpenGLShader : public Shader {
  private:
   std::string ReadFile(const std::string& filepath);
   std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);
-  void Compile(std::unordered_map<GLenum, std::string>& shaderSources);
+  void Compile(std::unordered_map<GLenum, std::string>& shader_sources);
 
- private:
-  uint32_t m_RendererID = 0;
-  std::string m_Name;
+  uint32_t renderer_id_ = 0;
+  std::string name_;
 };
 
 }  // namespace Solar

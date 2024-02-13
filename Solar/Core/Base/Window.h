@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include <string>
@@ -7,13 +9,13 @@
 namespace Solar {
 
 struct WindowProps {
-  std::string Title;
-  uint32_t Width;
-  uint32_t Height;
+  std::string title;
+  uint32_t width;
+  uint32_t height;
 
-  WindowProps(const std::string& title = "Solar Engine", uint32_t width = 1600,
-              uint32_t height = 900)
-      : Title(title), Width(width), Height(height) {}
+  explicit WindowProps(const std::string& title = "Solar Engine",
+                       uint32_t width = 1600, uint32_t height = 900)
+      : title(title), width(width), height(height) {}
 };
 
 // Interface representing a desktop system based window

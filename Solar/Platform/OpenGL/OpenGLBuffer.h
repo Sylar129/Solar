@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include "Core/Renderer/Buffer.h"
@@ -6,7 +8,7 @@ namespace Solar {
 
 class OpenGLVertexBuffer : public VertexBuffer {
  public:
-  OpenGLVertexBuffer(uint32_t size);
+  explicit OpenGLVertexBuffer(uint32_t size);
   OpenGLVertexBuffer(float* vertices, uint32_t size);
   virtual ~OpenGLVertexBuffer();
 
@@ -19,8 +21,8 @@ class OpenGLVertexBuffer : public VertexBuffer {
   virtual void SetLayout(const BufferLayout& layout) override;
 
  private:
-  uint32_t m_RendererID;
-  BufferLayout m_Layout;
+  uint32_t renderer_id_;
+  BufferLayout layout_;
 };
 
 class OpenGLIndexBuffer : public IndexBuffer {
@@ -31,10 +33,10 @@ class OpenGLIndexBuffer : public IndexBuffer {
   virtual void Bind() const override;
   virtual void Unbind() const override;
 
-  inline virtual uint32_t GetCount() const override { return m_Count; }
+  inline virtual uint32_t GetCount() const override { return count_; }
 
  private:
-  uint32_t m_RendererID;
-  uint32_t m_Count;
+  uint32_t renderer_id_;
+  uint32_t count_;
 };
 }  // namespace Solar

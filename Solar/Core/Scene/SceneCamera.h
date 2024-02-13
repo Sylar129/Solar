@@ -1,76 +1,77 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
+#include <glm/glm.hpp>
+
 #include "Core/Renderer/Camera.h"
-#include "glm/glm.hpp"
 
 namespace Solar {
 
 class SceneCamera : public Camera {
  public:
-  enum class ProjectionType { Perspective = 0, Orthographic = 1 };
+  enum class ProjectionType { kPerspective = 0, kOrthographic = 1 };
 
- public:
   SceneCamera();
   virtual ~SceneCamera() = default;
 
-  void SetOrthoGraphic(float size, float nearClip, float farClip);
-  void SetPerspective(float verticalFOV, float nearClip, float farClip);
+  void SetOrthoGraphic(float size, float near_clip, float far_clip);
+  void SetPerspective(float vertical_fov, float near_clip, float far_clip);
 
   void SetViewportSize(uint32_t width, uint32_t height);
 
-  float GetPerspectiveVerticalFOV() const { return m_PerspectiveFOV; }
-  void SetPerspectiveVerticalFOV(float verticalFOV) {
-    m_PerspectiveFOV = verticalFOV;
+  float GetPerspectiveVerticalFOV() const { return perspective_fov_; }
+  void SetPerspectiveVerticalFOV(float vertical_fov) {
+    perspective_fov_ = vertical_fov;
     RecalculateProjection();
   }
-  float GetPerspectiveNearClip() const { return m_PerspectiveNear; }
-  void SetPerspectiveNearClip(float nearClip) {
-    m_PerspectiveNear = nearClip;
+  float GetPerspectiveNearClip() const { return perspective_near_; }
+  void SetPerspectiveNearClip(float near_clip) {
+    perspective_near_ = near_clip;
     RecalculateProjection();
   }
-  float GetPerspectiveFarClip() const { return m_PerspectiveFar; }
-  void SetPerspectiveFarClip(float farClip) {
-    m_PerspectiveFar = farClip;
+  float GetPerspectiveFarClip() const { return perspective_far_; }
+  void SetPerspectiveFarClip(float far_clip) {
+    perspective_far_ = far_clip;
     RecalculateProjection();
   }
 
-  float GetOrthographicSize() const { return m_OrthographicSize; }
+  float GetOrthographicSize() const { return orthographic_size_; }
   void SetOrthographicSize(float size) {
-    m_OrthographicSize = size;
+    orthographic_size_ = size;
     RecalculateProjection();
   }
-  float GetOrthographicNearClip() const { return m_OrthographicNear; }
-  void SetOrthographicNearClip(float nearClip) {
-    m_OrthographicNear = nearClip;
+  float GetOrthographicNearClip() const { return orthographic_near_; }
+  void SetOrthographicNearClip(float near_clip) {
+    orthographic_near_ = near_clip;
     RecalculateProjection();
   }
-  float GetOrthographicFarClip() const { return m_OrthographicFar; }
-  void SetOrthographicFarClip(float farClip) {
-    m_OrthographicFar = farClip;
+  float GetOrthographicFarClip() const { return orthographic_far_; }
+  void SetOrthographicFarClip(float far_clip) {
+    orthographic_far_ = far_clip;
     RecalculateProjection();
   }
 
-  ProjectionType GetProjectionType() const { return m_ProjectionType; }
-  void SetProjectionType(ProjectionType type) { m_ProjectionType = type; }
+  ProjectionType GetProjectionType() const { return projection_type_; }
+  void SetProjectionType(ProjectionType type) { projection_type_ = type; }
 
  private:
   void RecalculateProjection();
 
- private:
   // Dealing with 2D first right now, TODO: change to Perspective
-  ProjectionType m_ProjectionType = ProjectionType::Orthographic;
+  ProjectionType projection_type_ = ProjectionType::kOrthographic;
 
   // Perspective
-  float m_PerspectiveFOV = glm::radians(45.0f);
-  float m_PerspectiveNear = 0.01f;
-  float m_PerspectiveFar = 1000.0f;
+  float perspective_fov_ = glm::radians(45.0f);
+  float perspective_near_ = 0.01f;
+  float perspective_far_ = 1000.0f;
 
   // Orthographic
-  float m_OrthographicSize = 10.0f;
-  float m_OrthographicNear = -1.0f;
-  float m_OrthographicFar = 1.0f;
+  float orthographic_size_ = 10.0f;
+  float orthographic_near_ = -1.0f;
+  float orthographic_far_ = 1.0f;
 
-  float m_AspectRatio = 0.0f;
+  float aspect_ratio_ = 0.0f;
 };
 
 }  // namespace Solar

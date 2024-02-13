@@ -1,7 +1,9 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include "Core/Renderer/OrthographicCamera.h"
-#include "Core/Renderer/RenderCommand.h"
+#include "Core/Renderer/RendererAPI.h"
 #include "Core/Renderer/Shader.h"
 
 namespace Solar {
@@ -15,17 +17,17 @@ class Renderer {
   static void EndScene();
 
   static void Submit(const Ref<Shader>& shader,
-                     const Ref<VertexArray>& vertexArray,
+                     const Ref<VertexArray>& vertex_array,
                      const glm::mat4& transform = glm::mat4(1.0f));
 
   inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 
  private:
   struct SceneData {
-    glm::mat4 ViewProjectionMatrix;
+    glm::mat4 view_projection_matrix;
   };
 
-  static Scope<SceneData> s_SceneData;
+  static Scope<SceneData> s_scene_data;
 };
 
 }  // namespace Solar

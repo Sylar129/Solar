@@ -1,69 +1,60 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 #include "Core/Scene/SceneCamera.h"
 #include "Core/Scene/ScriptableEntity.h"
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtx/quaternion.hpp"
 
 namespace Solar {
 
 struct TagComponent {
-  std::string Tag;
+  std::string tag;
 
-  TagComponent() = default;
-  TagComponent(const TagComponent&) = default;
-  TagComponent(const std::string& tag) : Tag(tag) {}
+  explicit TagComponent(const std::string& tag = "") : tag(tag) {}
 };
 
 struct TransformComponent {
-  glm::vec3 Translation{0.0f, 0.0f, 0.0f};
-  glm::vec3 Rotation{0.0f, 0.0f, 0.0f};
-  glm::vec3 Scale{1.0f, 1.0f, 1.0f};
+  glm::vec3 translation{0, 0, 0};
+  glm::vec3 rotation{0, 0, 0};
+  glm::vec3 scale{1, 1, 1};
 
-  TransformComponent() = default;
-  TransformComponent(const TransformComponent&) = default;
-  TransformComponent(const glm::vec3& translation) : Translation(translation) {}
+  explicit TransformComponent(const glm::vec3& translation = {0, 0, 0})
+      : translation(translation) {}
 
   glm::mat4 GetTranform() const {
-    glm::mat4 rotation = glm::toMat4(glm::quat(Rotation));
-
-    return glm::translate(glm::mat4(1.0f), Translation) * rotation *
-           glm::scale(glm::mat4(1.0f), Scale);
+    return glm::translate(glm::mat4(1), translation) *
+           glm::toMat4(glm::quat(rotation)) * glm::scale(glm::mat4(1), scale);
   }
 };
 
 struct SpriteRendererComponent {
-  glm::vec4 Color{1.0f, 1.0f, 1.0f, 1.0f};
-
-  SpriteRendererComponent() = default;
-  SpriteRendererComponent(const SpriteRendererComponent&) = default;
-  SpriteRendererComponent(const glm::vec4& color) : Color(color) {}
+  glm::vec4 color{1, 1, 1, 1};
 };
 
 struct CameraComponent {
-  SceneCamera Camera;
-  bool Primary = true;  // TODO: Move to the scene
-  bool FixedAspectRatio = false;
-
-  CameraComponent() = default;
-  CameraComponent(const CameraComponent&) = default;
+  SceneCamera camera;
+  bool primary = true;  // TODO: Move to the scene
+  bool fixed_aspect_ratio = false;
 };
 
 struct NativeScriptComponent {
-  ScriptableEntity* Instance = nullptr;
+  ScriptableEntity* instance = nullptr;
 
-  ScriptableEntity* (*InstantiateScript)() = nullptr;
-  void (*DestoryScript)(NativeScriptComponent*) = nullptr;
+  ScriptableEntity* (*instantiate_script)() = nullptr;
+  void (*destory_script)(NativeScriptComponent*) = nullptr;
 
   template <typename T>
   void Bind() {
-    InstantiateScript = []() {
+    instantiate_script = []() {
       return static_cast<ScriptableEntity*>(new T());
     };
-    DestoryScript = [](NativeScriptComponent* nsc) {
-      delete nsc->Instance;
-      nsc->Instance = nullptr;
+    destory_script = [](NativeScriptComponent* nsc) {
+      delete nsc->instance;
+      nsc->instance = nullptr;
     };
   }
 };

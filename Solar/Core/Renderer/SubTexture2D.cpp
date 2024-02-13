@@ -1,27 +1,29 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Core/Renderer/SubTexture2D.h"
 
 namespace Solar {
 
 SubTexture2D::SubTexture2D(const Ref<Texture2D>& texture, const glm::vec2& min,
                            const glm::vec2& max)
-    : m_Texture(texture) {
-  m_TexCoords[0] = {min.x, min.y};
-  m_TexCoords[1] = {max.x, min.y};
-  m_TexCoords[2] = {max.x, max.y};
-  m_TexCoords[3] = {min.x, max.y};
+    : texture_(texture) {
+  tex_coords_[0] = {min.x, min.y};
+  tex_coords_[1] = {max.x, min.y};
+  tex_coords_[2] = {max.x, max.y};
+  tex_coords_[3] = {min.x, max.y};
 }
 
 Ref<SubTexture2D> SubTexture2D::CreateFromCoords(const Ref<Texture2D>& texture,
-                                                 const glm::vec2 coords,
-                                                 const glm::vec2 cellSize,
-                                                 const glm::vec2 spriteSize) {
-  auto sheetWidth = texture->GetWidth();
-  auto sheetHeight = texture->GetHeight();
+                                                 const glm::vec2& coords,
+                                                 const glm::vec2& cell_size,
+                                                 const glm::vec2& sprite_size) {
+  auto sheet_width = texture->GetWidth();
+  auto sheet_height = texture->GetHeight();
 
-  glm::vec2 min = {(coords.x * cellSize.x) / sheetWidth,
-                   (coords.y * cellSize.y) / sheetHeight};
-  glm::vec2 max = {((coords.x + spriteSize.x) * cellSize.x) / sheetWidth,
-                   ((coords.y + spriteSize.y) * cellSize.y) / sheetHeight};
+  glm::vec2 min = {(coords.x * cell_size.x) / sheet_width,
+                   (coords.y * cell_size.y) / sheet_height};
+  glm::vec2 max = {((coords.x + sprite_size.x) * cell_size.x) / sheet_width,
+                   ((coords.y + sprite_size.y) * cell_size.y) / sheet_height};
 
   return CreateRef<SubTexture2D>(texture, min, max);
 }

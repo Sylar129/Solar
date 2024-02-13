@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include <iomanip>
@@ -10,15 +12,15 @@ namespace Solar {
 using FloatingPointMicroseconds = std::chrono::duration<double, std::micro>;
 
 struct ProfileResult {
-  std::string Name;
+  std::string name;
 
-  FloatingPointMicroseconds Start;
-  std::chrono::microseconds ElapsedTime;
-  std::thread::id ThreadID;
+  FloatingPointMicroseconds start;
+  std::chrono::microseconds elapsed_time;
+  std::thread::id thread_id;
 };
 
 struct InstrumentationSession {
-  std::string Name;
+  std::string name;
 };
 
 class Instrumentor {
@@ -28,8 +30,8 @@ class Instrumentor {
 
   void BeginSession(const std::string& name,
                     const std::string& filepath = "results.json") {
-    std::lock_guard lock(m_Mutex);
-    if (m_CurrentSession) {
+    std::lock_guard lock(mutex_);
+    if (current_session_ != nullptr) {
       // If there is already a current session, then close it before
       // beginning new one. Subsequent profiling output meant for the
       // original session will end up in the newly opened session instead.
@@ -39,15 +41,15 @@ class Instrumentor {
         SOLAR_CORE_ERROR(
             "Instrumentor::BeginSession('{0}') when "
             "session '{1}' already open.",
-            name, m_CurrentSession->Name);
+            name, current_session_->name);
       }
       InternalEndSession();
     }
 
-    m_OutputStream.open(filepath);
+    output_stream_.open(filepath);
 
-    if (m_OutputStream.is_open()) {
-      m_CurrentSession = new InstrumentationSession({name});
+    if (output_stream_.is_open()) {
+      current_session_ = new InstrumentationSession({name});
       WriteHeader();
     } else {
       if (Log::GetCoreLogger()) {  // Edge case: BeginSession() might be
@@ -59,7 +61,7 @@ class Instrumentor {
   }
 
   void EndSession() {
-    std::lock_guard lock(m_Mutex);
+    std::lock_guard lock(mutex_);
     InternalEndSession();
   }
 
@@ -67,91 +69,93 @@ class Instrumentor {
     std::stringstream json;
 
     json << std::setprecision(3) << std::fixed;
-    m_OutputStream << ",{";
-    m_OutputStream << "\"cat\":\"function\",";
-    m_OutputStream << "\"dur\":" << (result.ElapsedTime.count()) << ',';
-    m_OutputStream << "\"name\":\"" << result.Name << "\",";
-    m_OutputStream << "\"ph\":\"X\",";
-    m_OutputStream << "\"pid\":0,";
-    m_OutputStream << "\"tid\":" << result.ThreadID << ",";
-    m_OutputStream << "\"ts\":" << result.Start.count();
-    m_OutputStream << "}";
+    output_stream_ << ",{";
+    output_stream_ << "\"cat\":\"function\",";
+    output_stream_ << "\"dur\":" << (result.elapsed_time.count()) << ',';
+    output_stream_ << "\"name\":\"" << result.name << "\",";
+    output_stream_ << "\"ph\":\"X\",";
+    output_stream_ << "\"pid\":0,";
+    output_stream_ << "\"tid\":" << result.thread_id << ",";
+    output_stream_ << "\"ts\":" << result.start.count();
+    output_stream_ << "}";
 
-    std::lock_guard lock(m_Mutex);
-    if (m_CurrentSession) {
-      m_OutputStream << json.str();
-      m_OutputStream.flush();
+    std::lock_guard lock(mutex_);
+    if (current_session_ != nullptr) {
+      output_stream_ << json.str();
+      output_stream_.flush();
     }
   }
 
   static Instrumentor& Get() {
-    static Instrumentor instance;
-    return instance;
+    static Instrumentor s_instance;
+    return s_instance;
   }
 
  private:
-  Instrumentor() : m_CurrentSession(nullptr) {}
+  Instrumentor() : current_session_(nullptr) {}
 
   ~Instrumentor() { EndSession(); }
 
   void WriteHeader() {
-    m_OutputStream << "{\"otherData\": {},\"traceEvents\":[{}";
-    m_OutputStream.flush();
+    output_stream_ << "{\"otherData\": {},\"traceEvents\":[{}";
+    output_stream_.flush();
   }
 
   void WriteFooter() {
-    m_OutputStream << "]}";
-    m_OutputStream.flush();
+    output_stream_ << "]}";
+    output_stream_.flush();
   }
 
   // Note: you must already own lock on m_Mutex before
   // calling InternalEndSession()
   void InternalEndSession() {
-    if (m_CurrentSession) {
+    if (current_session_ != nullptr) {
       WriteFooter();
-      m_OutputStream.close();
-      delete m_CurrentSession;
-      m_CurrentSession = nullptr;
+      output_stream_.close();
+      delete current_session_;
+      current_session_ = nullptr;
     }
   }
 
- private:
-  std::mutex m_Mutex;
-  InstrumentationSession* m_CurrentSession;
-  std::ofstream m_OutputStream;
+  std::mutex mutex_;
+  InstrumentationSession* current_session_;
+  std::ofstream output_stream_;
 };
 
 class InstrumentationTimer {
  public:
-  InstrumentationTimer(const char* name) : m_Name(name), m_Stopped(false) {
-    m_StartTimepoint = std::chrono::high_resolution_clock::now();
+  explicit InstrumentationTimer(const char* name)
+      : name_(name), stopped_(false) {
+    start_timepoint_ = std::chrono::high_resolution_clock::now();
   }
 
   ~InstrumentationTimer() {
-    if (!m_Stopped) Stop();
+    if (!stopped_) {
+      Stop();
+    }
   }
 
   void Stop() {
-    auto endTimepoint = std::chrono::high_resolution_clock::now();
-    auto highResStart =
-        FloatingPointMicroseconds{m_StartTimepoint.time_since_epoch()};
-    auto elapsedTime =
-        std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint)
+    auto end_timepoint = std::chrono::high_resolution_clock::now();
+    auto high_res_start =
+        FloatingPointMicroseconds{start_timepoint_.time_since_epoch()};
+    auto elapsed_time =
+        std::chrono::time_point_cast<std::chrono::microseconds>(end_timepoint)
             .time_since_epoch() -
         std::chrono::time_point_cast<std::chrono::microseconds>(
-            m_StartTimepoint)
+            start_timepoint_)
             .time_since_epoch();
 
     Instrumentor::Get().WriteProfile(
-        {m_Name, highResStart, elapsedTime, std::this_thread::get_id()});
+        {name_, high_res_start, elapsed_time, std::this_thread::get_id()});
 
-    m_Stopped = true;
+    stopped_ = true;
   }
 
  private:
-  const char* m_Name;
-  std::chrono::time_point<std::chrono::high_resolution_clock> m_StartTimepoint;
-  bool m_Stopped;
+  const char* name_;
+  std::chrono::time_point<std::chrono::high_resolution_clock> start_timepoint_;
+  bool stopped_;
 };
 
 }  // namespace Solar

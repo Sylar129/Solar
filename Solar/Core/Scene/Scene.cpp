@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Core/Scene/Scene.h"
 
 #include "Core/Renderer/Renderer2D.h"
@@ -11,50 +13,50 @@ Scene::Scene() {}
 Scene::~Scene() {}
 
 Entity Scene::CreateEntity(const std::string& name) {
-  Entity entity = {m_Registry.create(), this};
+  Entity entity = {registry_.create(), this};
   entity.AddComponent<TransformComponent>();
   auto& tag = entity.AddComponent<TagComponent>();
-  tag.Tag = name.empty() ? "Entity" : name;
+  tag.tag = name.empty() ? "Entity" : name;
   return entity;
 }
 
-void Scene::DestoryEntity(Entity entity) { m_Registry.destroy(entity); }
+void Scene::DestoryEntity(Entity entity) { registry_.destroy(entity); }
 
 void Scene::OnUpdateRuntime(TimeStep& ts) {
   // Update scripts
   {
     // TODO: Move to Scene::OnScenePlay
-    m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc) {
-      if (!nsc.Instance) {
-        nsc.Instance = nsc.InstantiateScript();
-        nsc.Instance->m_Entity = Entity{entity, this};
-        nsc.Instance->OnCreate();
+    registry_.view<NativeScriptComponent>().each([=](auto entity, auto& nsc) {
+      if (!nsc.instance) {
+        nsc.instance = nsc.instantiate_script();
+        nsc.instance->entity_ = Entity{entity, this};
+        nsc.instance->OnCreate();
       }
-      nsc.Instance->OnUpdate(ts);
+      nsc.instance->OnUpdate(ts);
     });
   }
 
   // Render 2D
-  Camera* mainCamera = nullptr;
-  glm::mat4 cameraTransform;
+  Camera* main_camera = nullptr;
+  glm::mat4 camera_transform;
   {
-    auto view = m_Registry.view<CameraComponent, TransformComponent>();
+    auto view = registry_.view<CameraComponent, TransformComponent>();
     for (const auto& entity : view) {
       auto [transform, camera] =
           view.get<TransformComponent, CameraComponent>(entity);
 
-      if (camera.Primary) {
-        mainCamera = &camera.Camera;
-        cameraTransform = transform.GetTranform();
+      if (camera.primary) {
+        main_camera = &camera.camera;
+        camera_transform = transform.GetTranform();
         break;
       }
     }
   }
 
-  if (mainCamera) {
-    Renderer2D::BeginScene(*mainCamera, cameraTransform);
-    auto group = m_Registry.group<TransformComponent>(
-        entt::get<SpriteRendererComponent>);
+  if (main_camera) {
+    Renderer2D::BeginScene(*main_camera, camera_transform);
+    auto group =
+        registry_.group<TransformComponent>(entt::get<SpriteRendererComponent>);
     for (const auto& entity : group) {
       auto [transform, sprite] =
           group.get<TransformComponent, SpriteRendererComponent>(entity);
@@ -69,7 +71,7 @@ void Scene::OnUpdateRuntime(TimeStep& ts) {
 void Scene::OnUpdateEditor(TimeStep& ts, EditorCamera& camera) {
   Renderer2D::BeginScene(camera);
   auto group =
-      m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+      registry_.group<TransformComponent>(entt::get<SpriteRendererComponent>);
   for (const auto& entity : group) {
     auto [transform, sprite] =
         group.get<TransformComponent, SpriteRendererComponent>(entity);
@@ -81,24 +83,24 @@ void Scene::OnUpdateEditor(TimeStep& ts, EditorCamera& camera) {
 }
 
 void Scene::OnViewportResize(uint32_t width, uint32_t height) {
-  m_ViewportWidth = width;
-  m_ViewportHeight = height;
+  viewport_width_ = width;
+  viewport_height_ = height;
 
   // Resize our non-FixedAspectRatio cameras
-  auto view = m_Registry.view<CameraComponent>();
+  auto view = registry_.view<CameraComponent>();
   for (const auto& entity : view) {
-    auto& cameraComponent = view.get<CameraComponent>(entity);
-    if (!cameraComponent.FixedAspectRatio) {
-      cameraComponent.Camera.SetViewportSize(width, height);
+    auto& camera_component = view.get<CameraComponent>(entity);
+    if (!camera_component.fixed_aspect_ratio) {
+      camera_component.camera.SetViewportSize(width, height);
     }
   }
 }
 
 Entity Scene::GetPrimaryCameraEntity() {
-  auto view = m_Registry.view<CameraComponent>();
+  auto view = registry_.view<CameraComponent>();
   for (const auto& entity : view) {
     const auto& camera = view.get<CameraComponent>(entity);
-    if (camera.Primary) {
+    if (camera.primary) {
       return Entity{entity, this};
     }
   }
@@ -117,7 +119,7 @@ void Scene::OnComponentAdded<TransformComponent>(
 template <>
 void Scene::OnComponentAdded<CameraComponent>(Entity entity,
                                               CameraComponent& component) {
-  component.Camera.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
+  component.camera.SetViewportSize(viewport_width_, viewport_height_);
 }
 
 template <>

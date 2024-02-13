@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include "Core/Base/Timestep.h"
@@ -8,32 +10,33 @@
 namespace Solar {
 
 struct OrthographicCameraBounds {
-  float Left, Right;
-  float Bottom, Top;
+  float left, right;
+  float bottom, top;
 
-  float GetWidth() { return Right - Left; }
-  float GetHeight() { return Top - Bottom; }
+  float GetWidth() const { return right - left; }
+  float GetHeight() const { return top - bottom; }
 };
 
 class OrthographicCameraController {
  public:
-  OrthographicCameraController(float aspectRatio, bool rotation = false);
+  explicit OrthographicCameraController(float aspect_ratio,
+                                        bool rotation = false);
 
   void OnUpdate(TimeStep ts);
   void OnEvent(Event& e);
 
   void OnResize(float width, float height);
 
-  OrthographicCamera& GetCamera() { return m_Camera; }
-  const OrthographicCamera& GetCamera() const { return m_Camera; }
+  OrthographicCamera& GetCamera() { return camera_; }
+  const OrthographicCamera& GetCamera() const { return camera_; }
 
-  float GetZoomLevel() const { return m_ZoomLevel; }
+  float GetZoomLevel() const { return zoom_level_; }
   void SetZoomLevel(float level) {
-    m_ZoomLevel = level;
+    zoom_level_ = level;
     CalculateView();
   }
 
-  const OrthographicCameraBounds& GetBounds() const { return m_Bounds; }
+  const OrthographicCameraBounds& GetBounds() const { return bounds_; }
 
  private:
   void CalculateView();
@@ -41,18 +44,17 @@ class OrthographicCameraController {
   bool OnMouseScrolled(MouseScrolledEvent& e);
   bool OnWindowResized(WindowResizeEvent& e);
 
- private:
-  float m_AspectRatio;
-  float m_ZoomLevel;
-  OrthographicCameraBounds m_Bounds;
-  OrthographicCamera m_Camera;
+  float aspect_ratio_;
+  float zoom_level_;
+  OrthographicCameraBounds bounds_;
+  OrthographicCamera camera_;
 
-  glm::vec3 m_CameraPosition;
-  float m_CameraTranslationSpeed;
+  glm::vec3 camera_position_;
+  float camera_translation_speed_;
 
-  bool m_Rotation;
-  float m_CameraRotation;  // radians
-  float m_CameraRotationSpeed;
+  bool rotation_;
+  float camera_rotation_;  // radians
+  float camera_rotation_speed_;
 };
 
 }  // namespace Solar

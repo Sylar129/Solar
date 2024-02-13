@@ -1,8 +1,9 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Core/Base/Application.h"
 
 #include <chrono>
 
-#include "Core/Base/Input.h"
 #include "Core/Debug/Instrumentor.h"
 #include "Core/Renderer/Renderer.h"
 
@@ -13,19 +14,19 @@ namespace Solar {
 Application* Application::s_Instance = nullptr;
 
 Application::Application(const std::string& name)
-    : m_ImGuiLayer(nullptr), m_Running(true), m_Minimized(false) {
+    : imgui_layer_(nullptr), running_(true), minimized_(false) {
   SOLAR_PROFILE_FUNCTION();
 
   SOLAR_CORE_ASSERT(!s_Instance, "Application already exists!");
   s_Instance = this;
 
-  m_Window = std::unique_ptr<Window>(Window::Create(WindowProps(name)));
-  m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+  window_ = std::unique_ptr<Window>(Window::Create(WindowProps(name)));
+  window_->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
   Renderer::Init();
 
-  m_ImGuiLayer = CreateRef<ImGuiLayer>();
-  PushOverlay(m_ImGuiLayer);
+  imgui_layer_ = CreateRef<ImGuiLayer>();
+  PushOverlay(imgui_layer_);
 }
 
 Application::~Application() { SOLAR_PROFILE_FUNCTION(); }
@@ -33,40 +34,40 @@ Application::~Application() { SOLAR_PROFILE_FUNCTION(); }
 void Application::Run() {
   SOLAR_PROFILE_FUNCTION();
 
-  while (m_Running) {
+  while (running_) {
     SOLAR_PROFILE_SCOPE("RunLoop");
 
-    static auto lastFrameTime = std::chrono::steady_clock::now();
+    static auto s_last_frame_time = std::chrono::steady_clock::now();
 
     auto now = std::chrono::steady_clock::now();
-    std::chrono::duration<float> duration = now - lastFrameTime;
-    TimeStep timeStep = duration.count();
-    lastFrameTime = now;
+    std::chrono::duration<float> duration = now - s_last_frame_time;
+    TimeStep time_step = TimeStep(duration.count());
+    s_last_frame_time = now;
 
     /// <summary>
     /// Layer Update
     /// </summary>
-    if (!m_Minimized) {
+    if (!minimized_) {
       {
         SOLAR_PROFILE_SCOPE("LayerStack OnOpdate");
 
-        for (auto& layer : m_LayerStack) {
-          layer->OnUpdate(timeStep);
+        for (auto& layer : layer_stack_) {
+          layer->OnUpdate(time_step);
         }
       }
 
-      m_ImGuiLayer->Begin();
+      imgui_layer_->Begin();
       {
         SOLAR_PROFILE_SCOPE("LayerStack OnImGuiRender");
 
-        for (auto& layer : m_LayerStack) {
+        for (auto& layer : layer_stack_) {
           layer->OnImGuiRender();
         }
       }
-      m_ImGuiLayer->End();
+      imgui_layer_->End();
     }
 
-    m_Window->OnUpdate();
+    window_->OnUpdate();
   }
 }
 
@@ -78,9 +79,9 @@ void Application::OnEvent(Event& e) {
   dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
   // SOLAR_CORE_TRACE("{0}", e);
 
-  for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it) {
+  for (auto it = layer_stack_.rbegin(); it != layer_stack_.rend(); ++it) {
     (*it)->OnEvent(e);
-    if (e.Handled) {
+    if (e.handled) {
       break;
     }
   }
@@ -89,32 +90,33 @@ void Application::OnEvent(Event& e) {
 void Application::PushLayer(Ref<Layer> layer) {
   SOLAR_PROFILE_FUNCTION();
 
-  m_LayerStack.PushLayer(layer);
+  layer_stack_.PushLayer(layer);
   layer->OnAttach();
 }
 
 void Application::PushOverlay(Ref<Layer> layer) {
   SOLAR_PROFILE_FUNCTION();
 
-  m_LayerStack.PushOverlay(layer);
+  layer_stack_.PushOverlay(layer);
   layer->OnAttach();
 }
 
-void Application::Close() { m_Running = false; }
+void Application::Close() { running_ = false; }
 
 bool Application::OnWindowClose(WindowCloseEvent& e) {
-  m_Running = false;
+  running_ = false;
   return true;
 }
+
 bool Application::OnWindowResize(WindowResizeEvent& e) {
   SOLAR_PROFILE_FUNCTION();
 
   if (e.GetWidth() == 0 || e.GetHeight() == 0) {
-    m_Minimized = true;
+    minimized_ = true;
     return false;
   }
 
-  m_Minimized = false;
+  minimized_ = false;
   Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
   return false;
 }

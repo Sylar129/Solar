@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include <ostream>
@@ -138,8 +140,8 @@ enum class KeyCode : uint16_t {
   Menu = 348,
 };
 
-inline std::ostream& operator<<(std::ostream& os, KeyCode keyCode) {
-  os << static_cast<uint16_t>(keyCode);
+inline std::ostream& operator<<(std::ostream& os, KeyCode keycode) {
+  os << static_cast<uint16_t>(keycode);
   return os;
 }
 

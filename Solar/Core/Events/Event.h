@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include <functional>
@@ -9,31 +11,31 @@
 namespace Solar {
 
 enum class EventType {
-  None = 0,
-  WindowClose,
-  WindowResize,
-  WindowFocus,
-  WindowLostFocus,
-  WindowMoved,
-  Apptick,
-  AppUpdate,
-  AppRender,
-  KeyPressed,
-  KeyReleased,
-  KeyTyped,
-  MouseButtonPressed,
-  MouseButtonReleased,
-  MouseMoved,
-  MouseScrolled
+  kNone = 0,
+  kWindowClose,
+  kWindowResize,
+  kWindowFocus,
+  kWindowLostFocus,
+  kWindowMoved,
+  kApptick,
+  kAppUpdate,
+  kAppRender,
+  kKeyPressed,
+  kKeyReleased,
+  kKeyTyped,
+  kMouseButtonPressed,
+  kMouseButtonReleased,
+  kMouseMoved,
+  kMouseScrolled
 };
 
 enum EventCategory {
-  None = 0,
-  EventCategoryApplication = BIT(0),
-  EventCategoryInput = BIT(1),
-  EventCategoryKeyboard = BIT(2),
-  EventCategoryMouse = BIT(3),
-  EventCategoryMouseButton = BIT(4)
+  kNone = 0,
+  kEventCategoryApplication = BIT(0),
+  kEventCategoryInput = BIT(1),
+  kEventCategoryKeyboard = BIT(2),
+  kEventCategoryMouse = BIT(3),
+  kEventCategoryMouseButton = BIT(4)
 };
 
 #define EVENT_CLASS_TYPE(type)                                                \
@@ -49,14 +51,14 @@ class Event {
  public:
   virtual ~Event() = default;
 
-  bool Handled = false;
+  bool handled = false;
 
   virtual EventType GetEventType() const = 0;
   virtual const char* GetName() const = 0;
   virtual int GetCategoryFlags() const = 0;
   virtual std::string ToString() const { return GetName(); }
 
-  inline bool IsInCategory(EventCategory category) {
+  inline bool IsInCategory(EventCategory category) const {
     return GetCategoryFlags() & category;
   }
 };
@@ -66,19 +68,19 @@ class EventDispatcher {
   using EventFn = std::function<bool(T&)>;
 
  public:
-  EventDispatcher(Event& event) : m_Event(event) {}
+  explicit EventDispatcher(Event& event) : event_(event) {}
 
   template <typename T>
   bool Dispatch(EventFn<T> func) {
-    if (m_Event.GetEventType() == T::GetStaticType()) {
-      m_Event.Handled = func(*(T*)&m_Event);
+    if (event_.GetEventType() == T::GetStaticType()) {
+      event_.handled = func(*(T*)&event_);
       return true;
     }
     return false;
   }
 
  private:
-  Event& m_Event;
+  Event& event_;
 };
 
 inline std::ostream& operator<<(std::ostream& os, const Event& e) {

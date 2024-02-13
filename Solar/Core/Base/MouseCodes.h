@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include <ostream>
@@ -21,8 +23,8 @@ enum class MouseCode : uint16_t {
   ButtonMiddle = Button3
 };
 
-inline std::ostream& operator<<(std::ostream& os, MouseCode mouseCode) {
-  os << static_cast<int32_t>(mouseCode);
+inline std::ostream& operator<<(std::ostream& os, MouseCode mouse_code) {
+  os << static_cast<int32_t>(mouse_code);
   return os;
 }
 

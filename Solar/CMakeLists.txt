@@ -107,6 +107,7 @@ set(SolarSrc
   Platform/Windows/WindowsWindow.h
 )
 add_library(Solar STATIC ${SolarSrc})
+target_compile_definitions(Solar PUBLIC GLM_ENABLE_EXPERIMENTAL)
 target_compile_definitions(Solar PUBLIC YAML_CPP_STATIC_DEFINE)
 target_precompile_headers(Solar PRIVATE solpch.h)
 

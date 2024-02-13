@@ -1,11 +1,14 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Core/Scene/SceneSerializer.h"
+
+#include <yaml-cpp/yaml.h>
 
 #include <ostream>
 
 #include "Core/Base/Log.h"
 #include "Core/Scene/Components.h"
 #include "Core/Scene/Entity.h"
-#include "yaml-cpp/yaml.h"
 
 namespace YAML {
 
@@ -20,7 +23,8 @@ struct convert<glm::vec3> {
   }
 
   static bool decode(const Node& node, glm::vec3& rhs) {
-    if (!node.IsSequence() || node.size() != 3) return false;
+    if (!node.IsSequence() || node.size() != 3) { return false;
+}
 
     rhs.x = node[0].as<float>();
     rhs.y = node[1].as<float>();
@@ -41,7 +45,8 @@ struct convert<glm::vec4> {
   }
 
   static bool decode(const Node& node, glm::vec4& rhs) {
-    if (!node.IsSequence() || node.size() != 4) return false;
+    if (!node.IsSequence() || node.size() != 4) { return false;
+}
 
     rhs.x = node[0].as<float>();
     rhs.y = node[1].as<float>();
@@ -67,7 +72,7 @@ YAML::Emitter& operator<<(YAML::Emitter& out, const glm::vec4& v) {
   return out;
 }
 
-SceneSerializer::SceneSerializer(const Ref<Scene>& scene) : m_Scene(scene) {}
+SceneSerializer::SceneSerializer(const Ref<Scene>& scene) : scene_(scene) {}
 
 static void SerializeEntity(YAML::Emitter& out, Entity entity) {
   out << YAML::BeginMap;  // Entity
@@ -78,7 +83,7 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity) {
     out << YAML::Key << "TagComponent";
     out << YAML::BeginMap;
 
-    auto& tag = entity.GetComponent<TagComponent>().Tag;
+    auto& tag = entity.GetComponent<TagComponent>().tag;
     out << YAML::Key << "Tag" << YAML::Value << tag;
 
     out << YAML::EndMap;
@@ -89,12 +94,12 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity) {
     out << YAML::Key << "TransformComponent";
     out << YAML::BeginMap;
 
-    auto& transformComponent = entity.GetComponent<TransformComponent>();
+    auto& transform_component = entity.GetComponent<TransformComponent>();
     out << YAML::Key << "Translation" << YAML::Value
-        << transformComponent.Translation;
+        << transform_component.translation;
     out << YAML::Key << "Rotation" << YAML::Value
-        << transformComponent.Rotation;
-    out << YAML::Key << "Scale" << YAML::Value << transformComponent.Scale;
+        << transform_component.rotation;
+    out << YAML::Key << "Scale" << YAML::Value << transform_component.scale;
 
     out << YAML::EndMap;
   }
@@ -104,8 +109,8 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity) {
     out << YAML::Key << "CameraComponent";
     out << YAML::BeginMap;
 
-    auto& cameraComponent = entity.GetComponent<CameraComponent>();
-    auto& camera = cameraComponent.Camera;
+    auto& camera_component = entity.GetComponent<CameraComponent>();
+    auto& camera = camera_component.camera;
 
     out << YAML::Key << "Camera" << YAML::Value;
     out << YAML::BeginMap;
@@ -126,9 +131,9 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity) {
 
     out << YAML::EndMap;
 
-    out << YAML::Key << "Primary" << YAML::Value << cameraComponent.Primary;
+    out << YAML::Key << "Primary" << YAML::Value << camera_component.primary;
     out << YAML::Key << "FixedAspectRatio" << YAML::Value
-        << cameraComponent.FixedAspectRatio;
+        << camera_component.fixed_aspect_ratio;
 
     out << YAML::EndMap;
   }
@@ -138,9 +143,9 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity) {
     out << YAML::Key << "SpriteRendererComponent";
     out << YAML::BeginMap;
 
-    auto& spriteRendererComponent =
+    auto& sprite_renderer_component =
         entity.GetComponent<SpriteRendererComponent>();
-    out << YAML::Key << "Color" << YAML::Value << spriteRendererComponent.Color;
+    out << YAML::Key << "Color" << YAML::Value << sprite_renderer_component.color;
 
     out << YAML::EndMap;
   }
@@ -153,9 +158,10 @@ void SceneSerializer::Serialize(const std::string& filepath) {
   out << YAML::BeginMap;
   out << YAML::Key << "Scene" << YAML::Value << "TODO: SceneName";
   out << YAML::Key << "Entities" << YAML::Value << YAML::BeginSeq;
-  for (auto [entityID, _] : m_Scene->m_Registry.storage<Entity>().each()) {
-    Entity entity = {entityID, m_Scene.get()};
-    if (!entity) return;
+  for (auto [entityID, _] : scene_->registry_.storage<Entity>().each()) {
+    Entity entity = {entityID, scene_.get()};
+    if (!entity) { return;
+}
     SerializeEntity(out, entity);
   }
   out << YAML::EndSeq;
@@ -167,14 +173,15 @@ void SceneSerializer::Serialize(const std::string& filepath) {
 
 bool SceneSerializer::Deserialize(const std::string& filepath) {
   std::ifstream stream(filepath);
-  std::stringstream strStream;
-  strStream << stream.rdbuf();
+  std::stringstream str_stream;
+  str_stream << stream.rdbuf();
 
-  YAML::Node data = YAML::Load(strStream.str());
-  if (!data["Scene"]) return false;
+  YAML::Node data = YAML::Load(str_stream.str());
+  if (!data["Scene"]) { return false;
+}
 
-  std::string sceneName = data["Scene"].as<std::string>();
-  SOLAR_CORE_TRACE("Deserializing Scene '{0}'", sceneName);
+  std::string scene_name = data["Scene"].as<std::string>();
+  SOLAR_CORE_TRACE("Deserializing Scene '{0}'", scene_name);
 
   auto entities = data["Entities"];
   if (entities) {
@@ -182,57 +189,58 @@ bool SceneSerializer::Deserialize(const std::string& filepath) {
       uint64_t uuid = entity["Entity"].as<uint64_t>();  // TODO
 
       std::string name;
-      auto tagComponent = entity["TagComponent"];
-      if (tagComponent) name = tagComponent["Tag"].as<std::string>();
+      auto tag_component = entity["TagComponent"];
+      if (tag_component) { name = tag_component["Tag"].as<std::string>();
+}
 
       SOLAR_CORE_TRACE("Deserialized entity with ID = {0}, name = {1}", uuid,
                        name);
 
-      Entity deserializedEntity = m_Scene->CreateEntity(name);
+      Entity deserialized_entity = scene_->CreateEntity(name);
 
       // TransformComponent
-      auto transformComponent = entity["TransformComponent"];
-      if (transformComponent) {
+      auto transform_component = entity["TransformComponent"];
+      if (transform_component) {
         // Entities always have transforms
-        auto& tc = deserializedEntity.GetComponent<TransformComponent>();
-        tc.Translation = transformComponent["Translation"].as<glm::vec3>();
-        tc.Rotation = transformComponent["Rotation"].as<glm::vec3>();
-        tc.Scale = transformComponent["Scale"].as<glm::vec3>();
+        auto& tc = deserialized_entity.GetComponent<TransformComponent>();
+        tc.translation = transform_component["Translation"].as<glm::vec3>();
+        tc.rotation = transform_component["Rotation"].as<glm::vec3>();
+        tc.scale = transform_component["Scale"].as<glm::vec3>();
       }
 
       // CameraComponent
-      auto cameraComponent = entity["CameraComponent"];
-      if (cameraComponent) {
-        auto& cc = deserializedEntity.AddComponent<CameraComponent>();
+      auto camera_component = entity["CameraComponent"];
+      if (camera_component) {
+        auto& cc = deserialized_entity.AddComponent<CameraComponent>();
 
-        auto cameraProps = cameraComponent["Camera"];
-        cc.Camera.SetProjectionType(
-            (SceneCamera::ProjectionType)cameraProps["ProjectionType"]
+        auto camera_props = camera_component["Camera"];
+        cc.camera.SetProjectionType(
+            (SceneCamera::ProjectionType)camera_props["ProjectionType"]
                 .as<int>());
 
-        cc.Camera.SetPerspectiveVerticalFOV(
-            cameraProps["PerspectiveFOV"].as<float>());
-        cc.Camera.SetPerspectiveNearClip(
-            cameraProps["PerspectiveNear"].as<float>());
-        cc.Camera.SetPerspectiveFarClip(
-            cameraProps["PerspectiveFar"].as<float>());
+        cc.camera.SetPerspectiveVerticalFOV(
+            camera_props["PerspectiveFOV"].as<float>());
+        cc.camera.SetPerspectiveNearClip(
+            camera_props["PerspectiveNear"].as<float>());
+        cc.camera.SetPerspectiveFarClip(
+            camera_props["PerspectiveFar"].as<float>());
 
-        cc.Camera.SetOrthographicSize(
-            cameraProps["OrthographicSize"].as<float>());
-        cc.Camera.SetOrthographicNearClip(
-            cameraProps["OrthographicNear"].as<float>());
-        cc.Camera.SetOrthographicFarClip(
-            cameraProps["OrthographicFar"].as<float>());
+        cc.camera.SetOrthographicSize(
+            camera_props["OrthographicSize"].as<float>());
+        cc.camera.SetOrthographicNearClip(
+            camera_props["OrthographicNear"].as<float>());
+        cc.camera.SetOrthographicFarClip(
+            camera_props["OrthographicFar"].as<float>());
 
-        cc.Primary = cameraComponent["Primary"].as<bool>();
-        cc.FixedAspectRatio = cameraComponent["FixedAspectRatio"].as<bool>();
+        cc.primary = camera_component["Primary"].as<bool>();
+        cc.fixed_aspect_ratio = camera_component["FixedAspectRatio"].as<bool>();
       }
 
       // SpriteRendererComponent
-      auto spriteRendererComponent = entity["SpriteRendererComponent"];
-      if (spriteRendererComponent) {
-        auto& src = deserializedEntity.AddComponent<SpriteRendererComponent>();
-        src.Color = spriteRendererComponent["Color"].as<glm::vec4>();
+      auto sprite_renderer_component = entity["SpriteRendererComponent"];
+      if (sprite_renderer_component) {
+        auto& src = deserialized_entity.AddComponent<SpriteRendererComponent>();
+        src.color = sprite_renderer_component["Color"].as<glm::vec4>();
       }
     }
   }

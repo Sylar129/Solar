@@ -1,44 +1,47 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Core/Renderer/EditorCamera.h"
+
+#include <glm/gtx/quaternion.hpp>
 
 #include "Core/Base/Input.h"
 #include "Core/Base/KeyCodes.h"
 #include "Core/Base/MouseCodes.h"
-#include "glm/gtx/quaternion.hpp"
 
 namespace Solar {
 
-EditorCamera::EditorCamera(float fov, float aspectRatio, float nearClip,
-                           float farClip)
-    : m_FOV(fov),
-      m_AspectRatio(aspectRatio),
-      m_NearClip(nearClip),
-      m_FarClip(farClip),
-      Camera(
-          glm::perspective(glm::radians(fov), aspectRatio, nearClip, farClip)) {
+EditorCamera::EditorCamera(float fov, float aspect_ratio, float near_clip,
+                           float far_clip)
+    : fov_(fov),
+      aspect_ratio_(aspect_ratio),
+      near_clip_(near_clip),
+      far_clip_(far_clip),
+      Camera(glm::perspective(glm::radians(fov), aspect_ratio, near_clip,
+                              far_clip)) {
   UpdateView();
 }
 
 void EditorCamera::UpdateProjection() {
-  m_AspectRatio = m_ViewportWidth / m_ViewportHeight;
-  m_Projection = glm::perspective(glm::radians(m_FOV), m_AspectRatio,
-                                  m_NearClip, m_FarClip);
+  aspect_ratio_ = viewport_width_ / viewport_height_;
+  projection_ = glm::perspective(glm::radians(fov_), aspect_ratio_, near_clip_,
+                                 far_clip_);
 }
 
 void EditorCamera::UpdateView() {
   // m_Yaw = m_Pitch = 0.0f; // Lock the camera's rotation
-  m_Position = CalculatePosition();
+  position_ = CalculatePosition();
 
   glm::quat orientation = GetOrientation();
-  m_ViewMatrix =
-      glm::translate(glm::mat4(1.0f), m_Position) * glm::toMat4(orientation);
-  m_ViewMatrix = glm::inverse(m_ViewMatrix);
+  view_matrix_ =
+      glm::translate(glm::mat4(1.0f), position_) * glm::toMat4(orientation);
+  view_matrix_ = glm::inverse(view_matrix_);
 }
 
 std::pair<float, float> EditorCamera::PanSpeed() const {
-  float x = std::min(m_ViewportWidth / 1000.0f, 2.4f);  // max = 2.4f
+  float x = std::min(viewport_width_ / 1000.0f, 2.4f);  // max = 2.4f
   float xFactor = 0.0366f * (x * x) - 0.1778f * x + 0.3021f;
 
-  float y = std::min(m_ViewportHeight / 1000.0f, 2.4f);  // max = 2.4f
+  float y = std::min(viewport_height_ / 1000.0f, 2.4f);  // max = 2.4f
   float yFactor = 0.0366f * (y * y) - 0.1778f * y + 0.3021f;
 
   return {xFactor, yFactor};
@@ -47,7 +50,7 @@ std::pair<float, float> EditorCamera::PanSpeed() const {
 float EditorCamera::RotationSpeed() const { return 0.8f; }
 
 float EditorCamera::ZoomSpeed() const {
-  float distance = m_Distance * 0.2f;
+  float distance = distance_ * 0.2f;
   distance = std::max(distance, 0.0f);
   float speed = distance * distance;
   speed = std::min(speed, 100.0f);  // max speed = 100
@@ -57,15 +60,16 @@ float EditorCamera::ZoomSpeed() const {
 void EditorCamera::OnUpdate(TimeStep& ts) {
   if (Input::IsKeyPressed(KeyCode::LeftAlt)) {
     const glm::vec2& mouse{Input::GetMouseX(), Input::GetMouseY()};
-    glm::vec2 delta = (mouse - m_InitialMousePosition) * 0.003f;
-    m_InitialMousePosition = mouse;
+    glm::vec2 delta = (mouse - initial_mouse_position_) * 0.003f;
+    initial_mouse_position_ = mouse;
 
-    if (Input::IsMouseButtonPressed(MouseCode::ButtonMiddle))
+    if (Input::IsMouseButtonPressed(MouseCode::ButtonMiddle)) {
       MousePan(delta);
-    else if (Input::IsMouseButtonPressed(MouseCode::ButtonLeft))
+    } else if (Input::IsMouseButtonPressed(MouseCode::ButtonLeft)) {
       MouseRotate(delta);
-    else if (Input::IsMouseButtonPressed(MouseCode::ButtonRight))
+    } else if (Input::IsMouseButtonPressed(MouseCode::ButtonRight)) {
       MouseZoom(delta.y);
+}
   }
 
   UpdateView();
@@ -85,21 +89,21 @@ bool EditorCamera::OnMouseScroll(MouseScrolledEvent& e) {
 
 void EditorCamera::MousePan(const glm::vec2& delta) {
   auto [xSpeed, ySpeed] = PanSpeed();
-  m_FocalPoint += -GetRightDirection() * delta.x * xSpeed * m_Distance;
-  m_FocalPoint += GetUpDirection() * delta.y * ySpeed * m_Distance;
+  focal_point_ += -GetRightDirection() * delta.x * xSpeed * distance_;
+  focal_point_ += GetUpDirection() * delta.y * ySpeed * distance_;
 }
 
 void EditorCamera::MouseRotate(const glm::vec2& delta) {
-  float yawSign = GetUpDirection().y < 0 ? -1.0f : 1.0f;
-  m_Yaw += yawSign * delta.x * RotationSpeed();
-  m_Pitch += delta.y * RotationSpeed();
+  float yaw_sign = GetUpDirection().y < 0 ? -1.0f : 1.0f;
+  yaw_ += yaw_sign * delta.x * RotationSpeed();
+  pitch_ += delta.y * RotationSpeed();
 }
 
 void EditorCamera::MouseZoom(float delta) {
-  m_Distance -= delta * ZoomSpeed();
-  if (m_Distance < 1.0f) {
-    m_FocalPoint += GetForwardDirection();
-    m_Distance = 1.0f;
+  distance_ -= delta * ZoomSpeed();
+  if (distance_ < 1.0f) {
+    focal_point_ += GetForwardDirection();
+    distance_ = 1.0f;
   }
 }
 
@@ -116,11 +120,11 @@ glm::vec3 EditorCamera::GetForwardDirection() const {
 }
 
 glm::vec3 EditorCamera::CalculatePosition() const {
-  return m_FocalPoint - GetForwardDirection() * m_Distance;
+  return focal_point_ - GetForwardDirection() * distance_;
 }
 
 glm::quat EditorCamera::GetOrientation() const {
-  return glm::quat(glm::vec3(-m_Pitch, -m_Yaw, 0.0f));
+  return glm::quat(glm::vec3(-pitch_, -yaw_, 0.0f));
 }
 
 }  // namespace Solar
