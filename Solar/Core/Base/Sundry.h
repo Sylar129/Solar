@@ -3,6 +3,7 @@
 #pragma once
 
 #include <memory>
+#include <utility>
 
 #ifdef SOLAR_DEBUG
 #ifdef SOLAR_PLATFORM_WINDOWS

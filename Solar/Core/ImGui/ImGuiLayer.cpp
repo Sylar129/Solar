@@ -80,7 +80,8 @@ void ImGuiLayer::OnDetech() {
 void ImGuiLayer::OnEvent(Event& e) {
   if (block_events_) {
     ImGuiIO& io = ImGui::GetIO();
-    e.handled |= e.IsInCategory(EventCategory::kEventCategoryMouse) & io.WantCaptureMouse;
+    e.handled |= e.IsInCategory(EventCategory::kEventCategoryMouse) &
+                 io.WantCaptureMouse;
     e.handled |= e.IsInCategory(EventCategory::kEventCategoryKeyboard) &
                  io.WantCaptureKeyboard;
   }
@@ -100,8 +101,8 @@ void ImGuiLayer::End() {
 
   ImGuiIO& io = ImGui::GetIO();
   Application& app = Application::Get();
-  io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(),
-                          (float)app.GetWindow().GetHeight());
+  io.DisplaySize = ImVec2(static_cast<float>(app.GetWindow().GetWidth()),
+                          static_cast<float>(app.GetWindow().GetHeight()));
 
   // Rendering
   ImGui::Render();

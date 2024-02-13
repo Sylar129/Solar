@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <string>
+
 #include "Core/Base/KeyCodes.h"
 #include "Core/Events/Event.h"
 

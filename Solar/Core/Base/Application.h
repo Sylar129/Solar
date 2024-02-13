@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <string>
+
 #include "Core/Base/LayerStack.h"
 #include "Core/Base/Window.h"
 #include "Core/Events/ApplicationEvent.h"

@@ -8,6 +8,7 @@
 // clang-format on
 
 #include "Core/Base/Log.h"
+#include "Core/Base/Sundry.h"
 #include "Core/Debug/Instrumentor.h"
 
 namespace Solar {

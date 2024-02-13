@@ -7,7 +7,7 @@
 #include <spdlog/fmt/ostr.h>
 // clang-format on
 
-#include "Core/Base/Sundry.h"
+#include <memory>
 
 namespace Solar {
 

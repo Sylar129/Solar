@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <vector>
+
 #include "Core/Renderer/Buffer.h"
 
 namespace Solar {

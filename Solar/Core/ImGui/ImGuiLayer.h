@@ -11,9 +11,9 @@ class ImGuiLayer : public Layer {
   ImGuiLayer();
   ~ImGuiLayer();
 
-  virtual void OnAttach() override;
-  virtual void OnDetech() override;
-  virtual void OnEvent(Event& e) override;
+  void OnAttach() override;
+  void OnDetech() override;
+  void OnEvent(Event& e) override;
 
   void Begin();
   void End();
