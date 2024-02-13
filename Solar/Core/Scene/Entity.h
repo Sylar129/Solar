@@ -17,7 +17,7 @@ class Entity {
   T& AddComponent(Args&&... args) {
     SOLAR_CORE_ASSERT(!HasComponent<T>(), "Entity already has component!");
     T& component = scene_->registry_.emplace<T>(entity_handle_,
-                                                 std::forward<Args>(args)...);
+                                                std::forward<Args>(args)...);
 
     scene_->OnComponentAdded<T>(*this, component);
 

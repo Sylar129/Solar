@@ -24,6 +24,7 @@ class WindowResizeEvent : public Event {
   }
   EVENT_CLASS_TYPE(kWindowResize);
   EVENT_CLASS_CATEGORY(kEventCategoryApplication);
+
  private:
   unsigned int width_;
   unsigned int height_;

@@ -87,7 +87,7 @@ void WindowsWindow::Init(const WindowProps& props) {
 #endif  // SOLAR_DEBUG
 
     window_ = glfwCreateWindow((int)props.width, (int)props.height,
-                                props.title.c_str(), nullptr, nullptr);
+                               props.title.c_str(), nullptr, nullptr);
     s_GLFWWindowCount++;
   }
 
@@ -115,7 +115,7 @@ void WindowsWindow::Init(const WindowProps& props) {
   });
 
   glfwSetKeyCallback(window_, [](GLFWwindow* window, int key, int scancode,
-                                  int action, int mods) {
+                                 int action, int mods) {
     WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
     KeyCode key_code = static_cast<KeyCode>(key);
     switch (action) {

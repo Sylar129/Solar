@@ -3,8 +3,8 @@
 #include "Core/Renderer/Renderer.h"
 
 #include "Core/Debug/Instrumentor.h"
-#include "Core/Renderer/Renderer2D.h"
 #include "Core/Renderer/RenderCommand.h"
+#include "Core/Renderer/Renderer2D.h"
 #include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Solar {

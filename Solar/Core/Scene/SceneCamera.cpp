@@ -33,7 +33,7 @@ void SceneCamera::SetViewportSize(uint32_t width, uint32_t height) {
 void SceneCamera::RecalculateProjection() {
   if (projection_type_ == ProjectionType::kPerspective) {
     projection_ = glm::perspective(perspective_fov_, aspect_ratio_,
-                                    perspective_near_, perspective_far_);
+                                   perspective_near_, perspective_far_);
   } else {
     float ortho_left = -orthographic_size_ * aspect_ratio_ * 0.5f;
     float ortho_right = orthographic_size_ * aspect_ratio_ * 0.5f;
@@ -41,7 +41,7 @@ void SceneCamera::RecalculateProjection() {
     float ortho_top = orthographic_size_ * 0.5f;
 
     projection_ = glm::ortho(ortho_left, ortho_right, ortho_bottom, ortho_top,
-                              orthographic_near_, orthographic_far_);
+                             orthographic_near_, orthographic_far_);
   }
 }
 
