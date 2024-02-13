@@ -1,0 +1,61 @@
+---
+Checks: 'clang-analyzer-*,
+bugprone-*,
+misc-*,
+performance-*,
+readability-*,
+-bugprone-bool-pointer-implicit-conversion,
+-bugprone-easily-swappable-parameters,
+-bugprone-implicit-widening-of-multiplication-result,
+-bugprone-infinite-loop,
+-bugprone-signed-char-misuse,
+-bugprone-unhandled-exception-at-new,
+-modernize-use-trailing-return-type,
+cert-dcl03-c,
+cert-dcl58-cpp,
+cert-err34-c,
+cert-err52-cpp,
+cert-err58-cpp,
+cert-err60-cpp,
+cert-flp30-c,
+cert-oop57-cpp,
+cppcoreguidelines-interfaces-global-init,
+cppcoreguidelines-macro-usage,
+cppcoreguidelines-pro-type-static-cast-downcast,
+cppcoreguidelines-slicing,
+google-build-using-namespace,
+google-build-using-namespace,
+google-default-arguments,
+google-explicit-constructor,
+google-runtime-int,
+google-runtime-operator,
+hicpp-exception-baseclass,
+-misc-non-private-member-variables-in-classes,
+-readability-function-size,
+-readability-identifier-length,
+-readability-non-const-parameter'
+CheckOptions:
+  hicpp-signed-bitwise.IgnorePositiveIntegerLiterals: 'true'
+  readability-identifier-naming.AggressiveDependentMemberLookup: 'true'
+  readability-identifier-naming.ClassCase: 'CamelCase'
+  readability-identifier-naming.ClassConstantCase: 'CamelCase'
+  readability-identifier-naming.ClassConstantPrefix: 'k'
+  readability-identifier-naming.ConceptCase: 'CamelCase'
+  readability-identifier-naming.ConstantCase: 'CamelCase'
+  readability-identifier-naming.ConstantPrefix: 'k'
+  readability-identifier-naming.EnumCase: 'CamelCase'
+  readability-identifier-naming.GlobalVariableCase: 'CamelCase'
+  readability-identifier-naming.GlobalVariablePrefix: 'g'
+  readability-identifier-naming.LocalVariableCase: 'lower_case'
+  readability-identifier-naming.MacroDefinitionCase: 'UPPER_CASE'
+  readability-identifier-naming.MemberCase: 'lower_case'
+  readability-identifier-naming.MethodCase: 'CamelCase'
+  readability-identifier-naming.ParameterCase: 'lower_case'
+  readability-identifier-naming.ProtectedMemberSuffix: '_'
+  readability-identifier-naming.PrivateMemberSuffix: '_'
+  readability-identifier-naming.StructCase: 'CamelCase'
+  readability-identifier-naming.StaticVariableCase: 'lower_case'
+  readability-identifier-naming.StaticVariablePrefix: 's_'
+  readability-identifier-naming.TemplateParameterCase: 'CamelCase'
+...
+
