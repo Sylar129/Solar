@@ -2,6 +2,8 @@
 
 #include "EditorLayer.h"
 
+#include <string>
+
 // clang-format off
 #include "imgui.h"
 #include "ImGuizmo.h"
@@ -126,11 +128,12 @@ void EditorLayer::OnUpdate(TimeStep& ts) {
   auto viewport_size = viewport_bounds_[1] - viewport_bounds_[0];
   my = viewport_size.y - my;
 
-  int mouse_x = (int)mx;
-  int mouse_y = (int)my;
+  int mouse_x = static_cast<int>(mx);
+  int mouse_y = static_cast<int>(my);
 
-  if (mouse_x >= 0 && mouse_y >= 0 && mouse_x < (int)viewport_size.x &&
-      mouse_y < (int)viewport_size.y) {
+  if (mouse_x >= 0 && mouse_y >= 0 &&
+      mouse_x < static_cast<int>(viewport_size.x) &&
+      mouse_y < static_cast<int>(viewport_size.y)) {
     int pixel_data = framebuffer_->ReadPixel(1, mouse_x, mouse_y);
     if (-1 == pixel_data) {
       hovered_entity_ = {};
@@ -290,8 +293,8 @@ void EditorLayer::OnImGuiRender() {
     ImGuizmo::SetOrthographic(false);
     ImGuizmo::SetDrawlist();
 
-    float window_width = (float)ImGui::GetWindowWidth();
-    float window_height = (float)ImGui::GetWindowHeight();
+    float window_width = ImGui::GetWindowWidth();
+    float window_height = ImGui::GetWindowHeight();
     ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y,
                       window_width, window_height);
 
@@ -406,7 +409,7 @@ bool EditorLayer::OnKeyPressed(KeyPressdEvent& e) {
 }
 
 bool EditorLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e) {
-  // TODO: call function to detect state
+  // TODO(sylar): call function to detect state
   if (e.GetMouseButton() == MouseCode::ButtonLeft &&
       !Input::IsKeyPressed(KeyCode::LeftAlt)) {
     if (viewport_hovered_ && !ImGuizmo::IsOver()) {

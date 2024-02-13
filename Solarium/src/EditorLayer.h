@@ -13,14 +13,14 @@ namespace Solar {
 class EditorLayer : public Layer {
  public:
   EditorLayer();
-  virtual ~EditorLayer() = default;
+  ~EditorLayer() override = default;
 
-  virtual void OnAttach() override;
-  virtual void OnDetech() override;
+  void OnAttach() override;
+  void OnDetech() override;
 
-  virtual void OnUpdate(TimeStep& ts) override;
-  virtual void OnImGuiRender() override;
-  virtual void OnEvent(Event& event) override;
+  void OnUpdate(TimeStep& ts) override;
+  void OnImGuiRender() override;
+  void OnEvent(Event& event) override;
 
  private:
   bool OnKeyPressed(KeyPressdEvent& e);
