@@ -10,15 +10,15 @@ class OpenGLVertexBuffer : public VertexBuffer {
  public:
   explicit OpenGLVertexBuffer(uint32_t size);
   OpenGLVertexBuffer(float* vertices, uint32_t size);
-  virtual ~OpenGLVertexBuffer();
+  ~OpenGLVertexBuffer() override;
 
-  virtual void Bind() const override;
-  virtual void Unbind() const override;
+  void Bind() const override;
+  void Unbind() const override;
 
-  virtual void SetData(const void* data, uint32_t size) override;
+  void SetData(const void* data, uint32_t size) override;
 
-  virtual const BufferLayout& GetLayout() const override;
-  virtual void SetLayout(const BufferLayout& layout) override;
+  const BufferLayout& GetLayout() const override;
+  void SetLayout(const BufferLayout& layout) override;
 
  private:
   uint32_t renderer_id_;
@@ -28,12 +28,12 @@ class OpenGLVertexBuffer : public VertexBuffer {
 class OpenGLIndexBuffer : public IndexBuffer {
  public:
   OpenGLIndexBuffer(uint32_t* indices, uint32_t count);
-  virtual ~OpenGLIndexBuffer();
+  ~OpenGLIndexBuffer() override;
 
-  virtual void Bind() const override;
-  virtual void Unbind() const override;
+  void Bind() const override;
+  void Unbind() const override;
 
-  inline virtual uint32_t GetCount() const override { return count_; }
+  inline uint32_t GetCount() const override { return count_; }
 
  private:
   uint32_t renderer_id_;

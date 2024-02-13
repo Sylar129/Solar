@@ -84,7 +84,7 @@ constexpr GLenum SolarFBTextureFormatToGL(FramebufferTextureFormat format) {
   return 0;
 }
 
-// TODO
+// TODO(sylar)
 // constexpr GLenum GLDataType(FramebufferTextureFormat format) {
 //    switch (format) {
 //        case FramebufferTextureFormat::RGBA8:

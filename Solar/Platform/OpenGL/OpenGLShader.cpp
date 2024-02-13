@@ -2,6 +2,8 @@
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
+#include <vector>
+
 #include "Core/Debug/Instrumentor.h"
 #include "glad/glad.h"
 #include "glm/gtc/type_ptr.hpp"
@@ -212,7 +214,7 @@ std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(
 }
 
 void OpenGLShader::Compile(
-    std::unordered_map<GLenum, std::string>& shader_sources) {
+    const std::unordered_map<GLenum, std::string>& shader_sources) {
   SOLAR_PROFILE_FUNCTION();
 
   // Get a program object.
@@ -266,7 +268,7 @@ void OpenGLShader::Compile(
 
   // Note the different functions here: glGetProgram* instead of glGetShader*.
   GLint is_linked = 0;
-  glGetProgramiv(program, GL_LINK_STATUS, (int*)&is_linked);
+  glGetProgramiv(program, GL_LINK_STATUS, &is_linked);
   if (is_linked == GL_FALSE) {
     GLint max_length = 0;
     glGetProgramiv(program, GL_INFO_LOG_LENGTH, &max_length);

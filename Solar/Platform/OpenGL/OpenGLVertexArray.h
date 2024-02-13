@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <vector>
+
 #include "Core/Renderer/VertexArray.h"
 
 namespace Solar {
@@ -9,17 +11,16 @@ namespace Solar {
 class OpenGLVertexArray : public VertexArray {
  public:
   OpenGLVertexArray();
-  virtual ~OpenGLVertexArray();
+  ~OpenGLVertexArray() override;
 
-  virtual void Bind() const override;
-  virtual void Unbind() const override;
+  void Bind() const override;
+  void Unbind() const override;
 
-  virtual void AddVertexBuffer(const Ref<VertexBuffer>& vertex_buffer) override;
-  virtual void SetIndexBuffer(const Ref<IndexBuffer>& index_buffer) override;
+  void AddVertexBuffer(const Ref<VertexBuffer>& vertex_buffer) override;
+  void SetIndexBuffer(const Ref<IndexBuffer>& index_buffer) override;
 
-  virtual const std::vector<Ref<VertexBuffer>>& GetVertexBuffers()
-      const override;
-  virtual const Ref<IndexBuffer>& GetIndexBuffer() const override;
+  const std::vector<Ref<VertexBuffer>>& GetVertexBuffers() const override;
+  const Ref<IndexBuffer>& GetIndexBuffer() const override;
 
  private:
   uint32_t renderer_id_;

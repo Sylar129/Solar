@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <vector>
+
 #include "Core/Renderer/Framebuffer.h"
 
 namespace Solar {
@@ -9,19 +11,19 @@ namespace Solar {
 class OpenGLFramebuffer : public Framebuffer {
  public:
   explicit OpenGLFramebuffer(const FramebufferSpecification& spec);
-  virtual ~OpenGLFramebuffer();
+  ~OpenGLFramebuffer() override;
 
-  virtual void Bind() override;
-  virtual void Unbind() override;
+  void Bind() override;
+  void Unbind() override;
 
-  virtual void Resize(uint32_t width, uint32_t height) override;
-  virtual int ReadPixel(uint32_t attachment_index, int x, int y) override;
+  void Resize(uint32_t width, uint32_t height) override;
+  int ReadPixel(uint32_t attachment_index, int x, int y) override;
 
-  virtual void ClearAttachment(uint32_t attachment_index, int value) override;
+  void ClearAttachment(uint32_t attachment_index, int value) override;
 
-  virtual uint32_t GetColorAttachmentRendererID(uint32_t index) const override;
+  uint32_t GetColorAttachmentRendererID(uint32_t index) const override;
 
-  virtual const FramebufferSpecification& GetSpecification() const override;
+  const FramebufferSpecification& GetSpecification() const override;
 
   void Invalidate();
 
