@@ -247,7 +247,7 @@ void OpenGLShader::Compile(
 
       // The maxLength includes the NULL character
       std::vector<GLchar> info_log(max_length);
-      glGetShaderInfoLog(shader, max_length, &max_length, &info_log[0]);
+      glGetShaderInfoLog(shader, max_length, &max_length, info_log.data());
 
       // We don't need the shader anymore.
       glDeleteShader(shader);
@@ -273,7 +273,7 @@ void OpenGLShader::Compile(
 
     // The maxLength includes the NULL character
     std::vector<GLchar> info_log(max_length);
-    glGetProgramInfoLog(program, max_length, &max_length, &info_log[0]);
+    glGetProgramInfoLog(program, max_length, &max_length, info_log.data());
 
     // We don't need the program anymore.
     glDeleteProgram(program);

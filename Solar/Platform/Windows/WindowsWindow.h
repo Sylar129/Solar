@@ -9,7 +9,7 @@ namespace Solar {
 
 class WindowsWindow : public Window {
  public:
-  WindowsWindow(const WindowProps& props);
+  explicit WindowsWindow(const WindowProps& props);
   virtual ~WindowsWindow();
 
   void OnUpdate() override;
@@ -30,7 +30,6 @@ class WindowsWindow : public Window {
   virtual void Init(const WindowProps& props);
   virtual void Shutdown();
 
- private:
   GLFWwindow* m_Window;
   Scope<GraphicsContext> m_Context;
 

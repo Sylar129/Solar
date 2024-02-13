@@ -13,11 +13,15 @@
 
 namespace Solar {
 
-static uint8_t s_GLFWWindowCount = 0;
+namespace {
 
-static void GLFWErrorCallback(int error, const char* description) {
+uint8_t s_GLFWWindowCount = 0;
+
+void GLFWErrorCallback(int error, const char* description) {
   SOLAR_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 }
+
+}  // namespace
 
 Window* Window::Create(const WindowProps& props) {
   return new WindowsWindow(props);
@@ -113,23 +117,25 @@ void WindowsWindow::Init(const WindowProps& props) {
   glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode,
                                   int action, int mods) {
     WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-    KeyCode keyCode = static_cast<KeyCode>(key);
+    KeyCode key_code = static_cast<KeyCode>(key);
     switch (action) {
       case GLFW_PRESS: {
-        KeyPressdEvent event(keyCode, 0);
+        KeyPressdEvent event(key_code, 0);
         data.EventCallback(event);
         break;
       }
       case GLFW_RELEASE: {
-        KeyReleasedEvent event(keyCode);
+        KeyReleasedEvent event(key_code);
         data.EventCallback(event);
         break;
       }
       case GLFW_REPEAT: {
-        KeyPressdEvent event(keyCode, 1);
+        KeyPressdEvent event(key_code, 1);
         data.EventCallback(event);
         break;
       }
+      default:
+        break;
     }
   });
 
@@ -142,32 +148,34 @@ void WindowsWindow::Init(const WindowProps& props) {
   glfwSetMouseButtonCallback(
       m_Window, [](GLFWwindow* window, int button, int action, int mods) {
         WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-        MouseCode mouseCode = static_cast<MouseCode>(button);
+        MouseCode mouse_code = static_cast<MouseCode>(button);
         switch (action) {
           case GLFW_PRESS: {
-            MouseButtonPressedEvent event(mouseCode);
+            MouseButtonPressedEvent event(mouse_code);
             data.EventCallback(event);
             break;
           }
           case GLFW_RELEASE: {
-            MouseButtonReleasedEvent event(mouseCode);
+            MouseButtonReleasedEvent event(mouse_code);
             data.EventCallback(event);
             break;
           }
+          default:
+            break;
         }
       });
 
   glfwSetScrollCallback(
-      m_Window, [](GLFWwindow* window, double xOffset, double yOffset) {
+      m_Window, [](GLFWwindow* window, double x_offset, double y_offset) {
         WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-        MouseScrolledEvent event((float)xOffset, (float)yOffset);
+        MouseScrolledEvent event((float)x_offset, (float)y_offset);
         data.EventCallback(event);
       });
 
   glfwSetCursorPosCallback(
-      m_Window, [](GLFWwindow* window, double xPos, double yPos) {
+      m_Window, [](GLFWwindow* window, double x_pos, double y_pos) {
         WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-        MouseMovedEvent event((float)xPos, (float)yPos);
+        MouseMovedEvent event((float)x_pos, (float)y_pos);
         data.EventCallback(event);
       });
 }

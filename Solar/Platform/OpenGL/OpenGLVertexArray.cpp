@@ -85,7 +85,8 @@ void OpenGLVertexArray::AddVertexBuffer(
       case ShaderDataType::kInt4:
       case ShaderDataType::kBool:
         glEnableVertexAttribArray(vertex_buffer_index_);
-        glVertexAttribIPointer(vertex_buffer_index_, element.GetComponentCount(),
+        glVertexAttribIPointer(vertex_buffer_index_,
+                               element.GetComponentCount(),
                                ShaderDataTypeToOpenGLBaseType(element.type),
                                layout.GetStride(), (const void*)element.offset);
         vertex_buffer_index_++;
