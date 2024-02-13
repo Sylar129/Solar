@@ -28,25 +28,25 @@ void OrthographicCameraController::OnUpdate(TimeStep ts) {
   SOLAR_PROFILE_FUNCTION();
 
   // SOLAR_CORE_TRACE("Rotation: [{0}]", m_CameraRotation);
-  if (Input::IsKeyPressed(KeyCode::A)) {
+  if (Input::IsKeyPressed(KeyCode::kA)) {
     camera_position_.x -=
         glm::cos(camera_rotation_) * camera_translation_speed_ * ts;
     camera_position_.y -=
         glm::sin(camera_rotation_) * camera_translation_speed_ * ts;
   }
-  if (Input::IsKeyPressed(KeyCode::D)) {
+  if (Input::IsKeyPressed(KeyCode::kD)) {
     camera_position_.x +=
         glm::cos(camera_rotation_) * camera_translation_speed_ * ts;
     camera_position_.y +=
         glm::sin(camera_rotation_) * camera_translation_speed_ * ts;
   }
-  if (Input::IsKeyPressed(KeyCode::W)) {
+  if (Input::IsKeyPressed(KeyCode::kW)) {
     camera_position_.x +=
         -glm::sin(camera_rotation_) * camera_translation_speed_ * ts;
     camera_position_.y +=
         glm::cos(camera_rotation_) * camera_translation_speed_ * ts;
   }
-  if (Input::IsKeyPressed(KeyCode::S)) {
+  if (Input::IsKeyPressed(KeyCode::kS)) {
     camera_position_.x -=
         -glm::sin(camera_rotation_) * camera_translation_speed_ * ts;
     camera_position_.y -=
@@ -54,10 +54,10 @@ void OrthographicCameraController::OnUpdate(TimeStep ts) {
   }
 
   if (rotation_) {
-    if (Input::IsKeyPressed(KeyCode::Q)) {
+    if (Input::IsKeyPressed(KeyCode::kQ)) {
       camera_rotation_ += camera_rotation_speed_ * ts;
     }
-    if (Input::IsKeyPressed(KeyCode::E)) {
+    if (Input::IsKeyPressed(KeyCode::kE)) {
       camera_rotation_ -= camera_rotation_speed_ * ts;
     }
     camera_.SetRotation(camera_rotation_);

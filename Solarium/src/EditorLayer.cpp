@@ -13,7 +13,6 @@
 #include "Core/Math/Math.h"
 #include "Core/Scene/SceneSerializer.h"
 #include "Core/Utils/PlatformUtils.h"
-#include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
 namespace Solar {
@@ -65,16 +64,16 @@ void EditorLayer::OnAttach() {
       auto& translation = GetComponent<TransformComponent>().translation;
       float speed = 5.0f;
 
-      if (Input::IsKeyPressed(KeyCode::A)) {
+      if (Input::IsKeyPressed(KeyCode::kA)) {
         translation.x -= speed * ts;
       }
-      if (Input::IsKeyPressed(KeyCode::D)) {
+      if (Input::IsKeyPressed(KeyCode::kD)) {
         translation.x += speed * ts;
       }
-      if (Input::IsKeyPressed(KeyCode::W)) {
+      if (Input::IsKeyPressed(KeyCode::kW)) {
         translation.y += speed * ts;
       }
-      if (Input::IsKeyPressed(KeyCode::S)) {
+      if (Input::IsKeyPressed(KeyCode::kS)) {
         translation.y -= speed * ts;
       }
     }
@@ -315,7 +314,7 @@ void EditorLayer::OnImGuiRender() {
     glm::mat4 transform = tc.GetTranform();
 
     // Snapping
-    bool snap = Input::IsKeyPressed(KeyCode::LeftControl);
+    bool snap = Input::IsKeyPressed(KeyCode::kLeftControl);
     // Snap to 0.5m for translation/scale
     float snap_value = 0.5f;
     // Snap to 45 degrees for rotation
@@ -367,39 +366,39 @@ bool EditorLayer::OnKeyPressed(KeyPressdEvent& e) {
     return false;
   }
 
-  bool control = Input::IsKeyPressed(KeyCode::LeftControl) ||
-                 Input::IsKeyPressed(KeyCode::RightControl);
-  bool shift = Input::IsKeyPressed(KeyCode::LeftShift) ||
-               Input::IsKeyPressed(KeyCode::RightShift);
+  bool control = Input::IsKeyPressed(KeyCode::kLeftControl) ||
+                 Input::IsKeyPressed(KeyCode::kRightControl);
+  bool shift = Input::IsKeyPressed(KeyCode::kLeftShift) ||
+               Input::IsKeyPressed(KeyCode::kRightShift);
   switch (e.GetKeyCode()) {
-    case KeyCode::N:
+    case KeyCode::kN:
       if (control) {
         NewScene();
       }
       break;
 
-    case KeyCode::O:
+    case KeyCode::kO:
       if (control) {
         OpenScene();
       }
       break;
-    case KeyCode::S:
+    case KeyCode::kS:
       if (control && shift) {
         SaveSceneAs();
       }
       break;
 
       // Gizmos
-    case KeyCode::Q:
+    case KeyCode::kQ:
       gizmo_type_ = -1;
       break;
-    case KeyCode::W:
+    case KeyCode::kW:
       gizmo_type_ = ImGuizmo::OPERATION::TRANSLATE;
       break;
-    case KeyCode::E:
+    case KeyCode::kE:
       gizmo_type_ = ImGuizmo::OPERATION::ROTATE;
       break;
-    case KeyCode::R:
+    case KeyCode::kR:
       gizmo_type_ = ImGuizmo::OPERATION::SCALE;
       break;
     default:
@@ -411,7 +410,7 @@ bool EditorLayer::OnKeyPressed(KeyPressdEvent& e) {
 bool EditorLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e) {
   // TODO(sylar): call function to detect state
   if (e.GetMouseButton() == MouseCode::ButtonLeft &&
-      !Input::IsKeyPressed(KeyCode::LeftAlt)) {
+      !Input::IsKeyPressed(KeyCode::kLeftAlt)) {
     if (viewport_hovered_ && !ImGuizmo::IsOver()) {
       scene_hierarchy_panel_.SetSelectedEntity(hovered_entity_);
     }

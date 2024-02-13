@@ -60,7 +60,7 @@ float EditorCamera::ZoomSpeed() const {
 }
 
 void EditorCamera::OnUpdate(TimeStep& ts) {
-  if (Input::IsKeyPressed(KeyCode::LeftAlt)) {
+  if (Input::IsKeyPressed(KeyCode::kLeftAlt)) {
     const glm::vec2& mouse{Input::GetMouseX(), Input::GetMouseY()};
     glm::vec2 delta = (mouse - initial_mouse_position_) * 0.003f;
     initial_mouse_position_ = mouse;
