@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Core/Scene/Scene.h"
 
 #include "Core/Renderer/Renderer2D.h"

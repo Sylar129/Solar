@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Platform/OpenGL/OpenGLRendererAPI.h"
 
 #include <glad/glad.h>

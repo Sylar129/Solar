@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Platform/OpenGL/OpenGLTexture.h"
 
 #define STB_IMAGE_IMPLEMENTATION

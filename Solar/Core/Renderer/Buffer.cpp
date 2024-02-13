@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Core/Renderer/Buffer.h"
 
 #include "Core/Renderer/Renderer.h"

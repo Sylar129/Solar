@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Core/Renderer/RenderCommand.h"
 
 #include "Platform/OpenGL/OpenGLRendererAPI.h"

@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Platform/OpenGL/OpenGLBuffer.h"
 
 #include <glad/glad.h>

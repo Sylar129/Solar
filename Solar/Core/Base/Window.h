@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #pragma once
 
 #include <string>
@@ -11,8 +13,8 @@ struct WindowProps {
   uint32_t width;
   uint32_t height;
 
-  explicit WindowProps(const std::string& title = "Solar Engine", uint32_t width = 1600,
-              uint32_t height = 900)
+  explicit WindowProps(const std::string& title = "Solar Engine",
+                       uint32_t width = 1600, uint32_t height = 900)
       : title(title), width(width), height(height) {}
 };
 

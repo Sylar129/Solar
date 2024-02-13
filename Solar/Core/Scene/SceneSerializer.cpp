@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Core/Scene/SceneSerializer.h"
 
 #include <yaml-cpp/yaml.h>

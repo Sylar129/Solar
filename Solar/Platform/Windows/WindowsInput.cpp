@@ -1,10 +1,9 @@
-// clang-format off
-#include "Core/Base/Input.h"
-// clang-format on
+// Copyright (c) 2024 Sylar129
 
 #include <GLFW/glfw3.h>
 
 #include "Core/Base/Application.h"
+#include "Core/Base/Input.h"
 
 namespace Solar {
 

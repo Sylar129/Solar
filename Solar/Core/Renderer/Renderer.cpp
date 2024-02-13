@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Core/Renderer/Renderer.h"
 
 #include "Core/Debug/Instrumentor.h"

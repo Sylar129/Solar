@@ -1,6 +1,6 @@
-// clang-format off
-#include "Core/Utils/PlatformUtils.h"
+// Copyright (c) 2024 Sylar129
 
+// clang-format off
 #include <Windows.h>
 #include <commdlg.h>
 
@@ -10,6 +10,7 @@
 // clang-format on
 
 #include "Core/Base/Application.h"
+#include "Core/Utils/PlatformUtils.h"
 
 namespace Solar {
 

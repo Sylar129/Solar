@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Platform/Windows/WindowsWindow.h"
 
 #include <Windows.h>

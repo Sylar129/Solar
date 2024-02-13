@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Core/Renderer/OrthographicCamera.h"
 
 #include <glm/gtc/matrix_transform.hpp>

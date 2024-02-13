@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Sylar129
+
 #include "Core/Renderer/EditorCamera.h"
 
 #include <glm/gtx/quaternion.hpp>
