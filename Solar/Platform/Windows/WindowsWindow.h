@@ -14,36 +14,36 @@ class WindowsWindow : public Window {
 
   void OnUpdate() override;
 
-  inline uint32_t GetWidth() const override { return m_Data.Width; }
-  inline uint32_t GetHeight() const override { return m_Data.Height; }
+  inline uint32_t GetWidth() const override { return data_.width; }
+  inline uint32_t GetHeight() const override { return data_.height; }
 
   // Windows attributes
   inline void SetEventCallback(const EventCallbackFn& callback) override {
-    m_Data.EventCallback = callback;
+    data_.event_callback = callback;
   }
   void SetVSync(bool enabled) override;
   bool IsVSync() const override;
 
-  inline virtual void* GetNativeWindow() const override { return m_Window; }
+  inline virtual void* GetNativeWindow() const override { return window_; }
 
  private:
   virtual void Init(const WindowProps& props);
   virtual void Shutdown();
 
-  GLFWwindow* m_Window;
-  Scope<GraphicsContext> m_Context;
+  GLFWwindow* window_;
+  Scope<GraphicsContext> context_;
 
   struct WindowData {
-    std::string Title;
-    uint32_t Width;
-    uint32_t Height;
-    bool VSync;
-    EventCallbackFn EventCallback;
+    std::string title;
+    uint32_t width;
+    uint32_t height;
+    bool v_sync;
+    EventCallbackFn event_callback;
 
-    WindowData() : Width(0), Height(0), VSync(false) {}
+    WindowData() : width(0), height(0), v_sync(false) {}
   };
 
-  WindowData m_Data;
+  WindowData data_;
 };
 
 }  // namespace Solar

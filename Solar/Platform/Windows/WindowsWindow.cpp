@@ -43,7 +43,7 @@ void WindowsWindow::OnUpdate() {
   SOLAR_PROFILE_FUNCTION();
 
   glfwPollEvents();
-  m_Context->SwapBuffers();
+  context_->SwapBuffers();
 }
 
 void WindowsWindow::SetVSync(bool enabled) {
@@ -54,17 +54,17 @@ void WindowsWindow::SetVSync(bool enabled) {
   } else {
     glfwSwapInterval(0);
   }
-  m_Data.VSync = enabled;
+  data_.v_sync = enabled;
 }
 
-bool WindowsWindow::IsVSync() const { return m_Data.VSync; }
+bool WindowsWindow::IsVSync() const { return data_.v_sync; }
 
 void WindowsWindow::Init(const WindowProps& props) {
   SOLAR_PROFILE_FUNCTION();
 
-  m_Data.Title = props.title;
-  m_Data.Width = props.width;
-  m_Data.Height = props.height;
+  data_.title = props.title;
+  data_.width = props.width;
+  data_.height = props.height;
 
   SOLAR_CORE_INFO("Creating window {0} ({1}, {2})", props.title, props.width,
                   props.height);
@@ -86,52 +86,52 @@ void WindowsWindow::Init(const WindowProps& props) {
     }
 #endif  // SOLAR_DEBUG
 
-    m_Window = glfwCreateWindow((int)props.width, (int)props.height,
+    window_ = glfwCreateWindow((int)props.width, (int)props.height,
                                 props.title.c_str(), nullptr, nullptr);
     s_GLFWWindowCount++;
   }
 
-  m_Context = CreateScope<OpenGLContext>(m_Window);
-  m_Context->Init();
+  context_ = CreateScope<OpenGLContext>(window_);
+  context_->Init();
 
-  glfwSetWindowUserPointer(m_Window, &m_Data);
+  glfwSetWindowUserPointer(window_, &data_);
   SetVSync(true);
 
   // Set GLFW callbacks
   glfwSetWindowSizeCallback(
-      m_Window, [](GLFWwindow* window, int width, int height) {
+      window_, [](GLFWwindow* window, int width, int height) {
         WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-        data.Width = width;
-        data.Height = height;
+        data.width = width;
+        data.height = height;
 
         WindowResizeEvent event(width, height);
-        data.EventCallback(event);
+        data.event_callback(event);
       });
 
-  glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window) {
+  glfwSetWindowCloseCallback(window_, [](GLFWwindow* window) {
     WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
     WindowCloseEvent event;
-    data.EventCallback(event);
+    data.event_callback(event);
   });
 
-  glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode,
+  glfwSetKeyCallback(window_, [](GLFWwindow* window, int key, int scancode,
                                   int action, int mods) {
     WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
     KeyCode key_code = static_cast<KeyCode>(key);
     switch (action) {
       case GLFW_PRESS: {
         KeyPressdEvent event(key_code, 0);
-        data.EventCallback(event);
+        data.event_callback(event);
         break;
       }
       case GLFW_RELEASE: {
         KeyReleasedEvent event(key_code);
-        data.EventCallback(event);
+        data.event_callback(event);
         break;
       }
       case GLFW_REPEAT: {
         KeyPressdEvent event(key_code, 1);
-        data.EventCallback(event);
+        data.event_callback(event);
         break;
       }
       default:
@@ -139,25 +139,25 @@ void WindowsWindow::Init(const WindowProps& props) {
     }
   });
 
-  glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int codepoint) {
+  glfwSetCharCallback(window_, [](GLFWwindow* window, unsigned int codepoint) {
     WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
     KeyTypedEvent event(static_cast<KeyCode>(codepoint));
-    data.EventCallback(event);
+    data.event_callback(event);
   });
 
   glfwSetMouseButtonCallback(
-      m_Window, [](GLFWwindow* window, int button, int action, int mods) {
+      window_, [](GLFWwindow* window, int button, int action, int mods) {
         WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
         MouseCode mouse_code = static_cast<MouseCode>(button);
         switch (action) {
           case GLFW_PRESS: {
             MouseButtonPressedEvent event(mouse_code);
-            data.EventCallback(event);
+            data.event_callback(event);
             break;
           }
           case GLFW_RELEASE: {
             MouseButtonReleasedEvent event(mouse_code);
-            data.EventCallback(event);
+            data.event_callback(event);
             break;
           }
           default:
@@ -166,24 +166,24 @@ void WindowsWindow::Init(const WindowProps& props) {
       });
 
   glfwSetScrollCallback(
-      m_Window, [](GLFWwindow* window, double x_offset, double y_offset) {
+      window_, [](GLFWwindow* window, double x_offset, double y_offset) {
         WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
         MouseScrolledEvent event((float)x_offset, (float)y_offset);
-        data.EventCallback(event);
+        data.event_callback(event);
       });
 
   glfwSetCursorPosCallback(
-      m_Window, [](GLFWwindow* window, double x_pos, double y_pos) {
+      window_, [](GLFWwindow* window, double x_pos, double y_pos) {
         WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
         MouseMovedEvent event((float)x_pos, (float)y_pos);
-        data.EventCallback(event);
+        data.event_callback(event);
       });
 }
 
 void WindowsWindow::Shutdown() {
   SOLAR_PROFILE_FUNCTION();
 
-  glfwDestroyWindow(m_Window);
+  glfwDestroyWindow(window_);
   s_GLFWWindowCount--;
   if (s_GLFWWindowCount == 0) {
     SOLAR_CORE_INFO("Terminating GLFW");
