@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <string>
+
 #include "Core/Base/Timestep.h"
 #include "Core/Renderer/EditorCamera.h"
 #include "entt/entt.hpp"
@@ -15,7 +17,7 @@ class Scene {
   Scene();
   ~Scene();
 
-  Entity CreateEntity(const std::string& name = std::string());
+  Entity CreateEntity(const std::string& name);
   void DestoryEntity(Entity entity);
 
   void OnUpdateRuntime(TimeStep& ts);

@@ -3,6 +3,7 @@
 #include "Core/Scene/SceneSerializer.h"
 
 #include <ostream>
+#include <string>
 
 #include "Core/Base/Log.h"
 #include "Core/Scene/Components.h"
@@ -116,7 +117,7 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity) {
     out << YAML::Key << "Camera" << YAML::Value;
     out << YAML::BeginMap;
     out << YAML::Key << "ProjectionType" << YAML::Value
-        << (int)camera.GetProjectionType();
+        << static_cast<int>(camera.GetProjectionType());
     out << YAML::Key << "PerspectiveFOV" << YAML::Value
         << camera.GetPerspectiveVerticalFOV();
     out << YAML::Key << "PerspectiveNear" << YAML::Value
@@ -190,7 +191,8 @@ bool SceneSerializer::Deserialize(const std::string& filepath) {
   auto entities = data["Entities"];
   if (entities) {
     for (const auto& entity : entities) {
-      uint64_t uuid = entity["Entity"].as<uint64_t>();  // TODO
+      // TODO(sylar): gen uuid
+      uint64_t uuid = entity["Entity"].as<uint64_t>();
 
       std::string name;
       auto tag_component = entity["TagComponent"];

@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <string>
+
 #include "Core/Scene/SceneCamera.h"
 #include "Core/Scene/ScriptableEntity.h"
 #include "glm/glm.hpp"
@@ -36,7 +38,8 @@ struct SpriteRendererComponent {
 
 struct CameraComponent {
   SceneCamera camera;
-  bool primary = true;  // TODO: Move to the scene
+  // TODO(sylar): Move to the scene
+  bool primary = true;
   bool fixed_aspect_ratio = false;
 };
 

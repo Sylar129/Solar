@@ -17,6 +17,7 @@ class SceneCamera : public Camera {
   void SetOrthoGraphic(float size, float near_clip, float far_clip);
   void SetPerspective(float vertical_fov, float near_clip, float far_clip);
 
+  // TODO(sylar): set to float
   void SetViewportSize(uint32_t width, uint32_t height);
 
   float GetPerspectiveVerticalFOV() const { return perspective_fov_; }

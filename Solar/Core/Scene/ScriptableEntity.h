@@ -8,7 +8,7 @@ namespace Solar {
 
 class ScriptableEntity {
  public:
-  virtual ~ScriptableEntity(){};
+  virtual ~ScriptableEntity() {}
 
   template <typename T>
   T& GetComponent() {

@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <string>
+
 #include "Core/Scene/Scene.h"
 
 namespace Solar {
