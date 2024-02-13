@@ -8,13 +8,13 @@ namespace Solar {
 
 class OpenGLContext : public GraphicsContext {
  public:
-  OpenGLContext(GLFWwindow* windowHandle);
+  explicit OpenGLContext(GLFWwindow* window_handle);
 
   virtual void Init() override;
   virtual void SwapBuffers() override;
 
  private:
-  GLFWwindow* m_WindowHandle;
+  GLFWwindow* window_handle_;
 };
 
 }  // namespace Solar

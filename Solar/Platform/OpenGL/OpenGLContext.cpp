@@ -10,15 +10,15 @@
 
 namespace Solar {
 
-OpenGLContext::OpenGLContext(GLFWwindow* windowHandle)
-    : m_WindowHandle(windowHandle) {
-  SOLAR_CORE_ASSERT(windowHandle, "Window handle is null!");
+OpenGLContext::OpenGLContext(GLFWwindow* window_handle)
+    : window_handle_(window_handle) {
+  SOLAR_CORE_ASSERT(window_handle, "Window handle is null!");
 }
 
 void OpenGLContext::Init() {
   SOLAR_PROFILE_FUNCTION();
 
-  glfwMakeContextCurrent(m_WindowHandle);
+  glfwMakeContextCurrent(window_handle_);
   int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
   SOLAR_CORE_ASSERT(status, "Failed to initialize Glad!");
 
@@ -42,7 +42,7 @@ void OpenGLContext::Init() {
 void OpenGLContext::SwapBuffers() {
   SOLAR_PROFILE_FUNCTION();
 
-  glfwSwapBuffers(m_WindowHandle);
+  glfwSwapBuffers(window_handle_);
 }
 
 }  // namespace Solar
