@@ -2,6 +2,6 @@
 
 namespace Solar {
 
-RendererAPI::API RendererAPI::s_API = RendererAPI::API::OpenGL;
+RendererAPI::API RendererAPI::s_api = RendererAPI::API::kOpenGL;
 
 }  // namespace Solar
