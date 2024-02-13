@@ -17,7 +17,7 @@
 
 namespace Solar {
 
-ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer"), m_Time(0.0f) {}
+ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer"), time_(0.0f) {}
 
 ImGuiLayer::~ImGuiLayer() {}
 
@@ -76,7 +76,7 @@ void ImGuiLayer::OnDetech() {
 }
 
 void ImGuiLayer::OnEvent(Event& e) {
-  if (m_BlockEvents) {
+  if (block_events_) {
     ImGuiIO& io = ImGui::GetIO();
     e.handled |= e.IsInCategory(EventCategory::kEventCategoryMouse) & io.WantCaptureMouse;
     e.handled |= e.IsInCategory(EventCategory::kEventCategoryKeyboard) &

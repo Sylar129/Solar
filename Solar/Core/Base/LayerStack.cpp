@@ -2,37 +2,37 @@
 
 namespace Solar {
 
-LayerStack::LayerStack() : m_LayerInsertIndex(0) {}
+LayerStack::LayerStack() : layer_insert_index_(0) {}
 
 LayerStack::~LayerStack() {
-  for (auto& layer : m_Layers) {
+  for (auto& layer : layers_) {
     layer->OnDetech();
   }
 }
 
 void LayerStack::PushLayer(Ref<Layer> layer) {
-  m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer);
-  m_LayerInsertIndex++;
+  layers_.emplace(layers_.begin() + layer_insert_index_, layer);
+  layer_insert_index_++;
 }
 
 void LayerStack::PushOverlay(Ref<Layer> overlay) {
-  m_Layers.emplace_back(overlay);
+  layers_.emplace_back(overlay);
 }
 
 void LayerStack::PopLayer(Ref<Layer> layer) {
-  auto it = std::find(m_Layers.begin(), m_Layers.end(), layer);
-  if (it != m_Layers.end()) {
+  auto it = std::find(layers_.begin(), layers_.end(), layer);
+  if (it != layers_.end()) {
     layer->OnDetech();
-    m_Layers.erase(it);
-    m_LayerInsertIndex--;
+    layers_.erase(it);
+    layer_insert_index_--;
   }
 }
 
 void LayerStack::PopOverlay(Ref<Layer> overlay) {
-  auto it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
-  if (it != m_Layers.end()) {
+  auto it = std::find(layers_.begin(), layers_.end(), overlay);
+  if (it != layers_.end()) {
     overlay->OnDetech();
-    m_Layers.erase(it);
+    layers_.erase(it);
   }
 }
 

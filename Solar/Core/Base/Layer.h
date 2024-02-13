@@ -10,7 +10,7 @@ namespace Solar {
 
 class Layer {
  public:
-  Layer(const std::string& name = "Layer");
+  explicit Layer(const std::string& name = "Layer");
   virtual ~Layer();
 
   virtual void OnAttach() {}
@@ -19,10 +19,10 @@ class Layer {
   virtual void OnImGuiRender() {}
   virtual void OnEvent(Event& event) {}
 
-  inline const std::string GetName() const { return m_DebugName; }
+  std::string GetName() const { return debug_name_; }
 
  protected:
-  std::string m_DebugName;
+  std::string debug_name_;
 };
 
 }  // namespace Solar

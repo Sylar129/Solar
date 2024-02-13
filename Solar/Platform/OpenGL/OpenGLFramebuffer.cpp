@@ -7,7 +7,7 @@
 namespace Solar {
 
 namespace {
-constexpr uint32_t s_MaxFramebufferSize = 8192;
+constexpr uint32_t kMaxFramebufferSize = 8192;
 
 constexpr GLenum TextureTarget(bool multisampled) {
   return multisampled ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D;
@@ -125,8 +125,8 @@ void OpenGLFramebuffer::Bind() {
 void OpenGLFramebuffer::Unbind() { glBindFramebuffer(GL_FRAMEBUFFER, 0); }
 
 void OpenGLFramebuffer::Resize(uint32_t width, uint32_t height) {
-  if (width == 0 || height == 0 || width > s_MaxFramebufferSize ||
-      height > s_MaxFramebufferSize) {
+  if (width == 0 || height == 0 || width > kMaxFramebufferSize ||
+      height > kMaxFramebufferSize) {
     SOLAR_CORE_WARN("Attempted to resize framebuffer to {0}, {1}", width,
                     height);
     return;
