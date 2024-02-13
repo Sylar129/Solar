@@ -7,7 +7,7 @@ namespace Solar {
 SceneCamera::SceneCamera() { RecalculateProjection(); }
 
 void SceneCamera::SetOrthoGraphic(float size, float nearClip, float farClip) {
-  m_ProjectionType = ProjectionType::Orthographic;
+  m_ProjectionType = ProjectionType::kOrthographic;
   m_OrthographicSize = size;
   m_OrthographicNear = nearClip;
   m_OrthographicFar = farClip;
@@ -16,7 +16,7 @@ void SceneCamera::SetOrthoGraphic(float size, float nearClip, float farClip) {
 
 void SceneCamera::SetPerspective(float verticalFOV, float nearClip,
                                  float farClip) {
-  m_ProjectionType = ProjectionType::Perspective;
+  m_ProjectionType = ProjectionType::kPerspective;
   m_PerspectiveFOV = verticalFOV;
   m_PerspectiveNear = nearClip;
   m_PerspectiveFar = farClip;
@@ -29,7 +29,7 @@ void SceneCamera::SetViewportSize(uint32_t width, uint32_t height) {
 }
 
 void SceneCamera::RecalculateProjection() {
-  if (m_ProjectionType == ProjectionType::Perspective) {
+  if (m_ProjectionType == ProjectionType::kPerspective) {
     projection_ = glm::perspective(m_PerspectiveFOV, m_AspectRatio,
                                     m_PerspectiveNear, m_PerspectiveFar);
   } else {

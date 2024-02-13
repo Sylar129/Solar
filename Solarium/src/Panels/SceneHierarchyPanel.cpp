@@ -273,7 +273,7 @@ void SceneHierarchyPanel::DrawComponents(Entity entity) {
     }
 
     if (camera.GetProjectionType() ==
-        SceneCamera::ProjectionType::Perspective) {
+        SceneCamera::ProjectionType::kPerspective) {
       float verticalFOV = glm::degrees(camera.GetPerspectiveVerticalFOV());
       if (ImGui::DragFloat("Vertical Fov", &verticalFOV)) {
         camera.SetPerspectiveVerticalFOV(glm::radians(verticalFOV));
@@ -291,7 +291,7 @@ void SceneHierarchyPanel::DrawComponents(Entity entity) {
     }
 
     if (camera.GetProjectionType() ==
-        SceneCamera::ProjectionType::Orthographic) {
+        SceneCamera::ProjectionType::kOrthographic) {
       float orthoSize = camera.GetOrthographicSize();
       if (ImGui::DragFloat("Size", &orthoSize)) {
         camera.SetOrthographicSize(orthoSize);

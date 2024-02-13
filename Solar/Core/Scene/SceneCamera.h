@@ -8,9 +8,8 @@ namespace Solar {
 
 class SceneCamera : public Camera {
  public:
-  enum class ProjectionType { Perspective = 0, Orthographic = 1 };
+  enum class ProjectionType { kPerspective = 0, kOrthographic = 1 };
 
- public:
   SceneCamera();
   virtual ~SceneCamera() = default;
 
@@ -59,7 +58,7 @@ class SceneCamera : public Camera {
 
  private:
   // Dealing with 2D first right now, TODO: change to Perspective
-  ProjectionType m_ProjectionType = ProjectionType::Orthographic;
+  ProjectionType m_ProjectionType = ProjectionType::kOrthographic;
 
   // Perspective
   float m_PerspectiveFOV = glm::radians(45.0f);

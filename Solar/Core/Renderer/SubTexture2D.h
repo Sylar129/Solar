@@ -12,17 +12,17 @@ class SubTexture2D {
   SubTexture2D(const Ref<Texture2D>& texture, const glm::vec2& min,
                const glm::vec2& max);
 
-  const Ref<Texture2D> GetTexture() const { return m_Texture; }
-  const glm::vec2* GetTexCoords() const { return m_TexCoords; }
+  Ref<Texture2D> GetTexture() const { return texture_; }
+  const glm::vec2* GetTexCoords() const { return tex_coords_; }
 
   static Ref<SubTexture2D> CreateFromCoords(
-      const Ref<Texture2D>& texture, const glm::vec2 coords,
-      const glm::vec2 cellSize, const glm::vec2 spriteSize = {1, 1});
+      const Ref<Texture2D>& texture, const glm::vec2& coords,
+      const glm::vec2& cell_size, const glm::vec2& sprite_size = {1, 1});
 
  private:
-  Ref<Texture2D> m_Texture;
+  Ref<Texture2D> texture_;
 
-  glm::vec2 m_TexCoords[4];
+  glm::vec2 tex_coords_[4];
 };
 
 }  // namespace Solar
