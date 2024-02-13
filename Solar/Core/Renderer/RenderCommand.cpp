@@ -4,7 +4,7 @@
 
 namespace Solar {
 
-Scope<RendererAPI> RenderCommand::s_RendererAPI =
+Scope<RendererAPI> RenderCommand::s_renderer_api =
     CreateScope<OpenGLRendererAPI>();
 
 }  // namespace Solar

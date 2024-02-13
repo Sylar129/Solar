@@ -6,7 +6,7 @@
 
 namespace Solar {
 
-Scope<Renderer::SceneData> Renderer::s_SceneData =
+Scope<Renderer::SceneData> Renderer::s_scene_data =
     CreateScope<Renderer::SceneData>();
 
 void Renderer::Init() {
@@ -21,7 +21,7 @@ void Renderer::OnWindowResize(uint32_t width, uint32_t height) {
 }
 
 void Renderer::BeginScene(OrthographicCamera& camera) {
-  s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
+  s_scene_data->view_projection_matrix = camera.GetViewProjectionMatrix();
 }
 
 void Renderer::EndScene() {}
@@ -31,7 +31,7 @@ void Renderer::Submit(const Ref<Shader>& shader,
                       const glm::mat4& transform) {
   shader->Bind();
   std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4(
-      "u_ViewProjection", s_SceneData->ViewProjectionMatrix);
+      "u_ViewProjection", s_scene_data->view_projection_matrix);
   std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4(
       "u_Transform", transform);
 
