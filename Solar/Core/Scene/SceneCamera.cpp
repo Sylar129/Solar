@@ -6,40 +6,40 @@ namespace Solar {
 
 SceneCamera::SceneCamera() { RecalculateProjection(); }
 
-void SceneCamera::SetOrthoGraphic(float size, float nearClip, float farClip) {
-  m_ProjectionType = ProjectionType::kOrthographic;
-  m_OrthographicSize = size;
-  m_OrthographicNear = nearClip;
-  m_OrthographicFar = farClip;
+void SceneCamera::SetOrthoGraphic(float size, float near_clip, float far_clip) {
+  projection_type_ = ProjectionType::kOrthographic;
+  orthographic_size_ = size;
+  orthographic_near_ = near_clip;
+  orthographic_far_ = far_clip;
   RecalculateProjection();
 }
 
-void SceneCamera::SetPerspective(float verticalFOV, float nearClip,
-                                 float farClip) {
-  m_ProjectionType = ProjectionType::kPerspective;
-  m_PerspectiveFOV = verticalFOV;
-  m_PerspectiveNear = nearClip;
-  m_PerspectiveFar = farClip;
+void SceneCamera::SetPerspective(float vertical_fov, float near_clip,
+                                 float far_clip) {
+  projection_type_ = ProjectionType::kPerspective;
+  perspective_fov_ = vertical_fov;
+  perspective_near_ = near_clip;
+  perspective_far_ = far_clip;
   RecalculateProjection();
 }
 
 void SceneCamera::SetViewportSize(uint32_t width, uint32_t height) {
-  m_AspectRatio = (float)width / (float)height;
+  aspect_ratio_ = (float)width / (float)height;
   RecalculateProjection();
 }
 
 void SceneCamera::RecalculateProjection() {
-  if (m_ProjectionType == ProjectionType::kPerspective) {
-    projection_ = glm::perspective(m_PerspectiveFOV, m_AspectRatio,
-                                    m_PerspectiveNear, m_PerspectiveFar);
+  if (projection_type_ == ProjectionType::kPerspective) {
+    projection_ = glm::perspective(perspective_fov_, aspect_ratio_,
+                                    perspective_near_, perspective_far_);
   } else {
-    float orthoLeft = -m_OrthographicSize * m_AspectRatio * 0.5f;
-    float orthoRight = m_OrthographicSize * m_AspectRatio * 0.5f;
-    float orthoBottom = -m_OrthographicSize * 0.5f;
-    float orthoTop = m_OrthographicSize * 0.5f;
+    float ortho_left = -orthographic_size_ * aspect_ratio_ * 0.5f;
+    float ortho_right = orthographic_size_ * aspect_ratio_ * 0.5f;
+    float ortho_bottom = -orthographic_size_ * 0.5f;
+    float ortho_top = orthographic_size_ * 0.5f;
 
-    projection_ = glm::ortho(orthoLeft, orthoRight, orthoBottom, orthoTop,
-                              m_OrthographicNear, m_OrthographicFar);
+    projection_ = glm::ortho(ortho_left, ortho_right, ortho_bottom, ortho_top,
+                              orthographic_near_, orthographic_far_);
   }
 }
 

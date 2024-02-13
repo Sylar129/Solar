@@ -27,7 +27,7 @@ void Scene::OnUpdateRuntime(TimeStep& ts) {
     registry_.view<NativeScriptComponent>().each([=](auto entity, auto& nsc) {
       if (!nsc.instance) {
         nsc.instance = nsc.instantiate_script();
-        nsc.instance->m_Entity = Entity{entity, this};
+        nsc.instance->entity_ = Entity{entity, this};
         nsc.instance->OnCreate();
       }
       nsc.instance->OnUpdate(ts);
