@@ -2,6 +2,7 @@
 
 #pragma once
 
+// clang-format off
 // For use by Solar Application
 #include "Core/Base/Application.h"
 #include "Core/Base/Input.h"
@@ -33,3 +34,4 @@
 #include "Core/Renderer/OrthographicCamera.h"
 #include "Core/Renderer/OrthographicCameraController.h"
 // ----------------------------------------
+// clang-format on

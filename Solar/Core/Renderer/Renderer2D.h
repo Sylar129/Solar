@@ -21,7 +21,8 @@ class Renderer2D {
 
   static void BeginScene(const Camera& camera, const glm::mat4& transform);
   static void BeginScene(const EditorCamera& camera);
-  static void BeginScene(const OrthographicCamera& camera);  // TODO: Remove
+  // TODO(sylar): Remove
+  static void BeginScene(const OrthographicCamera& camera);
   static void EndScene();
   static void Flush();
 
@@ -80,7 +81,7 @@ class Renderer2D {
                              const glm::vec4& tint_color = glm::vec4(1.0f));
 
   static void DrawSprite(const glm::mat4& transform,
-                         SpriteRendererComponent& src, int entity_id);
+                         const SpriteRendererComponent& src, int entity_id);
 
   // Stats
   struct Statistics {

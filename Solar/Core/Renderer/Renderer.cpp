@@ -23,7 +23,7 @@ void Renderer::OnWindowResize(uint32_t width, uint32_t height) {
   RenderCommand::SetViewPort(0, 0, width, height);
 }
 
-void Renderer::BeginScene(OrthographicCamera& camera) {
+void Renderer::BeginScene(const OrthographicCamera& camera) {
   s_scene_data->view_projection_matrix = camera.GetViewProjectionMatrix();
 }
 

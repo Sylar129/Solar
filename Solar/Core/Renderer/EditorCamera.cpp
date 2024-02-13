@@ -2,6 +2,9 @@
 
 #include "Core/Renderer/EditorCamera.h"
 
+#include <algorithm>
+#include <utility>
+
 #include "Core/Base/Input.h"
 #include "Core/Base/KeyCodes.h"
 #include "Core/Base/MouseCodes.h"

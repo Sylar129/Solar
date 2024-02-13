@@ -2,6 +2,8 @@
 
 #include "Core/Renderer/OrthographicCameraController.h"
 
+#include <algorithm>
+
 #include "Core/Base/Input.h"
 #include "Core/Base/KeyCodes.h"
 #include "Core/Debug/Instrumentor.h"
@@ -97,7 +99,7 @@ bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e) {
 bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e) {
   SOLAR_PROFILE_FUNCTION();
 
-  OnResize((float)e.GetWidth(), (float)e.GetHeight());
+  OnResize(static_cast<float>(e.GetWidth()), static_cast<float>(e.GetHeight()));
   return false;
 }
 

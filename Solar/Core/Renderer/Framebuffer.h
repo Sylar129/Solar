@@ -24,7 +24,7 @@ enum class FramebufferTextureFormat {
 
 struct FramebufferTextureSpecification {
   FramebufferTextureFormat texture_format = FramebufferTextureFormat::kNone;
-  // TODO: filtering/wrap
+  // TODO(sylar): filtering/wrap
 
   FramebufferTextureSpecification() = default;
   FramebufferTextureSpecification(FramebufferTextureFormat format)
