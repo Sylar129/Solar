@@ -2,6 +2,7 @@
 
 #include "Core/Debug/Instrumentor.h"
 #include "Core/Renderer/Renderer2D.h"
+#include "Core/Renderer/RenderCommand.h"
 #include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Solar {
@@ -27,7 +28,7 @@ void Renderer::BeginScene(OrthographicCamera& camera) {
 void Renderer::EndScene() {}
 
 void Renderer::Submit(const Ref<Shader>& shader,
-                      const Ref<VertexArray>& vertexArray,
+                      const Ref<VertexArray>& vertex_array,
                       const glm::mat4& transform) {
   shader->Bind();
   std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4(
@@ -35,8 +36,8 @@ void Renderer::Submit(const Ref<Shader>& shader,
   std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4(
       "u_Transform", transform);
 
-  vertexArray->Bind();
-  RenderCommand::DrawIndexed(vertexArray);
+  vertex_array->Bind();
+  RenderCommand::DrawIndexed(vertex_array);
 }
 
 }  // namespace Solar

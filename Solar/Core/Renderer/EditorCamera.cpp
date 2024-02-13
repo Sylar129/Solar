@@ -61,12 +61,13 @@ void EditorCamera::OnUpdate(TimeStep& ts) {
     glm::vec2 delta = (mouse - initial_mouse_position_) * 0.003f;
     initial_mouse_position_ = mouse;
 
-    if (Input::IsMouseButtonPressed(MouseCode::ButtonMiddle))
+    if (Input::IsMouseButtonPressed(MouseCode::ButtonMiddle)) {
       MousePan(delta);
-    else if (Input::IsMouseButtonPressed(MouseCode::ButtonLeft))
+    } else if (Input::IsMouseButtonPressed(MouseCode::ButtonLeft)) {
       MouseRotate(delta);
-    else if (Input::IsMouseButtonPressed(MouseCode::ButtonRight))
+    } else if (Input::IsMouseButtonPressed(MouseCode::ButtonRight)) {
       MouseZoom(delta.y);
+}
   }
 
   UpdateView();
@@ -91,8 +92,8 @@ void EditorCamera::MousePan(const glm::vec2& delta) {
 }
 
 void EditorCamera::MouseRotate(const glm::vec2& delta) {
-  float yawSign = GetUpDirection().y < 0 ? -1.0f : 1.0f;
-  yaw_ += yawSign * delta.x * RotationSpeed();
+  float yaw_sign = GetUpDirection().y < 0 ? -1.0f : 1.0f;
+  yaw_ += yaw_sign * delta.x * RotationSpeed();
   pitch_ += delta.y * RotationSpeed();
 }
 

@@ -150,7 +150,9 @@ void Renderer2D::EndScene() {
 }
 
 void Renderer2D::Flush() {
-  if (0 == s_data.quad_index_count) return;
+  if (0 == s_data.quad_index_count) {
+    return;
+  }
 
   uint32_t data_size = (uint32_t)((uint8_t*)s_data.quad_vertex_buffer_ptr -
                                   (uint8_t*)s_data.quad_vertex_buffer_base);

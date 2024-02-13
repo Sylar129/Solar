@@ -18,14 +18,14 @@ Ref<Shader> Shader::Create(const std::string& filepath) {
 }
 
 Ref<Shader> Shader::Create(const std::string& name,
-                           const std::string& vertexSrc,
-                           const std::string& fragmentSrc) {
+                           const std::string& vertex_src,
+                           const std::string& fragment_src) {
   switch (Renderer::GetAPI()) {
     case RendererAPI::API::kNone:
       SOLAR_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
       return nullptr;
     case RendererAPI::API::kOpenGL:
-      return CreateRef<OpenGLShader>(name, vertexSrc, fragmentSrc);
+      return CreateRef<OpenGLShader>(name, vertex_src, fragment_src);
   }
   SOLAR_CORE_ASSERT(false, "Unknown RendererAPI");
   return nullptr;
@@ -33,11 +33,11 @@ Ref<Shader> Shader::Create(const std::string& name,
 
 void ShaderLibrary::Add(const std::string& name, const Ref<Shader>& shader) {
   SOLAR_CORE_ASSERT(!Exists(name), "Shader already exists!");
-  m_Shaders[name] = shader;
+  shaders_[name] = shader;
 }
 
 void ShaderLibrary::Add(const Ref<Shader>& shader) {
-  auto& name = shader->GetName();
+  const auto& name = shader->GetName();
   Add(name, shader);
 }
 
@@ -56,11 +56,11 @@ Ref<Shader> ShaderLibrary::Load(const std::string& name,
 
 Ref<Shader> ShaderLibrary::Get(const std::string& name) {
   SOLAR_CORE_ASSERT(Exists(name), "Shader not found!");
-  return m_Shaders[name];
+  return shaders_[name];
 }
 
 bool ShaderLibrary::Exists(const std::string& name) const {
-  return m_Shaders.find(name) != m_Shaders.end();
+  return shaders_.find(name) != shaders_.end();
 }
 
 }  // namespace Solar

@@ -3,6 +3,7 @@
 #include <Solar.h>
 
 #include "Core/Renderer/EditorCamera.h"
+#include "Core/Events/KeyEvent.h"
 #include "Panels/SceneHierarchyPanel.h"
 
 namespace Solar {
