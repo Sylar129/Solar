@@ -40,7 +40,7 @@ void Application::Run() {
 
     auto now = std::chrono::steady_clock::now();
     std::chrono::duration<float> duration = now - lastFrameTime;
-    TimeStep timeStep = duration.count();
+    TimeStep timeStep = TimeStep(duration.count());
     lastFrameTime = now;
 
     /// <summary>
