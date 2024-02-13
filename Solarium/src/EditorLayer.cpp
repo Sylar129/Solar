@@ -409,7 +409,7 @@ bool EditorLayer::OnKeyPressed(KeyPressdEvent& e) {
 
 bool EditorLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e) {
   // TODO(sylar): call function to detect state
-  if (e.GetMouseButton() == MouseCode::ButtonLeft &&
+  if (e.GetMouseButton() == MouseCode::kButtonLeft &&
       !Input::IsKeyPressed(KeyCode::kLeftAlt)) {
     if (viewport_hovered_ && !ImGuizmo::IsOver()) {
       scene_hierarchy_panel_.SetSelectedEntity(hovered_entity_);

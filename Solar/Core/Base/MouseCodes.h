@@ -8,19 +8,19 @@ namespace Solar {
 
 enum class MouseCode : uint16_t {
   // From glfw3.h
-  Button1 = 0,
-  Button2 = 1,
-  Button3 = 2,
-  Button4 = 3,
-  Button5 = 4,
-  Button6 = 5,
-  Button7 = 6,
-  Button8 = 7,
+  kButton1 = 0,
+  kButton2 = 1,
+  kButton3 = 2,
+  kButton4 = 3,
+  kButton5 = 4,
+  kButton6 = 5,
+  kButton7 = 6,
+  kButton8 = 7,
 
-  ButtonLast = Button8,
-  ButtonLeft = Button1,
-  ButtonRight = Button2,
-  ButtonMiddle = Button3
+  kButtonLast = kButton8,
+  kButtonLeft = kButton1,
+  kButtonRight = kButton2,
+  kButtonMiddle = kButton3
 };
 
 inline std::ostream& operator<<(std::ostream& os, MouseCode mouse_code) {
