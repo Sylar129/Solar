@@ -2,11 +2,10 @@
 
 #include "Core/Renderer/OrthographicCameraController.h"
 
-#include <glm/glm.hpp>
-
 #include "Core/Base/Input.h"
 #include "Core/Base/KeyCodes.h"
 #include "Core/Debug/Instrumentor.h"
+#include "glm/glm.hpp"
 
 namespace Solar {
 
@@ -15,7 +14,7 @@ OrthographicCameraController::OrthographicCameraController(float aspect_ratio,
     : aspect_ratio_(aspect_ratio),
       zoom_level_(1.0f),
       bounds_({-aspect_ratio_ * zoom_level_, aspect_ratio_ * zoom_level_,
-                -zoom_level_, zoom_level_}),
+               -zoom_level_, zoom_level_}),
       camera_(bounds_.left, bounds_.right, bounds_.bottom, bounds_.top),
       camera_position_(0.0f, 0.0f, 0.0f),
       camera_translation_speed_(1.0f),
@@ -81,9 +80,9 @@ void OrthographicCameraController::OnResize(float width, float height) {
 
 void OrthographicCameraController::CalculateView() {
   bounds_ = {-aspect_ratio_ * zoom_level_, aspect_ratio_ * zoom_level_,
-              -zoom_level_, zoom_level_};
+             -zoom_level_, zoom_level_};
   camera_.SetProjection(bounds_.left, bounds_.right, bounds_.bottom,
-                         bounds_.top);
+                        bounds_.top);
 }
 
 bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e) {

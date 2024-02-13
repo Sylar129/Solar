@@ -2,11 +2,10 @@
 
 #include "Core/Renderer/EditorCamera.h"
 
-#include <glm/gtx/quaternion.hpp>
-
 #include "Core/Base/Input.h"
 #include "Core/Base/KeyCodes.h"
 #include "Core/Base/MouseCodes.h"
+#include "glm/gtx/quaternion.hpp"
 
 namespace Solar {
 
@@ -69,7 +68,7 @@ void EditorCamera::OnUpdate(TimeStep& ts) {
       MouseRotate(delta);
     } else if (Input::IsMouseButtonPressed(MouseCode::ButtonRight)) {
       MouseZoom(delta.y);
-}
+    }
   }
 
   UpdateView();

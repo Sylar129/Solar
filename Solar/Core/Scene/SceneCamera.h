@@ -2,9 +2,8 @@
 
 #pragma once
 
-#include <glm/glm.hpp>
-
 #include "Core/Renderer/Camera.h"
+#include "glm/glm.hpp"
 
 namespace Solar {
 

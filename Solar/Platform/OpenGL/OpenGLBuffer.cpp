@@ -2,9 +2,8 @@
 
 #include "Platform/OpenGL/OpenGLBuffer.h"
 
-#include <glad/glad.h>
-
 #include "Core/Debug/Instrumentor.h"
+#include "glad/glad.h"
 
 namespace Solar {
 

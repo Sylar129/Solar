@@ -2,10 +2,9 @@
 
 #pragma once
 
-#include <GLFW/glfw3.h>
-
 #include "Core/Base/Window.h"
 #include "Core/Renderer/GraphicsContext.h"
+#include "GLFW/glfw3.h"
 
 namespace Solar {
 

@@ -2,11 +2,10 @@
 
 #pragma once
 
-#include <glm/glm.hpp>
-
 #include "Core/Base/Timestep.h"
 #include "Core/Events/MouseEvent.h"
 #include "Core/Renderer/Camera.h"
+#include "glm/glm.hpp"
 
 namespace Solar {
 

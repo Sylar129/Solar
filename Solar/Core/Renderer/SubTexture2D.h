@@ -2,10 +2,9 @@
 
 #pragma once
 
-#include <glm/vec2.hpp>
-
 #include "Core/Base/Sundry.h"
 #include "Core/Renderer/Texture.h"
+#include "glm/vec2.hpp"
 
 namespace Solar {
 

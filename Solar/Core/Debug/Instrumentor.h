@@ -4,6 +4,7 @@
 
 #include <iomanip>
 #include <ostream>
+#include <sstream>
 #include <string>
 
 #include "Core/Base/Log.h"

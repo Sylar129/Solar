@@ -3,9 +3,8 @@
 #include "Platform/OpenGL/OpenGLTexture.h"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
-
 #include "Core/Debug/Instrumentor.h"
+#include "stb_image.h"
 
 namespace Solar {
 

@@ -2,12 +2,12 @@
 
 #pragma once
 
-// clang-format off
-#include <spdlog/spdlog.h>
-#include <spdlog/fmt/ostr.h>
-// clang-format on
-
 #include <memory>
+
+// clang-format off
+#include "spdlog/spdlog.h"
+#include "spdlog/fmt/ostr.h"
+// clang-format on
 
 namespace Solar {
 

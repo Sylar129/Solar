@@ -2,10 +2,9 @@
 
 #include "Platform/OpenGL/OpenGLRendererAPI.h"
 
-#include <glad/glad.h>
-
 #include "Core/Base/Log.h"
 #include "Core/Debug/Instrumentor.h"
+#include "glad/glad.h"
 
 namespace Solar {
 

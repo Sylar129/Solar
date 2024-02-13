@@ -2,11 +2,11 @@
 
 #pragma once
 
-#include <glm/glm.hpp>
 #include <string>
 #include <unordered_map>
 
 #include "Core/Base/Sundry.h"
+#include "glm/glm.hpp"
 
 namespace Solar {
 

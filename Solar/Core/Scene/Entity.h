@@ -2,9 +2,8 @@
 
 #pragma once
 
-#include <entt/entt.hpp>
-
 #include "Core/Scene/Scene.h"
+#include "entt/entt.hpp"
 
 namespace Solar {
 
