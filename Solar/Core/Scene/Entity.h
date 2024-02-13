@@ -15,7 +15,7 @@ class Entity {
   template <typename T, typename... Args>
   T& AddComponent(Args&&... args) {
     SOLAR_CORE_ASSERT(!HasComponent<T>(), "Entity already has component!");
-    T& component = scene_->m_Registry.emplace<T>(entity_handle_,
+    T& component = scene_->registry_.emplace<T>(entity_handle_,
                                                  std::forward<Args>(args)...);
 
     scene_->OnComponentAdded<T>(*this, component);
@@ -27,19 +27,19 @@ class Entity {
   T& GetComponent() {
     SOLAR_CORE_ASSERT(HasComponent<T>(), "Entity does not have component!");
 
-    return scene_->m_Registry.get<T>(entity_handle_);
+    return scene_->registry_.get<T>(entity_handle_);
   }
 
   template <typename T>
   bool HasComponent() {
-    return scene_->m_Registry.any_of<T>(entity_handle_);
+    return scene_->registry_.any_of<T>(entity_handle_);
   }
 
   template <typename T>
   void RemoveComponent() {
     SOLAR_CORE_ASSERT(HasComponent<T>(), "Entity does not have component!");
 
-    scene_->m_Registry.remove<T>(entity_handle_);
+    scene_->registry_.remove<T>(entity_handle_);
   }
 
   operator bool() const { return entity_handle_ != entt::null; }
