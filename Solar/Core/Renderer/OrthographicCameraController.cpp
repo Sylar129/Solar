@@ -2,20 +2,21 @@
 
 #include "Core/Renderer/OrthographicCameraController.h"
 
-#include <glm/glm.hpp>
+#include <algorithm>
 
 #include "Core/Base/Input.h"
 #include "Core/Base/KeyCodes.h"
 #include "Core/Debug/Instrumentor.h"
+#include "glm/glm.hpp"
 
-namespace Solar {
+namespace solar {
 
 OrthographicCameraController::OrthographicCameraController(float aspect_ratio,
                                                            bool rotation)
     : aspect_ratio_(aspect_ratio),
       zoom_level_(1.0f),
       bounds_({-aspect_ratio_ * zoom_level_, aspect_ratio_ * zoom_level_,
-                -zoom_level_, zoom_level_}),
+               -zoom_level_, zoom_level_}),
       camera_(bounds_.left, bounds_.right, bounds_.bottom, bounds_.top),
       camera_position_(0.0f, 0.0f, 0.0f),
       camera_translation_speed_(1.0f),
@@ -27,25 +28,25 @@ void OrthographicCameraController::OnUpdate(TimeStep ts) {
   SOLAR_PROFILE_FUNCTION();
 
   // SOLAR_CORE_TRACE("Rotation: [{0}]", m_CameraRotation);
-  if (Input::IsKeyPressed(KeyCode::A)) {
+  if (Input::IsKeyPressed(KeyCode::kA)) {
     camera_position_.x -=
         glm::cos(camera_rotation_) * camera_translation_speed_ * ts;
     camera_position_.y -=
         glm::sin(camera_rotation_) * camera_translation_speed_ * ts;
   }
-  if (Input::IsKeyPressed(KeyCode::D)) {
+  if (Input::IsKeyPressed(KeyCode::kD)) {
     camera_position_.x +=
         glm::cos(camera_rotation_) * camera_translation_speed_ * ts;
     camera_position_.y +=
         glm::sin(camera_rotation_) * camera_translation_speed_ * ts;
   }
-  if (Input::IsKeyPressed(KeyCode::W)) {
+  if (Input::IsKeyPressed(KeyCode::kW)) {
     camera_position_.x +=
         -glm::sin(camera_rotation_) * camera_translation_speed_ * ts;
     camera_position_.y +=
         glm::cos(camera_rotation_) * camera_translation_speed_ * ts;
   }
-  if (Input::IsKeyPressed(KeyCode::S)) {
+  if (Input::IsKeyPressed(KeyCode::kS)) {
     camera_position_.x -=
         -glm::sin(camera_rotation_) * camera_translation_speed_ * ts;
     camera_position_.y -=
@@ -53,10 +54,10 @@ void OrthographicCameraController::OnUpdate(TimeStep ts) {
   }
 
   if (rotation_) {
-    if (Input::IsKeyPressed(KeyCode::Q)) {
+    if (Input::IsKeyPressed(KeyCode::kQ)) {
       camera_rotation_ += camera_rotation_speed_ * ts;
     }
-    if (Input::IsKeyPressed(KeyCode::E)) {
+    if (Input::IsKeyPressed(KeyCode::kE)) {
       camera_rotation_ -= camera_rotation_speed_ * ts;
     }
     camera_.SetRotation(camera_rotation_);
@@ -81,9 +82,9 @@ void OrthographicCameraController::OnResize(float width, float height) {
 
 void OrthographicCameraController::CalculateView() {
   bounds_ = {-aspect_ratio_ * zoom_level_, aspect_ratio_ * zoom_level_,
-              -zoom_level_, zoom_level_};
+             -zoom_level_, zoom_level_};
   camera_.SetProjection(bounds_.left, bounds_.right, bounds_.bottom,
-                         bounds_.top);
+                        bounds_.top);
 }
 
 bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e) {
@@ -98,8 +99,8 @@ bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e) {
 bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e) {
   SOLAR_PROFILE_FUNCTION();
 
-  OnResize((float)e.GetWidth(), (float)e.GetHeight());
+  OnResize(static_cast<float>(e.GetWidth()), static_cast<float>(e.GetHeight()));
   return false;
 }
 
-}  // namespace Solar
+}  // namespace solar

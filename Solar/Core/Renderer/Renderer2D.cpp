@@ -2,19 +2,21 @@
 
 #include "Core/Renderer/Renderer2D.h"
 
-#include <glm/gtc/matrix_transform.hpp>
+#include <cstdint>
 
 #include "Core/Debug/Instrumentor.h"
 #include "Core/Renderer/RenderCommand.h"
 #include "Core/Renderer/Shader.h"
 #include "Core/Renderer/VertexArray.h"
+#include "glm/gtc/matrix_transform.hpp"
 
-namespace Solar {
+namespace solar {
 
 struct QuadVertex {
   glm::vec3 position;
   glm::vec4 color;
   glm::vec2 tex_coord;
+  // TODO(sylar): why float?
   float tex_index;
   float tiling_factor;
 
@@ -23,10 +25,11 @@ struct QuadVertex {
 };
 
 struct Renderer2DData {
-  static const uint32_t kMaxQuads = 10000;
-  static const uint32_t kMaxVertices = kMaxQuads * 4;
-  static const uint32_t kMaxIndices = kMaxQuads * 6;
-  static const uint32_t kMaxTextureSlots = 32;  // TODO: Render capability
+  static constexpr uint32_t kMaxQuads = 10000;
+  static constexpr uint32_t kMaxVertices = kMaxQuads * 4;
+  static constexpr uint32_t kMaxIndices = kMaxQuads * 6;
+  static constexpr uint32_t kMaxTextureSlots =
+      32;  // TODO(sylar): Render capability
 
   Ref<VertexArray> quad_vertex_array;
   Ref<VertexBuffer> quad_vertex_buffer;
@@ -43,17 +46,24 @@ struct Renderer2DData {
   glm::vec4 quad_vertex_positions[4];
 
   Renderer2D::Statistics stats;
+
+  uint32_t DataSize() const {
+    auto data_size = reinterpret_cast<uint8_t*>(quad_vertex_buffer_ptr) -
+                     reinterpret_cast<uint8_t*>(quad_vertex_buffer_base);
+    return data_size;
+  }
 };
 
+// TODO(sylar): move
 static Renderer2DData s_data;
 
 void Renderer2D::Init() {
   SOLAR_PROFILE_FUNCTION();
 
-  s_data.quad_vertex_array = Solar::VertexArray::Create();
+  s_data.quad_vertex_array = VertexArray::Create();
 
   s_data.quad_vertex_buffer =
-      VertexBuffer::Create(s_data.kMaxVertices * sizeof(QuadVertex));
+      VertexBuffer::Create(Renderer2DData::kMaxVertices * sizeof(QuadVertex));
   s_data.quad_vertex_buffer->SetLayout(
       {{ShaderDataType::kFloat3, "a_Position"},
        {ShaderDataType::kFloat4, "a_Color"},
@@ -63,12 +73,12 @@ void Renderer2D::Init() {
        {ShaderDataType::kInt, "a_EntityID"}});
   s_data.quad_vertex_array->AddVertexBuffer(s_data.quad_vertex_buffer);
 
-  s_data.quad_vertex_buffer_base = new QuadVertex[s_data.kMaxVertices];
+  s_data.quad_vertex_buffer_base = new QuadVertex[Renderer2DData::kMaxVertices];
 
-  uint32_t* quad_indices = new uint32_t[s_data.kMaxIndices];
+  uint32_t* quad_indices = new uint32_t[Renderer2DData::kMaxIndices];
 
   uint32_t offset = 0;
-  for (auto i{0}; i < s_data.kMaxIndices; i += 6) {
+  for (auto i{0}; i < Renderer2DData::kMaxIndices; i += 6) {
     quad_indices[i + 0] = offset + 0;
     quad_indices[i + 1] = offset + 1;
     quad_indices[i + 2] = offset + 2;
@@ -80,7 +90,7 @@ void Renderer2D::Init() {
     offset += 4;
   }
   Ref<IndexBuffer> quad_ib =
-      IndexBuffer::Create(quad_indices, s_data.kMaxIndices);
+      IndexBuffer::Create(quad_indices, Renderer2DData::kMaxIndices);
   s_data.quad_vertex_array->SetIndexBuffer(quad_ib);
   delete[] quad_indices;
 
@@ -89,15 +99,15 @@ void Renderer2D::Init() {
   s_data.white_texture->SetData(&white_texture_data,
                                 sizeof(white_texture_data));
 
-  int32_t samplers[s_data.kMaxTextureSlots];
-  for (auto i{0}; i < s_data.kMaxTextureSlots; ++i) {
+  int32_t samplers[Renderer2DData::kMaxTextureSlots];
+  for (auto i{0}; i < Renderer2DData::kMaxTextureSlots; ++i) {
     samplers[i] = i;
   }
 
   s_data.texture_shader = Shader::Create("assets/shaders/Texture.glsl");
   s_data.texture_shader->Bind();
   s_data.texture_shader->SetIntArray("u_Texture", samplers,
-                                     s_data.kMaxTextureSlots);
+                                     Renderer2DData::kMaxTextureSlots);
 
   s_data.texture_slots[0] = s_data.white_texture;
 
@@ -156,9 +166,8 @@ void Renderer2D::Flush() {
     return;
   }
 
-  uint32_t data_size = (uint32_t)((uint8_t*)s_data.quad_vertex_buffer_ptr -
-                                  (uint8_t*)s_data.quad_vertex_buffer_base);
-  s_data.quad_vertex_buffer->SetData(s_data.quad_vertex_buffer_base, data_size);
+  s_data.quad_vertex_buffer->SetData(s_data.quad_vertex_buffer_base,
+                                     s_data.DataSize());
 
   // Bind textures
   for (auto i{0u}; i < s_data.texture_slot_index; ++i) {
@@ -214,7 +223,7 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
                           float tiling_factor, const glm::vec4& tint_color) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= s_data.kMaxIndices) {
+  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
     NextBatch();
   }
 
@@ -223,21 +232,21 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
   const glm::vec2* texture_coords = sub_texture->GetTexCoords();
   const Ref<Texture2D> texture = sub_texture->GetTexture();
 
-  float texture_index = 0.0f;
+  uint32_t texture_index = 0;
 
   for (auto i{1u}; i < s_data.texture_slot_index; i++) {
     if (*s_data.texture_slots[i].get() == *texture.get()) {
-      texture_index = (float)i;
+      texture_index = i;
       break;
     }
   }
 
-  if (texture_index == 0.0f) {
+  if (texture_index == 0) {
     if (s_data.texture_slot_index >= Renderer2DData::kMaxTextureSlots) {
       NextBatch();
     }
 
-    texture_index = (float)s_data.texture_slot_index;
+    texture_index = s_data.texture_slot_index;
     s_data.texture_slots[s_data.texture_slot_index] = texture;
     s_data.texture_slot_index++;
   }
@@ -250,7 +259,8 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
         transform * s_data.quad_vertex_positions[i];
     s_data.quad_vertex_buffer_ptr->color = kDefaultColor;
     s_data.quad_vertex_buffer_ptr->tex_coord = texture_coords[i];
-    s_data.quad_vertex_buffer_ptr->tex_index = texture_index;
+    s_data.quad_vertex_buffer_ptr->tex_index =
+        static_cast<float>(texture_index);
     s_data.quad_vertex_buffer_ptr->tiling_factor = tiling_factor;
     s_data.quad_vertex_buffer_ptr++;
   }
@@ -264,7 +274,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color,
                           int entity_id) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= s_data.kMaxIndices) {
+  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
     NextBatch();
   }
 
@@ -295,7 +305,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform,
                           const glm::vec4& tint_color, int entity_id) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= s_data.kMaxIndices) {
+  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
     NextBatch();
   }
 
@@ -304,21 +314,21 @@ void Renderer2D::DrawQuad(const glm::mat4& transform,
   constexpr glm::vec2 kTextureCoords[] = {
       {0.0f, 0.0f}, {1.0f, 0.0f}, {1.0f, 1.0f}, {0.0f, 1.0f}};
 
-  float texture_index = 0.0f;
+  uint32_t texture_index;
 
   for (auto i{1u}; i < s_data.texture_slot_index; i++) {
     if (*s_data.texture_slots[i].get() == *texture.get()) {
-      texture_index = (float)i;
+      texture_index = i;
       break;
     }
   }
 
-  if (texture_index == 0.0f) {
+  if (texture_index == 0) {
     if (s_data.texture_slot_index >= Renderer2DData::kMaxTextureSlots) {
       NextBatch();
     }
 
-    texture_index = (float)s_data.texture_slot_index;
+    texture_index = s_data.texture_slot_index;
     s_data.texture_slots[s_data.texture_slot_index] = texture;
     s_data.texture_slot_index++;
   }
@@ -328,7 +338,8 @@ void Renderer2D::DrawQuad(const glm::mat4& transform,
         transform * s_data.quad_vertex_positions[i];
     s_data.quad_vertex_buffer_ptr->color = kDefaultColor;
     s_data.quad_vertex_buffer_ptr->tex_coord = kTextureCoords[i];
-    s_data.quad_vertex_buffer_ptr->tex_index = texture_index;
+    s_data.quad_vertex_buffer_ptr->tex_index =
+        static_cast<float>(texture_index);
     s_data.quad_vertex_buffer_ptr->tiling_factor = tiling_factor;
     s_data.quad_vertex_buffer_ptr->entity_id = entity_id;
     s_data.quad_vertex_buffer_ptr++;
@@ -350,7 +361,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                 const glm::vec4& color) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= s_data.kMaxIndices) {
+  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
     NextBatch();
   }
 
@@ -396,7 +407,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                 const glm::vec4& tint_color) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= s_data.kMaxIndices) {
+  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
     NextBatch();
   }
 
@@ -405,21 +416,21 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
   constexpr glm::vec2 kTextureCoords[] = {
       {0.0f, 0.0f}, {1.0f, 0.0f}, {1.0f, 1.0f}, {0.0f, 1.0f}};
 
-  float texture_index = 0.0f;
+  uint32_t texture_index = 0;
 
   for (auto i{1u}; i < s_data.texture_slot_index; i++) {
     if (*s_data.texture_slots[i].get() == *texture.get()) {
-      texture_index = (float)i;
+      texture_index = i;
       break;
     }
   }
 
-  if (texture_index == 0.0f) {
+  if (texture_index == 0) {
     if (s_data.texture_slot_index >= Renderer2DData::kMaxTextureSlots) {
       NextBatch();
     }
 
-    texture_index = (float)s_data.texture_slot_index;
+    texture_index = s_data.texture_slot_index;
     s_data.texture_slots[s_data.texture_slot_index] = texture;
     s_data.texture_slot_index++;
   }
@@ -434,7 +445,8 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
         transform * s_data.quad_vertex_positions[i];
     s_data.quad_vertex_buffer_ptr->color = kDefaultColor;
     s_data.quad_vertex_buffer_ptr->tex_coord = kTextureCoords[i];
-    s_data.quad_vertex_buffer_ptr->tex_index = texture_index;
+    s_data.quad_vertex_buffer_ptr->tex_index =
+        static_cast<float>(texture_index);
     s_data.quad_vertex_buffer_ptr->tiling_factor = tiling_factor;
     s_data.quad_vertex_buffer_ptr++;
   }
@@ -460,7 +472,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                 const glm::vec4& tint_color) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= s_data.kMaxIndices) {
+  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
     NextBatch();
   }
 
@@ -469,21 +481,21 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
   const glm::vec2* texture_coords = sub_texture->GetTexCoords();
   const Ref<Texture2D> texture = sub_texture->GetTexture();
 
-  float texture_index = 0.0f;
+  uint32_t texture_index = 0;
 
   for (auto i{1u}; i < s_data.texture_slot_index; i++) {
     if (*s_data.texture_slots[i].get() == *texture.get()) {
-      texture_index = (float)i;
+      texture_index = i;
       break;
     }
   }
 
-  if (texture_index == 0.0f) {
+  if (texture_index == 0) {
     if (s_data.texture_slot_index >= Renderer2DData::kMaxTextureSlots) {
       NextBatch();
     }
 
-    texture_index = (float)s_data.texture_slot_index;
+    texture_index = s_data.texture_slot_index;
     s_data.texture_slots[s_data.texture_slot_index] = texture;
     s_data.texture_slot_index++;
   }
@@ -498,7 +510,8 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
         transform * s_data.quad_vertex_positions[i];
     s_data.quad_vertex_buffer_ptr->color = kDefaultColor;
     s_data.quad_vertex_buffer_ptr->tex_coord = texture_coords[i];
-    s_data.quad_vertex_buffer_ptr->tex_index = texture_index;
+    s_data.quad_vertex_buffer_ptr->tex_index =
+        static_cast<float>(texture_index);
     s_data.quad_vertex_buffer_ptr->tiling_factor = tiling_factor;
     s_data.quad_vertex_buffer_ptr++;
   }
@@ -509,7 +522,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
 }
 
 void Renderer2D::DrawSprite(const glm::mat4& transform,
-                            SpriteRendererComponent& src, int entity_id) {
+                            const SpriteRendererComponent& src, int entity_id) {
   DrawQuad(transform, src.color, entity_id);
 }
 
@@ -530,4 +543,4 @@ void Renderer2D::NextBatch() {
   StartBatch();
 }
 
-}  // namespace Solar
+}  // namespace solar

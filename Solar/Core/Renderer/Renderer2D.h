@@ -9,7 +9,7 @@
 #include "Core/Renderer/Texture.h"
 #include "Core/Scene/Components.h"
 
-namespace Solar {
+namespace solar {
 
 class Renderer2D {
  public:
@@ -21,7 +21,8 @@ class Renderer2D {
 
   static void BeginScene(const Camera& camera, const glm::mat4& transform);
   static void BeginScene(const EditorCamera& camera);
-  static void BeginScene(const OrthographicCamera& camera);  // TODO: Remove
+  // TODO(sylar): Remove
+  static void BeginScene(const OrthographicCamera& camera);
   static void EndScene();
   static void Flush();
 
@@ -31,10 +32,12 @@ class Renderer2D {
   static void DrawQuad(const glm::vec3& position, const glm::vec2& size,
                        const glm::vec4& color);
   static void DrawQuad(const glm::vec2& position, const glm::vec2& size,
-                       const Ref<Texture2D>& texture, float tiling_factor = 1.0f,
+                       const Ref<Texture2D>& texture,
+                       float tiling_factor = 1.0f,
                        const glm::vec4& tint_color = glm::vec4(1.0f));
   static void DrawQuad(const glm::vec3& position, const glm::vec2& size,
-                       const Ref<Texture2D>& texture, float tiling_factor = 1.0f,
+                       const Ref<Texture2D>& texture,
+                       float tiling_factor = 1.0f,
                        const glm::vec4& tint_color = glm::vec4(1.0f));
   static void DrawQuad(const glm::vec2& position, const glm::vec2& size,
                        const Ref<SubTexture2D>& sub_texture,
@@ -48,7 +51,8 @@ class Renderer2D {
   static void DrawQuad(const glm::mat4& transform, const glm::vec4& color,
                        int entity_id = -1);
   static void DrawQuad(const glm::mat4& transform,
-                       const Ref<Texture2D>& texture, float tiling_factor = 1.0f,
+                       const Ref<Texture2D>& texture,
+                       float tiling_factor = 1.0f,
                        const glm::vec4& tint_color = glm::vec4(1.0f),
                        int entity_id = -1);
 
@@ -77,7 +81,7 @@ class Renderer2D {
                              const glm::vec4& tint_color = glm::vec4(1.0f));
 
   static void DrawSprite(const glm::mat4& transform,
-                         SpriteRendererComponent& src, int entity_id);
+                         const SpriteRendererComponent& src, int entity_id);
 
   // Stats
   struct Statistics {
@@ -95,4 +99,4 @@ class Renderer2D {
   static void NextBatch();
 };
 
-}  // namespace Solar
+}  // namespace solar

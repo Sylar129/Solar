@@ -2,12 +2,13 @@
 
 #pragma once
 
-#include <entt/entt.hpp>
+#include <string>
 
 #include "Core/Base/Timestep.h"
 #include "Core/Renderer/EditorCamera.h"
+#include "entt/entt.hpp"
 
-namespace Solar {
+namespace solar {
 
 class Entity;
 
@@ -16,7 +17,7 @@ class Scene {
   Scene();
   ~Scene();
 
-  Entity CreateEntity(const std::string& name = std::string());
+  Entity CreateEntity(const std::string& name);
   void DestoryEntity(Entity entity);
 
   void OnUpdateRuntime(TimeStep& ts);
@@ -38,4 +39,4 @@ class Scene {
   friend class SceneHierarchyPanel;
 };
 
-}  // namespace Solar
+}  // namespace solar

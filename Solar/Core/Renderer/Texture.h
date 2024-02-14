@@ -6,7 +6,7 @@
 
 #include "Core/Base/Sundry.h"
 
-namespace Solar {
+namespace solar {
 
 class Texture {
  public:
@@ -29,4 +29,4 @@ class Texture2D : public Texture {
   static Ref<Texture2D> Create(const std::string& path);
 };
 
-}  // namespace Solar
+}  // namespace solar

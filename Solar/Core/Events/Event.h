@@ -8,7 +8,7 @@
 
 #include "Core/Base/Sundry.h"
 
-namespace Solar {
+namespace solar {
 
 enum class EventType {
   kNone = 0,
@@ -38,12 +38,12 @@ enum EventCategory {
   kEventCategoryMouseButton = BIT(4)
 };
 
-#define EVENT_CLASS_TYPE(type)                                                \
-  static EventType GetStaticType() { return EventType::type; }                \
-  virtual EventType GetEventType() const override { return GetStaticType(); } \
-  virtual const char* GetName() const override { return #type; }
+#define EVENT_CLASS_TYPE(type)                                        \
+  static EventType GetStaticType() { return EventType::type; }        \
+  EventType GetEventType() const override { return GetStaticType(); } \
+  const char* GetName() const override { return #type; }
 #define EVENT_CLASS_CATEGORY(category) \
-  virtual int GetCategoryFlags() const override { return category; }
+  int GetCategoryFlags() const override { return category; }
 
 class Event {
   friend class EventDispatcher;
@@ -73,7 +73,7 @@ class EventDispatcher {
   template <typename T>
   bool Dispatch(EventFn<T> func) {
     if (event_.GetEventType() == T::GetStaticType()) {
-      event_.handled = func(*(T*)&event_);
+      event_.handled = func(*static_cast<T*>(&event_));
       return true;
     }
     return false;
@@ -87,4 +87,4 @@ inline std::ostream& operator<<(std::ostream& os, const Event& e) {
   return os << e.ToString();
 }
 
-}  // namespace Solar
+}  // namespace solar

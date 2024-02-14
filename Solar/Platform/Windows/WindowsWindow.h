@@ -2,17 +2,18 @@
 
 #pragma once
 
-#include <GLFW/glfw3.h>
+#include <string>
 
 #include "Core/Base/Window.h"
 #include "Core/Renderer/GraphicsContext.h"
+#include "GLFW/glfw3.h"
 
-namespace Solar {
+namespace solar {
 
 class WindowsWindow : public Window {
  public:
   explicit WindowsWindow(const WindowProps& props);
-  virtual ~WindowsWindow();
+  ~WindowsWindow() override;
 
   void OnUpdate() override;
 
@@ -26,7 +27,7 @@ class WindowsWindow : public Window {
   void SetVSync(bool enabled) override;
   bool IsVSync() const override;
 
-  inline virtual void* GetNativeWindow() const override { return window_; }
+  inline void* GetNativeWindow() const override { return window_; }
 
  private:
   virtual void Init(const WindowProps& props);
@@ -48,4 +49,4 @@ class WindowsWindow : public Window {
   WindowData data_;
 };
 
-}  // namespace Solar
+}  // namespace solar

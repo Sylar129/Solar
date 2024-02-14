@@ -5,7 +5,7 @@
 #include "Core/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLBuffer.h"
 
-namespace Solar {
+namespace solar {
 
 Ref<VertexBuffer> VertexBuffer::Create(uint32_t size) {
   switch (Renderer::GetAPI()) {
@@ -42,4 +42,4 @@ Ref<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t count) {
   return nullptr;
 }
 
-}  // namespace Solar
+}  // namespace solar

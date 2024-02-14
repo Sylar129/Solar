@@ -4,11 +4,11 @@
 
 #include "Core/Scene/Entity.h"
 
-namespace Solar {
+namespace solar {
 
 class ScriptableEntity {
  public:
-  virtual ~ScriptableEntity(){};
+  virtual ~ScriptableEntity() {}
 
   template <typename T>
   T& GetComponent() {
@@ -25,4 +25,4 @@ class ScriptableEntity {
   friend class Scene;
 };
 
-}  // namespace Solar
+}  // namespace solar

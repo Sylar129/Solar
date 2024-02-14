@@ -6,7 +6,7 @@
 
 #include "Core/Base/Sundry.h"
 
-namespace Solar {
+namespace solar {
 
 enum class FramebufferTextureFormat {
   kNone = 0,
@@ -24,10 +24,10 @@ enum class FramebufferTextureFormat {
 
 struct FramebufferTextureSpecification {
   FramebufferTextureFormat texture_format = FramebufferTextureFormat::kNone;
-  // TODO: filtering/wrap
+  // TODO(sylar): filtering/wrap
 
   FramebufferTextureSpecification() = default;
-  FramebufferTextureSpecification(FramebufferTextureFormat format)
+  FramebufferTextureSpecification(FramebufferTextureFormat format)  // NOLINT
       : texture_format(format) {}
 };
 
@@ -69,4 +69,4 @@ class Framebuffer {
   static Ref<Framebuffer> Create(const FramebufferSpecification& spec);
 };
 
-}  // namespace Solar
+}  // namespace solar

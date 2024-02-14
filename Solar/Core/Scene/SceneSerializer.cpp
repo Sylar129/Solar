@@ -2,13 +2,13 @@
 
 #include "Core/Scene/SceneSerializer.h"
 
-#include <yaml-cpp/yaml.h>
-
 #include <ostream>
+#include <string>
 
 #include "Core/Base/Log.h"
 #include "Core/Scene/Components.h"
 #include "Core/Scene/Entity.h"
+#include "yaml-cpp/yaml.h"
 
 namespace YAML {
 
@@ -23,8 +23,9 @@ struct convert<glm::vec3> {
   }
 
   static bool decode(const Node& node, glm::vec3& rhs) {
-    if (!node.IsSequence() || node.size() != 3) { return false;
-}
+    if (!node.IsSequence() || node.size() != 3) {
+      return false;
+    }
 
     rhs.x = node[0].as<float>();
     rhs.y = node[1].as<float>();
@@ -45,8 +46,9 @@ struct convert<glm::vec4> {
   }
 
   static bool decode(const Node& node, glm::vec4& rhs) {
-    if (!node.IsSequence() || node.size() != 4) { return false;
-}
+    if (!node.IsSequence() || node.size() != 4) {
+      return false;
+    }
 
     rhs.x = node[0].as<float>();
     rhs.y = node[1].as<float>();
@@ -58,7 +60,7 @@ struct convert<glm::vec4> {
 
 }  // namespace YAML
 
-namespace Solar {
+namespace solar {
 
 YAML::Emitter& operator<<(YAML::Emitter& out, const glm::vec3& v) {
   out << YAML::Flow;
@@ -115,7 +117,7 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity) {
     out << YAML::Key << "Camera" << YAML::Value;
     out << YAML::BeginMap;
     out << YAML::Key << "ProjectionType" << YAML::Value
-        << (int)camera.GetProjectionType();
+        << static_cast<int>(camera.GetProjectionType());
     out << YAML::Key << "PerspectiveFOV" << YAML::Value
         << camera.GetPerspectiveVerticalFOV();
     out << YAML::Key << "PerspectiveNear" << YAML::Value
@@ -145,7 +147,8 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity) {
 
     auto& sprite_renderer_component =
         entity.GetComponent<SpriteRendererComponent>();
-    out << YAML::Key << "Color" << YAML::Value << sprite_renderer_component.color;
+    out << YAML::Key << "Color" << YAML::Value
+        << sprite_renderer_component.color;
 
     out << YAML::EndMap;
   }
@@ -160,8 +163,9 @@ void SceneSerializer::Serialize(const std::string& filepath) {
   out << YAML::Key << "Entities" << YAML::Value << YAML::BeginSeq;
   for (auto [entityID, _] : scene_->registry_.storage<Entity>().each()) {
     Entity entity = {entityID, scene_.get()};
-    if (!entity) { return;
-}
+    if (!entity) {
+      return;
+    }
     SerializeEntity(out, entity);
   }
   out << YAML::EndSeq;
@@ -177,8 +181,9 @@ bool SceneSerializer::Deserialize(const std::string& filepath) {
   str_stream << stream.rdbuf();
 
   YAML::Node data = YAML::Load(str_stream.str());
-  if (!data["Scene"]) { return false;
-}
+  if (!data["Scene"]) {
+    return false;
+  }
 
   std::string scene_name = data["Scene"].as<std::string>();
   SOLAR_CORE_TRACE("Deserializing Scene '{0}'", scene_name);
@@ -186,12 +191,14 @@ bool SceneSerializer::Deserialize(const std::string& filepath) {
   auto entities = data["Entities"];
   if (entities) {
     for (const auto& entity : entities) {
-      uint64_t uuid = entity["Entity"].as<uint64_t>();  // TODO
+      // TODO(sylar): gen uuid
+      uint64_t uuid = entity["Entity"].as<uint64_t>();
 
       std::string name;
       auto tag_component = entity["TagComponent"];
-      if (tag_component) { name = tag_component["Tag"].as<std::string>();
-}
+      if (tag_component) {
+        name = tag_component["Tag"].as<std::string>();
+      }
 
       SOLAR_CORE_TRACE("Deserialized entity with ID = {0}, name = {1}", uuid,
                        name);
@@ -257,4 +264,4 @@ bool SceneSerializer::DeserializeRuntime(const std::string& filepath) {
   return false;
 }
 
-}  // namespace Solar
+}  // namespace solar

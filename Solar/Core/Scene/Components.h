@@ -2,14 +2,15 @@
 
 #pragma once
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/quaternion.hpp>
+#include <string>
 
 #include "Core/Scene/SceneCamera.h"
 #include "Core/Scene/ScriptableEntity.h"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtx/quaternion.hpp"
 
-namespace Solar {
+namespace solar {
 
 struct TagComponent {
   std::string tag;
@@ -37,7 +38,8 @@ struct SpriteRendererComponent {
 
 struct CameraComponent {
   SceneCamera camera;
-  bool primary = true;  // TODO: Move to the scene
+  // TODO(sylar): Move to the scene
+  bool primary = true;
   bool fixed_aspect_ratio = false;
 };
 
@@ -59,4 +61,4 @@ struct NativeScriptComponent {
   }
 };
 
-}  // namespace Solar
+}  // namespace solar

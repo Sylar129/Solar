@@ -2,14 +2,15 @@
 
 #include "SceneHierarchyPanel.h"
 
-#include <imgui.h>
-#include <imgui_internal.h>
-
-#include <glm/gtc/type_ptr.hpp>
+#include <string>
 
 #include "Core/Scene/Components.h"
+#include "Core/Scene/SceneCamera.h"
+#include "glm/gtc/type_ptr.hpp"
+#include "imgui.h"           // NOLINT
+#include "imgui_internal.h"  // NOLINT
 
-namespace Solar {
+namespace solar {
 
 namespace {
 void DrawVec3Control(const std::string& label, glm::vec3& values,
@@ -102,6 +103,7 @@ void DrawComponent(const std::string& label, Entity entity,
     float line_height =
         GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
     ImGui::Separator();
+    // NOLINTNEXTLINE
     bool open = ImGui::TreeNodeEx((void*)typeid(T).hash_code(), kTreeNodeFlags,
                                   "%s", label.c_str());
     ImGui::PopStyleVar();
@@ -183,6 +185,7 @@ void SceneHierarchyPanel::DrawEntityNode(Entity entity) {
       ((selection_context_ == entity) ? ImGuiTreeNodeFlags_Selected : 0) |
       ImGuiTreeNodeFlags_OpenOnArrow;
   flags |= ImGuiTreeNodeFlags_SpanAvailWidth;
+  // NOLINTNEXTLINE
   bool opened = ImGui::TreeNodeEx((void*)(uint64_t)(uint32_t)entity, flags,
                                   "%s", tag.c_str());
   if (ImGui::IsItemClicked()) {
@@ -256,28 +259,23 @@ void SceneHierarchyPanel::DrawComponents(Entity entity) {
 
     ImGui::Checkbox("Primary", &component.primary);
 
-    // TODO(sylar): simplify
-    const char* projection_type_strings[] = {"Perspective", "Orthographic"};
-    const char* current_projection_type_string =
-        projection_type_strings[(int)camera.GetProjectionType()];
-    if (ImGui::BeginCombo("Porjection", current_projection_type_string)) {
-      for (int i = 0; i < 2; ++i) {
-        bool is_selected =
-            current_projection_type_string == projection_type_strings[i];
-        if (ImGui::Selectable(projection_type_strings[i], is_selected)) {
-          current_projection_type_string = projection_type_strings[i];
-          camera.SetProjectionType((SceneCamera::ProjectionType)i);
+    auto projection_type = camera.GetProjectionType();
+    if (ImGui::BeginCombo("Porjection", ToString(projection_type).data())) {
+      for (auto t : SceneCamera::GetTypeArray()) {
+        bool is_selected = t == projection_type;
+        if (ImGui::Selectable(ToString(t).data(), is_selected)) {
+          camera.SetProjectionType(t);
         }
 
         if (is_selected) {
           ImGui::SetItemDefaultFocus();
         }
       }
+
       ImGui::EndCombo();
     }
 
-    if (camera.GetProjectionType() ==
-        SceneCamera::ProjectionType::kPerspective) {
+    if (projection_type == SceneCamera::ProjectionType::kPerspective) {
       float vertical_fov = glm::degrees(camera.GetPerspectiveVerticalFOV());
       if (ImGui::DragFloat("Vertical Fov", &vertical_fov)) {
         camera.SetPerspectiveVerticalFOV(glm::radians(vertical_fov));
@@ -294,8 +292,7 @@ void SceneHierarchyPanel::DrawComponents(Entity entity) {
       }
     }
 
-    if (camera.GetProjectionType() ==
-        SceneCamera::ProjectionType::kOrthographic) {
+    if (projection_type == SceneCamera::ProjectionType::kOrthographic) {
       float ortho_size = camera.GetOrthographicSize();
       if (ImGui::DragFloat("Size", &ortho_size)) {
         camera.SetOrthographicSize(ortho_size);
@@ -321,4 +318,4 @@ void SceneHierarchyPanel::DrawComponents(Entity entity) {
       });
 }
 
-}  // namespace Solar
+}  // namespace solar

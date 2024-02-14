@@ -4,7 +4,7 @@
 
 #include <string>
 
-namespace Solar {
+namespace solar {
 
 class FileDialogs {
  public:
@@ -13,4 +13,4 @@ class FileDialogs {
   static std::string SaveFile(const char* filter);
 };
 
-}  // namespace Solar
+}  // namespace solar

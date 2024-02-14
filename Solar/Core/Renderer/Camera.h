@@ -2,9 +2,9 @@
 
 #pragma once
 
-#include <glm/mat4x4.hpp>
+#include "glm/mat4x4.hpp"
 
-namespace Solar {
+namespace solar {
 
 class Camera {
  public:
@@ -18,4 +18,4 @@ class Camera {
   glm::mat4 projection_ = glm::mat4(1.0f);
 };
 
-}  // namespace Solar
+}  // namespace solar

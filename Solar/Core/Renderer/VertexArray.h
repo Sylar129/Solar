@@ -2,9 +2,11 @@
 
 #pragma once
 
+#include <vector>
+
 #include "Core/Renderer/Buffer.h"
 
-namespace Solar {
+namespace solar {
 
 class VertexArray {
  public:
@@ -22,4 +24,4 @@ class VertexArray {
   static Ref<VertexArray> Create();
 };
 
-}  // namespace Solar
+}  // namespace solar

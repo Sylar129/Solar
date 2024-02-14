@@ -2,10 +2,10 @@
 
 #include "Core/Base/Layer.h"
 
-namespace Solar {
+namespace solar {
 
 Layer::Layer(const std::string& name) : debug_name_(name) {}
 
 Layer::~Layer() {}
 
-}  // namespace Solar
+}  // namespace solar

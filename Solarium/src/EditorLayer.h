@@ -4,23 +4,23 @@
 
 #include <Solar.h>
 
-#include "Core/Renderer/EditorCamera.h"
 #include "Core/Events/KeyEvent.h"
+#include "Core/Renderer/EditorCamera.h"
 #include "Panels/SceneHierarchyPanel.h"
 
-namespace Solar {
+namespace solar {
 
 class EditorLayer : public Layer {
  public:
   EditorLayer();
-  virtual ~EditorLayer() = default;
+  ~EditorLayer() override = default;
 
-  virtual void OnAttach() override;
-  virtual void OnDetech() override;
+  void OnAttach() override;
+  void OnDetech() override;
 
-  virtual void OnUpdate(TimeStep& ts) override;
-  virtual void OnImGuiRender() override;
-  virtual void OnEvent(Event& event) override;
+  void OnUpdate(TimeStep& ts) override;
+  void OnImGuiRender() override;
+  void OnEvent(Event& event) override;
 
  private:
   bool OnKeyPressed(KeyPressdEvent& e);
@@ -63,4 +63,4 @@ class EditorLayer : public Layer {
   SceneHierarchyPanel scene_hierarchy_panel_;
 };
 
-}  // namespace Solar
+}  // namespace solar

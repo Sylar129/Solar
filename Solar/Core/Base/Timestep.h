@@ -2,7 +2,7 @@
 
 #pragma once
 
-namespace Solar {
+namespace solar {
 
 class TimeStep {
  public:
@@ -17,4 +17,4 @@ class TimeStep {
   float time_;
 };
 
-}  // namespace Solar
+}  // namespace solar

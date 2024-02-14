@@ -2,6 +2,7 @@
 
 #pragma once
 
+// clang-format off
 #include <iostream>
 #include <fstream>
 #include <memory>
@@ -24,3 +25,4 @@
 #ifdef SOLAR_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif
+// clang-format on

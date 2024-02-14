@@ -2,11 +2,10 @@
 
 #include "Platform/OpenGL/OpenGLFramebuffer.h"
 
-#include <glad/glad.h>
-
 #include "Core/Base/Log.h"
+#include "glad/glad.h"
 
-namespace Solar {
+namespace solar {
 
 namespace {
 constexpr uint32_t kMaxFramebufferSize = 8192;
@@ -85,7 +84,7 @@ constexpr GLenum SolarFBTextureFormatToGL(FramebufferTextureFormat format) {
   return 0;
 }
 
-// TODO
+// TODO(sylar)
 // constexpr GLenum GLDataType(FramebufferTextureFormat format) {
 //    switch (format) {
 //        case FramebufferTextureFormat::RGBA8:
@@ -239,4 +238,4 @@ void OpenGLFramebuffer::Invalidate() {
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-}  // namespace Solar
+}  // namespace solar

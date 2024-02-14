@@ -4,20 +4,20 @@
 
 // clang-format off
 
-#include <imgui.h>
-#include <ImGuizmo.h>
-#include <backends/imgui_impl_glfw.h>
-#include <backends/imgui_impl_opengl3.h>
+#include "imgui.h" // NOLINT
+#include "ImGuizmo.h"
+#include "backends/imgui_impl_glfw.h"
+#include "backends/imgui_impl_opengl3.h"
 
 // Temporary
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
 // clang-format on
 
 #include "Core/Base/Application.h"
 #include "Core/Debug/Instrumentor.h"
 
-namespace Solar {
+namespace solar {
 
 ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer"), time_(0.0f) {}
 
@@ -80,7 +80,8 @@ void ImGuiLayer::OnDetech() {
 void ImGuiLayer::OnEvent(Event& e) {
   if (block_events_) {
     ImGuiIO& io = ImGui::GetIO();
-    e.handled |= e.IsInCategory(EventCategory::kEventCategoryMouse) & io.WantCaptureMouse;
+    e.handled |= e.IsInCategory(EventCategory::kEventCategoryMouse) &
+                 io.WantCaptureMouse;
     e.handled |= e.IsInCategory(EventCategory::kEventCategoryKeyboard) &
                  io.WantCaptureKeyboard;
   }
@@ -100,8 +101,8 @@ void ImGuiLayer::End() {
 
   ImGuiIO& io = ImGui::GetIO();
   Application& app = Application::Get();
-  io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(),
-                          (float)app.GetWindow().GetHeight());
+  io.DisplaySize = ImVec2(static_cast<float>(app.GetWindow().GetWidth()),
+                          static_cast<float>(app.GetWindow().GetHeight()));
 
   // Rendering
   ImGui::Render();
@@ -149,4 +150,4 @@ void ImGuiLayer::SetDarkThemeColors() {
   colors[ImGuiCol_TitleBgCollapsed] = ImVec4{0.15f, 0.1505f, 0.151f, 1.0f};
 }
 
-}  // namespace Solar
+}  // namespace solar

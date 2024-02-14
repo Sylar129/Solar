@@ -2,8 +2,8 @@
 
 #include "Core/Renderer/RendererAPI.h"
 
-namespace Solar {
+namespace solar {
 
-RendererAPI::API RendererAPI::s_api = RendererAPI::API::kOpenGL;
+RendererAPI::API RendererAPI::api_ = RendererAPI::API::kOpenGL;
 
-}  // namespace Solar
+}  // namespace solar

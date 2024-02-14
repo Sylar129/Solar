@@ -2,11 +2,10 @@
 
 #include "Platform/OpenGL/OpenGLVertexArray.h"
 
-#include <glad/glad.h>
-
 #include "Core/Debug/Instrumentor.h"
+#include "glad/glad.h"
 
-namespace Solar {
+namespace solar {
 
 namespace {
 constexpr GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type) {
@@ -132,4 +131,4 @@ const Ref<IndexBuffer>& OpenGLVertexArray::GetIndexBuffer() const {
   return index_buffer_;
 }
 
-}  // namespace Solar
+}  // namespace solar

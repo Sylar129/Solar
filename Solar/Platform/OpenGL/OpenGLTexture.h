@@ -2,27 +2,28 @@
 
 #pragma once
 
-#include <glad/glad.h>
+#include <string>
 
 #include "Core/Renderer/Texture.h"
+#include "glad/glad.h"
 
-namespace Solar {
+namespace solar {
 
 class OpenGLTexture2D : public Texture2D {
  public:
   OpenGLTexture2D(uint32_t width, uint32_t height);
   explicit OpenGLTexture2D(const std::string& path);
-  virtual ~OpenGLTexture2D();
+  ~OpenGLTexture2D() override;
 
-  virtual uint32_t GetWidth() const override { return width_; }
-  virtual uint32_t GetHeight() const override { return height_; }
-  virtual uint32_t GetRendererID() const override { return renderer_id_; }
+  uint32_t GetWidth() const override { return width_; }
+  uint32_t GetHeight() const override { return height_; }
+  uint32_t GetRendererID() const override { return renderer_id_; }
 
-  virtual void SetData(void* data, uint32_t size) override;
+  void SetData(void* data, uint32_t size) override;
 
-  virtual void Bind(uint32_t slot) const override;
+  void Bind(uint32_t slot) const override;
 
-  virtual bool operator==(const Texture& other) const override {
+  bool operator==(const Texture& other) const override {
     return renderer_id_ == ((OpenGLTexture2D&)other).renderer_id_;
   }
 
@@ -35,4 +36,4 @@ class OpenGLTexture2D : public Texture2D {
   GLenum data_format_;
 };
 
-}  // namespace Solar
+}  // namespace solar

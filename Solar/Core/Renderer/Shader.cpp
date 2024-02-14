@@ -5,7 +5,7 @@
 #include "Core/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLShader.h"
 
-namespace Solar {
+namespace solar {
 
 Ref<Shader> Shader::Create(const std::string& filepath) {
   switch (Renderer::GetAPI()) {
@@ -65,4 +65,4 @@ bool ShaderLibrary::Exists(const std::string& name) const {
   return shaders_.find(name) != shaders_.end();
 }
 
-}  // namespace Solar
+}  // namespace solar

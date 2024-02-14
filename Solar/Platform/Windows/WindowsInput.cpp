@@ -1,23 +1,22 @@
 // Copyright (c) 2024 Sylar129
 
-#include <GLFW/glfw3.h>
-
 #include "Core/Base/Application.h"
 #include "Core/Base/Input.h"
+#include "GLFW/glfw3.h"
 
-namespace Solar {
+namespace solar {
 
 bool Input::IsKeyPressed(KeyCode keycode) {
   auto *window = static_cast<GLFWwindow *>(
       Application::Get().GetWindow().GetNativeWindow());
-  auto state = glfwGetKey(window, static_cast<uint16_t>(keycode));
+  auto state = glfwGetKey(window, static_cast<int>(keycode));
 
   return state == GLFW_PRESS || state == GLFW_REPEAT;
 }
 bool Input::IsMouseButtonPressed(MouseCode button) {
   auto *window = static_cast<GLFWwindow *>(
       Application::Get().GetWindow().GetNativeWindow());
-  auto state = glfwGetMouseButton(window, static_cast<uint16_t>(button));
+  auto state = glfwGetMouseButton(window, static_cast<int>(button));
 
   return state == GLFW_PRESS;
 }
@@ -28,7 +27,7 @@ std::pair<float, float> Input::GetMousePosition() {
   double ypos;
   glfwGetCursorPos(window, &xpos, &ypos);
 
-  return {(float)xpos, (float)ypos};
+  return {static_cast<float>(xpos), static_cast<float>(ypos)};
 }
 float Input::GetMouseX() {
   auto [x, y] = GetMousePosition();
@@ -39,4 +38,4 @@ float Input::GetMouseY() {
   return y;
 }
 
-}  // namespace Solar
+}  // namespace solar

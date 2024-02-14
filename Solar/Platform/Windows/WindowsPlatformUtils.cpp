@@ -4,23 +4,23 @@
 #include <Windows.h>
 #include <commdlg.h>
 
-#include <GLFW/glfw3.h>
+#include "GLFW/glfw3.h"
 #define GLFW_EXPOSE_NATIVE_WIN32
-#include <GLFW/glfw3native.h>
+#include "GLFW/glfw3native.h"
 // clang-format on
 
 #include "Core/Base/Application.h"
 #include "Core/Utils/PlatformUtils.h"
 
-namespace Solar {
+namespace solar {
 
 std::string FileDialogs::OpenFile(const char* filter) {
   OPENFILENAMEA ofn;
   CHAR szFile[260] = {0};
   ZeroMemory(&ofn, sizeof(OPENFILENAMEA));
   ofn.lStructSize = sizeof(OPENFILENAMEA);
-  ofn.hwndOwner = glfwGetWin32Window(
-      (GLFWwindow*)Application::Get().GetWindow().GetNativeWindow());
+  ofn.hwndOwner = glfwGetWin32Window(static_cast<GLFWwindow*>(
+      Application::Get().GetWindow().GetNativeWindow()));
   ofn.lpstrFile = szFile;
   ofn.nMaxFile = sizeof(szFile);
   ofn.lpstrFilter = filter;
@@ -37,8 +37,8 @@ std::string FileDialogs::SaveFile(const char* filter) {
   CHAR szFile[260] = {0};
   ZeroMemory(&ofn, sizeof(OPENFILENAME));
   ofn.lStructSize = sizeof(OPENFILENAME);
-  ofn.hwndOwner = glfwGetWin32Window(
-      (GLFWwindow*)Application::Get().GetWindow().GetNativeWindow());
+  ofn.hwndOwner = glfwGetWin32Window(static_cast<GLFWwindow*>(
+      Application::Get().GetWindow().GetNativeWindow()));
   ofn.lpstrFile = szFile;
   ofn.nMaxFile = sizeof(szFile);
   ofn.lpstrFilter = filter;
@@ -50,4 +50,4 @@ std::string FileDialogs::SaveFile(const char* filter) {
   return std::string();
 }
 
-}  // namespace Solar
+}  // namespace solar

@@ -2,25 +2,26 @@
 
 #include "Core/Base/Application.h"
 
-#include <chrono>
+#include <chrono>  // NOLINT
 
 #include "Core/Debug/Instrumentor.h"
 #include "Core/Renderer/Renderer.h"
 
-namespace Solar {
+namespace solar {
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
-Application* Application::s_Instance = nullptr;
+Application* Application::instance_ = nullptr;
 
 Application::Application(const std::string& name)
     : imgui_layer_(nullptr), running_(true), minimized_(false) {
   SOLAR_PROFILE_FUNCTION();
 
   SOLAR_CORE_ASSERT(!s_Instance, "Application already exists!");
-  s_Instance = this;
+  instance_ = this;
 
-  window_ = std::unique_ptr<Window>(Window::Create(WindowProps(name)));
+  // TODO(sylar): simplify
+  window_ = Scope<Window>(Window::Create(WindowProps(name)));
   window_->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
   Renderer::Init();
@@ -37,12 +38,12 @@ void Application::Run() {
   while (running_) {
     SOLAR_PROFILE_SCOPE("RunLoop");
 
-    static auto s_last_frame_time = std::chrono::steady_clock::now();
+    static auto last_frame_time = std::chrono::steady_clock::now();
 
     auto now = std::chrono::steady_clock::now();
-    std::chrono::duration<float> duration = now - s_last_frame_time;
+    std::chrono::duration<float> duration = now - last_frame_time;
     TimeStep time_step = TimeStep(duration.count());
-    s_last_frame_time = now;
+    last_frame_time = now;
 
     /// <summary>
     /// Layer Update
@@ -121,4 +122,4 @@ bool Application::OnWindowResize(WindowResizeEvent& e) {
   return false;
 }
 
-}  // namespace Solar
+}  // namespace solar

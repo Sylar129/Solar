@@ -4,16 +4,16 @@
 
 #include "Core/Base/Layer.h"
 
-namespace Solar {
+namespace solar {
 
 class ImGuiLayer : public Layer {
  public:
   ImGuiLayer();
   ~ImGuiLayer();
 
-  virtual void OnAttach() override;
-  virtual void OnDetech() override;
-  virtual void OnEvent(Event& e) override;
+  void OnAttach() override;
+  void OnDetech() override;
+  void OnEvent(Event& e) override;
 
   void Begin();
   void End();
@@ -27,4 +27,4 @@ class ImGuiLayer : public Layer {
   float time_;
 };
 
-}  // namespace Solar
+}  // namespace solar

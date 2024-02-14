@@ -7,7 +7,7 @@
 #include "Core/Events/MouseEvent.h"
 #include "Core/Renderer/OrthographicCamera.h"
 
-namespace Solar {
+namespace solar {
 
 struct OrthographicCameraBounds {
   float left, right;
@@ -57,4 +57,4 @@ class OrthographicCameraController {
   float camera_rotation_speed_;
 };
 
-}  // namespace Solar
+}  // namespace solar

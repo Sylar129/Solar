@@ -2,13 +2,15 @@
 
 #pragma once
 
+#include <string>
+
 #include "Core/Base/LayerStack.h"
 #include "Core/Base/Window.h"
 #include "Core/Events/ApplicationEvent.h"
 #include "Core/Events/Event.h"
 #include "Core/ImGui/ImGuiLayer.h"
 
-namespace Solar {
+namespace solar {
 
 class Application {
  public:
@@ -27,7 +29,7 @@ class Application {
 
   Ref<ImGuiLayer> GetImGuiLayer() { return imgui_layer_; }
 
-  inline static Application& Get() { return *s_Instance; }
+  inline static Application& Get() { return *instance_; }
 
  private:
   bool OnWindowClose(WindowCloseEvent& e);
@@ -39,9 +41,9 @@ class Application {
   bool minimized_;
   LayerStack layer_stack_;
 
-  static Application* s_Instance;
+  static Application* instance_;
 };
 
 Application* CreateApplication();
 
-}  // namespace Solar
+}  // namespace solar

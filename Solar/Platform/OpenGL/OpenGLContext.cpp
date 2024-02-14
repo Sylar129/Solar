@@ -3,14 +3,15 @@
 #include "Platform/OpenGL/OpenGLContext.h"
 
 // clang-format off
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
 // clang-format on
 
 #include "Core/Base/Log.h"
+#include "Core/Base/Sundry.h"
 #include "Core/Debug/Instrumentor.h"
 
-namespace Solar {
+namespace solar {
 
 OpenGLContext::OpenGLContext(GLFWwindow* window_handle)
     : window_handle_(window_handle) {
@@ -47,4 +48,4 @@ void OpenGLContext::SwapBuffers() {
   glfwSwapBuffers(window_handle_);
 }
 
-}  // namespace Solar
+}  // namespace solar

@@ -2,13 +2,15 @@
 
 #include "Core/Renderer/EditorCamera.h"
 
-#include <glm/gtx/quaternion.hpp>
+#include <algorithm>
+#include <utility>
 
 #include "Core/Base/Input.h"
 #include "Core/Base/KeyCodes.h"
 #include "Core/Base/MouseCodes.h"
+#include "glm/gtx/quaternion.hpp"
 
-namespace Solar {
+namespace solar {
 
 EditorCamera::EditorCamera(float fov, float aspect_ratio, float near_clip,
                            float far_clip)
@@ -58,18 +60,18 @@ float EditorCamera::ZoomSpeed() const {
 }
 
 void EditorCamera::OnUpdate(TimeStep& ts) {
-  if (Input::IsKeyPressed(KeyCode::LeftAlt)) {
+  if (Input::IsKeyPressed(KeyCode::kLeftAlt)) {
     const glm::vec2& mouse{Input::GetMouseX(), Input::GetMouseY()};
     glm::vec2 delta = (mouse - initial_mouse_position_) * 0.003f;
     initial_mouse_position_ = mouse;
 
-    if (Input::IsMouseButtonPressed(MouseCode::ButtonMiddle)) {
+    if (Input::IsMouseButtonPressed(MouseCode::kButtonMiddle)) {
       MousePan(delta);
-    } else if (Input::IsMouseButtonPressed(MouseCode::ButtonLeft)) {
+    } else if (Input::IsMouseButtonPressed(MouseCode::kButtonLeft)) {
       MouseRotate(delta);
-    } else if (Input::IsMouseButtonPressed(MouseCode::ButtonRight)) {
+    } else if (Input::IsMouseButtonPressed(MouseCode::kButtonRight)) {
       MouseZoom(delta.y);
-}
+    }
   }
 
   UpdateView();
@@ -127,4 +129,4 @@ glm::quat EditorCamera::GetOrientation() const {
   return glm::quat(glm::vec3(-pitch_, -yaw_, 0.0f));
 }
 
-}  // namespace Solar
+}  // namespace solar

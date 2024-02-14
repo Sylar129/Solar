@@ -4,9 +4,9 @@
 
 #include "Platform/OpenGL/OpenGLRendererAPI.h"
 
-namespace Solar {
+namespace solar {
 
-Scope<RendererAPI> RenderCommand::s_renderer_api =
+Scope<RendererAPI> RenderCommand::renderer_api_ =
     CreateScope<OpenGLRendererAPI>();
 
-}  // namespace Solar
+}  // namespace solar

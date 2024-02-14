@@ -6,15 +6,15 @@
 
 #ifdef SOLAR_PLATFORM_WINDOWS
 
-extern Solar::Application* Solar::CreateApplication();
+extern solar::Application* solar::CreateApplication();
 
 int main(int argc, char** argv) {
-  Solar::Log::Init();
+  solar::Log::Init();
   SOLAR_CORE_WARN("Initialized Log!");
   SOLAR_INFO("Hello! Solar Engine.");
 
   SOLAR_PROFILE_BEGIN_SESSION("Startup", "SolarProfile-Startup.json");
-  auto app = Solar::CreateApplication();
+  auto app = solar::CreateApplication();
   SOLAR_PROFILE_END_SESSION();
 
   SOLAR_PROFILE_BEGIN_SESSION("Runtime", "SolarProfile-Runtime.json");

@@ -4,10 +4,12 @@
 
 #include <iomanip>
 #include <ostream>
+#include <sstream>
+#include <string>
 
 #include "Core/Base/Log.h"
 
-namespace Solar {
+namespace solar {
 
 using FloatingPointMicroseconds = std::chrono::duration<double, std::micro>;
 
@@ -87,8 +89,8 @@ class Instrumentor {
   }
 
   static Instrumentor& Get() {
-    static Instrumentor s_instance;
-    return s_instance;
+    static Instrumentor instance;
+    return instance;
   }
 
  private:
@@ -158,7 +160,7 @@ class InstrumentationTimer {
   bool stopped_;
 };
 
-}  // namespace Solar
+}  // namespace solar
 
 #define SOLAR_PROFILE 0
 

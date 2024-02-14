@@ -7,7 +7,7 @@
 #include "Core/Base/Timestep.h"
 #include "Core/Events/Event.h"
 
-namespace Solar {
+namespace solar {
 
 class Layer {
  public:
@@ -26,4 +26,4 @@ class Layer {
   std::string debug_name_;
 };
 
-}  // namespace Solar
+}  // namespace solar

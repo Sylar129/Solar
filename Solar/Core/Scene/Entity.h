@@ -2,11 +2,12 @@
 
 #pragma once
 
-#include <entt/entt.hpp>
+#include <utility>
 
 #include "Core/Scene/Scene.h"
+#include "entt/entt.hpp"
 
-namespace Solar {
+namespace solar {
 
 class Entity {
  public:
@@ -18,7 +19,7 @@ class Entity {
   T& AddComponent(Args&&... args) {
     SOLAR_CORE_ASSERT(!HasComponent<T>(), "Entity already has component!");
     T& component = scene_->registry_.emplace<T>(entity_handle_,
-                                                 std::forward<Args>(args)...);
+                                                std::forward<Args>(args)...);
 
     scene_->OnComponentAdded<T>(*this, component);
 
@@ -58,4 +59,4 @@ class Entity {
   Scene* scene_ = nullptr;
 };
 
-}  // namespace Solar
+}  // namespace solar

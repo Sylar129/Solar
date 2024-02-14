@@ -2,12 +2,11 @@
 
 #pragma once
 
-#include <glm/vec2.hpp>
-
 #include "Core/Base/Sundry.h"
 #include "Core/Renderer/Texture.h"
+#include "glm/vec2.hpp"
 
-namespace Solar {
+namespace solar {
 
 class SubTexture2D {
  public:
@@ -27,4 +26,4 @@ class SubTexture2D {
   glm::vec2 tex_coords_[4];
 };
 
-}  // namespace Solar
+}  // namespace solar

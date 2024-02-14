@@ -2,12 +2,11 @@
 
 #include "Platform/OpenGL/OpenGLRendererAPI.h"
 
-#include <glad/glad.h>
-
 #include "Core/Base/Log.h"
 #include "Core/Debug/Instrumentor.h"
+#include "glad/glad.h"
 
-namespace Solar {
+namespace solar {
 
 void OpenGLMessageCallback(unsigned int source, unsigned int type,
                            unsigned int id, unsigned int serverity, int length,
@@ -70,4 +69,4 @@ void OpenGLRendererAPI::DrawIndexed(const Ref<VertexArray>& vertex_array,
   glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-}  // namespace Solar
+}  // namespace solar

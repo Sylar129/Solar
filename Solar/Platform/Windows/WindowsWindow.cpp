@@ -11,7 +11,7 @@
 #include "Core/Events/MouseEvent.h"
 #include "Platform/OpenGL/OpenGLContext.h"
 
-namespace Solar {
+namespace solar {
 
 namespace {
 
@@ -86,8 +86,9 @@ void WindowsWindow::Init(const WindowProps& props) {
     }
 #endif  // SOLAR_DEBUG
 
-    window_ = glfwCreateWindow((int)props.width, (int)props.height,
-                                props.title.c_str(), nullptr, nullptr);
+    window_ = glfwCreateWindow(static_cast<int>(props.width),
+                               static_cast<int>(props.height),
+                               props.title.c_str(), nullptr, nullptr);
     s_GLFWWindowCount++;
   }
 
@@ -100,7 +101,8 @@ void WindowsWindow::Init(const WindowProps& props) {
   // Set GLFW callbacks
   glfwSetWindowSizeCallback(
       window_, [](GLFWwindow* window, int width, int height) {
-        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+        WindowData& data =
+            *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
         data.width = width;
         data.height = height;
 
@@ -109,14 +111,18 @@ void WindowsWindow::Init(const WindowProps& props) {
       });
 
   glfwSetWindowCloseCallback(window_, [](GLFWwindow* window) {
-    WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+    WindowData& data =
+        *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+
     WindowCloseEvent event;
     data.event_callback(event);
   });
 
   glfwSetKeyCallback(window_, [](GLFWwindow* window, int key, int scancode,
-                                  int action, int mods) {
-    WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+                                 int action, int mods) {
+    WindowData& data =
+        *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+
     KeyCode key_code = static_cast<KeyCode>(key);
     switch (action) {
       case GLFW_PRESS: {
@@ -140,14 +146,18 @@ void WindowsWindow::Init(const WindowProps& props) {
   });
 
   glfwSetCharCallback(window_, [](GLFWwindow* window, unsigned int codepoint) {
-    WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+    WindowData& data =
+        *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+
     KeyTypedEvent event(static_cast<KeyCode>(codepoint));
     data.event_callback(event);
   });
 
   glfwSetMouseButtonCallback(
       window_, [](GLFWwindow* window, int button, int action, int mods) {
-        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+        WindowData& data =
+            *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+
         MouseCode mouse_code = static_cast<MouseCode>(button);
         switch (action) {
           case GLFW_PRESS: {
@@ -167,17 +177,22 @@ void WindowsWindow::Init(const WindowProps& props) {
 
   glfwSetScrollCallback(
       window_, [](GLFWwindow* window, double x_offset, double y_offset) {
-        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-        MouseScrolledEvent event((float)x_offset, (float)y_offset);
+        WindowData& data =
+            *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+
+        MouseScrolledEvent event(static_cast<float>(x_offset),
+                                 static_cast<float>(y_offset));
         data.event_callback(event);
       });
 
-  glfwSetCursorPosCallback(
-      window_, [](GLFWwindow* window, double x_pos, double y_pos) {
-        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-        MouseMovedEvent event((float)x_pos, (float)y_pos);
-        data.event_callback(event);
-      });
+  glfwSetCursorPosCallback(window_, [](GLFWwindow* window, double x_pos,
+                                       double y_pos) {
+    WindowData& data =
+        *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+
+    MouseMovedEvent event(static_cast<float>(x_pos), static_cast<float>(y_pos));
+    data.event_callback(event);
+  });
 }
 
 void WindowsWindow::Shutdown() {
@@ -191,4 +206,4 @@ void WindowsWindow::Shutdown() {
   }
 }
 
-}  // namespace Solar
+}  // namespace solar

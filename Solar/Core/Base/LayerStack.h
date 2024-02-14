@@ -6,7 +6,7 @@
 
 #include "Core/Base/Layer.h"
 
-namespace Solar {
+namespace solar {
 
 class LayerStack {
  public:
@@ -35,4 +35,4 @@ class LayerStack {
   unsigned int layer_insert_index_;
 };
 
-}  // namespace Solar
+}  // namespace solar

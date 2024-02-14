@@ -2,20 +2,20 @@
 
 #include "EditorLayer.h"
 
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include <string>
 
 // clang-format off
-#include <imgui.h>
-#include <ImGuizmo.h>
+#include "imgui.h" // NOLINT
+#include "ImGuizmo.h"
 // clang-format on
 
 #include "Core/Debug/Instrumentor.h"
 #include "Core/Math/Math.h"
 #include "Core/Scene/SceneSerializer.h"
 #include "Core/Utils/PlatformUtils.h"
+#include "glm/gtc/type_ptr.hpp"
 
-namespace Solar {
+namespace solar {
 
 EditorLayer::EditorLayer()
     : Layer("EditorLayer"), camera_controller_(1280.0f / 720.0f) {}
@@ -64,16 +64,16 @@ void EditorLayer::OnAttach() {
       auto& translation = GetComponent<TransformComponent>().translation;
       float speed = 5.0f;
 
-      if (Input::IsKeyPressed(KeyCode::A)) {
+      if (Input::IsKeyPressed(KeyCode::kA)) {
         translation.x -= speed * ts;
       }
-      if (Input::IsKeyPressed(KeyCode::D)) {
+      if (Input::IsKeyPressed(KeyCode::kD)) {
         translation.x += speed * ts;
       }
-      if (Input::IsKeyPressed(KeyCode::W)) {
+      if (Input::IsKeyPressed(KeyCode::kW)) {
         translation.y += speed * ts;
       }
-      if (Input::IsKeyPressed(KeyCode::S)) {
+      if (Input::IsKeyPressed(KeyCode::kS)) {
         translation.y -= speed * ts;
       }
     }
@@ -127,11 +127,12 @@ void EditorLayer::OnUpdate(TimeStep& ts) {
   auto viewport_size = viewport_bounds_[1] - viewport_bounds_[0];
   my = viewport_size.y - my;
 
-  int mouse_x = (int)mx;
-  int mouse_y = (int)my;
+  int mouse_x = static_cast<int>(mx);
+  int mouse_y = static_cast<int>(my);
 
-  if (mouse_x >= 0 && mouse_y >= 0 && mouse_x < (int)viewport_size.x &&
-      mouse_y < (int)viewport_size.y) {
+  if (mouse_x >= 0 && mouse_y >= 0 &&
+      mouse_x < static_cast<int>(viewport_size.x) &&
+      mouse_y < static_cast<int>(viewport_size.y)) {
     int pixel_data = framebuffer_->ReadPixel(1, mouse_x, mouse_y);
     if (-1 == pixel_data) {
       hovered_entity_ = {};
@@ -273,6 +274,7 @@ void EditorLayer::OnImGuiRender() {
   ImVec2 viewport_panel_size = ImGui::GetContentRegionAvail();
   viewport_size_ = {viewport_panel_size.x, viewport_panel_size.y};
   uint32_t texture_id = framebuffer_->GetColorAttachmentRendererID(0);
+  // NOLINTNEXTLINE
   ImGui::Image((void*)texture_id, ImVec2(viewport_size_.x, viewport_size_.y),
                ImVec2{0, 1}, ImVec2{1, 0});
 
@@ -291,8 +293,8 @@ void EditorLayer::OnImGuiRender() {
     ImGuizmo::SetOrthographic(false);
     ImGuizmo::SetDrawlist();
 
-    float window_width = (float)ImGui::GetWindowWidth();
-    float window_height = (float)ImGui::GetWindowHeight();
+    float window_width = ImGui::GetWindowWidth();
+    float window_height = ImGui::GetWindowHeight();
     ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y,
                       window_width, window_height);
 
@@ -313,7 +315,7 @@ void EditorLayer::OnImGuiRender() {
     glm::mat4 transform = tc.GetTranform();
 
     // Snapping
-    bool snap = Input::IsKeyPressed(KeyCode::LeftControl);
+    bool snap = Input::IsKeyPressed(KeyCode::kLeftControl);
     // Snap to 0.5m for translation/scale
     float snap_value = 0.5f;
     // Snap to 45 degrees for rotation
@@ -365,39 +367,39 @@ bool EditorLayer::OnKeyPressed(KeyPressdEvent& e) {
     return false;
   }
 
-  bool control = Input::IsKeyPressed(KeyCode::LeftControl) ||
-                 Input::IsKeyPressed(KeyCode::RightControl);
-  bool shift = Input::IsKeyPressed(KeyCode::LeftShift) ||
-               Input::IsKeyPressed(KeyCode::RightShift);
+  bool control = Input::IsKeyPressed(KeyCode::kLeftControl) ||
+                 Input::IsKeyPressed(KeyCode::kRightControl);
+  bool shift = Input::IsKeyPressed(KeyCode::kLeftShift) ||
+               Input::IsKeyPressed(KeyCode::kRightShift);
   switch (e.GetKeyCode()) {
-    case KeyCode::N:
+    case KeyCode::kN:
       if (control) {
         NewScene();
       }
       break;
 
-    case KeyCode::O:
+    case KeyCode::kO:
       if (control) {
         OpenScene();
       }
       break;
-    case KeyCode::S:
+    case KeyCode::kS:
       if (control && shift) {
         SaveSceneAs();
       }
       break;
 
       // Gizmos
-    case KeyCode::Q:
+    case KeyCode::kQ:
       gizmo_type_ = -1;
       break;
-    case KeyCode::W:
+    case KeyCode::kW:
       gizmo_type_ = ImGuizmo::OPERATION::TRANSLATE;
       break;
-    case KeyCode::E:
+    case KeyCode::kE:
       gizmo_type_ = ImGuizmo::OPERATION::ROTATE;
       break;
-    case KeyCode::R:
+    case KeyCode::kR:
       gizmo_type_ = ImGuizmo::OPERATION::SCALE;
       break;
     default:
@@ -407,9 +409,9 @@ bool EditorLayer::OnKeyPressed(KeyPressdEvent& e) {
 }
 
 bool EditorLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e) {
-  // TODO: call function to detect state
-  if (e.GetMouseButton() == MouseCode::ButtonLeft &&
-      !Input::IsKeyPressed(KeyCode::LeftAlt)) {
+  // TODO(sylar): call function to detect state
+  if (e.GetMouseButton() == MouseCode::kButtonLeft &&
+      !Input::IsKeyPressed(KeyCode::kLeftAlt)) {
     if (viewport_hovered_ && !ImGuizmo::IsOver()) {
       scene_hierarchy_panel_.SetSelectedEntity(hovered_entity_);
     }
@@ -447,4 +449,4 @@ void EditorLayer::SaveSceneAs() {
   }
 }
 
-}  // namespace Solar
+}  // namespace solar
