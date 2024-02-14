@@ -1,6 +1,6 @@
 // Copyright (c) 2024 Sylar129
 
-#include "scene_hierarchy_panel.h"
+#include "src/panels/scene_hierarchy_panel.h"
 
 #include <string>
 
