@@ -98,10 +98,10 @@ set(SolarSrc
     platform/opengl/texture.h
     platform/opengl/vertex_array.cpp
     platform/opengl/vertex_array.h
-    platform/windows/windows_input.cpp
-    platform/windows/windows_platform_utils.cpp
-    platform/windows/windows_window.cpp
-    platform/windows/windows_window.h)
+    platform/windows/input.cpp
+    platform/windows/platform_utils.cpp
+    platform/windows/window.cpp
+    platform/windows/window.h)
 add_library(Solar STATIC ${SolarSrc})
 target_compile_definitions(Solar PUBLIC GLM_ENABLE_EXPERIMENTAL)
 target_compile_definitions(Solar PUBLIC YAML_CPP_STATIC_DEFINE)

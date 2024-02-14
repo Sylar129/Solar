@@ -9,8 +9,9 @@
 #include "GLFW/glfw3native.h"
 // clang-format on
 
-#include "core/base/application.h"
 #include "core/utils/platform_utils.h"
+
+#include "core/base/application.h"
 
 namespace solar {
 

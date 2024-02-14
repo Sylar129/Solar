@@ -1,8 +1,9 @@
 // Copyright (c) 2024 Sylar129
 
+#include "core/base/input.h"
+
 #include "GLFW/glfw3.h"
 #include "core/base/application.h"
-#include "core/base/input.h"
 
 namespace solar {
 

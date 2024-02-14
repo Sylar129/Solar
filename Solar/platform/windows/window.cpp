@@ -1,6 +1,6 @@
 // Copyright (c) 2024 Sylar129
 
-#include "platform/windows/windows_window.h"
+#include "platform/windows/window.h"
 
 #include <Windows.h>
 
