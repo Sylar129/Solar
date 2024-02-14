@@ -17,7 +17,7 @@ Application::Application(const std::string& name)
     : imgui_layer_(nullptr), running_(true), minimized_(false) {
   SOLAR_PROFILE_FUNCTION();
 
-  SOLAR_CORE_ASSERT(!s_Instance, "Application already exists!");
+  SOLAR_CORE_ASSERT(!instance_, "Application already exists!");
   instance_ = this;
 
   // TODO(sylar): simplify

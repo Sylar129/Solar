@@ -6,6 +6,7 @@
 #include <string_view>
 
 #include "Core/Base/Sundry.h"
+#include "Core/Base/Log.h"
 #include "Core/Renderer/Camera.h"
 #include "glm/glm.hpp"
 
