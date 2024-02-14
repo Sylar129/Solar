@@ -5,6 +5,7 @@
 #include <string>
 
 #include "Core/Scene/Components.h"
+#include "Core/Scene/SceneCamera.h"
 #include "glm/gtc/type_ptr.hpp"
 #include "imgui.h"           // NOLINT
 #include "imgui_internal.h"  // NOLINT
@@ -258,28 +259,23 @@ void SceneHierarchyPanel::DrawComponents(Entity entity) {
 
     ImGui::Checkbox("Primary", &component.primary);
 
-    // TODO(sylar): simplify
-    const char* projection_type_strings[] = {"Perspective", "Orthographic"};
-    const char* current_projection_type_string =
-        projection_type_strings[static_cast<int>(camera.GetProjectionType())];
-    if (ImGui::BeginCombo("Porjection", current_projection_type_string)) {
-      for (int i = 0; i < 2; ++i) {
-        bool is_selected =
-            current_projection_type_string == projection_type_strings[i];
-        if (ImGui::Selectable(projection_type_strings[i], is_selected)) {
-          current_projection_type_string = projection_type_strings[i];
-          camera.SetProjectionType((SceneCamera::ProjectionType)i);
+    auto projection_type = camera.GetProjectionType();
+    if (ImGui::BeginCombo("Porjection", ToString(projection_type).data())) {
+      for (auto t : SceneCamera::GetTypeArray()) {
+        bool is_selected = t == projection_type;
+        if (ImGui::Selectable(ToString(t).data(), is_selected)) {
+          camera.SetProjectionType(t);
         }
 
         if (is_selected) {
           ImGui::SetItemDefaultFocus();
         }
       }
+
       ImGui::EndCombo();
     }
 
-    if (camera.GetProjectionType() ==
-        SceneCamera::ProjectionType::kPerspective) {
+    if (projection_type == SceneCamera::ProjectionType::kPerspective) {
       float vertical_fov = glm::degrees(camera.GetPerspectiveVerticalFOV());
       if (ImGui::DragFloat("Vertical Fov", &vertical_fov)) {
         camera.SetPerspectiveVerticalFOV(glm::radians(vertical_fov));
@@ -296,8 +292,7 @@ void SceneHierarchyPanel::DrawComponents(Entity entity) {
       }
     }
 
-    if (camera.GetProjectionType() ==
-        SceneCamera::ProjectionType::kOrthographic) {
+    if (projection_type == SceneCamera::ProjectionType::kOrthographic) {
       float ortho_size = camera.GetOrthographicSize();
       if (ImGui::DragFloat("Size", &ortho_size)) {
         camera.SetOrthographicSize(ortho_size);

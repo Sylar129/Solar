@@ -2,6 +2,10 @@
 
 #pragma once
 
+#include <array>
+#include <string_view>
+
+#include "Core/Base/Sundry.h"
 #include "Core/Renderer/Camera.h"
 #include "glm/glm.hpp"
 
@@ -9,10 +13,16 @@ namespace solar {
 
 class SceneCamera : public Camera {
  public:
-  enum class ProjectionType { kPerspective = 0, kOrthographic = 1 };
+  enum class ProjectionType { kPerspective = 0, kOrthographic };
 
   SceneCamera();
   virtual ~SceneCamera() = default;
+
+  static constexpr auto GetTypeArray() {
+    constexpr std::array kTypes = {SceneCamera::ProjectionType::kPerspective,
+                                   SceneCamera::ProjectionType::kOrthographic};
+    return kTypes;
+  }
 
   void SetOrthoGraphic(float size, float near_clip, float far_clip);
   void SetPerspective(float vertical_fov, float near_clip, float far_clip);
@@ -73,5 +83,16 @@ class SceneCamera : public Camera {
 
   float aspect_ratio_ = 0.0f;
 };
+
+constexpr std::string_view ToString(SceneCamera::ProjectionType type) {
+  switch (type) {
+    case SceneCamera::ProjectionType::kPerspective:
+      return "Perspective";
+    case SceneCamera::ProjectionType::kOrthographic:
+      return "Orthographic";
+  }
+
+  SOLAR_ASSERT(false, "UNREACHABLE");
+}
 
 }  // namespace solar
