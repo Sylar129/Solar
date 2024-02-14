@@ -20,7 +20,6 @@ include_directories(
 
 # Solar
 set(SolarSrc
-    solar.h
     core/base/application.cpp
     core/base/application.h
     core/base/entrypoint.h
