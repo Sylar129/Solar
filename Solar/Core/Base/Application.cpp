@@ -9,8 +9,6 @@
 
 namespace solar {
 
-#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
-
 Application* Application::instance_ = nullptr;
 
 Application::Application(const std::string& name)
@@ -22,7 +20,7 @@ Application::Application(const std::string& name)
 
   // TODO(sylar): simplify
   window_ = Scope<Window>(Window::Create(WindowProps(name)));
-  window_->SetEventCallback(BIND_EVENT_FN(OnEvent));
+  window_->SetEventCallback([this](Event& e) { OnEvent(e); });
 
   Renderer::Init();
 
@@ -76,8 +74,8 @@ void Application::OnEvent(Event& e) {
   SOLAR_PROFILE_FUNCTION();
 
   EventDispatcher dispatcher(e);
-  dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
-  dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
+  dispatcher.Dispatch(this, &Application::OnWindowClose);
+  dispatcher.Dispatch(this, &Application::OnWindowResize);
   // SOLAR_CORE_TRACE("{0}", e);
 
   for (auto it = layer_stack_.rbegin(); it != layer_stack_.rend(); ++it) {
