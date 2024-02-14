@@ -4,9 +4,9 @@
 
 #include "glm/glm.hpp"
 
-namespace solar::Math {
+namespace solar::math {
 
 bool DecomposeTranform(const glm::mat4& transform, glm::vec3& out_translation,
                        glm::vec3& out_rotation, glm::vec3& out_scale);
 
-}  // namespace solar::Math
+}  // namespace solar::math
