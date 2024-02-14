@@ -27,7 +27,7 @@ struct FramebufferTextureSpecification {
   // TODO(sylar): filtering/wrap
 
   FramebufferTextureSpecification() = default;
-  FramebufferTextureSpecification(FramebufferTextureFormat format)
+  FramebufferTextureSpecification(FramebufferTextureFormat format)  // NOLINT
       : texture_format(format) {}
 };
 

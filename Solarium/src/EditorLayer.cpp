@@ -274,6 +274,7 @@ void EditorLayer::OnImGuiRender() {
   ImVec2 viewport_panel_size = ImGui::GetContentRegionAvail();
   viewport_size_ = {viewport_panel_size.x, viewport_panel_size.y};
   uint32_t texture_id = framebuffer_->GetColorAttachmentRendererID(0);
+  // NOLINTNEXTLINE
   ImGui::Image((void*)texture_id, ImVec2(viewport_size_.x, viewport_size_.y),
                ImVec2{0, 1}, ImVec2{1, 0});
 

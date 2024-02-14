@@ -102,6 +102,7 @@ void DrawComponent(const std::string& label, Entity entity,
     float line_height =
         GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
     ImGui::Separator();
+    // NOLINTNEXTLINE
     bool open = ImGui::TreeNodeEx((void*)typeid(T).hash_code(), kTreeNodeFlags,
                                   "%s", label.c_str());
     ImGui::PopStyleVar();
@@ -183,6 +184,7 @@ void SceneHierarchyPanel::DrawEntityNode(Entity entity) {
       ((selection_context_ == entity) ? ImGuiTreeNodeFlags_Selected : 0) |
       ImGuiTreeNodeFlags_OpenOnArrow;
   flags |= ImGuiTreeNodeFlags_SpanAvailWidth;
+  // NOLINTNEXTLINE
   bool opened = ImGui::TreeNodeEx((void*)(uint64_t)(uint32_t)entity, flags,
                                   "%s", tag.c_str());
   if (ImGui::IsItemClicked()) {
@@ -259,7 +261,7 @@ void SceneHierarchyPanel::DrawComponents(Entity entity) {
     // TODO(sylar): simplify
     const char* projection_type_strings[] = {"Perspective", "Orthographic"};
     const char* current_projection_type_string =
-        projection_type_strings[(int)camera.GetProjectionType()];
+        projection_type_strings[static_cast<int>(camera.GetProjectionType())];
     if (ImGui::BeginCombo("Porjection", current_projection_type_string)) {
       for (int i = 0; i < 2; ++i) {
         bool is_selected =

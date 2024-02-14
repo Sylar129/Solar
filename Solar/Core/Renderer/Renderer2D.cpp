@@ -46,6 +46,12 @@ struct Renderer2DData {
   glm::vec4 quad_vertex_positions[4];
 
   Renderer2D::Statistics stats;
+
+  uint32_t DataSize() const {
+    auto data_size = reinterpret_cast<uint8_t*>(quad_vertex_buffer_ptr) -
+                     reinterpret_cast<uint8_t*>(quad_vertex_buffer_base);
+    return data_size;
+  }
 };
 
 // TODO(sylar): move
@@ -160,9 +166,8 @@ void Renderer2D::Flush() {
     return;
   }
 
-  uint32_t data_size = (uint32_t)((uint8_t*)s_data.quad_vertex_buffer_ptr -
-                                  (uint8_t*)s_data.quad_vertex_buffer_base);
-  s_data.quad_vertex_buffer->SetData(s_data.quad_vertex_buffer_base, data_size);
+  s_data.quad_vertex_buffer->SetData(s_data.quad_vertex_buffer_base,
+                                     s_data.DataSize());
 
   // Bind textures
   for (auto i{0u}; i < s_data.texture_slot_index; ++i) {
