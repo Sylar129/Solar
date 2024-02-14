@@ -3,7 +3,7 @@
 #include "core/renderer/vertex_array.h"
 
 #include "core/renderer/renderer.h"
-#include "platform/opengl/opengl_vertex_array.h"
+#include "platform/opengl/vertex_array.h"
 
 namespace solar {
 

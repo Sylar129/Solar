@@ -1,6 +1,6 @@
 // Copyright (c) 2024 Sylar129
 
-#include "platform/opengl/opengl_vertex_array.h"
+#include "platform/opengl/vertex_array.h"
 
 #include "core/debug/instrumentor.h"
 #include "glad/glad.h"

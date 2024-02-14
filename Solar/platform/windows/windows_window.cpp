@@ -10,7 +10,7 @@
 #include "core/events/key_event.h"
 #include "core/events/mouse_event.h"
 #include "core/renderer/renderer.h"
-#include "platform/opengl/opengl_context.h"
+#include "platform/opengl/context.h"
 
 namespace solar {
 

@@ -1,6 +1,6 @@
 // Copyright (c) 2024 Sylar129
 
-#include "platform/opengl/opengl_shader.h"
+#include "platform/opengl/shader.h"
 
 #include <vector>
 

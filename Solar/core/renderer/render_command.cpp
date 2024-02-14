@@ -2,7 +2,7 @@
 
 #include "core/renderer/render_command.h"
 
-#include "platform/opengl/opengl_renderer_api.h"
+#include "platform/opengl/renderer_api.h"
 
 namespace solar {
 

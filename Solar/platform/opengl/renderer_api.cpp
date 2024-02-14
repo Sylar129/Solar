@@ -1,6 +1,6 @@
 // Copyright (c) 2024 Sylar129
 
-#include "platform/opengl/opengl_renderer_api.h"
+#include "platform/opengl/renderer_api.h"
 
 #include "core/base/log.h"
 #include "core/debug/instrumentor.h"

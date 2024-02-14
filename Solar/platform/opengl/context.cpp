@@ -1,6 +1,6 @@
 // Copyright (c) 2024 Sylar129
 
-#include "platform/opengl/opengl_context.h"
+#include "platform/opengl/context.h"
 
 // clang-format off
 #include "glad/glad.h"

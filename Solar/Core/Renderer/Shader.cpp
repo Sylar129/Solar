@@ -3,7 +3,7 @@
 #include "core/renderer/shader.h"
 
 #include "core/renderer/renderer.h"
-#include "platform/opengl/opengl_shader.h"
+#include "platform/opengl/shader.h"
 
 namespace solar {
 

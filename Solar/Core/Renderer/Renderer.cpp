@@ -5,7 +5,7 @@
 #include "core/debug/instrumentor.h"
 #include "core/renderer/render_command.h"
 #include "core/renderer/renderer2d.h"
-#include "platform/opengl/opengl_shader.h"
+#include "platform/opengl/shader.h"
 
 namespace solar {
 

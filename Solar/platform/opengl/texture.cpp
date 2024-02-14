@@ -1,6 +1,6 @@
 // Copyright (c) 2024 Sylar129
 
-#include "platform/opengl/opengl_texture.h"
+#include "platform/opengl/texture.h"
 
 #include "core/debug/instrumentor.h"
 #define STB_IMAGE_IMPLEMENTATION

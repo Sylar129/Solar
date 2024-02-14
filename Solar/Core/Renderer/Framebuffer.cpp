@@ -3,7 +3,7 @@
 #include "core/renderer/framebuffer.h"
 
 #include "core/renderer/renderer.h"
-#include "platform/opengl/opengl_framebuffer.h"
+#include "platform/opengl/framebuffer.h"
 
 namespace solar {
 

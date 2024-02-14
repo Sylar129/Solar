@@ -3,7 +3,7 @@
 #include "core/renderer/texture.h"
 
 #include "core/renderer/renderer.h"
-#include "platform/opengl/opengl_texture.h"
+#include "platform/opengl/texture.h"
 
 namespace solar {
 

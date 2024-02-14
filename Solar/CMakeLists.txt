@@ -84,20 +84,20 @@ set(SolarSrc
     core/scene/scene_serializer.h
     core/scene/scriptable_entity.h
     core/utils/platform_utils.h
-    platform/opengl/opengl_buffer.cpp
-    platform/opengl/opengl_buffer.h
-    platform/opengl/opengl_context.cpp
-    platform/opengl/opengl_context.h
-    platform/opengl/opengl_framebuffer.cpp
-    platform/opengl/opengl_framebuffer.h
-    platform/opengl/opengl_renderer_api.cpp
-    platform/opengl/opengl_renderer_api.h
-    platform/opengl/opengl_shader.cpp
-    platform/opengl/opengl_shader.h
-    platform/opengl/opengl_texture.cpp
-    platform/opengl/opengl_texture.h
-    platform/opengl/opengl_vertex_array.cpp
-    platform/opengl/opengl_vertex_array.h
+    platform/opengl/buffer.cpp
+    platform/opengl/buffer.h
+    platform/opengl/context.cpp
+    platform/opengl/context.h
+    platform/opengl/framebuffer.cpp
+    platform/opengl/framebuffer.h
+    platform/opengl/renderer_api.cpp
+    platform/opengl/renderer_api.h
+    platform/opengl/shader.cpp
+    platform/opengl/shader.h
+    platform/opengl/texture.cpp
+    platform/opengl/texture.h
+    platform/opengl/vertex_array.cpp
+    platform/opengl/vertex_array.h
     platform/windows/windows_input.cpp
     platform/windows/windows_platform_utils.cpp
     platform/windows/windows_window.cpp

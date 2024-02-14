@@ -1,6 +1,6 @@
 // Copyright (c) 2024 Sylar129
 
-#include "platform/opengl/opengl_framebuffer.h"
+#include "platform/opengl/framebuffer.h"
 
 #include "core/base/log.h"
 #include "glad/glad.h"
