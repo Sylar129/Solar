@@ -4,8 +4,8 @@
 
 #include <string>
 
-#include "Core/Base/Timestep.h"
-#include "Core/Renderer/EditorCamera.h"
+#include "core/base/timestep.h"
+#include "core/renderer/editor_camera.h"
 #include "entt/entt.hpp"
 
 namespace solar {

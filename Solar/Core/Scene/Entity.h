@@ -4,9 +4,9 @@
 
 #include <utility>
 
-#include "Core/Base/Log.h"
-#include "Core/Base/Sundry.h"
-#include "Core/Scene/Scene.h"
+#include "core/base/log.h"
+#include "core/base/sundry.h"
+#include "core/scene/scene.h"
 #include "entt/entt.hpp"
 
 namespace solar {

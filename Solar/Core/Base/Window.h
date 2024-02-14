@@ -4,7 +4,7 @@
 
 #include <string>
 
-#include "Core/Events/Event.h"
+#include "core/events/event.h"
 
 namespace solar {
 

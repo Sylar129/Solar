@@ -1,6 +1,6 @@
 // Copyright (c) 2024 Sylar129
 
-#include "Core/Scene/Entity.h"
+#include "core/scene/entity.h"
 
 namespace solar {
 

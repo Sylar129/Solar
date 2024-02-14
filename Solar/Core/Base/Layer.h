@@ -4,8 +4,8 @@
 
 #include <string>
 
-#include "Core/Base/Timestep.h"
-#include "Core/Events/Event.h"
+#include "core/base/timestep.h"
+#include "core/events/event.h"
 
 namespace solar {
 

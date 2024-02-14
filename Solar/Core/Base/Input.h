@@ -5,8 +5,8 @@
 // TODO(sylar): remove
 #include <utility>
 
-#include "Core/Base/KeyCodes.h"
-#include "Core/Base/MouseCodes.h"
+#include "core/base/key_codes.h"
+#include "core/base/mouse_codes.h"
 
 namespace solar {
 

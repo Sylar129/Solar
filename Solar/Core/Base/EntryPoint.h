@@ -2,11 +2,10 @@
 
 #pragma once
 
-#include "Core/Debug/Instrumentor.h"
+#include "core/base/application.h"
+#include "core/debug/instrumentor.h"
 
 #ifdef SOLAR_PLATFORM_WINDOWS
-
-extern solar::Application* solar::CreateApplication();
 
 int main(int argc, char** argv) {
   solar::Log::Init();

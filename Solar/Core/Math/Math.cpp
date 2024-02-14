@@ -1,6 +1,6 @@
 // Copyright (c) 2024 Sylar129
 
-#include "Core/Math/Math.h"
+#include "core/math/math.h"
 
 #include "glm/gtx/matrix_decompose.hpp"
 

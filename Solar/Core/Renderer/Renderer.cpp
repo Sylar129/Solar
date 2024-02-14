@@ -1,11 +1,11 @@
 // Copyright (c) 2024 Sylar129
 
-#include "Core/Renderer/Renderer.h"
+#include "core/renderer/renderer.h"
 
-#include "Core/Debug/Instrumentor.h"
-#include "Core/Renderer/RenderCommand.h"
-#include "Core/Renderer/Renderer2D.h"
-#include "Platform/OpenGL/OpenGLShader.h"
+#include "core/debug/instrumentor.h"
+#include "core/renderer/render_command.h"
+#include "core/renderer/renderer2d.h"
+#include "platform/opengl/shader.h"
 
 namespace solar {
 

@@ -1,9 +1,9 @@
 // Copyright (c) 2024 Sylar129
 
-#include "Core/Renderer/Texture.h"
+#include "core/renderer/texture.h"
 
-#include "Core/Renderer/Renderer.h"
-#include "Platform/OpenGL/OpenGLTexture.h"
+#include "core/renderer/renderer.h"
+#include "platform/opengl/texture.h"
 
 namespace solar {
 

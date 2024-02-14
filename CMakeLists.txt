@@ -15,15 +15,21 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_compile_definitions(SOLAR_PLATFORM_WINDOWS)
 add_compile_definitions(SOLAR_DEBUG)
 
-include_directories(Solar/ Vendor/imgui/ Vendor/ImGuizmo/ Vendor/glm/
-                    Vendor/spdlog/include/ Vendor/entt/src/)
+include_directories(
+  Solar/
+  Solarium/
+  Vendor/imgui/
+  Vendor/ImGuizmo/
+  Vendor/glm/
+  Vendor/spdlog/include/
+  Vendor/entt/src/)
 
 # Solarium
 add_executable(
   Solarium
-  Solarium/src/EditorLayer.cpp Solarium/src/EditorLayer.h
-  Solarium/src/SolariumApp.cpp Solarium/src/Panels/SceneHierarchyPanel.cpp
-  Solarium/src/Panels/SceneHierarchyPanel.h)
+  Solarium/src/editor_layer.cpp Solarium/src/editor_layer.h
+  Solarium/src/solarium_app.cpp Solarium/src/panels/scene_hierarchy_panel.cpp
+  Solarium/src/panels/scene_hierarchy_panel.h)
 
 # Solar
 add_subdirectory(Solar/)

@@ -1,9 +1,9 @@
 // Copyright (c) 2024 Sylar129
 
-#include "Core/Renderer/Framebuffer.h"
+#include "core/renderer/framebuffer.h"
 
-#include "Core/Renderer/Renderer.h"
-#include "Platform/OpenGL/OpenGLFramebuffer.h"
+#include "core/renderer/renderer.h"
+#include "platform/opengl/framebuffer.h"
 
 namespace solar {
 
