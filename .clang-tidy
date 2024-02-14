@@ -44,8 +44,6 @@ CheckOptions:
   readability-identifier-naming.ConstantCase: 'CamelCase'
   readability-identifier-naming.ConstantPrefix: 'k'
   readability-identifier-naming.EnumCase: 'CamelCase'
-  readability-identifier-naming.GlobalVariableCase: 'CamelCase'
-  readability-identifier-naming.GlobalVariablePrefix: 'g'
   readability-identifier-naming.LocalVariableCase: 'lower_case'
   readability-identifier-naming.MacroDefinitionCase: 'UPPER_CASE'
   readability-identifier-naming.MemberCase: 'lower_case'
@@ -56,7 +54,6 @@ CheckOptions:
   readability-identifier-naming.PrivateMemberSuffix: '_'
   readability-identifier-naming.StructCase: 'CamelCase'
   readability-identifier-naming.StaticVariableCase: 'lower_case'
-  readability-identifier-naming.StaticVariablePrefix: 's_'
   readability-identifier-naming.TemplateParameterCase: 'CamelCase'
 ...
 

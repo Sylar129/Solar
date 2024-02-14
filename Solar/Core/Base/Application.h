@@ -29,7 +29,7 @@ class Application {
 
   Ref<ImGuiLayer> GetImGuiLayer() { return imgui_layer_; }
 
-  inline static Application& Get() { return *s_Instance; }
+  inline static Application& Get() { return *instance_; }
 
  private:
   bool OnWindowClose(WindowCloseEvent& e);
@@ -41,7 +41,7 @@ class Application {
   bool minimized_;
   LayerStack layer_stack_;
 
-  static Application* s_Instance;
+  static Application* instance_;
 };
 
 Application* CreateApplication();

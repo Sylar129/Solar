@@ -27,7 +27,7 @@ class Renderer {
     glm::mat4 view_projection_matrix;
   };
 
-  static Scope<SceneData> s_scene_data;
+  static Scope<SceneData> scene_data_;
 };
 
 }  // namespace solar

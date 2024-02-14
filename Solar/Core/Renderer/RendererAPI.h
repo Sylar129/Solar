@@ -22,10 +22,10 @@ class RendererAPI {
   virtual void DrawIndexed(const Ref<VertexArray>& vertex_array,
                            uint32_t index_count) = 0;
 
-  inline static API GetAPI() { return s_api; }
+  inline static API GetAPI() { return api_; }
 
  private:
-  static API s_api;
+  static API api_;
 };
 
 }  // namespace solar

@@ -89,8 +89,8 @@ class Instrumentor {
   }
 
   static Instrumentor& Get() {
-    static Instrumentor s_instance;
-    return s_instance;
+    static Instrumentor instance;
+    return instance;
   }
 
  private:

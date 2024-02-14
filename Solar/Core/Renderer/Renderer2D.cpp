@@ -48,6 +48,7 @@ struct Renderer2DData {
   Renderer2D::Statistics stats;
 };
 
+// TODO(sylar): move
 static Renderer2DData s_data;
 
 void Renderer2D::Init() {
