@@ -6,8 +6,8 @@
 
 #include "Core/Scene/Components.h"
 #include "glm/gtc/type_ptr.hpp"
-#include "imgui.h"
-#include "imgui_internal.h"
+#include "imgui.h"           // NOLINT
+#include "imgui_internal.h"  // NOLINT
 
 namespace solar {
 

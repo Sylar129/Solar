@@ -4,7 +4,7 @@
 
 // clang-format off
 
-#include "imgui.h"
+#include "imgui.h" // NOLINT
 #include "ImGuizmo.h"
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"

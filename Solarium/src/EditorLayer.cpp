@@ -5,7 +5,7 @@
 #include <string>
 
 // clang-format off
-#include "imgui.h"
+#include "imgui.h" // NOLINT
 #include "ImGuizmo.h"
 // clang-format on
 

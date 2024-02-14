@@ -57,7 +57,7 @@ void Renderer2D::Init() {
   s_data.quad_vertex_array = VertexArray::Create();
 
   s_data.quad_vertex_buffer =
-      VertexBuffer::Create(s_data.kMaxVertices * sizeof(QuadVertex));
+      VertexBuffer::Create(Renderer2DData::kMaxVertices * sizeof(QuadVertex));
   s_data.quad_vertex_buffer->SetLayout(
       {{ShaderDataType::kFloat3, "a_Position"},
        {ShaderDataType::kFloat4, "a_Color"},
@@ -67,12 +67,12 @@ void Renderer2D::Init() {
        {ShaderDataType::kInt, "a_EntityID"}});
   s_data.quad_vertex_array->AddVertexBuffer(s_data.quad_vertex_buffer);
 
-  s_data.quad_vertex_buffer_base = new QuadVertex[s_data.kMaxVertices];
+  s_data.quad_vertex_buffer_base = new QuadVertex[Renderer2DData::kMaxVertices];
 
-  uint32_t* quad_indices = new uint32_t[s_data.kMaxIndices];
+  uint32_t* quad_indices = new uint32_t[Renderer2DData::kMaxIndices];
 
   uint32_t offset = 0;
-  for (auto i{0}; i < s_data.kMaxIndices; i += 6) {
+  for (auto i{0}; i < Renderer2DData::kMaxIndices; i += 6) {
     quad_indices[i + 0] = offset + 0;
     quad_indices[i + 1] = offset + 1;
     quad_indices[i + 2] = offset + 2;
@@ -84,7 +84,7 @@ void Renderer2D::Init() {
     offset += 4;
   }
   Ref<IndexBuffer> quad_ib =
-      IndexBuffer::Create(quad_indices, s_data.kMaxIndices);
+      IndexBuffer::Create(quad_indices, Renderer2DData::kMaxIndices);
   s_data.quad_vertex_array->SetIndexBuffer(quad_ib);
   delete[] quad_indices;
 
@@ -93,15 +93,15 @@ void Renderer2D::Init() {
   s_data.white_texture->SetData(&white_texture_data,
                                 sizeof(white_texture_data));
 
-  int32_t samplers[s_data.kMaxTextureSlots];
-  for (auto i{0}; i < s_data.kMaxTextureSlots; ++i) {
+  int32_t samplers[Renderer2DData::kMaxTextureSlots];
+  for (auto i{0}; i < Renderer2DData::kMaxTextureSlots; ++i) {
     samplers[i] = i;
   }
 
   s_data.texture_shader = Shader::Create("assets/shaders/Texture.glsl");
   s_data.texture_shader->Bind();
   s_data.texture_shader->SetIntArray("u_Texture", samplers,
-                                     s_data.kMaxTextureSlots);
+                                     Renderer2DData::kMaxTextureSlots);
 
   s_data.texture_slots[0] = s_data.white_texture;
 
@@ -218,7 +218,7 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
                           float tiling_factor, const glm::vec4& tint_color) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= s_data.kMaxIndices) {
+  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
     NextBatch();
   }
 
@@ -269,7 +269,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color,
                           int entity_id) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= s_data.kMaxIndices) {
+  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
     NextBatch();
   }
 
@@ -300,7 +300,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform,
                           const glm::vec4& tint_color, int entity_id) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= s_data.kMaxIndices) {
+  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
     NextBatch();
   }
 
@@ -356,7 +356,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                 const glm::vec4& color) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= s_data.kMaxIndices) {
+  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
     NextBatch();
   }
 
@@ -402,7 +402,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                 const glm::vec4& tint_color) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= s_data.kMaxIndices) {
+  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
     NextBatch();
   }
 
@@ -420,7 +420,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
     }
   }
 
-  if (texture_index == 0.0f) {
+  if (texture_index == 0) {
     if (s_data.texture_slot_index >= Renderer2DData::kMaxTextureSlots) {
       NextBatch();
     }
@@ -467,7 +467,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                 const glm::vec4& tint_color) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= s_data.kMaxIndices) {
+  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
     NextBatch();
   }
 

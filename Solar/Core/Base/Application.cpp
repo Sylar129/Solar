@@ -2,7 +2,7 @@
 
 #include "Core/Base/Application.h"
 
-#include <chrono>
+#include <chrono>  // NOLINT
 
 #include "Core/Debug/Instrumentor.h"
 #include "Core/Renderer/Renderer.h"
