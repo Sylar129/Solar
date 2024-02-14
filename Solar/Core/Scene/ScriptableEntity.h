@@ -4,7 +4,7 @@
 
 #include "Core/Scene/Entity.h"
 
-namespace Solar {
+namespace solar {
 
 class ScriptableEntity {
  public:
@@ -25,4 +25,4 @@ class ScriptableEntity {
   friend class Scene;
 };
 
-}  // namespace Solar
+}  // namespace solar

@@ -5,7 +5,7 @@
 #include "Core/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLVertexArray.h"
 
-namespace Solar {
+namespace solar {
 
 Ref<VertexArray> VertexArray::Create() {
   switch (Renderer::GetAPI()) {
@@ -19,4 +19,4 @@ Ref<VertexArray> VertexArray::Create() {
   return nullptr;
 }
 
-}  // namespace Solar
+}  // namespace solar

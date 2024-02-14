@@ -6,7 +6,7 @@
 #include "Core/Scene/Entity.h"
 #include "Core/Scene/Scene.h"
 
-namespace Solar {
+namespace solar {
 
 class SceneHierarchyPanel {
  public:
@@ -28,4 +28,4 @@ class SceneHierarchyPanel {
   Entity selection_context_;
 };
 
-}  // namespace Solar
+}  // namespace solar

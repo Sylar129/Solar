@@ -10,7 +10,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtx/quaternion.hpp"
 
-namespace Solar {
+namespace solar {
 
 struct TagComponent {
   std::string tag;
@@ -61,4 +61,4 @@ struct NativeScriptComponent {
   }
 };
 
-}  // namespace Solar
+}  // namespace solar

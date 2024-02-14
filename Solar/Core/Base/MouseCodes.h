@@ -4,7 +4,7 @@
 
 #include <ostream>
 
-namespace Solar {
+namespace solar {
 
 enum class MouseCode : uint16_t {
   // From glfw3.h
@@ -28,4 +28,4 @@ inline std::ostream& operator<<(std::ostream& os, MouseCode mouse_code) {
   return os;
 }
 
-}  // namespace Solar
+}  // namespace solar

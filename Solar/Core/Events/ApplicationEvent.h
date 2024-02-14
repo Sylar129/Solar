@@ -7,7 +7,7 @@
 
 #include "Core/Events/Event.h"
 
-namespace Solar {
+namespace solar {
 
 class WindowResizeEvent : public Event {
  public:
@@ -62,4 +62,4 @@ class AppRenderEvent : public Event {
   EVENT_CLASS_CATEGORY(kEventCategoryApplication);
 };
 
-}  // namespace Solar
+}  // namespace solar

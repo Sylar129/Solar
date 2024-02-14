@@ -5,7 +5,7 @@
 #include "Core/Debug/Instrumentor.h"
 #include "glad/glad.h"
 
-namespace Solar {
+namespace solar {
 
 // OpenGLVertexBuffer
 OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size) {
@@ -88,4 +88,4 @@ void OpenGLIndexBuffer::Unbind() const {
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-}  // namespace Solar
+}  // namespace solar

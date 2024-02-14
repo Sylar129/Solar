@@ -2,7 +2,7 @@
 
 #include "Core/Base/LayerStack.h"
 
-namespace Solar {
+namespace solar {
 
 LayerStack::LayerStack() : layer_insert_index_(0) {}
 
@@ -38,4 +38,4 @@ void LayerStack::PopOverlay(Ref<Layer> overlay) {
   }
 }
 
-}  // namespace Solar
+}  // namespace solar

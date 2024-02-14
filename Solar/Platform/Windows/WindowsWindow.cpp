@@ -11,7 +11,7 @@
 #include "Core/Events/MouseEvent.h"
 #include "Platform/OpenGL/OpenGLContext.h"
 
-namespace Solar {
+namespace solar {
 
 namespace {
 
@@ -206,4 +206,4 @@ void WindowsWindow::Shutdown() {
   }
 }
 
-}  // namespace Solar
+}  // namespace solar

@@ -8,7 +8,7 @@
 #include "Core/Renderer/EditorCamera.h"
 #include "entt/entt.hpp"
 
-namespace Solar {
+namespace solar {
 
 class Entity;
 
@@ -39,4 +39,4 @@ class Scene {
   friend class SceneHierarchyPanel;
 };
 
-}  // namespace Solar
+}  // namespace solar

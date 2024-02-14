@@ -5,7 +5,7 @@
 #include "Core/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLTexture.h"
 
-namespace Solar {
+namespace solar {
 
 Ref<Texture2D> Texture2D::Create(uint32_t width, uint32_t height) {
   switch (Renderer::GetAPI()) {
@@ -31,4 +31,4 @@ Ref<Texture2D> Texture2D::Create(const std::string& path) {
   return nullptr;
 }
 
-}  // namespace Solar
+}  // namespace solar

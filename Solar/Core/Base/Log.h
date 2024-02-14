@@ -9,7 +9,7 @@
 #include "spdlog/fmt/ostr.h"
 // clang-format on
 
-namespace Solar {
+namespace solar {
 
 class Log {
  public:
@@ -28,20 +28,20 @@ class Log {
   static std::shared_ptr<spdlog::logger> s_ClientLogger;
 };
 
-}  // namespace Solar
+}  // namespace solar
 
 // Core log macros
-#define SOLAR_CORE_TRACE(...) ::Solar::Log::GetCoreLogger()->trace(__VA_ARGS__)
-#define SOLAR_CORE_INFO(...) ::Solar::Log::GetCoreLogger()->info(__VA_ARGS__)
-#define SOLAR_CORE_WARN(...) ::Solar::Log::GetCoreLogger()->warn(__VA_ARGS__)
-#define SOLAR_CORE_ERROR(...) ::Solar::Log::GetCoreLogger()->error(__VA_ARGS__)
+#define SOLAR_CORE_TRACE(...) ::solar::Log::GetCoreLogger()->trace(__VA_ARGS__)
+#define SOLAR_CORE_INFO(...) ::solar::Log::GetCoreLogger()->info(__VA_ARGS__)
+#define SOLAR_CORE_WARN(...) ::solar::Log::GetCoreLogger()->warn(__VA_ARGS__)
+#define SOLAR_CORE_ERROR(...) ::solar::Log::GetCoreLogger()->error(__VA_ARGS__)
 #define SOLAR_CORE_CRITICAL(...) \
-  ::Solar::Log::GetCoreLogger()->critical(__VA_ARGS__)
+  ::solar::Log::GetCoreLogger()->critical(__VA_ARGS__)
 
 // Client log macros
-#define SOLAR_TRACE(...) ::Solar::Log::GetClientLogger()->trace(__VA_ARGS__)
-#define SOLAR_INFO(...) ::Solar::Log::GetClientLogger()->info(__VA_ARGS__)
-#define SOLAR_WARN(...) ::Solar::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define SOLAR_ERROR(...) ::Solar::Log::GetClientLogger()->error(__VA_ARGS__)
+#define SOLAR_TRACE(...) ::solar::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define SOLAR_INFO(...) ::solar::Log::GetClientLogger()->info(__VA_ARGS__)
+#define SOLAR_WARN(...) ::solar::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define SOLAR_ERROR(...) ::solar::Log::GetClientLogger()->error(__VA_ARGS__)
 #define SOLAR_CRITICAL(...) \
-  ::Solar::Log::GetClientLogger()->critical(__VA_ARGS__)
+  ::solar::Log::GetClientLogger()->critical(__VA_ARGS__)

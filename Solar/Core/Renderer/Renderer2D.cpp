@@ -10,7 +10,7 @@
 #include "Core/Renderer/VertexArray.h"
 #include "glm/gtc/matrix_transform.hpp"
 
-namespace Solar {
+namespace solar {
 
 struct QuadVertex {
   glm::vec3 position;
@@ -53,7 +53,7 @@ static Renderer2DData s_data;
 void Renderer2D::Init() {
   SOLAR_PROFILE_FUNCTION();
 
-  s_data.quad_vertex_array = Solar::VertexArray::Create();
+  s_data.quad_vertex_array = VertexArray::Create();
 
   s_data.quad_vertex_buffer =
       VertexBuffer::Create(s_data.kMaxVertices * sizeof(QuadVertex));
@@ -537,4 +537,4 @@ void Renderer2D::NextBatch() {
   StartBatch();
 }
 
-}  // namespace Solar
+}  // namespace solar

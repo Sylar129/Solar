@@ -8,7 +8,7 @@
 #include "Core/Base/KeyCodes.h"
 #include "Core/Base/MouseCodes.h"
 
-namespace Solar {
+namespace solar {
 
 class Input {
  public:
@@ -19,4 +19,4 @@ class Input {
   static float GetMouseY();
 };
 
-}  // namespace Solar
+}  // namespace solar

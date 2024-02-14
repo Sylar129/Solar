@@ -11,7 +11,7 @@
 #include "Core/Base/Sundry.h"
 #include "Core/Debug/Instrumentor.h"
 
-namespace Solar {
+namespace solar {
 
 OpenGLContext::OpenGLContext(GLFWwindow* window_handle)
     : window_handle_(window_handle) {
@@ -48,4 +48,4 @@ void OpenGLContext::SwapBuffers() {
   glfwSwapBuffers(window_handle_);
 }
 
-}  // namespace Solar
+}  // namespace solar

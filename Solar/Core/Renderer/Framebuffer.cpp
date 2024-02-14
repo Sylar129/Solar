@@ -5,7 +5,7 @@
 #include "Core/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLFramebuffer.h"
 
-namespace Solar {
+namespace solar {
 
 Ref<Framebuffer> Framebuffer::Create(const FramebufferSpecification& spec) {
   switch (Renderer::GetAPI()) {
@@ -19,4 +19,4 @@ Ref<Framebuffer> Framebuffer::Create(const FramebufferSpecification& spec) {
   return nullptr;
 }
 
-}  // namespace Solar
+}  // namespace solar

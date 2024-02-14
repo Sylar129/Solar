@@ -7,7 +7,7 @@
 #include "Core/Scene/Scene.h"
 #include "entt/entt.hpp"
 
-namespace Solar {
+namespace solar {
 
 class Entity {
  public:
@@ -59,4 +59,4 @@ class Entity {
   Scene* scene_ = nullptr;
 };
 
-}  // namespace Solar
+}  // namespace solar

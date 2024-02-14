@@ -7,7 +7,7 @@
 #include "Core/Base/KeyCodes.h"
 #include "Core/Events/Event.h"
 
-namespace Solar {
+namespace solar {
 
 class KeyEvent : public Event {
  public:
@@ -67,4 +67,4 @@ class KeyTypedEvent : public KeyEvent {
   EVENT_CLASS_TYPE(kKeyTyped);
 };
 
-}  // namespace Solar
+}  // namespace solar

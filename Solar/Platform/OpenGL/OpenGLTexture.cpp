@@ -9,7 +9,7 @@
 
 #include "Core/Debug/Instrumentor.h"
 
-namespace Solar {
+namespace solar {
 
 OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
     : width_(width),
@@ -97,4 +97,4 @@ void OpenGLTexture2D::Bind(uint32_t slot) const {
   glBindTextureUnit(slot, renderer_id_);
 }
 
-}  // namespace Solar
+}  // namespace solar

@@ -5,7 +5,7 @@
 #include "Core/Debug/Instrumentor.h"
 #include "glm/gtc/matrix_transform.hpp"
 
-namespace Solar {
+namespace solar {
 
 OrthographicCamera::OrthographicCamera(float left, float right, float bottom,
                                        float top)
@@ -62,4 +62,4 @@ void OrthographicCamera::RecalculateViewMatrix() {
   view_projection_matrix_ = projection_matrix_ * view_matrix_;
 }
 
-}  // namespace Solar
+}  // namespace solar

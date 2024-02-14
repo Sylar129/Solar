@@ -9,7 +9,7 @@
 
 #include "Core/Base/Log.h"
 
-namespace Solar {
+namespace solar {
 
 using FloatingPointMicroseconds = std::chrono::duration<double, std::micro>;
 
@@ -160,7 +160,7 @@ class InstrumentationTimer {
   bool stopped_;
 };
 
-}  // namespace Solar
+}  // namespace solar
 
 #define SOLAR_PROFILE 0
 

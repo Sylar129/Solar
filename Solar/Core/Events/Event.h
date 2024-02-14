@@ -8,7 +8,7 @@
 
 #include "Core/Base/Sundry.h"
 
-namespace Solar {
+namespace solar {
 
 enum class EventType {
   kNone = 0,
@@ -87,4 +87,4 @@ inline std::ostream& operator<<(std::ostream& os, const Event& e) {
   return os << e.ToString();
 }
 
-}  // namespace Solar
+}  // namespace solar

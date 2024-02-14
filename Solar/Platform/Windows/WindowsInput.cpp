@@ -4,7 +4,7 @@
 #include "Core/Base/Input.h"
 #include "GLFW/glfw3.h"
 
-namespace Solar {
+namespace solar {
 
 bool Input::IsKeyPressed(KeyCode keycode) {
   auto *window = static_cast<GLFWwindow *>(
@@ -38,4 +38,4 @@ float Input::GetMouseY() {
   return y;
 }
 
-}  // namespace Solar
+}  // namespace solar

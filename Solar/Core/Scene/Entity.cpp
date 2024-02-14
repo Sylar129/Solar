@@ -2,9 +2,9 @@
 
 #include "Core/Scene/Entity.h"
 
-namespace Solar {
+namespace solar {
 
 Entity::Entity(entt::entity handle, Scene* scene)
     : entity_handle_(handle), scene_(scene) {}
 
-}  // namespace Solar
+}  // namespace solar

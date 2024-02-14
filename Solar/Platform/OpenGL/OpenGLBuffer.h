@@ -4,7 +4,7 @@
 
 #include "Core/Renderer/Buffer.h"
 
-namespace Solar {
+namespace solar {
 
 class OpenGLVertexBuffer : public VertexBuffer {
  public:
@@ -39,4 +39,4 @@ class OpenGLIndexBuffer : public IndexBuffer {
   uint32_t renderer_id_;
   uint32_t count_;
 };
-}  // namespace Solar
+}  // namespace solar

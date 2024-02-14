@@ -6,7 +6,7 @@
 
 #include "Core/Base/Sundry.h"
 
-namespace Solar {
+namespace solar {
 
 enum class FramebufferTextureFormat {
   kNone = 0,
@@ -69,4 +69,4 @@ class Framebuffer {
   static Ref<Framebuffer> Create(const FramebufferSpecification& spec);
 };
 
-}  // namespace Solar
+}  // namespace solar

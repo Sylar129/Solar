@@ -6,7 +6,7 @@
 
 #include "Core/Events/Event.h"
 
-namespace Solar {
+namespace solar {
 
 struct WindowProps {
   std::string title;
@@ -40,4 +40,4 @@ class Window {
   static Window* Create(const WindowProps& props = WindowProps());
 };
 
-}  // namespace Solar
+}  // namespace solar

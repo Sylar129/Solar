@@ -9,7 +9,7 @@
 #include "Core/Debug/Instrumentor.h"
 #include "glm/glm.hpp"
 
-namespace Solar {
+namespace solar {
 
 OrthographicCameraController::OrthographicCameraController(float aspect_ratio,
                                                            bool rotation)
@@ -103,4 +103,4 @@ bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e) {
   return false;
 }
 
-}  // namespace Solar
+}  // namespace solar

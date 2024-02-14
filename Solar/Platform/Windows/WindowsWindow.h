@@ -8,7 +8,7 @@
 #include "Core/Renderer/GraphicsContext.h"
 #include "GLFW/glfw3.h"
 
-namespace Solar {
+namespace solar {
 
 class WindowsWindow : public Window {
  public:
@@ -49,4 +49,4 @@ class WindowsWindow : public Window {
   WindowData data_;
 };
 
-}  // namespace Solar
+}  // namespace solar

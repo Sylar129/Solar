@@ -9,7 +9,7 @@
 #include "Core/Renderer/Camera.h"
 #include "glm/glm.hpp"
 
-namespace Solar {
+namespace solar {
 
 class EditorCamera : public Camera {
  public:
@@ -73,4 +73,4 @@ class EditorCamera : public Camera {
   float viewport_height_ = 720;
 };
 
-}  // namespace Solar
+}  // namespace solar

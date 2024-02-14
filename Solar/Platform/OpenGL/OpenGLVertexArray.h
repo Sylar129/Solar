@@ -6,7 +6,7 @@
 
 #include "Core/Renderer/VertexArray.h"
 
-namespace Solar {
+namespace solar {
 
 class OpenGLVertexArray : public VertexArray {
  public:
@@ -29,4 +29,4 @@ class OpenGLVertexArray : public VertexArray {
   Ref<IndexBuffer> index_buffer_;
 };
 
-}  // namespace Solar
+}  // namespace solar

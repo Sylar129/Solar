@@ -60,7 +60,7 @@ struct convert<glm::vec4> {
 
 }  // namespace YAML
 
-namespace Solar {
+namespace solar {
 
 YAML::Emitter& operator<<(YAML::Emitter& out, const glm::vec3& v) {
   out << YAML::Flow;
@@ -264,4 +264,4 @@ bool SceneSerializer::DeserializeRuntime(const std::string& filepath) {
   return false;
 }
 
-}  // namespace Solar
+}  // namespace solar

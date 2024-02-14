@@ -9,7 +9,7 @@
 #include "Core/Renderer/Texture.h"
 #include "Core/Scene/Components.h"
 
-namespace Solar {
+namespace solar {
 
 class Renderer2D {
  public:
@@ -99,4 +99,4 @@ class Renderer2D {
   static void NextBatch();
 };
 
-}  // namespace Solar
+}  // namespace solar

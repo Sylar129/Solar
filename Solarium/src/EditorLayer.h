@@ -8,7 +8,7 @@
 #include "Core/Renderer/EditorCamera.h"
 #include "Panels/SceneHierarchyPanel.h"
 
-namespace Solar {
+namespace solar {
 
 class EditorLayer : public Layer {
  public:
@@ -63,4 +63,4 @@ class EditorLayer : public Layer {
   SceneHierarchyPanel scene_hierarchy_panel_;
 };
 
-}  // namespace Solar
+}  // namespace solar

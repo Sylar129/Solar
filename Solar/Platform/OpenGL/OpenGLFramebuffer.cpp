@@ -5,7 +5,7 @@
 #include "Core/Base/Log.h"
 #include "glad/glad.h"
 
-namespace Solar {
+namespace solar {
 
 namespace {
 constexpr uint32_t kMaxFramebufferSize = 8192;
@@ -238,4 +238,4 @@ void OpenGLFramebuffer::Invalidate() {
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-}  // namespace Solar
+}  // namespace solar

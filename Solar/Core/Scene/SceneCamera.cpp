@@ -4,7 +4,7 @@
 
 #include "glm/gtc/matrix_transform.hpp"
 
-namespace Solar {
+namespace solar {
 
 SceneCamera::SceneCamera() { RecalculateProjection(); }
 
@@ -45,4 +45,4 @@ void SceneCamera::RecalculateProjection() {
   }
 }
 
-}  // namespace Solar
+}  // namespace solar

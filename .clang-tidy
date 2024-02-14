@@ -50,6 +50,7 @@ CheckOptions:
   readability-identifier-naming.MacroDefinitionCase: 'UPPER_CASE'
   readability-identifier-naming.MemberCase: 'lower_case'
   readability-identifier-naming.MethodCase: 'CamelCase'
+  readability-identifier-naming.NamespaceCase: 'lower_case'
   readability-identifier-naming.ParameterCase: 'lower_case'
   readability-identifier-naming.ProtectedMemberSuffix: '_'
   readability-identifier-naming.PrivateMemberSuffix: '_'

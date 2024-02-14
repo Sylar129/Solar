@@ -4,7 +4,7 @@
 
 #include "Core/Renderer/RendererAPI.h"
 
-namespace Solar {
+namespace solar {
 
 class OpenGLRendererAPI : public RendererAPI {
  public:
@@ -18,4 +18,4 @@ class OpenGLRendererAPI : public RendererAPI {
                    uint32_t index_count) override;
 };
 
-}  // namespace Solar
+}  // namespace solar

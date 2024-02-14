@@ -9,7 +9,7 @@
 #include "imgui.h"
 #include "imgui_internal.h"
 
-namespace Solar {
+namespace solar {
 
 namespace {
 void DrawVec3Control(const std::string& label, glm::vec3& values,
@@ -321,4 +321,4 @@ void SceneHierarchyPanel::DrawComponents(Entity entity) {
       });
 }
 
-}  // namespace Solar
+}  // namespace solar

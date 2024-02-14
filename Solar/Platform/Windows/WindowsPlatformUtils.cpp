@@ -12,7 +12,7 @@
 #include "Core/Base/Application.h"
 #include "Core/Utils/PlatformUtils.h"
 
-namespace Solar {
+namespace solar {
 
 std::string FileDialogs::OpenFile(const char* filter) {
   OPENFILENAMEA ofn;
@@ -50,4 +50,4 @@ std::string FileDialogs::SaveFile(const char* filter) {
   return std::string();
 }
 
-}  // namespace Solar
+}  // namespace solar

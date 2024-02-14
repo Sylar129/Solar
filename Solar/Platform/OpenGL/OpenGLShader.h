@@ -10,7 +10,7 @@
 // TODO(sylar): REMOVE!
 typedef unsigned int GLenum;
 
-namespace Solar {
+namespace solar {
 
 class OpenGLShader : public Shader {
  public:
@@ -53,4 +53,4 @@ class OpenGLShader : public Shader {
   std::string name_;
 };
 
-}  // namespace Solar
+}  // namespace solar

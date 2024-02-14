@@ -4,7 +4,7 @@
 
 #include "Core/Renderer/RendererAPI.h"
 
-namespace Solar {
+namespace solar {
 
 class RenderCommand {
  public:
@@ -30,4 +30,4 @@ class RenderCommand {
   static Scope<RendererAPI> s_renderer_api;
 };
 
-}  // namespace Solar
+}  // namespace solar

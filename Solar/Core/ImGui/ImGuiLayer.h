@@ -4,7 +4,7 @@
 
 #include "Core/Base/Layer.h"
 
-namespace Solar {
+namespace solar {
 
 class ImGuiLayer : public Layer {
  public:
@@ -27,4 +27,4 @@ class ImGuiLayer : public Layer {
   float time_;
 };
 
-}  // namespace Solar
+}  // namespace solar

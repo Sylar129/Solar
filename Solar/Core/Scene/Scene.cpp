@@ -6,7 +6,7 @@
 #include "Core/Scene/Components.h"
 #include "Core/Scene/Entity.h"
 
-namespace Solar {
+namespace solar {
 
 Scene::Scene() {}
 
@@ -136,4 +136,4 @@ template <>
 void Scene::OnComponentAdded<NativeScriptComponent>(
     Entity entity, NativeScriptComponent& component) {}
 
-}  // namespace Solar
+}  // namespace solar

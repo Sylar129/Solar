@@ -5,7 +5,7 @@
 #include "Core/Base/EntryPoint.h"
 #include "EditorLayer.h"
 
-namespace Solar {
+namespace solar {
 
 class Solarium : public Application {
  public:
@@ -19,4 +19,4 @@ class Solarium : public Application {
 
 Application* CreateApplication() { return new Solarium(); }
 
-}  // namespace Solar
+}  // namespace solar

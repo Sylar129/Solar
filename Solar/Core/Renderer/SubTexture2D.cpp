@@ -2,7 +2,7 @@
 
 #include "Core/Renderer/SubTexture2D.h"
 
-namespace Solar {
+namespace solar {
 
 SubTexture2D::SubTexture2D(const Ref<Texture2D>& texture, const glm::vec2& min,
                            const glm::vec2& max)
@@ -28,4 +28,4 @@ Ref<SubTexture2D> SubTexture2D::CreateFromCoords(const Ref<Texture2D>& texture,
   return CreateRef<SubTexture2D>(texture, min, max);
 }
 
-}  // namespace Solar
+}  // namespace solar

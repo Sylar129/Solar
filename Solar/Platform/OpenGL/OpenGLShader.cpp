@@ -8,7 +8,7 @@
 #include "glad/glad.h"
 #include "glm/gtc/type_ptr.hpp"
 
-namespace Solar {
+namespace solar {
 
 namespace {
 constexpr GLenum ShaderTypeFromString(const std::string& type) {
@@ -298,4 +298,4 @@ void OpenGLShader::Compile(
   renderer_id_ = program;
 }
 
-}  // namespace Solar
+}  // namespace solar

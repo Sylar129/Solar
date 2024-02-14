@@ -6,7 +6,7 @@
 
 #include "Core/Renderer/Framebuffer.h"
 
-namespace Solar {
+namespace solar {
 
 class OpenGLFramebuffer : public Framebuffer {
  public:
@@ -38,4 +38,4 @@ class OpenGLFramebuffer : public Framebuffer {
   uint32_t depth_attachment_;
 };
 
-}  // namespace Solar
+}  // namespace solar

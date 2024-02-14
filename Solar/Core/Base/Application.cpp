@@ -7,7 +7,7 @@
 #include "Core/Debug/Instrumentor.h"
 #include "Core/Renderer/Renderer.h"
 
-namespace Solar {
+namespace solar {
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
@@ -122,4 +122,4 @@ bool Application::OnWindowResize(WindowResizeEvent& e) {
   return false;
 }
 
-}  // namespace Solar
+}  // namespace solar

@@ -5,7 +5,7 @@
 #include "Core/Renderer/Camera.h"
 #include "glm/glm.hpp"
 
-namespace Solar {
+namespace solar {
 
 class SceneCamera : public Camera {
  public:
@@ -74,4 +74,4 @@ class SceneCamera : public Camera {
   float aspect_ratio_ = 0.0f;
 };
 
-}  // namespace Solar
+}  // namespace solar

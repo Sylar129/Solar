@@ -42,7 +42,7 @@
     return this->fn(std::forward<decltype(args)>(args)...); \
   }
 
-namespace Solar {
+namespace solar {
 
 template <bool SHIFT = true>
 constexpr auto BIT(int n) {
@@ -67,4 +67,4 @@ constexpr Ref<T> CreateRef(Args&&... args) {
   return std::make_shared<T>(std::forward<Args>(args)...);
 }
 
-}  // namespace Solar
+}  // namespace solar

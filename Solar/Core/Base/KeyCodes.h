@@ -4,7 +4,7 @@
 
 #include <ostream>
 
-namespace Solar {
+namespace solar {
 
 enum class KeyCode : uint16_t {
   // From glfw3.h
@@ -145,4 +145,4 @@ inline std::ostream& operator<<(std::ostream& os, KeyCode keycode) {
   return os;
 }
 
-}  // namespace Solar
+}  // namespace solar

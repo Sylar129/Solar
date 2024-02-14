@@ -10,7 +10,7 @@
 #include "Core/Events/Event.h"
 #include "Core/ImGui/ImGuiLayer.h"
 
-namespace Solar {
+namespace solar {
 
 class Application {
  public:
@@ -46,4 +46,4 @@ class Application {
 
 Application* CreateApplication();
 
-}  // namespace Solar
+}  // namespace solar

@@ -6,7 +6,7 @@
 #include "Core/Renderer/RendererAPI.h"
 #include "Core/Renderer/Shader.h"
 
-namespace Solar {
+namespace solar {
 
 class Renderer {
  public:
@@ -30,4 +30,4 @@ class Renderer {
   static Scope<SceneData> s_scene_data;
 };
 
-}  // namespace Solar
+}  // namespace solar

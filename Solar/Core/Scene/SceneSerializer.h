@@ -6,7 +6,7 @@
 
 #include "Core/Scene/Scene.h"
 
-namespace Solar {
+namespace solar {
 
 class SceneSerializer {
  public:
@@ -22,4 +22,4 @@ class SceneSerializer {
   Ref<Scene> scene_;
 };
 
-}  // namespace Solar
+}  // namespace solar

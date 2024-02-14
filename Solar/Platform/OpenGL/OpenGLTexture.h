@@ -7,7 +7,7 @@
 #include "Core/Renderer/Texture.h"
 #include "glad/glad.h"
 
-namespace Solar {
+namespace solar {
 
 class OpenGLTexture2D : public Texture2D {
  public:
@@ -36,4 +36,4 @@ class OpenGLTexture2D : public Texture2D {
   GLenum data_format_;
 };
 
-}  // namespace Solar
+}  // namespace solar

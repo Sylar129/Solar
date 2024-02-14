@@ -10,7 +10,7 @@
 #include "Core/Base/MouseCodes.h"
 #include "glm/gtx/quaternion.hpp"
 
-namespace Solar {
+namespace solar {
 
 EditorCamera::EditorCamera(float fov, float aspect_ratio, float near_clip,
                            float far_clip)
@@ -129,4 +129,4 @@ glm::quat EditorCamera::GetOrientation() const {
   return glm::quat(glm::vec3(-pitch_, -yaw_, 0.0f));
 }
 
-}  // namespace Solar
+}  // namespace solar

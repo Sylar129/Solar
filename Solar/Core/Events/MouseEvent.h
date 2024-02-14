@@ -8,7 +8,7 @@
 #include "Core/Base/MouseCodes.h"
 #include "Core/Events/Event.h"
 
-namespace Solar {
+namespace solar {
 
 class MouseMovedEvent : public Event {
  public:
@@ -92,4 +92,4 @@ class MouseButtonReleasedEvent : public MouseButtonEvent {
   EVENT_CLASS_TYPE(kMouseButtonReleased);
 };
 
-}  // namespace Solar
+}  // namespace solar

@@ -15,7 +15,7 @@
 #include "Core/Utils/PlatformUtils.h"
 #include "glm/gtc/type_ptr.hpp"
 
-namespace Solar {
+namespace solar {
 
 EditorLayer::EditorLayer()
     : Layer("EditorLayer"), camera_controller_(1280.0f / 720.0f) {}
@@ -448,4 +448,4 @@ void EditorLayer::SaveSceneAs() {
   }
 }
 
-}  // namespace Solar
+}  // namespace solar

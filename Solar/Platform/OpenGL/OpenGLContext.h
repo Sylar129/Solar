@@ -6,7 +6,7 @@
 
 struct GLFWwindow;
 
-namespace Solar {
+namespace solar {
 
 class OpenGLContext : public GraphicsContext {
  public:
@@ -19,4 +19,4 @@ class OpenGLContext : public GraphicsContext {
   GLFWwindow* window_handle_;
 };
 
-}  // namespace Solar
+}  // namespace solar

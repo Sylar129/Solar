@@ -2,7 +2,7 @@
 
 #pragma once
 
-namespace Solar {
+namespace solar {
 
 class GraphicsContext {
  public:
@@ -12,4 +12,4 @@ class GraphicsContext {
   virtual void SwapBuffers() = 0;
 };
 
-}  // namespace Solar
+}  // namespace solar

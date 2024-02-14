@@ -7,7 +7,7 @@
 
 #include "Core/Base/Sundry.h"
 
-namespace Solar {
+namespace solar {
 
 enum class ShaderDataType {
   kNone = 0,
@@ -172,4 +172,4 @@ class IndexBuffer {
   static Ref<IndexBuffer> Create(uint32_t* indices, uint32_t count);
 };
 
-}  // namespace Solar
+}  // namespace solar

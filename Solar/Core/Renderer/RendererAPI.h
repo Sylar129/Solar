@@ -5,7 +5,7 @@
 #include "Core/Renderer/VertexArray.h"
 #include "glm/vec4.hpp"
 
-namespace Solar {
+namespace solar {
 
 class RendererAPI {
  public:
@@ -28,4 +28,4 @@ class RendererAPI {
   static API s_api;
 };
 
-}  // namespace Solar
+}  // namespace solar

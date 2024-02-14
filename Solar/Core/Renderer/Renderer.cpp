@@ -7,7 +7,7 @@
 #include "Core/Renderer/Renderer2D.h"
 #include "Platform/OpenGL/OpenGLShader.h"
 
-namespace Solar {
+namespace solar {
 
 Scope<Renderer::SceneData> Renderer::s_scene_data =
     CreateScope<Renderer::SceneData>();
@@ -42,4 +42,4 @@ void Renderer::Submit(const Ref<Shader>& shader,
   RenderCommand::DrawIndexed(vertex_array);
 }
 
-}  // namespace Solar
+}  // namespace solar
