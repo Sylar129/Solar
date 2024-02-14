@@ -339,7 +339,7 @@ void EditorLayer::OnImGuiRender() {
       glm::vec3 translation;
       glm::vec3 rotation;
       glm::vec3 scale;
-      Math::DecomposeTranform(transform, translation, rotation, scale);
+      math::DecomposeTranform(transform, translation, rotation, scale);
 
       glm::vec3 delta_rotation = rotation - tc.rotation;
       tc.translation = translation;
