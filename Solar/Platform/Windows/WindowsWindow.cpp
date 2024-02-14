@@ -9,6 +9,7 @@
 #include "Core/Events/ApplicationEvent.h"
 #include "Core/Events/KeyEvent.h"
 #include "Core/Events/MouseEvent.h"
+#include "Core/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLContext.h"
 
 namespace solar {
@@ -81,7 +82,7 @@ void WindowsWindow::Init(const WindowProps& props) {
     SOLAR_PROFILE_SCOPE("glfwCreateWindow");
 
 #ifdef SOLAR_DEBUG
-    if (Renderer::GetAPI() == RendererAPI::API::OpenGL) {
+    if (Renderer::GetAPI() == RendererAPI::API::kOpenGL) {
       glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
     }
 #endif  // SOLAR_DEBUG

@@ -55,5 +55,6 @@ CheckOptions:
   readability-identifier-naming.StructCase: 'CamelCase'
   readability-identifier-naming.StaticVariableCase: 'lower_case'
   readability-identifier-naming.TemplateParameterCase: 'CamelCase'
+  performance-unnecessary-value-param.AllowedTypes: 'Ref'
 ...
 

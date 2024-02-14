@@ -64,19 +64,24 @@ class Event {
 };
 
 class EventDispatcher {
-  template <typename T>
-  using EventFn = std::function<bool(T&)>;
+  template <typename E>
+  using EventFn = std::function<bool(E&)>;
 
  public:
   explicit EventDispatcher(Event& event) : event_(event) {}
 
-  template <typename T>
-  bool Dispatch(EventFn<T> func) {
-    if (event_.GetEventType() == T::GetStaticType()) {
-      event_.handled = func(*static_cast<T*>(&event_));
+  template <typename E>
+  bool Dispatch(EventFn<E> func) {
+    if (event_.GetEventType() == E::GetStaticType()) {
+      event_.handled = func(*static_cast<E*>(&event_));
       return true;
     }
     return false;
+  }
+
+  template <typename T, typename E>
+  void Dispatch(T* instance, bool (T::*func)(E&)) {
+    Dispatch<E>([=](E& e) -> bool { return (instance->*func)(e); });
   }
 
  private:
