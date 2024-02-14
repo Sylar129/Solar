@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <sstream>
 #include <string>
 
 #include "core/base/key_codes.h"

@@ -21,9 +21,9 @@ include_directories(Solar/ Vendor/imgui/ Vendor/ImGuizmo/ Vendor/glm/
 # Solarium
 add_executable(
   Solarium
-  Solarium/src/EditorLayer.cpp Solarium/src/EditorLayer.h
-  Solarium/src/SolariumApp.cpp Solarium/src/Panels/SceneHierarchyPanel.cpp
-  Solarium/src/Panels/SceneHierarchyPanel.h)
+  Solarium/src/editor_layer.cpp Solarium/src/editor_layer.h
+  Solarium/src/solarium_app.cpp Solarium/src/panels/scene_hierarchy_panel.cpp
+  Solarium/src/panels/scene_hierarchy_panel.h)
 
 # Solar
 add_subdirectory(Solar/)
