@@ -1,10 +1,10 @@
 // Copyright (c) 2024 Sylar129
 
-#include "Core/Scene/Scene.h"
+#include "core/scene/scene.h"
 
-#include "Core/Renderer/Renderer2D.h"
-#include "Core/Scene/Components.h"
-#include "Core/Scene/Entity.h"
+#include "core/renderer/renderer2d.h"
+#include "core/scene/components.h"
+#include "core/scene/entity.h"
 
 namespace solar {
 

@@ -1,13 +1,13 @@
 // Copyright (c) 2024 Sylar129
 
-#include "Core/Renderer/Renderer2D.h"
+#include "core/renderer/renderer2d.h"
 
 #include <cstdint>
 
-#include "Core/Debug/Instrumentor.h"
-#include "Core/Renderer/RenderCommand.h"
-#include "Core/Renderer/Shader.h"
-#include "Core/Renderer/VertexArray.h"
+#include "core/debug/instrumentor.h"
+#include "core/renderer/render_command.h"
+#include "core/renderer/shader.h"
+#include "core/renderer/vertex_array.h"
 #include "glm/gtc/matrix_transform.hpp"
 
 namespace solar {

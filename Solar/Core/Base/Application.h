@@ -4,11 +4,11 @@
 
 #include <string>
 
-#include "Core/Base/LayerStack.h"
-#include "Core/Base/Window.h"
-#include "Core/Events/ApplicationEvent.h"
-#include "Core/Events/Event.h"
-#include "Core/ImGui/ImGuiLayer.h"
+#include "core/base/layer_stack.h"
+#include "core/base/window.h"
+#include "core/events/application_event.h"
+#include "core/events/event.h"
+#include "core/imgui/imgui_layer.h"
 
 namespace solar {
 

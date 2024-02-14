@@ -1,11 +1,11 @@
 // Copyright (c) 2024 Sylar129
 
-#include "Core/Base/Application.h"
+#include "core/base/application.h"
 
 #include <chrono>  // NOLINT
 
-#include "Core/Debug/Instrumentor.h"
-#include "Core/Renderer/Renderer.h"
+#include "core/debug/instrumentor.h"
+#include "core/renderer/renderer.h"
 
 namespace solar {
 

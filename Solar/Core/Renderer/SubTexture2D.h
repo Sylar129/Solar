@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include "Core/Base/Sundry.h"
-#include "Core/Renderer/Texture.h"
+#include "core/base/sundry.h"
+#include "core/renderer/texture.h"
 #include "glm/vec2.hpp"
 
 namespace solar {

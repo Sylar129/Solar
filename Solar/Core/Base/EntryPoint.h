@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Core/Debug/Instrumentor.h"
+#include "core/debug/instrumentor.h"
 
 #ifdef SOLAR_PLATFORM_WINDOWS
 

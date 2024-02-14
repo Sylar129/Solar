@@ -1,6 +1,6 @@
 // Copyright (c) 2024 Sylar129
 
-#include "Core/Renderer/SubTexture2D.h"
+#include "core/renderer/subtexture2d.h"
 
 namespace solar {
 

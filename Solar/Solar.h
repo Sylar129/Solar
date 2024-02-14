@@ -4,34 +4,34 @@
 
 // clang-format off
 // For use by Solar Application
-#include "Core/Base/Application.h"
-#include "Core/Base/Input.h"
-#include "Core/Base/KeyCodes.h"
-#include "Core/Base/Layer.h"
-#include "Core/Base/Log.h"
-#include "Core/Base/MouseCodes.h"
-#include "Core/Base/Timestep.h"
+#include "core/base/application.h"
+#include "core/base/input.h"
+#include "core/base/key_codes.h"
+#include "core/base/Layer.h"
+#include "core/base/log.h"
+#include "core/base/mouse_codes.h"
+#include "core/base/timestep.h"
 
-#include "Core/ImGui/ImGuiLayer.h"
+#include "core/imgui/imgui_layer.h"
 
-#include "Core/Scene/Components.h"
-#include "Core/Scene/Entity.h"
-#include "Core/Scene/Scene.h"
-#include "Core/Scene/ScriptableEntity.h"
+#include "core/scene/components.h"
+#include "core/scene/entity.h"
+#include "core/scene/scene.h"
+#include "core/scene/scriptable_entity.h"
 
 // -------------- --Renderer---------------
-#include "Core/Renderer/Renderer.h"
-#include "Core/Renderer/Renderer2D.h"
-#include "Core/Renderer/RenderCommand.h"
+#include "core/renderer/renderer.h"
+#include "core/renderer/renderer2d.h"
+#include "core/renderer/render_command.h"
 
-#include "Core/Renderer/Buffer.h"
-#include "Core/Renderer/Framebuffer.h"
-#include "Core/Renderer/Shader.h"
-#include "Core/Renderer/SubTexture2D.h"
-#include "Core/Renderer/Texture.h"
-#include "Core/Renderer/VertexArray.h"
+#include "core/renderer/buffer.h"
+#include "core/renderer/framebuffer.h"
+#include "core/renderer/shader.h"
+#include "core/renderer/subtexture2d.h"
+#include "core/renderer/texture.h"
+#include "core/renderer/vertex_array.h"
 
-#include "Core/Renderer/OrthographicCamera.h"
-#include "Core/Renderer/OrthographicCameraController.h"
+#include "core/renderer/orthographic_camera.h"
+#include "core/renderer/orthographic_camera_controller.h"
 // ----------------------------------------
 // clang-format on

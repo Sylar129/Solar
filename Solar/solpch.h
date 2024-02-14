@@ -19,8 +19,8 @@
 #include <unordered_set>
 
 #include <glm/glm.hpp>
-#include "Core/Base/Log.h"
-#include "Core/Debug/Instrumentor.h"
+#include "core/base/log.h"
+#include "core/debug/instrumentor.h"
 
 #ifdef SOLAR_PLATFORM_WINDOWS
 #include <Windows.h>

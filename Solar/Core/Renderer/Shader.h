@@ -5,7 +5,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "Core/Base/Sundry.h"
+#include "core/base/sundry.h"
 #include "glm/glm.hpp"
 
 namespace solar {

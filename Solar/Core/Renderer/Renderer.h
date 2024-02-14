@@ -2,9 +2,9 @@
 
 #pragma once
 
-#include "Core/Renderer/OrthographicCamera.h"
-#include "Core/Renderer/RendererAPI.h"
-#include "Core/Renderer/Shader.h"
+#include "core/renderer/orthographic_camera.h"
+#include "core/renderer/renderer_api.h"
+#include "core/renderer/shader.h"
 
 namespace solar {
 
