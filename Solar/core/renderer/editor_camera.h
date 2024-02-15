@@ -21,7 +21,7 @@ class EditorCamera : public Camera {
   float GetDistance() const;
   void SetDistance(float distance);
 
-  void SetViewportSize(float width, float height);
+  void SetViewportSize(const Size& viewport_size);
 
   const glm::mat4& GetViewMatrix() const;
   const glm::vec3& GetPosition() const;

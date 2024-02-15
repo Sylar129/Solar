@@ -102,7 +102,7 @@ void EditorLayer::OnUpdate(const TimeStep& ts) {
           spec.height != viewport_size_.height)) {
     framebuffer_->Resize(viewport_size_.width, viewport_size_.height);
     camera_controller_.OnResize(viewport_size_.width, viewport_size_.height);
-    editor_camera_.SetViewportSize(viewport_size_.width, viewport_size_.height);
+    editor_camera_.SetViewportSize(viewport_size_);
     active_scene_->OnViewportResize(viewport_size_);
   }
 

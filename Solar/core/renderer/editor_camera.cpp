@@ -62,8 +62,8 @@ float EditorCamera::GetDistance() const { return distance_; }
 
 void EditorCamera::SetDistance(float distance) { distance_ = distance; }
 
-void EditorCamera::SetViewportSize(float width, float height) {
-  viewport_size_ = {width, height};
+void EditorCamera::SetViewportSize(const Size& viewport_size) {
+  viewport_size_ = viewport_size;
   UpdateProjection();
 }
 
