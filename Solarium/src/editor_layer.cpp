@@ -89,7 +89,7 @@ void EditorLayer::OnAttach() {
   scene_hierarchy_panel_.SetContext(active_scene_);
 }
 
-void EditorLayer::OnDetech() { SOLAR_PROFILE_FUNCTION(); }
+void EditorLayer::OnDetach() { SOLAR_PROFILE_FUNCTION(); }
 
 void EditorLayer::OnUpdate(const TimeStep& ts) {
   SOLAR_PROFILE_FUNCTION();

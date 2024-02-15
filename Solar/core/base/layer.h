@@ -15,7 +15,7 @@ class Layer {
   virtual ~Layer();
 
   virtual void OnAttach() {}
-  virtual void OnDetech() {}
+  virtual void OnDetach() {}
   virtual void OnUpdate(const TimeStep& ts) {}
   virtual void OnImGuiRender() {}
   virtual void OnEvent(Event& event) {}

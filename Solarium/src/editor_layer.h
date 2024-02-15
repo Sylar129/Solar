@@ -19,7 +19,7 @@ class EditorLayer : public Layer {
   ~EditorLayer() override = default;
 
   void OnAttach() override;
-  void OnDetech() override;
+  void OnDetach() override;
 
   void OnUpdate(const TimeStep& ts) override;
   void OnImGuiRender() override;
