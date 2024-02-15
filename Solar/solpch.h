@@ -2,27 +2,24 @@
 
 #pragma once
 
-// clang-format off
-#include <iostream>
-#include <fstream>
-#include <memory>
-#include <utility>
 #include <algorithm>
-#include <functional>
 #include <chrono>
-#include <thread>
-
-#include <string>
+#include <fstream>
+#include <functional>
+#include <iostream>
+#include <memory>
 #include <sstream>
-#include <vector>
+#include <string>
+#include <thread>
 #include <unordered_map>
 #include <unordered_set>
+#include <utility>
+#include <vector>
 
-#include <glm/glm.hpp>
 #include "core/base/log.h"
 #include "core/debug/instrumentor.h"
+#include "glm/glm.hpp"
 
 #ifdef SOLAR_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif
-// clang-format on

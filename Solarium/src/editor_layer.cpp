@@ -360,10 +360,8 @@ void EditorLayer::OnEvent(Event& event) {
   editor_camera_.OnEvent(event);
 
   EventDispatcher dispatcher(event);
-  dispatcher.Dispatch<KeyPressdEvent>(
-      SOLAR_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
-  dispatcher.Dispatch<MouseButtonPressedEvent>(
-      SOLAR_BIND_EVENT_FN(EditorLayer::OnMouseButtonPressed));
+  dispatcher.Dispatch(this, &EditorLayer::OnKeyPressed);
+  dispatcher.Dispatch(this, &EditorLayer::OnMouseButtonPressed);
 }
 
 bool EditorLayer::OnKeyPressed(KeyPressdEvent& e) {

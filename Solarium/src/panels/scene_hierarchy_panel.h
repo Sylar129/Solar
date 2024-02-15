@@ -2,9 +2,9 @@
 
 #pragma once
 
-#include "core/base/sundry.h"
 #include "core/scene/entity.h"
 #include "core/scene/scene.h"
+#include "core/utils/misc.h"
 
 namespace solar {
 
