@@ -14,7 +14,7 @@ class SubTexture2D {
                const glm::vec2& max);
 
   Ref<Texture2D> GetTexture() const { return texture_; }
-  const glm::vec2* GetTexCoords() const { return tex_coords_; }
+  const auto& GetTexCoords() const { return tex_coords_; }
 
   static Ref<SubTexture2D> CreateFromCoords(
       const Ref<Texture2D>& texture, const glm::vec2& coords,
@@ -23,7 +23,7 @@ class SubTexture2D {
  private:
   Ref<Texture2D> texture_;
 
-  glm::vec2 tex_coords_[4];
+  std::array<glm::vec2, 4> tex_coords_;
 };
 
 }  // namespace solar
