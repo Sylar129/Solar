@@ -18,7 +18,7 @@ class ImGuiLayer : public Layer {
   void Begin();
   void End();
 
-  void SetBlockEvents(bool block) { block_events_ = block; }
+  void SetBlockEvents(bool block);
 
   void SetDarkThemeColors();
 

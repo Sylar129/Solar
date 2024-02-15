@@ -4,8 +4,10 @@
 
 namespace solar {
 
-Layer::Layer(const std::string& name) : debug_name_(name) {}
+Layer::Layer(const std::string& debug_name) : debug_name_(debug_name) {}
 
 Layer::~Layer() {}
+
+std::string Layer::GetDebugName() const { return debug_name_; }
 
 }  // namespace solar

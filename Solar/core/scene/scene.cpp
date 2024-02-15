@@ -22,7 +22,7 @@ Entity Scene::CreateEntity(const std::string& name) {
 
 void Scene::DestoryEntity(Entity entity) { registry_.destroy(entity); }
 
-void Scene::OnUpdateRuntime(TimeStep& ts) {
+void Scene::OnUpdateRuntime(const TimeStep& ts) {
   // Update scripts
   {
     // TODO(sylar): Move to Scene::OnScenePlay
@@ -69,7 +69,7 @@ void Scene::OnUpdateRuntime(TimeStep& ts) {
   }
 }
 
-void Scene::OnUpdateEditor(TimeStep& ts, EditorCamera& camera) {
+void Scene::OnUpdateEditor(const TimeStep& ts, EditorCamera& camera) {
   Renderer2D::BeginScene(camera);
   auto group =
       registry_.group<TransformComponent>(entt::get<SpriteRendererComponent>);

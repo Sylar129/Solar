@@ -47,6 +47,14 @@ void WindowsWindow::OnUpdate() {
   context_->SwapBuffers();
 }
 
+uint32_t WindowsWindow::GetWidth() const { return data_.width; }
+
+uint32_t WindowsWindow::GetHeight() const { return data_.height; }
+
+void WindowsWindow::SetEventCallback(const EventCallbackFn& callback) {
+  data_.event_callback = callback;
+}
+
 void WindowsWindow::SetVSync(bool enabled) {
   SOLAR_PROFILE_FUNCTION();
 
@@ -59,6 +67,8 @@ void WindowsWindow::SetVSync(bool enabled) {
 }
 
 bool WindowsWindow::IsVSync() const { return data_.v_sync; }
+
+void* WindowsWindow::GetNativeWindow() const { return window_; }
 
 void WindowsWindow::Init(const WindowProps& props) {
   SOLAR_PROFILE_FUNCTION();

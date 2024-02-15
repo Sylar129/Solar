@@ -91,7 +91,7 @@ void EditorLayer::OnAttach() {
 
 void EditorLayer::OnDetech() { SOLAR_PROFILE_FUNCTION(); }
 
-void EditorLayer::OnUpdate(TimeStep& ts) {
+void EditorLayer::OnUpdate(const TimeStep& ts) {
   SOLAR_PROFILE_FUNCTION();
 
   // Resize

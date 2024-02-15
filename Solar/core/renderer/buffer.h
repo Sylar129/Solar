@@ -5,57 +5,10 @@
 #include <string>
 #include <vector>
 
-#include "core/debug/assert.h"
+#include "core/renderer/shader_data_type.h"
 #include "core/utils/misc.h"
 
 namespace solar {
-
-enum class ShaderDataType {
-  kNone = 0,
-  kFloat,
-  kFloat2,
-  kFloat3,
-  kFloat4,
-  kMat3,
-  kMat4,
-  kInt,
-  kInt2,
-  kInt3,
-  kInt4,
-  kBool
-};
-
-constexpr uint32_t ShaderDataTypeSize(ShaderDataType type) {
-  switch (type) {
-    case ShaderDataType::kFloat:
-      return 4;
-    case ShaderDataType::kFloat2:
-      return 4 * 2;
-    case ShaderDataType::kFloat3:
-      return 4 * 3;
-    case ShaderDataType::kFloat4:
-      return 4 * 4;
-    case ShaderDataType::kMat3:
-      return 4 * 3 * 3;
-    case ShaderDataType::kMat4:
-      return 4 * 4 * 4;
-    case ShaderDataType::kInt:
-      return 4;
-    case ShaderDataType::kInt2:
-      return 4 * 2;
-    case ShaderDataType::kInt3:
-      return 4 * 3;
-    case ShaderDataType::kInt4:
-      return 4 * 4;
-    case ShaderDataType::kBool:
-      return 1;
-    case ShaderDataType::kNone:
-      break;
-  }
-
-  SOLAR_CORE_ASSERT(false, "Unknown Shader Data Type!");
-  return 0;
-}
 
 struct BufferElement {
   std::string name;
@@ -75,36 +28,7 @@ struct BufferElement {
         offset(0),
         normalized(normalized) {}
 
-  uint32_t GetComponentCount() const {
-    switch (type) {
-      case ShaderDataType::kFloat:
-        return 1;
-      case ShaderDataType::kFloat2:
-        return 2;
-      case ShaderDataType::kFloat3:
-        return 3;
-      case ShaderDataType::kFloat4:
-        return 4;
-      case ShaderDataType::kMat3:
-        return 3 * 3;
-      case ShaderDataType::kMat4:
-        return 4 * 4;
-      case ShaderDataType::kInt:
-        return 1;
-      case ShaderDataType::kInt2:
-        return 2;
-      case ShaderDataType::kInt3:
-        return 3;
-      case ShaderDataType::kInt4:
-        return 4;
-      case ShaderDataType::kBool:
-        return 1;
-      case ShaderDataType::kNone:
-        break;
-    }
-    SOLAR_CORE_ASSERT(false, "Unknown Shader Data Type!");
-    return 0;
-  }
+  uint32_t GetComponentCount() const { return ShaderDataTypeCount(type); }
 };
 
 class BufferLayout {
@@ -121,14 +45,10 @@ class BufferLayout {
     return elements_;
   }
 
-  std::vector<BufferElement>::iterator begin() { return elements_.begin(); }
-  std::vector<BufferElement>::iterator end() { return elements_.end(); }
-  std::vector<BufferElement>::const_iterator begin() const {
-    return elements_.begin();
-  }
-  std::vector<BufferElement>::const_iterator end() const {
-    return elements_.end();
-  }
+  auto begin() { return elements_.begin(); }
+  auto begin() const { return elements_.cbegin(); }
+  auto end() { return elements_.end(); }
+  auto end() const { return elements_.cend(); }
 
  private:
   void CalculateOffsetAndStride() {

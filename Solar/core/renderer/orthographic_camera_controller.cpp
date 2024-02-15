@@ -24,7 +24,7 @@ OrthographicCameraController::OrthographicCameraController(float aspect_ratio,
       camera_rotation_(0.0f),
       camera_rotation_speed_(1.0f) {}
 
-void OrthographicCameraController::OnUpdate(TimeStep ts) {
+void OrthographicCameraController::OnUpdate(const TimeStep& ts) {
   SOLAR_PROFILE_FUNCTION();
 
   // SOLAR_CORE_TRACE("Rotation: [{0}]", m_CameraRotation);

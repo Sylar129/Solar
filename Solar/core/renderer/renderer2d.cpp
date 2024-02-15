@@ -136,7 +136,7 @@ void Renderer2D::BeginScene(const Camera& camera, const glm::mat4& transform) {
 void Renderer2D::BeginScene(const EditorCamera& camera) {
   SOLAR_PROFILE_FUNCTION();
 
-  glm::mat4 view_proj = camera.GetViewProjection();
+  glm::mat4 view_proj = camera.CalcViewProjection();
 
   s_data.texture_shader->Bind();
   s_data.texture_shader->SetMat4("u_ViewProjection", view_proj);

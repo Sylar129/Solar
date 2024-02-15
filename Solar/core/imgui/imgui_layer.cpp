@@ -115,6 +115,8 @@ void ImGuiLayer::End() {
   }
 }
 
+void ImGuiLayer::SetBlockEvents(bool block) { block_events_ = block; }
+
 void ImGuiLayer::SetDarkThemeColors() {
   ImGuiStyle& style = ImGui::GetStyle();
   auto& colors = style.Colors;

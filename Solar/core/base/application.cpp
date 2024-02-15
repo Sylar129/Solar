@@ -70,6 +70,8 @@ void Application::Run() {
   }
 }
 
+void Application::Close() { running_ = false; }
+
 void Application::OnEvent(Event& e) {
   SOLAR_PROFILE_FUNCTION();
 
@@ -100,7 +102,11 @@ void Application::PushOverlay(Ref<Layer> layer) {
   layer->OnAttach();
 }
 
-void Application::Close() { running_ = false; }
+Window& Application::GetWindow() { return *window_; }
+
+Ref<ImGuiLayer> Application::GetImGuiLayer() { return imgui_layer_; }
+
+Application& Application::Get() { return *instance_; }
 
 bool Application::OnWindowClose(WindowCloseEvent& e) {
   running_ = false;

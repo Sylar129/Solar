@@ -20,16 +20,16 @@ class LayerStack {
   void PopOverlay(Ref<Layer> overlay);
 
   auto begin() { return layers_.begin(); }
-  auto begin() const { return layers_.begin(); }
+  auto begin() const { return layers_.cbegin(); }
 
   auto end() { return layers_.end(); }
-  auto end() const { return layers_.end(); }
+  auto end() const { return layers_.cend(); }
 
   auto rbegin() { return layers_.rbegin(); }
-  auto rbegin() const { return layers_.rbegin(); }
+  auto rbegin() const { return layers_.crbegin(); }
 
   auto rend() { return layers_.rend(); }
-  auto rend() const { return layers_.rend(); }
+  auto rend() const { return layers_.crend(); }
 
  private:
   std::vector<Ref<Layer>> layers_;

@@ -22,7 +22,7 @@ class OrthographicCameraController {
   explicit OrthographicCameraController(float aspect_ratio,
                                         bool rotation = false);
 
-  void OnUpdate(TimeStep ts);
+  void OnUpdate(const TimeStep& ts);
   void OnEvent(Event& e);
 
   void OnResize(float width, float height);

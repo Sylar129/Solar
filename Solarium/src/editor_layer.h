@@ -21,7 +21,7 @@ class EditorLayer : public Layer {
   void OnAttach() override;
   void OnDetech() override;
 
-  void OnUpdate(TimeStep& ts) override;
+  void OnUpdate(const TimeStep& ts) override;
   void OnImGuiRender() override;
   void OnEvent(Event& event) override;
 

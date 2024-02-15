@@ -30,40 +30,26 @@ class SceneCamera : public Camera {
   // TODO(sylar): set to float
   void SetViewportSize(uint32_t width, uint32_t height);
 
-  float GetPerspectiveVerticalFOV() const { return perspective_fov_; }
-  void SetPerspectiveVerticalFOV(float vertical_fov) {
-    perspective_fov_ = vertical_fov;
-    RecalculateProjection();
-  }
-  float GetPerspectiveNearClip() const { return perspective_near_; }
-  void SetPerspectiveNearClip(float near_clip) {
-    perspective_near_ = near_clip;
-    RecalculateProjection();
-  }
-  float GetPerspectiveFarClip() const { return perspective_far_; }
-  void SetPerspectiveFarClip(float far_clip) {
-    perspective_far_ = far_clip;
-    RecalculateProjection();
-  }
+  float GetPerspectiveVerticalFOV() const;
+  void SetPerspectiveVerticalFOV(float vertical_fov);
 
-  float GetOrthographicSize() const { return orthographic_size_; }
-  void SetOrthographicSize(float size) {
-    orthographic_size_ = size;
-    RecalculateProjection();
-  }
-  float GetOrthographicNearClip() const { return orthographic_near_; }
-  void SetOrthographicNearClip(float near_clip) {
-    orthographic_near_ = near_clip;
-    RecalculateProjection();
-  }
-  float GetOrthographicFarClip() const { return orthographic_far_; }
-  void SetOrthographicFarClip(float far_clip) {
-    orthographic_far_ = far_clip;
-    RecalculateProjection();
-  }
+  float GetPerspectiveNearClip() const;
+  void SetPerspectiveNearClip(float near_clip);
 
-  ProjectionType GetProjectionType() const { return projection_type_; }
-  void SetProjectionType(ProjectionType type) { projection_type_ = type; }
+  float GetPerspectiveFarClip() const;
+  void SetPerspectiveFarClip(float far_clip);
+
+  float GetOrthographicSize() const;
+  void SetOrthographicSize(float size);
+
+  float GetOrthographicNearClip() const;
+  void SetOrthographicNearClip(float near_clip);
+
+  float GetOrthographicFarClip() const;
+  void SetOrthographicFarClip(float far_clip);
+
+  ProjectionType GetProjectionType() const;
+  void SetProjectionType(ProjectionType type);
 
  private:
   void RecalculateProjection();

@@ -18,7 +18,7 @@ class ScriptableEntity {
  protected:
   virtual void OnCreate() {}
   virtual void OnDestroy() {}
-  virtual void OnUpdate(TimeStep ts) {}
+  virtual void OnUpdate(const TimeStep& ts) {}
 
  private:
   Entity entity_;
