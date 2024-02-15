@@ -5,6 +5,7 @@
 #include <string>
 
 #include "core/events/event.h"
+#include "core/utils/misc.h"
 
 namespace solar {
 
@@ -37,7 +38,7 @@ class Window {
 
   virtual void* GetNativeWindow() const = 0;
 
-  static Window* Create(const WindowProps& props = WindowProps());
+  static Scope<Window> Create(const WindowProps& props = WindowProps());
 };
 
 }  // namespace solar

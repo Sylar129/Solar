@@ -6,6 +6,7 @@
 #include <string_view>
 
 #include "core/debug/assert.h"
+#include "core/math/size.h"
 #include "core/renderer/camera.h"
 #include "glm/trigonometric.hpp"
 
@@ -27,8 +28,7 @@ class SceneCamera : public Camera {
   void SetOrthoGraphic(float size, float near_clip, float far_clip);
   void SetPerspective(float vertical_fov, float near_clip, float far_clip);
 
-  // TODO(sylar): set to float
-  void SetViewportSize(uint32_t width, uint32_t height);
+  void SetViewportSize(const Size& viewport_size);
 
   float GetPerspectiveVerticalFOV() const;
   void SetPerspectiveVerticalFOV(float vertical_fov);

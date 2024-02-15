@@ -10,6 +10,7 @@
 #include "core/events/key_event.h"
 #include "core/events/mouse_event.h"
 #include "core/renderer/renderer.h"
+#include "core/utils/misc.h"
 #include "platform/opengl/context.h"
 
 namespace solar {
@@ -24,8 +25,9 @@ void GLFWErrorCallback(int error, const char* description) {
 
 }  // namespace
 
-Window* Window::Create(const WindowProps& props) {
-  return new WindowsWindow(props);
+// TODO(sylar): multiplatform
+Scope<Window> Window::Create(const WindowProps& props) {
+  return CreateScope<WindowsWindow>(props);
 }
 
 WindowsWindow::WindowsWindow(const WindowProps& props) {

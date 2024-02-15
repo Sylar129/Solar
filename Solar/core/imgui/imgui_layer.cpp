@@ -68,7 +68,7 @@ void ImGuiLayer::OnAttach() {
   ImGui_ImplOpenGL3_Init("#version 410");
 }
 
-void ImGuiLayer::OnDetech() {
+void ImGuiLayer::OnDetach() {
   SOLAR_PROFILE_FUNCTION();
 
   ImGui_ImplOpenGL3_Shutdown();

@@ -84,16 +84,15 @@ void Scene::OnUpdateEditor(const TimeStep& ts, EditorCamera& camera) {
   Renderer2D::EndScene();
 }
 
-void Scene::OnViewportResize(uint32_t width, uint32_t height) {
-  viewport_width_ = width;
-  viewport_height_ = height;
+void Scene::OnViewportResize(const Size& size) {
+  viewport_size_ = size;
 
   // Resize our non-FixedAspectRatio cameras
   auto view = registry_.view<CameraComponent>();
   for (const auto& entity : view) {
     auto& camera_component = view.get<CameraComponent>(entity);
     if (!camera_component.fixed_aspect_ratio) {
-      camera_component.camera.SetViewportSize(width, height);
+      camera_component.camera.SetViewportSize(size);
     }
   }
 }
@@ -121,7 +120,7 @@ void Scene::OnComponentAdded<TransformComponent>(
 template <>
 void Scene::OnComponentAdded<CameraComponent>(Entity entity,
                                               CameraComponent& component) {
-  component.camera.SetViewportSize(viewport_width_, viewport_height_);
+  component.camera.SetViewportSize(viewport_size_);
 }
 
 template <>

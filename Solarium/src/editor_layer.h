@@ -4,6 +4,7 @@
 
 #include "core/base/layer.h"
 #include "core/events/key_event.h"
+#include "core/math/size.h"
 #include "core/renderer/editor_camera.h"
 #include "core/renderer/framebuffer.h"
 #include "core/renderer/orthographic_camera_controller.h"
@@ -19,7 +20,7 @@ class EditorLayer : public Layer {
   ~EditorLayer() override = default;
 
   void OnAttach() override;
-  void OnDetech() override;
+  void OnDetach() override;
 
   void OnUpdate(const TimeStep& ts) override;
   void OnImGuiRender() override;
@@ -54,7 +55,7 @@ class EditorLayer : public Layer {
   bool viewport_focused_ = false;
   bool viewport_hovered_ = false;
 
-  glm::vec2 viewport_size_ = {0.0f, 0.0f};
+  Size viewport_size_ = {0.0f, 0.0f};
   glm::vec2
       viewport_bounds_[2];  // 0 stands for min bound, 1 stands for max bound
 

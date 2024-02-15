@@ -3,12 +3,8 @@
 #pragma once
 
 #include <string>
-#include <unordered_map>
 
 #include "core/renderer/shader.h"
-
-// TODO(sylar): REMOVE!
-typedef unsigned int GLenum;
 
 namespace solar {
 
@@ -45,10 +41,6 @@ class OpenGLShader : public Shader {
   void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
 
  private:
-  std::string ReadFile(const std::string& filepath);
-  std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);
-  void Compile(const std::unordered_map<GLenum, std::string>& shader_sources);
-
   uint32_t renderer_id_ = 0;
   std::string name_;
 };

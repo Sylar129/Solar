@@ -8,7 +8,7 @@ LayerStack::LayerStack() : layer_insert_index_(0) {}
 
 LayerStack::~LayerStack() {
   for (auto& layer : layers_) {
-    layer->OnDetech();
+    layer->OnDetach();
   }
 }
 
@@ -24,7 +24,7 @@ void LayerStack::PushOverlay(Ref<Layer> overlay) {
 void LayerStack::PopLayer(Ref<Layer> layer) {
   auto it = std::find(layers_.begin(), layers_.end(), layer);
   if (it != layers_.end()) {
-    layer->OnDetech();
+    layer->OnDetach();
     layers_.erase(it);
     layer_insert_index_--;
   }
@@ -33,7 +33,7 @@ void LayerStack::PopLayer(Ref<Layer> layer) {
 void LayerStack::PopOverlay(Ref<Layer> overlay) {
   auto it = std::find(layers_.begin(), layers_.end(), overlay);
   if (it != layers_.end()) {
-    overlay->OnDetech();
+    overlay->OnDetach();
     layers_.erase(it);
   }
 }

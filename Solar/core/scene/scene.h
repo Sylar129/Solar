@@ -5,6 +5,7 @@
 #include <string>
 
 #include "core/base/timestep.h"
+#include "core/math/size.h"
 #include "core/renderer/editor_camera.h"
 #include "entt/entt.hpp"
 
@@ -22,7 +23,7 @@ class Scene {
 
   void OnUpdateRuntime(const TimeStep& ts);
   void OnUpdateEditor(const TimeStep& ts, EditorCamera& camera);
-  void OnViewportResize(uint32_t width, uint32_t height);
+  void OnViewportResize(const Size& size);
 
   Entity GetPrimaryCameraEntity();
 
@@ -31,8 +32,7 @@ class Scene {
   void OnComponentAdded(Entity entity, T& component);
 
   entt::registry registry_;
-  uint32_t viewport_width_ = 0;
-  uint32_t viewport_height_ = 0;
+  Size viewport_size_;
 
   friend class Entity;
   friend class SceneSerializer;

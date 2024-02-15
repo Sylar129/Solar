@@ -2,10 +2,9 @@
 
 #pragma once
 
-#include <utility>
-
 #include "core/base/timestep.h"
 #include "core/events/mouse_event.h"
+#include "core/math/size.h"
 #include "core/renderer/camera.h"
 #include "glm/fwd.hpp"
 
@@ -22,7 +21,7 @@ class EditorCamera : public Camera {
   float GetDistance() const;
   void SetDistance(float distance);
 
-  void SetViewportSize(float width, float height);
+  void SetViewportSize(const Size& viewport_size);
 
   const glm::mat4& GetViewMatrix() const;
   const glm::vec3& GetPosition() const;
@@ -47,7 +46,6 @@ class EditorCamera : public Camera {
 
   glm::vec3 CalculatePosition() const;
 
-  std::pair<float, float> PanSpeed() const;
   float RotationSpeed() const;
   float ZoomSpeed() const;
 
@@ -64,8 +62,7 @@ class EditorCamera : public Camera {
   float distance_ = 10.0f;
   float pitch_ = 0.0f;
   float yaw_ = 0.0f;
-  float viewport_width_ = 1280;
-  float viewport_height_ = 720;
+  Size viewport_size_;
 };
 
 }  // namespace solar

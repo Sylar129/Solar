@@ -18,8 +18,7 @@ Application::Application(const std::string& name)
   SOLAR_CORE_ASSERT(!instance_, "Application already exists!");
   instance_ = this;
 
-  // TODO(sylar): simplify
-  window_ = Scope<Window>(Window::Create(WindowProps(name)));
+  window_ = Window::Create(WindowProps(name));
   window_->SetEventCallback([this](Event& e) { OnEvent(e); });
 
   Renderer::Init();
