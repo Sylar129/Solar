@@ -3,12 +3,11 @@
 #include "platform/opengl/context.h"
 
 // clang-format off
+#include "core/debug/assert.h"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 // clang-format on
 
-#include "core/base/log.h"
-#include "core/base/sundry.h"
 #include "core/debug/instrumentor.h"
 
 namespace solar {

@@ -5,8 +5,7 @@
 #include <array>
 #include <string_view>
 
-#include "core/base/log.h"
-#include "core/base/sundry.h"
+#include "core/debug/assert.h"
 #include "core/renderer/camera.h"
 #include "glm/trigonometric.hpp"
 

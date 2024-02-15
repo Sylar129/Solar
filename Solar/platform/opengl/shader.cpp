@@ -4,6 +4,7 @@
 
 #include <vector>
 
+#include "core/debug/assert.h"
 #include "core/debug/instrumentor.h"
 #include "glad/glad.h"
 #include "glm/gtc/type_ptr.hpp"

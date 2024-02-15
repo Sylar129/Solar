@@ -7,6 +7,7 @@
 #include "GLFW/glfw3.h"
 #include "core/base/window.h"
 #include "core/renderer/graphics_context.h"
+#include "core/utils/misc.h"
 
 namespace solar {
 
