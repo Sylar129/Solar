@@ -18,17 +18,15 @@ class WindowsWindow : public Window {
 
   void OnUpdate() override;
 
-  inline uint32_t GetWidth() const override { return data_.width; }
-  inline uint32_t GetHeight() const override { return data_.height; }
+  uint32_t GetWidth() const override;
+  uint32_t GetHeight() const override;
 
   // Windows attributes
-  inline void SetEventCallback(const EventCallbackFn& callback) override {
-    data_.event_callback = callback;
-  }
+  void SetEventCallback(const EventCallbackFn& callback) override;
   void SetVSync(bool enabled) override;
   bool IsVSync() const override;
 
-  inline void* GetNativeWindow() const override { return window_; }
+  void* GetNativeWindow() const override;
 
  private:
   virtual void Init(const WindowProps& props);
