@@ -16,7 +16,7 @@ class OpenGLFramebuffer : public Framebuffer {
   void Bind() override;
   void Unbind() override;
 
-  void Resize(uint32_t width, uint32_t height) override;
+  void Resize(float width, float height) override;
   int ReadPixel(uint32_t attachment_index, int x, int y) override;
 
   void ClearAttachment(uint32_t attachment_index, int value) override;

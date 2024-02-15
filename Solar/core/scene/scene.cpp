@@ -84,7 +84,7 @@ void Scene::OnUpdateEditor(const TimeStep& ts, EditorCamera& camera) {
   Renderer2D::EndScene();
 }
 
-void Scene::OnViewportResize(uint32_t width, uint32_t height) {
+void Scene::OnViewportResize(float width, float height) {
   viewport_width_ = width;
   viewport_height_ = height;
 

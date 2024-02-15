@@ -96,15 +96,14 @@ void EditorLayer::OnUpdate(const TimeStep& ts) {
 
   // Resize
   if (FramebufferSpecification spec = framebuffer_->GetSpecification();
-      viewport_size_.x > 0.0f &&
-      viewport_size_.y > 0.0f  // zero sized framebuffer is invalid
+      viewport_size_.x > 0 &&
+      viewport_size_.y > 0  // zero sized framebuffer is invalid
       && (spec.width != viewport_size_.x || spec.height != viewport_size_.y)) {
-    framebuffer_->Resize((uint32_t)viewport_size_.x,
-                         (uint32_t)viewport_size_.y);
+    framebuffer_->Resize(viewport_size_.x,
+                         viewport_size_.y);
     camera_controller_.OnResize(viewport_size_.x, viewport_size_.y);
     editor_camera_.SetViewportSize(viewport_size_.x, viewport_size_.y);
-    active_scene_->OnViewportResize((uint32_t)viewport_size_.x,
-                                    (uint32_t)viewport_size_.y);
+    active_scene_->OnViewportResize(viewport_size_.x, viewport_size_.y);
   }
 
   if (viewport_focused_) {

@@ -22,7 +22,7 @@ class Scene {
 
   void OnUpdateRuntime(const TimeStep& ts);
   void OnUpdateEditor(const TimeStep& ts, EditorCamera& camera);
-  void OnViewportResize(uint32_t width, uint32_t height);
+  void OnViewportResize(float width, float height);
 
   Entity GetPrimaryCameraEntity();
 
@@ -31,8 +31,8 @@ class Scene {
   void OnComponentAdded(Entity entity, T& component);
 
   entt::registry registry_;
-  uint32_t viewport_width_ = 0;
-  uint32_t viewport_height_ = 0;
+  float viewport_width_ = 0;
+  float viewport_height_ = 0;
 
   friend class Entity;
   friend class SceneSerializer;

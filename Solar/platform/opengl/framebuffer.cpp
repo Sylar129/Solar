@@ -9,7 +9,7 @@
 namespace solar {
 
 namespace {
-constexpr uint32_t kMaxFramebufferSize = 8192;
+constexpr float kMaxFramebufferSize = 8192;
 
 constexpr GLenum TextureTarget(bool multisampled) {
   return multisampled ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D;
@@ -46,8 +46,7 @@ void AttachColorTexture(uint32_t id, int samples, GLenum internal_format,
 }
 
 void AttachDepthTexture(uint32_t id, int samples, GLenum format,
-                        GLenum attachment_type, uint32_t width,
-                        uint32_t height) {
+                        GLenum attachment_type, float width, float height) {
   bool multisampled = samples > 1;
   if (multisampled) {
     glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, format, width,
@@ -121,12 +120,13 @@ OpenGLFramebuffer::~OpenGLFramebuffer() {
 
 void OpenGLFramebuffer::Bind() {
   glBindFramebuffer(GL_FRAMEBUFFER, renderer_id_);
-  glViewport(0, 0, specification_.width, specification_.height);
+  glViewport(0, 0, static_cast<GLsizei>(specification_.width),
+             static_cast<GLsizei>(specification_.height));
 }
 
 void OpenGLFramebuffer::Unbind() { glBindFramebuffer(GL_FRAMEBUFFER, 0); }
 
-void OpenGLFramebuffer::Resize(uint32_t width, uint32_t height) {
+void OpenGLFramebuffer::Resize(float width, float height) {
   if (width == 0 || height == 0 || width > kMaxFramebufferSize ||
       height > kMaxFramebufferSize) {
     SOLAR_CORE_WARN("Attempted to resize framebuffer to {0}, {1}", width,

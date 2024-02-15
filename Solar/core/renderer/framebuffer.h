@@ -41,8 +41,8 @@ struct FramebufferAttachmentSpecification {
 };
 
 struct FramebufferSpecification {
-  uint32_t width;
-  uint32_t height;
+  float width;
+  float height;
   FramebufferAttachmentSpecification attachments;
   uint32_t samples = 1;
 
@@ -56,7 +56,7 @@ class Framebuffer {
   virtual void Bind() = 0;
   virtual void Unbind() = 0;
 
-  virtual void Resize(uint32_t width, uint32_t height) = 0;
+  virtual void Resize(float width, float height) = 0;
   virtual int ReadPixel(uint32_t attachment_index, int x, int y) = 0;
 
   virtual void ClearAttachment(uint32_t attachment_index, int value) = 0;
