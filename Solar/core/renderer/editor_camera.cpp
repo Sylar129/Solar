@@ -3,14 +3,26 @@
 #include "core/renderer/editor_camera.h"
 
 #include <algorithm>
-#include <utility>
 
 #include "core/base/input.h"
 #include "core/base/key_codes.h"
 #include "core/base/mouse_codes.h"
+#include "core/math/size.h"
 #include "glm/gtx/quaternion.hpp"
 
 namespace solar {
+
+namespace {
+constexpr glm::vec2 CalcPanSpeed(const Size& viewport_size) {
+  float x = std::min(viewport_size.width / 1000.0f, 2.4f);  // max = 2.4f
+  float x_factor = 0.0366f * (x * x) - 0.1778f * x + 0.3021f;
+
+  float y = std::min(viewport_size.height / 1000.0f, 2.4f);  // max = 2.4f
+  float y_factor = 0.0366f * (y * y) - 0.1778f * y + 0.3021f;
+
+  return {x_factor, y_factor};
+}
+}  // namespace
 
 EditorCamera::EditorCamera(float fov, float aspect_ratio, float near_clip,
                            float far_clip)
@@ -51,8 +63,7 @@ float EditorCamera::GetDistance() const { return distance_; }
 void EditorCamera::SetDistance(float distance) { distance_ = distance; }
 
 void EditorCamera::SetViewportSize(float width, float height) {
-  viewport_width_ = width;
-  viewport_height_ = height;
+  viewport_size_ = {width, height};
   UpdateProjection();
 }
 
@@ -85,7 +96,7 @@ glm::quat EditorCamera::CalcOrientation() const {
 }
 
 void EditorCamera::UpdateProjection() {
-  aspect_ratio_ = viewport_width_ / viewport_height_;
+  aspect_ratio_ = viewport_size_.width / viewport_size_.height;
   projection_ = glm::perspective(glm::radians(fov_), aspect_ratio_, near_clip_,
                                  far_clip_);
 }
@@ -108,9 +119,9 @@ bool EditorCamera::OnMouseScroll(MouseScrolledEvent& e) {
 }
 
 void EditorCamera::MousePan(const glm::vec2& delta) {
-  auto [xSpeed, ySpeed] = PanSpeed();
-  focal_point_ += -CalcRightDirection() * delta.x * xSpeed * distance_;
-  focal_point_ += CalcUpDirection() * delta.y * ySpeed * distance_;
+  auto speed = CalcPanSpeed(viewport_size_);
+  focal_point_ += -CalcRightDirection() * delta.x * speed.x * distance_;
+  focal_point_ += CalcUpDirection() * delta.y * speed.y * distance_;
 }
 
 void EditorCamera::MouseRotate(const glm::vec2& delta) {
@@ -129,16 +140,6 @@ void EditorCamera::MouseZoom(float delta) {
 
 glm::vec3 EditorCamera::CalculatePosition() const {
   return focal_point_ - CalcForwardDirection() * distance_;
-}
-
-std::pair<float, float> EditorCamera::PanSpeed() const {
-  float x = std::min(viewport_width_ / 1000.0f, 2.4f);  // max = 2.4f
-  float x_factor = 0.0366f * (x * x) - 0.1778f * x + 0.3021f;
-
-  float y = std::min(viewport_height_ / 1000.0f, 2.4f);  // max = 2.4f
-  float y_factor = 0.0366f * (y * y) - 0.1778f * y + 0.3021f;
-
-  return {x_factor, y_factor};
 }
 
 float EditorCamera::RotationSpeed() const { return 0.8f; }

@@ -96,14 +96,14 @@ void EditorLayer::OnUpdate(const TimeStep& ts) {
 
   // Resize
   if (FramebufferSpecification spec = framebuffer_->GetSpecification();
-      viewport_size_.x > 0 &&
-      viewport_size_.y > 0  // zero sized framebuffer is invalid
-      && (spec.width != viewport_size_.x || spec.height != viewport_size_.y)) {
-    framebuffer_->Resize(viewport_size_.x,
-                         viewport_size_.y);
-    camera_controller_.OnResize(viewport_size_.x, viewport_size_.y);
-    editor_camera_.SetViewportSize(viewport_size_.x, viewport_size_.y);
-    active_scene_->OnViewportResize(viewport_size_.x, viewport_size_.y);
+      viewport_size_.width > 0 &&
+      viewport_size_.height > 0  // zero sized framebuffer is invalid
+      && (spec.width != viewport_size_.width ||
+          spec.height != viewport_size_.height)) {
+    framebuffer_->Resize(viewport_size_.width, viewport_size_.height);
+    camera_controller_.OnResize(viewport_size_.width, viewport_size_.height);
+    editor_camera_.SetViewportSize(viewport_size_.width, viewport_size_.height);
+    active_scene_->OnViewportResize(viewport_size_);
   }
 
   if (viewport_focused_) {
@@ -279,7 +279,8 @@ void EditorLayer::OnImGuiRender() {
   viewport_size_ = {viewport_panel_size.x, viewport_panel_size.y};
   uint32_t texture_id = framebuffer_->GetColorAttachmentRendererID(0);
   // NOLINTNEXTLINE
-  ImGui::Image((void*)texture_id, ImVec2(viewport_size_.x, viewport_size_.y),
+  ImGui::Image((void*)texture_id,
+               ImVec2(viewport_size_.width, viewport_size_.height),
                ImVec2{0, 1}, ImVec2{1, 0});
 
   auto window_size = ImGui::GetWindowSize();
@@ -423,8 +424,7 @@ bool EditorLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e) {
 
 void EditorLayer::NewScene() {
   active_scene_ = CreateRef<Scene>();
-  active_scene_->OnViewportResize((uint32_t)viewport_size_.x,
-                                  (uint32_t)viewport_size_.y);
+  active_scene_->OnViewportResize(viewport_size_);
   scene_hierarchy_panel_.SetContext(active_scene_);
 }
 
@@ -433,8 +433,7 @@ void EditorLayer::OpenScene() {
       FileDialogs::OpenFile("Solar Scene(*.solar)\0*.solar\0");
   if (!filepath.empty()) {
     active_scene_ = CreateRef<Scene>();
-    active_scene_->OnViewportResize((uint32_t)viewport_size_.x,
-                                    (uint32_t)viewport_size_.y);
+    active_scene_->OnViewportResize(viewport_size_);
     scene_hierarchy_panel_.SetContext(active_scene_);
 
     SceneSerializer serializer(active_scene_);

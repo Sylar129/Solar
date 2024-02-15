@@ -25,8 +25,8 @@ void SceneCamera::SetPerspective(float vertical_fov, float near_clip,
   RecalculateProjection();
 }
 
-void SceneCamera::SetViewportSize(float width, float height) {
-  aspect_ratio_ = width / height;
+void SceneCamera::SetViewportSize(const Size& size) {
+  aspect_ratio_ = size.width / size.height;
   RecalculateProjection();
 }
 
