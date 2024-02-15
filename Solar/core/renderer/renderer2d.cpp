@@ -13,14 +13,16 @@ namespace solar {
 
 namespace {
 constexpr int kQuadVertexCount = 4;
+constexpr int kQuadIndexCount = 6;
 
 constexpr uint32_t kMaxQuads = 10000;
-constexpr uint32_t kMaxVertices = kMaxQuads * 4;
-constexpr uint32_t kMaxIndices = kMaxQuads * 6;
+constexpr uint32_t kMaxVertices = kMaxQuads * kQuadVertexCount;
+constexpr uint32_t kMaxIndices = kMaxQuads * kQuadIndexCount;
 constexpr uint32_t kMaxTextureSlots = 32;  // TODO(sylar): Render capability
-constexpr uint32_t kWhiteTextureData = 0xffffffff;
 
 constexpr uint32_t kTextureIndex = 0;  // White texture
+constexpr uint32_t kWhiteTextureData = 0xffffffff;
+
 constexpr float kTilingFactor = 1;
 constexpr glm::vec4 kDefaultColor = {1, 1, 1, 1};
 constexpr glm::vec2 kTextureCoords[] = {{0, 0}, {1, 0}, {1, 1}, {0, 1}};
@@ -85,7 +87,7 @@ void Renderer2D::Init() {
   uint32_t* quad_indices = new uint32_t[kMaxIndices];
 
   uint32_t offset = 0;
-  for (auto i{0}; i < kMaxIndices; i += 6) {
+  for (auto i{0}; i < kMaxIndices; i += kQuadIndexCount) {
     quad_indices[i + 0] = offset + 0;
     quad_indices[i + 1] = offset + 1;
     quad_indices[i + 2] = offset + 2;
@@ -94,7 +96,7 @@ void Renderer2D::Init() {
     quad_indices[i + 4] = offset + 3;
     quad_indices[i + 5] = offset + 0;
 
-    offset += 4;
+    offset += kQuadVertexCount;
   }
   Ref<IndexBuffer> quad_ib = IndexBuffer::Create(quad_indices, kMaxIndices);
   s_data.quad_vertex_array->SetIndexBuffer(quad_ib);
@@ -173,7 +175,7 @@ void Renderer2D::Flush() {
                                      s_data.DataSize());
 
   // Bind textures
-  for (auto i{0u}; i < s_data.texture_slot_index; ++i) {
+  for (auto i{0U}; i < s_data.texture_slot_index; ++i) {
     s_data.texture_slots[i]->Bind(i);
   }
 
@@ -236,7 +238,7 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
 
   uint32_t texture_index = 0;
 
-  for (auto i{1u}; i < s_data.texture_slot_index; i++) {
+  for (auto i{1U}; i < s_data.texture_slot_index; i++) {
     if (*s_data.texture_slots[i] == *texture) {
       texture_index = i;
       break;
@@ -266,7 +268,7 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
     s_data.quad_vertex_buffer_ptr++;
   }
 
-  s_data.quad_index_count += 6;
+  s_data.quad_index_count += kQuadIndexCount;
 
   s_data.stats.quad_count++;
 }
@@ -290,7 +292,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color,
     s_data.quad_vertex_buffer_ptr++;
   }
 
-  s_data.quad_index_count += 6;
+  s_data.quad_index_count += kQuadIndexCount;
 
   s_data.stats.quad_count++;
 }
@@ -306,7 +308,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform,
 
   uint32_t texture_index;
 
-  for (auto i{1u}; i < s_data.texture_slot_index; i++) {
+  for (auto i{1U}; i < s_data.texture_slot_index; i++) {
     if (*s_data.texture_slots[i] == *texture) {
       texture_index = i;
       break;
@@ -334,7 +336,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform,
     s_data.quad_vertex_buffer_ptr++;
   }
 
-  s_data.quad_index_count += 6;
+  s_data.quad_index_count += kQuadIndexCount;
 
   s_data.stats.quad_count++;
 }
@@ -369,7 +371,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
     s_data.quad_vertex_buffer_ptr++;
   }
 
-  s_data.quad_index_count += 6;
+  s_data.quad_index_count += kQuadIndexCount;
 
   s_data.stats.quad_count++;
 }
@@ -396,7 +398,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
 
   uint32_t texture_index = 0;
 
-  for (auto i{1u}; i < s_data.texture_slot_index; i++) {
+  for (auto i{1U}; i < s_data.texture_slot_index; i++) {
     if (*s_data.texture_slots[i] == *texture) {
       texture_index = i;
       break;
@@ -428,7 +430,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
     s_data.quad_vertex_buffer_ptr++;
   }
 
-  s_data.quad_index_count += 6;
+  s_data.quad_index_count += kQuadIndexCount;
 
   s_data.stats.quad_count++;
 }
@@ -458,7 +460,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
 
   uint32_t texture_index = 0;
 
-  for (auto i{1u}; i < s_data.texture_slot_index; i++) {
+  for (auto i{1U}; i < s_data.texture_slot_index; i++) {
     if (*s_data.texture_slots[i] == *texture) {
       texture_index = i;
       break;
@@ -490,7 +492,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
     s_data.quad_vertex_buffer_ptr++;
   }
 
-  s_data.quad_index_count += 6;
+  s_data.quad_index_count += kQuadIndexCount;
 
   s_data.stats.quad_count++;
 }
