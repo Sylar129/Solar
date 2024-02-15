@@ -62,8 +62,7 @@ void Scene::OnUpdateRuntime(const TimeStep& ts) {
           group.get<TransformComponent, SpriteRendererComponent>(entity);
 
       // Renderer2D::DrawQuad(transform.GetTranform(), sprite.Color);
-      Renderer2D::DrawSprite(transform.GetTranform(), sprite,
-                             static_cast<int>(entity));
+      Renderer2D::DrawSprite(transform, sprite, static_cast<int>(entity));
     }
     Renderer2D::EndScene();
   }
@@ -78,8 +77,7 @@ void Scene::OnUpdateEditor(const TimeStep& ts, EditorCamera& camera) {
         group.get<TransformComponent, SpriteRendererComponent>(entity);
 
     // Renderer2D::DrawQuad(transform.GetTranform(), sprite.Color);
-    Renderer2D::DrawSprite(transform.GetTranform(), sprite,
-                           static_cast<int>(entity));
+    Renderer2D::DrawSprite(transform, sprite, static_cast<int>(entity));
   }
   Renderer2D::EndScene();
 }

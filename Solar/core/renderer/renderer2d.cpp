@@ -213,6 +213,18 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
   DrawQuad(transform, color);
 }
 
+void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color,
+                          int entity_id) {
+  SOLAR_PROFILE_FUNCTION();
+
+  if (s_data.quad_index_count >= kMaxIndices) {
+    NextBatch();
+  }
+
+  s_data.Setup(transform, color, kTextureCoords, kTextureIndex, kTilingFactor,
+               entity_id);
+}
+
 void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
                           const Ref<Texture2D>& texture, float tiling_factor,
                           const glm::vec4& color) {
@@ -224,7 +236,50 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
   DrawQuad(transform, texture, tiling_factor, color);
 }
 
+void Renderer2D::DrawQuad(const glm::mat4& transform,
+                          const Ref<Texture2D>& texture, float tiling_factor,
+                          const glm::vec4& color, int entity_id) {
+  SOLAR_PROFILE_FUNCTION();
+
+  if (s_data.quad_index_count >= kMaxIndices) {
+    NextBatch();
+  }
+
+  uint32_t texture_index = 0;
+
+  for (auto i{1U}; i < s_data.texture_slot_index; i++) {
+    if (*s_data.texture_slots[i] == *texture) {
+      texture_index = i;
+      break;
+    }
+  }
+
+  if (texture_index == 0) {
+    if (s_data.texture_slot_index >= kMaxTextureSlots) {
+      NextBatch();
+    }
+
+    texture_index = s_data.texture_slot_index;
+    s_data.texture_slots[s_data.texture_slot_index] = texture;
+    s_data.texture_slot_index++;
+  }
+
+  s_data.Setup(transform, color, kTextureCoords, texture_index, tiling_factor,
+               entity_id);
+}
+
 void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
+                          const Ref<SubTexture2D>& sub_texture,
+                          float tiling_factor, const glm::vec4& color) {
+  SOLAR_PROFILE_FUNCTION();
+
+  glm::mat4 transform = glm::translate(glm::mat4(1), position) *
+                        glm::scale(glm::mat4(1), {size.x, size.y, 1});
+
+  DrawQuad(transform, sub_texture, tiling_factor, color);
+}
+
+void Renderer2D::DrawQuad(const glm::mat4& transform,
                           const Ref<SubTexture2D>& sub_texture,
                           float tiling_factor, const glm::vec4& color) {
   SOLAR_PROFILE_FUNCTION();
@@ -255,55 +310,8 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
     s_data.texture_slot_index++;
   }
 
-  glm::mat4 transform = glm::translate(glm::mat4(1), position) *
-                        glm::scale(glm::mat4(1), {size.x, size.y, 1});
-
   s_data.Setup(transform, color, texture_coords, texture_index, tiling_factor,
                -1);
-}
-
-void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color,
-                          int entity_id) {
-  SOLAR_PROFILE_FUNCTION();
-
-  if (s_data.quad_index_count >= kMaxIndices) {
-    NextBatch();
-  }
-
-  s_data.Setup(transform, color, kTextureCoords, kTextureIndex, kTilingFactor,
-               entity_id);
-}
-
-void Renderer2D::DrawQuad(const glm::mat4& transform,
-                          const Ref<Texture2D>& texture, float tiling_factor,
-                          const glm::vec4& color, int entity_id) {
-  SOLAR_PROFILE_FUNCTION();
-
-  if (s_data.quad_index_count >= kMaxIndices) {
-    NextBatch();
-  }
-
-  uint32_t texture_index;
-
-  for (auto i{1U}; i < s_data.texture_slot_index; i++) {
-    if (*s_data.texture_slots[i] == *texture) {
-      texture_index = i;
-      break;
-    }
-  }
-
-  if (texture_index == 0) {
-    if (s_data.texture_slot_index >= kMaxTextureSlots) {
-      NextBatch();
-    }
-
-    texture_index = s_data.texture_slot_index;
-    s_data.texture_slots[s_data.texture_slot_index] = texture;
-    s_data.texture_slot_index++;
-  }
-
-  s_data.Setup(transform, color, kTextureCoords, texture_index, tiling_factor,
-               entity_id);
 }
 
 void Renderer2D::DrawRotateQuad(const glm::vec3& position,
@@ -320,8 +328,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
       glm::rotate(glm::mat4(1), glm::radians(rotation), {0, 0, 1}) *
       glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
-  s_data.Setup(transform, color, kTextureCoords, kTextureIndex, kTilingFactor,
-               -1);
+  DrawQuad(transform, color);
 }
 
 void Renderer2D::DrawRotateQuad(const glm::vec3& position,
@@ -330,36 +337,12 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                 float tiling_factor, const glm::vec4& color) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= kMaxIndices) {
-    NextBatch();
-  }
-
-  uint32_t texture_index = 0;
-
-  for (auto i{1U}; i < s_data.texture_slot_index; i++) {
-    if (*s_data.texture_slots[i] == *texture) {
-      texture_index = i;
-      break;
-    }
-  }
-
-  if (texture_index == 0) {
-    if (s_data.texture_slot_index >= kMaxTextureSlots) {
-      NextBatch();
-    }
-
-    texture_index = s_data.texture_slot_index;
-    s_data.texture_slots[s_data.texture_slot_index] = texture;
-    s_data.texture_slot_index++;
-  }
-
   glm::mat4 transform =
       glm::translate(glm::mat4(1), position) *
       glm::rotate(glm::mat4(1), glm::radians(rotation), {0, 0, 1}) *
       glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
-  s_data.Setup(transform, color, kTextureCoords, texture_index, tiling_factor,
-               -1);
+  DrawQuad(transform, texture, tiling_factor, color);
 }
 
 void Renderer2D::DrawRotateQuad(const glm::vec3& position,
@@ -368,44 +351,17 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                 float tiling_factor, const glm::vec4& color) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= kMaxIndices) {
-    NextBatch();
-  }
-
-  const auto& texture_coords = sub_texture->GetTexCoords();
-  Ref<Texture2D> texture = sub_texture->GetTexture();
-
-  uint32_t texture_index = 0;
-
-  for (auto i{1U}; i < s_data.texture_slot_index; i++) {
-    if (*s_data.texture_slots[i] == *texture) {
-      texture_index = i;
-      break;
-    }
-  }
-
-  if (texture_index == 0) {
-    if (s_data.texture_slot_index >= kMaxTextureSlots) {
-      NextBatch();
-    }
-
-    texture_index = s_data.texture_slot_index;
-    s_data.texture_slots[s_data.texture_slot_index] = texture;
-    s_data.texture_slot_index++;
-  }
-
   glm::mat4 transform =
       glm::translate(glm::mat4(1), position) *
       glm::rotate(glm::mat4(1), glm::radians(rotation), {0, 0, 1}) *
       glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
-  s_data.Setup(transform, color, texture_coords, texture_index, tiling_factor,
-               -1);
+  DrawQuad(transform, sub_texture, tiling_factor, color);
 }
 
-void Renderer2D::DrawSprite(const glm::mat4& transform,
+void Renderer2D::DrawSprite(const TransformComponent& transform,
                             const SpriteRendererComponent& src, int entity_id) {
-  DrawQuad(transform, src.color, entity_id);
+  DrawQuad(transform.GetTranform(), src.color, entity_id);
 }
 
 void Renderer2D::ResetStats() {

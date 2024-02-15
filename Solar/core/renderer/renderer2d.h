@@ -29,21 +29,22 @@ class Renderer2D {
   // Primitives
   static void DrawQuad(const glm::vec3& position, const glm::vec2& size,
                        const glm::vec4& color);
-
+  static void DrawQuad(const glm::mat4& transform, const glm::vec4& color,
+                       int entity_id = -1);
+  
   static void DrawQuad(const glm::vec3& position, const glm::vec2& size,
                        const Ref<Texture2D>& texture, float tiling_factor,
                        const glm::vec4& color);
+  static void DrawQuad(const glm::mat4& transform,
+                       const Ref<Texture2D>& texture, float tiling_factor,
+                       const glm::vec4& color, int entity_id = -1);
 
   static void DrawQuad(const glm::vec3& position, const glm::vec2& size,
                        const Ref<SubTexture2D>& sub_texture,
                        float tiling_factor, const glm::vec4& color);
-
-  static void DrawQuad(const glm::mat4& transform, const glm::vec4& color,
-                       int entity_id = -1);
-
   static void DrawQuad(const glm::mat4& transform,
-                       const Ref<Texture2D>& texture, float tiling_factor,
-                       const glm::vec4& color, int entity_id = -1);
+                       const Ref<SubTexture2D>& sub_texture,
+                       float tiling_factor, const glm::vec4& color);
 
   // Rotation is in radians
   static void DrawRotateQuad(const glm::vec3& position, const glm::vec2& size,
@@ -58,7 +59,7 @@ class Renderer2D {
                              const Ref<SubTexture2D>& sub_texture,
                              float tiling_factor, const glm::vec4& color);
 
-  static void DrawSprite(const glm::mat4& transform,
+  static void DrawSprite(const TransformComponent& transform,
                          const SpriteRendererComponent& src, int entity_id);
 
   // Stats
