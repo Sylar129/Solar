@@ -79,7 +79,7 @@ OpenGLTexture2D::~OpenGLTexture2D() {
   glDeleteTextures(1, &renderer_id_);
 }
 
-void OpenGLTexture2D::SetData(void* data, uint32_t size) {
+void OpenGLTexture2D::SetData(const void* data, uint32_t size) {
   SOLAR_PROFILE_FUNCTION();
 
   uint32_t bytes_per_pixel = data_format_ == GL_RGBA ? 4 : 3;
