@@ -14,22 +14,21 @@ namespace solar {
 
 class Application {
  public:
-  explicit Application(const std::string& name = "Solar App");
+  explicit Application(const std::string& name);
   virtual ~Application();
 
   void Run();
+  void Close();
+
   void OnEvent(Event& e);
 
   void PushLayer(Ref<Layer> layer);
   void PushOverlay(Ref<Layer> layer);
 
-  inline Window& GetWindow() { return *window_; }
+  Window& GetWindow();
+  Ref<ImGuiLayer> GetImGuiLayer();
 
-  void Close();
-
-  Ref<ImGuiLayer> GetImGuiLayer() { return imgui_layer_; }
-
-  inline static Application& Get() { return *instance_; }
+  static Application& Get();
 
  private:
   bool OnWindowClose(WindowCloseEvent& e);

@@ -10,6 +10,7 @@
 
 namespace solar {
 
+// TODO(syalr): remove static
 class Input {
  public:
   static bool IsKeyPressed(KeyCode keycode);
