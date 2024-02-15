@@ -11,6 +11,20 @@
 
 namespace solar {
 
+namespace {
+constexpr int kQuadVertexCount = 4;
+
+constexpr uint32_t kMaxQuads = 10000;
+constexpr uint32_t kMaxVertices = kMaxQuads * 4;
+constexpr uint32_t kMaxIndices = kMaxQuads * 6;
+constexpr uint32_t kMaxTextureSlots = 32;  // TODO(sylar): Render capability
+
+constexpr uint32_t kTextureIndex = 0;  // White texture
+constexpr float kTilingFactor = 1;
+constexpr glm::vec4 kDefaultColor = {1, 1, 1, 1};
+constexpr glm::vec2 kTextureCoords[] = {{0, 0}, {1, 0}, {1, 1}, {0, 1}};
+}  // namespace
+
 struct QuadVertex {
   glm::vec3 position;
   glm::vec4 color;
@@ -23,12 +37,6 @@ struct QuadVertex {
 };
 
 struct Renderer2DData {
-  static constexpr uint32_t kMaxQuads = 10000;
-  static constexpr uint32_t kMaxVertices = kMaxQuads * 4;
-  static constexpr uint32_t kMaxIndices = kMaxQuads * 6;
-  static constexpr uint32_t kMaxTextureSlots =
-      32;  // TODO(sylar): Render capability
-
   Ref<VertexArray> quad_vertex_array;
   Ref<VertexBuffer> quad_vertex_buffer;
   Ref<Shader> texture_shader;
@@ -41,7 +49,7 @@ struct Renderer2DData {
   std::array<Ref<Texture2D>, kMaxTextureSlots> texture_slots;
   uint32_t texture_slot_index = 1;  // 0 = white texture
 
-  glm::vec4 quad_vertex_positions[4];
+  glm::vec4 quad_vertex_positions[kQuadVertexCount];
 
   Renderer2D::Statistics stats;
 
@@ -61,7 +69,7 @@ void Renderer2D::Init() {
   s_data.quad_vertex_array = VertexArray::Create();
 
   s_data.quad_vertex_buffer =
-      VertexBuffer::Create(Renderer2DData::kMaxVertices * sizeof(QuadVertex));
+      VertexBuffer::Create(kMaxVertices * sizeof(QuadVertex));
   s_data.quad_vertex_buffer->SetLayout(
       {{ShaderDataType::kFloat3, "a_Position"},
        {ShaderDataType::kFloat4, "a_Color"},
@@ -71,12 +79,12 @@ void Renderer2D::Init() {
        {ShaderDataType::kInt, "a_EntityID"}});
   s_data.quad_vertex_array->AddVertexBuffer(s_data.quad_vertex_buffer);
 
-  s_data.quad_vertex_buffer_base = new QuadVertex[Renderer2DData::kMaxVertices];
+  s_data.quad_vertex_buffer_base = new QuadVertex[kMaxVertices];
 
-  uint32_t* quad_indices = new uint32_t[Renderer2DData::kMaxIndices];
+  uint32_t* quad_indices = new uint32_t[kMaxIndices];
 
   uint32_t offset = 0;
-  for (auto i{0}; i < Renderer2DData::kMaxIndices; i += 6) {
+  for (auto i{0}; i < kMaxIndices; i += 6) {
     quad_indices[i + 0] = offset + 0;
     quad_indices[i + 1] = offset + 1;
     quad_indices[i + 2] = offset + 2;
@@ -87,8 +95,7 @@ void Renderer2D::Init() {
 
     offset += 4;
   }
-  Ref<IndexBuffer> quad_ib =
-      IndexBuffer::Create(quad_indices, Renderer2DData::kMaxIndices);
+  Ref<IndexBuffer> quad_ib = IndexBuffer::Create(quad_indices, kMaxIndices);
   s_data.quad_vertex_array->SetIndexBuffer(quad_ib);
   delete[] quad_indices;
 
@@ -97,15 +104,14 @@ void Renderer2D::Init() {
   s_data.white_texture->SetData(&white_texture_data,
                                 sizeof(white_texture_data));
 
-  int32_t samplers[Renderer2DData::kMaxTextureSlots];
-  for (auto i{0}; i < Renderer2DData::kMaxTextureSlots; ++i) {
+  int32_t samplers[kMaxTextureSlots];
+  for (auto i{0}; i < kMaxTextureSlots; ++i) {
     samplers[i] = i;
   }
 
   s_data.texture_shader = Shader::Create("assets/shaders/Texture.glsl");
   s_data.texture_shader->Bind();
-  s_data.texture_shader->SetIntArray("u_Texture", samplers,
-                                     Renderer2DData::kMaxTextureSlots);
+  s_data.texture_shader->SetIntArray("u_Texture", samplers, kMaxTextureSlots);
 
   s_data.texture_slots[0] = s_data.white_texture;
 
@@ -222,12 +228,10 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
                           float tiling_factor, const glm::vec4& tint_color) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
+  if (s_data.quad_index_count >= kMaxIndices) {
     NextBatch();
   }
 
-  constexpr size_t kQuadVertexCount = 4;
-  constexpr glm::vec4 kDefaultColor = {1, 1, 1, 1};
   const glm::vec2* texture_coords = sub_texture->GetTexCoords();
   Ref<Texture2D> texture = sub_texture->GetTexture();
 
@@ -241,7 +245,7 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
   }
 
   if (texture_index == 0) {
-    if (s_data.texture_slot_index >= Renderer2DData::kMaxTextureSlots) {
+    if (s_data.texture_slot_index >= kMaxTextureSlots) {
       NextBatch();
     }
 
@@ -253,7 +257,7 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
   glm::mat4 transform = glm::translate(glm::mat4(1), position) *
                         glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
-  for (auto i{0}; i < kQuadVertexCount; ++i) {
+  for (int i = 0; i < kQuadVertexCount; ++i) {
     s_data.quad_vertex_buffer_ptr->position =
         transform * s_data.quad_vertex_positions[i];
     s_data.quad_vertex_buffer_ptr->color = kDefaultColor;
@@ -272,16 +276,11 @@ void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color,
                           int entity_id) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
+  if (s_data.quad_index_count >= kMaxIndices) {
     NextBatch();
   }
 
-  constexpr uint32_t kTextureIndex = 0;  // White texture
-  constexpr float kTilingFactor = 1;
-  constexpr size_t kQuadVertexCount = 4;
-  constexpr glm::vec2 kTextureCoords[] = {{0, 0}, {1, 0}, {1, 1}, {0, 1}};
-
-  for (auto i{0}; i < kQuadVertexCount; ++i) {
+  for (int i = 0; i < kQuadVertexCount; ++i) {
     s_data.quad_vertex_buffer_ptr->position =
         transform * s_data.quad_vertex_positions[i];
     s_data.quad_vertex_buffer_ptr->color = color;
@@ -302,13 +301,9 @@ void Renderer2D::DrawQuad(const glm::mat4& transform,
                           const glm::vec4& tint_color, int entity_id) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
+  if (s_data.quad_index_count >= kMaxIndices) {
     NextBatch();
   }
-
-  constexpr size_t kQuadVertexCount = 4;
-  constexpr glm::vec4 kDefaultColor = {1, 1, 1, 1};
-  constexpr glm::vec2 kTextureCoords[] = {{0, 0}, {1, 0}, {1, 1}, {0, 1}};
 
   uint32_t texture_index;
 
@@ -320,7 +315,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform,
   }
 
   if (texture_index == 0) {
-    if (s_data.texture_slot_index >= Renderer2DData::kMaxTextureSlots) {
+    if (s_data.texture_slot_index >= kMaxTextureSlots) {
       NextBatch();
     }
 
@@ -329,7 +324,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform,
     s_data.texture_slot_index++;
   }
 
-  for (auto i{0}; i < kQuadVertexCount; ++i) {
+  for (int i = 0; i < kQuadVertexCount; ++i) {
     s_data.quad_vertex_buffer_ptr->position =
         transform * s_data.quad_vertex_positions[i];
     s_data.quad_vertex_buffer_ptr->color = kDefaultColor;
@@ -356,21 +351,16 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                 const glm::vec4& color) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
+  if (s_data.quad_index_count >= kMaxIndices) {
     NextBatch();
   }
-
-  constexpr uint32_t kTextureIndex = 0;  // White texture
-  constexpr float kTilingFactor = 1;
-  constexpr size_t kQuadVertexCount = 4;
-  constexpr glm::vec2 kTextureCoords[] = {{0, 0}, {1, 0}, {1, 1}, {0, 1}};
 
   glm::mat4 transform =
       glm::translate(glm::mat4(1), position) *
       glm::rotate(glm::mat4(1), glm::radians(rotation), {0, 0, 1}) *
       glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
-  for (auto i{0}; i < kQuadVertexCount; ++i) {
+  for (int i = 0; i < kQuadVertexCount; ++i) {
     s_data.quad_vertex_buffer_ptr->position =
         transform * s_data.quad_vertex_positions[i];
     s_data.quad_vertex_buffer_ptr->color = color;
@@ -401,13 +391,9 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                 const glm::vec4& tint_color) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
+  if (s_data.quad_index_count >= kMaxIndices) {
     NextBatch();
   }
-
-  constexpr size_t kQuadVertexCount = 4;
-  constexpr glm::vec4 kDefaultColor = {1, 1, 1, 1};
-  constexpr glm::vec2 kTextureCoords[] = {{0, 0}, {1, 0}, {1, 1}, {0, 1}};
 
   uint32_t texture_index = 0;
 
@@ -419,7 +405,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
   }
 
   if (texture_index == 0) {
-    if (s_data.texture_slot_index >= Renderer2DData::kMaxTextureSlots) {
+    if (s_data.texture_slot_index >= kMaxTextureSlots) {
       NextBatch();
     }
 
@@ -433,7 +419,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
       glm::rotate(glm::mat4(1), glm::radians(rotation), {0, 0, 1}) *
       glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
-  for (auto i{0}; i < kQuadVertexCount; ++i) {
+  for (int i = 0; i < kQuadVertexCount; ++i) {
     s_data.quad_vertex_buffer_ptr->position =
         transform * s_data.quad_vertex_positions[i];
     s_data.quad_vertex_buffer_ptr->color = kDefaultColor;
@@ -464,12 +450,10 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                 const glm::vec4& tint_color) {
   SOLAR_PROFILE_FUNCTION();
 
-  if (s_data.quad_index_count >= Renderer2DData::kMaxIndices) {
+  if (s_data.quad_index_count >= kMaxIndices) {
     NextBatch();
   }
 
-  constexpr size_t kQuadVertexCount = 4;
-  constexpr glm::vec4 kDefaultColor = {1, 1, 1, 1};
   const glm::vec2* texture_coords = sub_texture->GetTexCoords();
   Ref<Texture2D> texture = sub_texture->GetTexture();
 
@@ -483,7 +467,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
   }
 
   if (texture_index == 0) {
-    if (s_data.texture_slot_index >= Renderer2DData::kMaxTextureSlots) {
+    if (s_data.texture_slot_index >= kMaxTextureSlots) {
       NextBatch();
     }
 
@@ -497,7 +481,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
       glm::rotate(glm::mat4(1), glm::radians(rotation), {0, 0, 1}) *
       glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
-  for (auto i{0}; i < kQuadVertexCount; ++i) {
+  for (int i = 0; i < kQuadVertexCount; ++i) {
     s_data.quad_vertex_buffer_ptr->position =
         transform * s_data.quad_vertex_positions[i];
     s_data.quad_vertex_buffer_ptr->color = kDefaultColor;
