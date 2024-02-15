@@ -25,9 +25,9 @@ EditorCamera::EditorCamera(float fov, float aspect_ratio, float near_clip,
 
 void EditorCamera::OnUpdate(const TimeStep& ts) {
   if (Input::IsKeyPressed(KeyCode::kLeftAlt)) {
-    const glm::vec2& mouse{Input::GetMouseX(), Input::GetMouseY()};
-    glm::vec2 delta = (mouse - initial_mouse_position_) * 0.003f;
-    initial_mouse_position_ = mouse;
+    auto mouse_position = Input::GetMousePosition();
+    glm::vec2 delta = (mouse_position - initial_mouse_position_) * 0.003f;
+    initial_mouse_position_ = mouse_position;
 
     if (Input::IsMouseButtonPressed(MouseCode::kButtonMiddle)) {
       MousePan(delta);

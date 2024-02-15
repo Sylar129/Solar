@@ -4,6 +4,7 @@
 
 #include "GLFW/glfw3.h"
 #include "core/base/application.h"
+#include "glm/fwd.hpp"
 
 namespace solar {
 
@@ -14,6 +15,7 @@ bool Input::IsKeyPressed(KeyCode keycode) {
 
   return state == GLFW_PRESS || state == GLFW_REPEAT;
 }
+
 bool Input::IsMouseButtonPressed(MouseCode button) {
   auto *window = static_cast<GLFWwindow *>(
       Application::Get().GetWindow().GetNativeWindow());
@@ -21,7 +23,8 @@ bool Input::IsMouseButtonPressed(MouseCode button) {
 
   return state == GLFW_PRESS;
 }
-std::pair<float, float> Input::GetMousePosition() {
+
+glm::vec2 Input::GetMousePosition() {
   auto *window = static_cast<GLFWwindow *>(
       Application::Get().GetWindow().GetNativeWindow());
   double xpos;
@@ -29,14 +32,6 @@ std::pair<float, float> Input::GetMousePosition() {
   glfwGetCursorPos(window, &xpos, &ypos);
 
   return {static_cast<float>(xpos), static_cast<float>(ypos)};
-}
-float Input::GetMouseX() {
-  auto [x, y] = GetMousePosition();
-  return x;
-}
-float Input::GetMouseY() {
-  auto [x, y] = GetMousePosition();
-  return y;
 }
 
 }  // namespace solar

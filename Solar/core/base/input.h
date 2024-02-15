@@ -2,22 +2,17 @@
 
 #pragma once
 
-// TODO(sylar): remove
-#include <utility>
-
 #include "core/base/key_codes.h"
 #include "core/base/mouse_codes.h"
+#include "glm/fwd.hpp"
 
 namespace solar {
 
-// TODO(syalr): remove static
 class Input {
  public:
   static bool IsKeyPressed(KeyCode keycode);
   static bool IsMouseButtonPressed(MouseCode button);
-  static std::pair<float, float> GetMousePosition();
-  static float GetMouseX();
-  static float GetMouseY();
+  static glm::vec2 GetMousePosition();
 };
 
 }  // namespace solar
