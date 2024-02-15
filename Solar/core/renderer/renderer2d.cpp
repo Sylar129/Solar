@@ -203,11 +203,6 @@ void Renderer2D::Flush() {
 }
 
 // TODO(sylar): redundant
-void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size,
-                          const glm::vec4& color) {
-  DrawQuad({position.x, position.y, 0}, size, color);
-}
-
 void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
                           const glm::vec4& color) {
   SOLAR_PROFILE_FUNCTION();
@@ -218,34 +213,20 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
   DrawQuad(transform, color);
 }
 
-void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size,
-                          const Ref<Texture2D>& texture, float tiling_factor,
-                          const glm::vec4& tint_color) {
-  DrawQuad({position.x, position.y, 0}, size, texture, tiling_factor,
-           tint_color);
-}
-
 void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
                           const Ref<Texture2D>& texture, float tiling_factor,
-                          const glm::vec4& tint_color) {
+                          const glm::vec4& color) {
   SOLAR_PROFILE_FUNCTION();
 
   glm::mat4 transform = glm::translate(glm::mat4(1), position) *
                         glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
-  DrawQuad(transform, texture, tiling_factor, tint_color);
-}
-
-void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size,
-                          const Ref<SubTexture2D>& sub_texture,
-                          float tiling_factor, const glm::vec4& tint_color) {
-  DrawQuad({position.x, position.y, 0}, size, sub_texture, tiling_factor,
-           tint_color);
+  DrawQuad(transform, texture, tiling_factor, color);
 }
 
 void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
                           const Ref<SubTexture2D>& sub_texture,
-                          float tiling_factor, const glm::vec4& tint_color) {
+                          float tiling_factor, const glm::vec4& color) {
   SOLAR_PROFILE_FUNCTION();
 
   if (s_data.quad_index_count >= kMaxIndices) {
@@ -277,8 +258,8 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
   glm::mat4 transform = glm::translate(glm::mat4(1), position) *
                         glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
-  s_data.Setup(transform, kDefaultColor, texture_coords, texture_index,
-               tiling_factor, -1);
+  s_data.Setup(transform, color, texture_coords, texture_index, tiling_factor,
+               -1);
 }
 
 void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color,
@@ -295,7 +276,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color,
 
 void Renderer2D::DrawQuad(const glm::mat4& transform,
                           const Ref<Texture2D>& texture, float tiling_factor,
-                          const glm::vec4& tint_color, int entity_id) {
+                          const glm::vec4& color, int entity_id) {
   SOLAR_PROFILE_FUNCTION();
 
   if (s_data.quad_index_count >= kMaxIndices) {
@@ -321,14 +302,8 @@ void Renderer2D::DrawQuad(const glm::mat4& transform,
     s_data.texture_slot_index++;
   }
 
-  s_data.Setup(transform, kDefaultColor, kTextureCoords, texture_index,
-               tiling_factor, entity_id);
-}
-
-void Renderer2D::DrawRotateQuad(const glm::vec2& position,
-                                const glm::vec2& size, float rotation,
-                                const glm::vec4& color) {
-  DrawRotateQuad({position.x, position.y, 0}, size, rotation, color);
+  s_data.Setup(transform, color, kTextureCoords, texture_index, tiling_factor,
+               entity_id);
 }
 
 void Renderer2D::DrawRotateQuad(const glm::vec3& position,
@@ -349,20 +324,10 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                -1);
 }
 
-void Renderer2D::DrawRotateQuad(const glm::vec2& position,
-                                const glm::vec2& size, float rotation,
-                                const Ref<Texture2D>& texture,
-                                float tiling_factor,
-                                const glm::vec4& tint_color) {
-  DrawRotateQuad({position.x, position.y, 0}, size, rotation, texture,
-                 tiling_factor, tint_color);
-}
-
 void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                 const glm::vec2& size, float rotation,
                                 const Ref<Texture2D>& texture,
-                                float tiling_factor,
-                                const glm::vec4& tint_color) {
+                                float tiling_factor, const glm::vec4& color) {
   SOLAR_PROFILE_FUNCTION();
 
   if (s_data.quad_index_count >= kMaxIndices) {
@@ -393,24 +358,14 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
       glm::rotate(glm::mat4(1), glm::radians(rotation), {0, 0, 1}) *
       glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
-  s_data.Setup(transform, kDefaultColor, kTextureCoords, texture_index,
-               tiling_factor, -1);
-}
-
-void Renderer2D::DrawRotateQuad(const glm::vec2& position,
-                                const glm::vec2& size, float rotation,
-                                const Ref<SubTexture2D>& sub_texture,
-                                float tiling_factor,
-                                const glm::vec4& tint_color) {
-  DrawRotateQuad({position.x, position.y, 0}, size, rotation, sub_texture,
-                 tiling_factor, tint_color);
+  s_data.Setup(transform, color, kTextureCoords, texture_index, tiling_factor,
+               -1);
 }
 
 void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                 const glm::vec2& size, float rotation,
                                 const Ref<SubTexture2D>& sub_texture,
-                                float tiling_factor,
-                                const glm::vec4& tint_color) {
+                                float tiling_factor, const glm::vec4& color) {
   SOLAR_PROFILE_FUNCTION();
 
   if (s_data.quad_index_count >= kMaxIndices) {
@@ -444,8 +399,8 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
       glm::rotate(glm::mat4(1), glm::radians(rotation), {0, 0, 1}) *
       glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
-  s_data.Setup(transform, kDefaultColor, texture_coords, texture_index,
-               tiling_factor, -1);
+  s_data.Setup(transform, color, texture_coords, texture_index, tiling_factor,
+               -1);
 }
 
 void Renderer2D::DrawSprite(const glm::mat4& transform,
