@@ -8,7 +8,7 @@
 #include "core/base/log.h"
 #include "core/base/sundry.h"
 #include "core/renderer/camera.h"
-#include "glm/glm.hpp"
+#include "glm/trigonometric.hpp"
 
 namespace solar {
 

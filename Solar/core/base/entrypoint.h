@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
   SOLAR_INFO("Hello! Solar Engine.");
 
   SOLAR_PROFILE_BEGIN_SESSION("Startup", "SolarProfile-Startup.json");
-  auto app = solar::CreateApplication();
+  auto* app = solar::CreateApplication();
   SOLAR_PROFILE_END_SESSION();
 
   SOLAR_PROFILE_BEGIN_SESSION("Runtime", "SolarProfile-Runtime.json");

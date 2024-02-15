@@ -2,7 +2,7 @@
 
 #include "core/scene/scene_serializer.h"
 
-#include <ostream>
+#include <fstream>
 #include <string>
 
 #include "core/base/log.h"
