@@ -179,15 +179,15 @@ void Renderer2D::Flush() {
 // TODO(sylar): redundant
 void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size,
                           const glm::vec4& color) {
-  DrawQuad({position.x, position.y, 0.0f}, size, color);
+  DrawQuad({position.x, position.y, 0}, size, color);
 }
 
 void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
                           const glm::vec4& color) {
   SOLAR_PROFILE_FUNCTION();
 
-  glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
-                        glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
+  glm::mat4 transform = glm::translate(glm::mat4(1), position) *
+                        glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
   DrawQuad(transform, color);
 }
@@ -195,7 +195,7 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
 void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size,
                           const Ref<Texture2D>& texture, float tiling_factor,
                           const glm::vec4& tint_color) {
-  DrawQuad({position.x, position.y, 0.0f}, size, texture, tiling_factor,
+  DrawQuad({position.x, position.y, 0}, size, texture, tiling_factor,
            tint_color);
 }
 
@@ -204,8 +204,8 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
                           const glm::vec4& tint_color) {
   SOLAR_PROFILE_FUNCTION();
 
-  glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
-                        glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
+  glm::mat4 transform = glm::translate(glm::mat4(1), position) *
+                        glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
   DrawQuad(transform, texture, tiling_factor, tint_color);
 }
@@ -213,7 +213,7 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
 void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size,
                           const Ref<SubTexture2D>& sub_texture,
                           float tiling_factor, const glm::vec4& tint_color) {
-  DrawQuad({position.x, position.y, 0.0f}, size, sub_texture, tiling_factor,
+  DrawQuad({position.x, position.y, 0}, size, sub_texture, tiling_factor,
            tint_color);
 }
 
@@ -227,14 +227,14 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
   }
 
   constexpr size_t kQuadVertexCount = 4;
-  constexpr glm::vec4 kDefaultColor = {1.0f, 1.0f, 1.0f, 1.0f};
+  constexpr glm::vec4 kDefaultColor = {1, 1, 1, 1};
   const glm::vec2* texture_coords = sub_texture->GetTexCoords();
-  const Ref<Texture2D> texture = sub_texture->GetTexture();
+  Ref<Texture2D> texture = sub_texture->GetTexture();
 
   uint32_t texture_index = 0;
 
   for (auto i{1u}; i < s_data.texture_slot_index; i++) {
-    if (*s_data.texture_slots[i].get() == *texture.get()) {
+    if (*s_data.texture_slots[i] == *texture) {
       texture_index = i;
       break;
     }
@@ -250,8 +250,8 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
     s_data.texture_slot_index++;
   }
 
-  glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
-                        glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
+  glm::mat4 transform = glm::translate(glm::mat4(1), position) *
+                        glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
   for (auto i{0}; i < kQuadVertexCount; ++i) {
     s_data.quad_vertex_buffer_ptr->position =
@@ -277,10 +277,9 @@ void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color,
   }
 
   constexpr uint32_t kTextureIndex = 0;  // White texture
-  constexpr float kTilingFactor = 1.0f;
+  constexpr float kTilingFactor = 1;
   constexpr size_t kQuadVertexCount = 4;
-  constexpr glm::vec2 kTextureCoords[] = {
-      {0.0f, 0.0f}, {1.0f, 0.0f}, {1.0f, 1.0f}, {0.0f, 1.0f}};
+  constexpr glm::vec2 kTextureCoords[] = {{0, 0}, {1, 0}, {1, 1}, {0, 1}};
 
   for (auto i{0}; i < kQuadVertexCount; ++i) {
     s_data.quad_vertex_buffer_ptr->position =
@@ -308,14 +307,13 @@ void Renderer2D::DrawQuad(const glm::mat4& transform,
   }
 
   constexpr size_t kQuadVertexCount = 4;
-  constexpr glm::vec4 kDefaultColor = {1.0f, 1.0f, 1.0f, 1.0f};
-  constexpr glm::vec2 kTextureCoords[] = {
-      {0.0f, 0.0f}, {1.0f, 0.0f}, {1.0f, 1.0f}, {0.0f, 1.0f}};
+  constexpr glm::vec4 kDefaultColor = {1, 1, 1, 1};
+  constexpr glm::vec2 kTextureCoords[] = {{0, 0}, {1, 0}, {1, 1}, {0, 1}};
 
   uint32_t texture_index;
 
   for (auto i{1u}; i < s_data.texture_slot_index; i++) {
-    if (*s_data.texture_slots[i].get() == *texture.get()) {
+    if (*s_data.texture_slots[i] == *texture) {
       texture_index = i;
       break;
     }
@@ -350,7 +348,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform,
 void Renderer2D::DrawRotateQuad(const glm::vec2& position,
                                 const glm::vec2& size, float rotation,
                                 const glm::vec4& color) {
-  DrawRotateQuad({position.x, position.y, 0.0f}, size, rotation, color);
+  DrawRotateQuad({position.x, position.y, 0}, size, rotation, color);
 }
 
 void Renderer2D::DrawRotateQuad(const glm::vec3& position,
@@ -363,15 +361,14 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
   }
 
   constexpr uint32_t kTextureIndex = 0;  // White texture
-  constexpr float kTilingFactor = 1.0f;
+  constexpr float kTilingFactor = 1;
   constexpr size_t kQuadVertexCount = 4;
-  constexpr glm::vec2 kTextureCoords[] = {
-      {0.0f, 0.0f}, {1.0f, 0.0f}, {1.0f, 1.0f}, {0.0f, 1.0f}};
+  constexpr glm::vec2 kTextureCoords[] = {{0, 0}, {1, 0}, {1, 1}, {0, 1}};
 
   glm::mat4 transform =
-      glm::translate(glm::mat4(1.0f), position) *
-      glm::rotate(glm::mat4(1.0f), glm::radians(rotation), {0.0f, 0.0f, 1.0f}) *
-      glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
+      glm::translate(glm::mat4(1), position) *
+      glm::rotate(glm::mat4(1), glm::radians(rotation), {0, 0, 1}) *
+      glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
   for (auto i{0}; i < kQuadVertexCount; ++i) {
     s_data.quad_vertex_buffer_ptr->position =
@@ -393,7 +390,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec2& position,
                                 const Ref<Texture2D>& texture,
                                 float tiling_factor,
                                 const glm::vec4& tint_color) {
-  DrawRotateQuad({position.x, position.y, 0.0f}, size, rotation, texture,
+  DrawRotateQuad({position.x, position.y, 0}, size, rotation, texture,
                  tiling_factor, tint_color);
 }
 
@@ -409,14 +406,13 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
   }
 
   constexpr size_t kQuadVertexCount = 4;
-  constexpr glm::vec4 kDefaultColor = {1.0f, 1.0f, 1.0f, 1.0f};
-  constexpr glm::vec2 kTextureCoords[] = {
-      {0.0f, 0.0f}, {1.0f, 0.0f}, {1.0f, 1.0f}, {0.0f, 1.0f}};
+  constexpr glm::vec4 kDefaultColor = {1, 1, 1, 1};
+  constexpr glm::vec2 kTextureCoords[] = {{0, 0}, {1, 0}, {1, 1}, {0, 1}};
 
   uint32_t texture_index = 0;
 
   for (auto i{1u}; i < s_data.texture_slot_index; i++) {
-    if (*s_data.texture_slots[i].get() == *texture.get()) {
+    if (*s_data.texture_slots[i] == *texture) {
       texture_index = i;
       break;
     }
@@ -433,9 +429,9 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
   }
 
   glm::mat4 transform =
-      glm::translate(glm::mat4(1.0f), position) *
-      glm::rotate(glm::mat4(1.0f), glm::radians(rotation), {0.0f, 0.0f, 1.0f}) *
-      glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
+      glm::translate(glm::mat4(1), position) *
+      glm::rotate(glm::mat4(1), glm::radians(rotation), {0, 0, 1}) *
+      glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
   for (auto i{0}; i < kQuadVertexCount; ++i) {
     s_data.quad_vertex_buffer_ptr->position =
@@ -457,7 +453,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec2& position,
                                 const Ref<SubTexture2D>& sub_texture,
                                 float tiling_factor,
                                 const glm::vec4& tint_color) {
-  DrawRotateQuad({position.x, position.y, 0.0f}, size, rotation, sub_texture,
+  DrawRotateQuad({position.x, position.y, 0}, size, rotation, sub_texture,
                  tiling_factor, tint_color);
 }
 
@@ -473,14 +469,14 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
   }
 
   constexpr size_t kQuadVertexCount = 4;
-  constexpr glm::vec4 kDefaultColor = {1.0f, 1.0f, 1.0f, 1.0f};
+  constexpr glm::vec4 kDefaultColor = {1, 1, 1, 1};
   const glm::vec2* texture_coords = sub_texture->GetTexCoords();
-  const Ref<Texture2D> texture = sub_texture->GetTexture();
+  Ref<Texture2D> texture = sub_texture->GetTexture();
 
   uint32_t texture_index = 0;
 
   for (auto i{1u}; i < s_data.texture_slot_index; i++) {
-    if (*s_data.texture_slots[i].get() == *texture.get()) {
+    if (*s_data.texture_slots[i] == *texture) {
       texture_index = i;
       break;
     }
@@ -497,9 +493,9 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
   }
 
   glm::mat4 transform =
-      glm::translate(glm::mat4(1.0f), position) *
-      glm::rotate(glm::mat4(1.0f), glm::radians(rotation), {0.0f, 0.0f, 1.0f}) *
-      glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f});
+      glm::translate(glm::mat4(1), position) *
+      glm::rotate(glm::mat4(1), glm::radians(rotation), {0, 0, 1}) *
+      glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
   for (auto i{0}; i < kQuadVertexCount; ++i) {
     s_data.quad_vertex_buffer_ptr->position =
