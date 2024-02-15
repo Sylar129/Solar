@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "core/base/layer.h"
+#include "core/utils/misc.h"
 
 namespace solar {
 

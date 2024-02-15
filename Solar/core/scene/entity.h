@@ -4,8 +4,7 @@
 
 #include <utility>
 
-#include "core/base/log.h"
-#include "core/base/sundry.h"
+#include "core/debug/assert.h"
 #include "core/scene/scene.h"
 #include "entt/entt.hpp"
 

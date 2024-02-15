@@ -2,6 +2,7 @@
 
 #include "platform/opengl/texture.h"
 
+#include "core/debug/assert.h"
 #include "core/debug/instrumentor.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"  // NOLINT

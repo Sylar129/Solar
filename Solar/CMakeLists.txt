@@ -32,7 +32,6 @@ set(SolarSrc
     core/base/log.cpp
     core/base/log.h
     core/base/mouse_codes.h
-    core/base/sundry.h
     core/base/timestep.h
     core/base/window.h
     core/debug/instrumentor.h
@@ -104,7 +103,7 @@ set(SolarSrc
 add_library(Solar STATIC ${SolarSrc})
 target_compile_definitions(Solar PUBLIC GLM_ENABLE_EXPERIMENTAL)
 target_compile_definitions(Solar PUBLIC YAML_CPP_STATIC_DEFINE)
-target_precompile_headers(Solar PRIVATE solpch.h)
+# target_precompile_headers(Solar PRIVATE solpch.h)
 
 # Imgui
 set(ImGuiSrc

@@ -3,6 +3,7 @@
 #include "platform/opengl/framebuffer.h"
 
 #include "core/base/log.h"
+#include "core/debug/assert.h"
 #include "glad/glad.h"
 
 namespace solar {

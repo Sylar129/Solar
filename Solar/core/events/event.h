@@ -6,9 +6,16 @@
 #include <ostream>
 #include <string>
 
-#include "core/base/sundry.h"
-
 namespace solar {
+
+template <bool SHIFT = true>
+constexpr auto BIT(int n) {
+  if constexpr (SHIFT) {
+    return 1 << n;
+  } else {
+    return n;
+  }
+}
 
 enum class EventType {
   kNone = 0,

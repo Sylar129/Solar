@@ -5,8 +5,8 @@
 #include <string>
 #include <vector>
 
-#include "core/base/log.h"
-#include "core/base/sundry.h"
+#include "core/debug/assert.h"
+#include "core/utils/misc.h"
 
 namespace solar {
 

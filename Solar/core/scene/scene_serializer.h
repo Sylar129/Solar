@@ -5,6 +5,7 @@
 #include <string>
 
 #include "core/scene/scene.h"
+#include "core/utils/misc.h"
 
 namespace solar {
 
