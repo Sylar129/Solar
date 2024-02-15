@@ -30,6 +30,53 @@ void SceneCamera::SetViewportSize(uint32_t width, uint32_t height) {
   RecalculateProjection();
 }
 
+float SceneCamera::GetPerspectiveVerticalFOV() const {
+  return perspective_fov_;
+}
+void SceneCamera::SetPerspectiveVerticalFOV(float vertical_fov) {
+  perspective_fov_ = vertical_fov;
+  RecalculateProjection();
+}
+
+float SceneCamera::GetPerspectiveNearClip() const { return perspective_near_; }
+void SceneCamera::SetPerspectiveNearClip(float near_clip) {
+  perspective_near_ = near_clip;
+  RecalculateProjection();
+}
+
+float SceneCamera::GetPerspectiveFarClip() const { return perspective_far_; }
+void SceneCamera::SetPerspectiveFarClip(float far_clip) {
+  perspective_far_ = far_clip;
+  RecalculateProjection();
+}
+
+float SceneCamera::GetOrthographicSize() const { return orthographic_size_; }
+void SceneCamera::SetOrthographicSize(float size) {
+  orthographic_size_ = size;
+  RecalculateProjection();
+}
+
+float SceneCamera::GetOrthographicNearClip() const {
+  return orthographic_near_;
+}
+void SceneCamera::SetOrthographicNearClip(float near_clip) {
+  orthographic_near_ = near_clip;
+  RecalculateProjection();
+}
+
+float SceneCamera::GetOrthographicFarClip() const { return orthographic_far_; }
+void SceneCamera::SetOrthographicFarClip(float far_clip) {
+  orthographic_far_ = far_clip;
+  RecalculateProjection();
+}
+
+SceneCamera::ProjectionType SceneCamera::GetProjectionType() const {
+  return projection_type_;
+}
+void SceneCamera::SetProjectionType(SceneCamera::ProjectionType type) {
+  projection_type_ = type;
+}
+
 void SceneCamera::RecalculateProjection() {
   if (projection_type_ == ProjectionType::kPerspective) {
     projection_ = glm::perspective(perspective_fov_, aspect_ratio_,

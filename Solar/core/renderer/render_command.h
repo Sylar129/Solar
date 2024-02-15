@@ -8,23 +8,17 @@ namespace solar {
 
 class RenderCommand {
  public:
-  inline static void Init() { renderer_api_->Init(); }
+  static void Init();
 
-  inline static void SetViewPort(uint32_t x, uint32_t y, uint32_t width,
-                                 uint32_t height) {
-    renderer_api_->SetViewPort(x, y, width, height);
-  }
+  static void SetViewPort(uint32_t x, uint32_t y, uint32_t width,
+                          uint32_t height);
 
-  inline static void SetClearColor(const glm::vec4& color) {
-    renderer_api_->SetClearColor(color);
-  }
+  static void SetClearColor(const glm::vec4& color);
 
-  inline static void Clear() { renderer_api_->Clear(); }
+  static void Clear();
 
-  inline static void DrawIndexed(const Ref<VertexArray>& vertex_array,
-                                 uint32_t count = 0) {
-    renderer_api_->DrawIndexed(vertex_array, count);
-  }
+  static void DrawIndexed(const Ref<VertexArray>& vertex_array,
+                          uint32_t count = 0);
 
  private:
   static Scope<RendererAPI> renderer_api_;
