@@ -19,26 +19,21 @@ class EditorCamera : public Camera {
   void OnUpdate(TimeStep& ts);
   void OnEvent(Event& e);
 
-  inline float GetDistance() const { return distance_; }
-  inline void SetDistance(float distance) { distance_ = distance; }
+  float GetDistance() const;
+  void SetDistance(float distance);
 
-  inline void SetViewportSize(float width, float height) {
-    viewport_width_ = width;
-    viewport_height_ = height;
-    UpdateProjection();
-  }
+  void SetViewportSize(float width, float height);
 
-  const glm::mat4& GetViewMatrix() const { return view_matrix_; }
-  glm::mat4 GetViewProjection() const { return projection_ * view_matrix_; }
+  const glm::mat4& GetViewMatrix() const;
+  const glm::vec3& GetPosition() const;
+  float GetPitch() const;
+  float GetYaw() const;
 
+  glm::mat4 GetViewProjection() const;
   glm::vec3 GetUpDirection() const;
   glm::vec3 GetRightDirection() const;
   glm::vec3 GetForwardDirection() const;
-  const glm::vec3& GetPosition() const { return position_; }
   glm::quat GetOrientation() const;
-
-  float GetPitch() const { return pitch_; }
-  float GetYaw() const { return yaw_; }
 
  private:
   void UpdateProjection();
