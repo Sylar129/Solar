@@ -25,7 +25,6 @@ constexpr uint32_t kTextureIndex = 0;  // White texture
 constexpr uint32_t kWhiteTextureData = 0xffffffff;
 
 constexpr float kTilingFactor = 1;
-constexpr glm::vec4 kDefaultColor = {1, 1, 1, 1};
 constexpr std::array<glm::vec2, kQuadVertexCount> kTextureCoords = {
     glm::vec2{0, 0}, glm::vec2{1, 0}, glm::vec2{1, 1}, glm::vec2{0, 1}};
 }  // namespace
@@ -54,7 +53,7 @@ struct Renderer2DData {
   std::array<Ref<Texture2D>, kMaxTextureSlots> texture_slots;
   uint32_t texture_slot_index = 1;  // 0 = white texture
 
-  glm::vec4 quad_vertex_positions[kQuadVertexCount];
+  std::array<glm::vec4, kQuadVertexCount> quad_vertex_positions;
 
   Renderer2D::Statistics stats;
 
