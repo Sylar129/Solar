@@ -29,11 +29,11 @@ class EditorCamera : public Camera {
   float GetPitch() const;
   float GetYaw() const;
 
-  glm::mat4 GetViewProjection() const;
-  glm::vec3 GetUpDirection() const;
-  glm::vec3 GetRightDirection() const;
-  glm::vec3 GetForwardDirection() const;
-  glm::quat GetOrientation() const;
+  glm::mat4 CalcViewProjection() const;
+  glm::vec3 CalcUpDirection() const;
+  glm::vec3 CalcRightDirection() const;
+  glm::vec3 CalcForwardDirection() const;
+  glm::quat CalcOrientation() const;
 
  private:
   void UpdateProjection();
