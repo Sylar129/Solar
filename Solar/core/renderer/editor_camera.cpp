@@ -23,7 +23,7 @@ EditorCamera::EditorCamera(float fov, float aspect_ratio, float near_clip,
   UpdateView();
 }
 
-void EditorCamera::OnUpdate(TimeStep& ts) {
+void EditorCamera::OnUpdate(const TimeStep& ts) {
   if (Input::IsKeyPressed(KeyCode::kLeftAlt)) {
     const glm::vec2& mouse{Input::GetMouseX(), Input::GetMouseY()};
     glm::vec2 delta = (mouse - initial_mouse_position_) * 0.003f;

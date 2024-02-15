@@ -16,7 +16,7 @@ class EditorCamera : public Camera {
   EditorCamera() = default;
   EditorCamera(float fov, float aspect_ratio, float near_clip, float far_clip);
 
-  void OnUpdate(TimeStep& ts);
+  void OnUpdate(const TimeStep& ts);
   void OnEvent(Event& e);
 
   float GetDistance() const;

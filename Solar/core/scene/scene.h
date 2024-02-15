@@ -20,8 +20,8 @@ class Scene {
   Entity CreateEntity(const std::string& name);
   void DestoryEntity(Entity entity);
 
-  void OnUpdateRuntime(TimeStep& ts);
-  void OnUpdateEditor(TimeStep& ts, EditorCamera& camera);
+  void OnUpdateRuntime(const TimeStep& ts);
+  void OnUpdateEditor(const TimeStep& ts, EditorCamera& camera);
   void OnViewportResize(uint32_t width, uint32_t height);
 
   Entity GetPrimaryCameraEntity();

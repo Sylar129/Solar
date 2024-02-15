@@ -16,7 +16,7 @@ class Layer {
 
   virtual void OnAttach() {}
   virtual void OnDetech() {}
-  virtual void OnUpdate(TimeStep& ts) {}
+  virtual void OnUpdate(const TimeStep& ts) {}
   virtual void OnImGuiRender() {}
   virtual void OnEvent(Event& event) {}
 
