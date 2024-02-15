@@ -4,7 +4,7 @@
 
 #include "core/base/sundry.h"
 #include "core/renderer/texture.h"
-#include "glm/vec2.hpp"
+#include "glm/ext/vector_float2.hpp"
 
 namespace solar {
 

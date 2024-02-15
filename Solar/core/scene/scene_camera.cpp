@@ -2,7 +2,7 @@
 
 #include "core/scene/scene_camera.h"
 
-#include "glm/gtc/matrix_transform.hpp"
+#include "glm/ext/matrix_clip_space.hpp"
 
 namespace solar {
 

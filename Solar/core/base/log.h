@@ -4,10 +4,7 @@
 
 #include <memory>
 
-// clang-format off
-#include "spdlog/spdlog.h"
-#include "spdlog/fmt/ostr.h"
-// clang-format on
+#include "spdlog/logger.h"
 
 namespace solar {
 

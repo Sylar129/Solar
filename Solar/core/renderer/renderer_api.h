@@ -3,7 +3,7 @@
 #pragma once
 
 #include "core/renderer/vertex_array.h"
-#include "glm/vec4.hpp"
+#include "glm/ext/vector_float4.hpp"
 
 namespace solar {
 

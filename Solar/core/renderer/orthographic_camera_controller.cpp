@@ -7,7 +7,7 @@
 #include "core/base/input.h"
 #include "core/base/key_codes.h"
 #include "core/debug/instrumentor.h"
-#include "glm/glm.hpp"
+#include "glm/trigonometric.hpp"
 
 namespace solar {
 

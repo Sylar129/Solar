@@ -7,7 +7,7 @@
 #include "core/base/timestep.h"
 #include "core/events/mouse_event.h"
 #include "core/renderer/camera.h"
-#include "glm/glm.hpp"
+#include "glm/fwd.hpp"
 
 namespace solar {
 

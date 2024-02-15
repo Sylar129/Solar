@@ -8,7 +8,6 @@
 #include "core/renderer/render_command.h"
 #include "core/renderer/shader.h"
 #include "core/renderer/vertex_array.h"
-#include "glm/gtc/matrix_transform.hpp"
 
 namespace solar {
 
