@@ -34,6 +34,7 @@ set(SolarSrc
     core/base/mouse_codes.h
     core/base/timestep.h
     core/base/window.h
+    core/debug/assert.h
     core/debug/instrumentor.h
     core/events/application_event.h
     core/events/event.h
@@ -81,6 +82,7 @@ set(SolarSrc
     core/scene/scene_serializer.cpp
     core/scene/scene_serializer.h
     core/scene/scriptable_entity.h
+    core/utils/misc.h
     core/utils/platform_utils.h
     platform/opengl/buffer.cpp
     platform/opengl/buffer.h
