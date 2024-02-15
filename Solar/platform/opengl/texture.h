@@ -19,7 +19,7 @@ class OpenGLTexture2D : public Texture2D {
   uint32_t GetHeight() const override { return height_; }
   uint32_t GetRendererID() const override { return renderer_id_; }
 
-  void SetData(void* data, uint32_t size) override;
+  void SetData(const void* data, uint32_t size) override;
 
   void Bind(uint32_t slot) const override;
 

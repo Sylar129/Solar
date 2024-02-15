@@ -18,6 +18,7 @@ constexpr uint32_t kMaxQuads = 10000;
 constexpr uint32_t kMaxVertices = kMaxQuads * 4;
 constexpr uint32_t kMaxIndices = kMaxQuads * 6;
 constexpr uint32_t kMaxTextureSlots = 32;  // TODO(sylar): Render capability
+constexpr uint32_t kWhiteTextureData = 0xffffffff;
 
 constexpr uint32_t kTextureIndex = 0;  // White texture
 constexpr float kTilingFactor = 1;
@@ -100,9 +101,7 @@ void Renderer2D::Init() {
   delete[] quad_indices;
 
   s_data.white_texture = Texture2D::Create(1, 1);
-  uint32_t white_texture_data = 0xffffffff;
-  s_data.white_texture->SetData(&white_texture_data,
-                                sizeof(white_texture_data));
+  s_data.white_texture->SetData(&kWhiteTextureData, sizeof(kWhiteTextureData));
 
   int32_t samplers[kMaxTextureSlots];
   for (auto i{0}; i < kMaxTextureSlots; ++i) {
