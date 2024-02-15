@@ -226,19 +226,19 @@ void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color,
 }
 
 void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
-                          const Ref<Texture2D>& texture, float tiling_factor,
-                          const glm::vec4& color) {
+                          const glm::vec4& color, const Ref<Texture2D>& texture,
+                          float tiling_factor) {
   SOLAR_PROFILE_FUNCTION();
 
   glm::mat4 transform = glm::translate(glm::mat4(1), position) *
                         glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
-  DrawQuad(transform, texture, tiling_factor, color);
+  DrawQuad(transform, color, texture, tiling_factor);
 }
 
-void Renderer2D::DrawQuad(const glm::mat4& transform,
+void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color,
                           const Ref<Texture2D>& texture, float tiling_factor,
-                          const glm::vec4& color, int entity_id) {
+                          int entity_id) {
   SOLAR_PROFILE_FUNCTION();
 
   if (s_data.quad_index_count >= kMaxIndices) {
@@ -269,19 +269,20 @@ void Renderer2D::DrawQuad(const glm::mat4& transform,
 }
 
 void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
+                          const glm::vec4& color,
                           const Ref<SubTexture2D>& sub_texture,
-                          float tiling_factor, const glm::vec4& color) {
+                          float tiling_factor) {
   SOLAR_PROFILE_FUNCTION();
 
   glm::mat4 transform = glm::translate(glm::mat4(1), position) *
                         glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
-  DrawQuad(transform, sub_texture, tiling_factor, color);
+  DrawQuad(transform, color, sub_texture, tiling_factor);
 }
 
-void Renderer2D::DrawQuad(const glm::mat4& transform,
+void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color,
                           const Ref<SubTexture2D>& sub_texture,
-                          float tiling_factor, const glm::vec4& color) {
+                          float tiling_factor) {
   SOLAR_PROFILE_FUNCTION();
 
   if (s_data.quad_index_count >= kMaxIndices) {
@@ -333,8 +334,9 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
 
 void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                 const glm::vec2& size, float rotation,
+                                const glm::vec4& color,
                                 const Ref<Texture2D>& texture,
-                                float tiling_factor, const glm::vec4& color) {
+                                float tiling_factor) {
   SOLAR_PROFILE_FUNCTION();
 
   glm::mat4 transform =
@@ -342,13 +344,14 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
       glm::rotate(glm::mat4(1), glm::radians(rotation), {0, 0, 1}) *
       glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
-  DrawQuad(transform, texture, tiling_factor, color);
+  DrawQuad(transform, color, texture, tiling_factor);
 }
 
 void Renderer2D::DrawRotateQuad(const glm::vec3& position,
                                 const glm::vec2& size, float rotation,
+                                const glm::vec4& color,
                                 const Ref<SubTexture2D>& sub_texture,
-                                float tiling_factor, const glm::vec4& color) {
+                                float tiling_factor) {
   SOLAR_PROFILE_FUNCTION();
 
   glm::mat4 transform =
@@ -356,7 +359,7 @@ void Renderer2D::DrawRotateQuad(const glm::vec3& position,
       glm::rotate(glm::mat4(1), glm::radians(rotation), {0, 0, 1}) *
       glm::scale(glm::mat4(1), {size.x, size.y, 1});
 
-  DrawQuad(transform, sub_texture, tiling_factor, color);
+  DrawQuad(transform, color, sub_texture, tiling_factor);
 }
 
 void Renderer2D::DrawSprite(const TransformComponent& transform,

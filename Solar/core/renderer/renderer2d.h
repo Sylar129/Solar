@@ -31,33 +31,35 @@ class Renderer2D {
                        const glm::vec4& color);
   static void DrawQuad(const glm::mat4& transform, const glm::vec4& color,
                        int entity_id = -1);
-  
-  static void DrawQuad(const glm::vec3& position, const glm::vec2& size,
-                       const Ref<Texture2D>& texture, float tiling_factor,
-                       const glm::vec4& color);
-  static void DrawQuad(const glm::mat4& transform,
-                       const Ref<Texture2D>& texture, float tiling_factor,
-                       const glm::vec4& color, int entity_id = -1);
 
   static void DrawQuad(const glm::vec3& position, const glm::vec2& size,
+                       const glm::vec4& color, const Ref<Texture2D>& texture,
+                       float tiling_factor);
+  static void DrawQuad(const glm::mat4& transform, const glm::vec4& color,
+                       const Ref<Texture2D>& texture, float tiling_factor,
+                       int entity_id = -1);
+
+  static void DrawQuad(const glm::vec3& position, const glm::vec2& size,
+                       const glm::vec4& color,
                        const Ref<SubTexture2D>& sub_texture,
-                       float tiling_factor, const glm::vec4& color);
-  static void DrawQuad(const glm::mat4& transform,
+                       float tiling_factor);
+  static void DrawQuad(const glm::mat4& transform, const glm::vec4& color,
                        const Ref<SubTexture2D>& sub_texture,
-                       float tiling_factor, const glm::vec4& color);
+                       float tiling_factor);
 
   // Rotation is in radians
   static void DrawRotateQuad(const glm::vec3& position, const glm::vec2& size,
                              float rotation, const glm::vec4& color);
 
   static void DrawRotateQuad(const glm::vec3& position, const glm::vec2& size,
-                             float rotation, const Ref<Texture2D>& texture,
-                             float tiling_factor, const glm::vec4& color);
+                             float rotation, const glm::vec4& color,
+                             const Ref<Texture2D>& texture,
+                             float tiling_factor);
 
   static void DrawRotateQuad(const glm::vec3& position, const glm::vec2& size,
-                             float rotation,
+                             float rotation, const glm::vec4& color,
                              const Ref<SubTexture2D>& sub_texture,
-                             float tiling_factor, const glm::vec4& color);
+                             float tiling_factor);
 
   static void DrawSprite(const TransformComponent& transform,
                          const SpriteRendererComponent& src, int entity_id);
