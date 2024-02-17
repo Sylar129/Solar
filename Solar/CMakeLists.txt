@@ -85,6 +85,8 @@ set(SolarSrc
     core/scene/scene.cpp
     core/scene/scene.h
     core/scene/scriptable_entity.h
+    core/utils/image.cpp
+    core/utils/image.h
     core/utils/misc.h
     core/utils/platform_utils.h
     platform/opengl/buffer.cpp

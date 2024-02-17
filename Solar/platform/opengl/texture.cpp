@@ -4,8 +4,7 @@
 
 #include "core/debug/assert.h"
 #include "core/debug/instrumentor.h"
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"  // NOLINT
+#include "core/utils/image.h"
 
 namespace solar {
 
@@ -29,22 +28,14 @@ OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
 OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : path_(path) {
   SOLAR_PROFILE_FUNCTION();
 
-  int width;
-  int height;
-  int channels;
-  stbi_set_flip_vertically_on_load(1);
-  stbi_uc* data = nullptr;
-  {
-    SOLAR_PROFILE_SCOPE("OpenGLTexture2D(stbi_load)");
-    data = stbi_load(path.c_str(), &width, &height, &channels, 0);
-  }
-  SOLAR_CORE_ASSERT(data, "Failed to load image!");
-  width_ = width;
-  height_ = height;
+  Image image(path, FlipVerticallyOnLoad::kFlip);
+  width_ = image.GetWidth();
+  height_ = image.GetHeight();
 
   GLenum internal_format = 0;
   GLenum data_format = 0;
 
+  auto channels = image.GetChannels();
   if (channels == 4) {
     internal_format = GL_RGBA8;
     data_format = GL_RGBA;
@@ -68,9 +59,7 @@ OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : path_(path) {
   glTextureParameteri(renderer_id_, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
   glTextureSubImage2D(renderer_id_, 0, 0, 0, width_, height_, data_format,
-                      GL_UNSIGNED_BYTE, data);
-
-  stbi_image_free(data);
+                      GL_UNSIGNED_BYTE, image.GetData());
 }
 
 OpenGLTexture2D::~OpenGLTexture2D() {
