@@ -27,9 +27,13 @@ include_directories(
 # Solarium
 add_executable(
   Solarium
-  Solarium/src/editor_layer.cpp Solarium/src/editor_layer.h
-  Solarium/src/solarium_app.cpp Solarium/src/panels/scene_hierarchy_panel.cpp
-  Solarium/src/panels/scene_hierarchy_panel.h)
+  Solarium/src/panels/content_browser_panel.cpp
+  Solarium/src/panels/content_browser_panel.h
+  Solarium/src/panels/scene_hierarchy_panel.cpp
+  Solarium/src/panels/scene_hierarchy_panel.h
+  Solarium/src/editor_layer.cpp
+  Solarium/src/editor_layer.h
+  Solarium/src/solarium_app.cpp)
 
 # Solar
 add_subdirectory(Solar/)
