@@ -11,6 +11,8 @@
 
 namespace solar {
 
+class Statistics;
+
 class Renderer2D {
  public:
   Renderer2D() = delete;
@@ -64,14 +66,6 @@ class Renderer2D {
   static void DrawSprite(const TransformComponent& transform,
                          const SpriteRendererComponent& src, int entity_id);
 
-  // Stats
-  struct Statistics {
-    uint32_t draw_calls = 0;
-    uint32_t quad_count = 0;
-
-    uint32_t GetTotalVertexCount() const { return quad_count * 4; }
-    uint32_t GetTotalIndexCount() const { return quad_count * 6; }
-  };
   static void ResetStats();
   static Statistics GetStats();
 

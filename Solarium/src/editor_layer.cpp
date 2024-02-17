@@ -16,6 +16,7 @@
 #include "core/renderer/framebuffer.h"
 #include "core/renderer/render_command.h"
 #include "core/renderer/renderer2d.h"
+#include "core/renderer/renderer2d_data.h"
 #include "core/scene/scene_serializer.h"
 #include "core/utils/platform_utils.h"
 #include "glm/gtc/type_ptr.hpp"
