@@ -32,25 +32,23 @@ OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : path_(path) {
   width_ = image.GetWidth();
   height_ = image.GetHeight();
 
-  GLenum internal_format = 0;
-  GLenum data_format = 0;
+  internale_format_ = GL_RGBA8;
+  data_format_ = GL_RGBA;
 
   auto channels = image.GetChannels();
   if (channels == 4) {
-    internal_format = GL_RGBA8;
-    data_format = GL_RGBA;
+    internale_format_ = GL_RGBA8;
+    data_format_ = GL_RGBA;
   } else if (channels == 3) {
-    internal_format = GL_RGB8;
-    data_format = GL_RGB;
+    internale_format_ = GL_RGB8;
+    data_format_ = GL_RGB;
   }
 
-  internale_format_ = internal_format;
-  data_format_ = data_format;
-
-  SOLAR_CORE_ASSERT(internal_format && data_format, "Format not supported!!");
+  // SOLAR_CORE_ASSERT(internal_format && data_format, "Format not
+  // supported!!");
 
   glCreateTextures(GL_TEXTURE_2D, 1, &renderer_id_);
-  glTextureStorage2D(renderer_id_, 1, internal_format, width_, height_);
+  glTextureStorage2D(renderer_id_, 1, internale_format_, width_, height_);
 
   glTextureParameteri(renderer_id_, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTextureParameteri(renderer_id_, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -58,7 +56,7 @@ OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : path_(path) {
   glTextureParameteri(renderer_id_, GL_TEXTURE_WRAP_S, GL_REPEAT);
   glTextureParameteri(renderer_id_, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-  glTextureSubImage2D(renderer_id_, 0, 0, 0, width_, height_, data_format,
+  glTextureSubImage2D(renderer_id_, 0, 0, 0, width_, height_, data_format_,
                       GL_UNSIGNED_BYTE, image.GetData());
 }
 

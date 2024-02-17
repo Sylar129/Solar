@@ -3,6 +3,10 @@
 #pragma once
 
 #include <filesystem>
+
+#include "core/renderer/texture.h"
+#include "core/utils/misc.h"
+
 namespace solar {
 class ContentBrowserPanel {
  public:
@@ -12,5 +16,6 @@ class ContentBrowserPanel {
 
  private:
   std::filesystem::path current_directory_;
+  Ref<Texture2D> directory_icon_;
 };
 }  // namespace solar

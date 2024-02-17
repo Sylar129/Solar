@@ -16,13 +16,13 @@ DockId=0x00000006,0
 
 [Window][Viewport]
 Pos=372,21
-Size=856,879
+Size=856,632
 Collapsed=0
-DockId=0x00000005,0
+DockId=0x00000009,0
 
 [Window][Scene Hierarchy]
 Pos=0,21
-Size=370,347
+Size=370,422
 Collapsed=0
 DockId=0x00000001,0
 
@@ -32,8 +32,8 @@ Size=493,540
 Collapsed=0
 
 [Window][Properties]
-Pos=0,370
-Size=370,530
+Pos=0,445
+Size=370,455
 Collapsed=0
 DockId=0x00000002,0
 
@@ -43,14 +43,22 @@ Size=370,879
 Collapsed=0
 DockId=0x00000008,0
 
+[Window][Content Browser]
+Pos=372,655
+Size=856,245
+Collapsed=0
+DockId=0x0000000A,0
+
 [Docking][Data]
-DockSpace         ID=0x3BC79352 Window=0x4647B76E Pos=201,256 Size=1600,879 Split=X Selected=0x54723243
-  DockNode        ID=0x00000007 Parent=0x3BC79352 SizeRef=1548,701 Split=X
+DockSpace         ID=0x3BC79352 Window=0x4647B76E Pos=163,218 Size=1600,879 Split=X Selected=0x54723243
+  DockNode        ID=0x00000007 Parent=0x3BC79352 SizeRef=1228,701 Split=X
     DockNode      ID=0x00000003 Parent=0x00000007 SizeRef=965,701 Split=X
       DockNode    ID=0x00000004 Parent=0x00000003 SizeRef=370,701 Split=Y Selected=0x2E9237F7
-        DockNode  ID=0x00000001 Parent=0x00000004 SizeRef=370,448 CentralNode=1 Selected=0x2E9237F7
-        DockNode  ID=0x00000002 Parent=0x00000004 SizeRef=370,530 Selected=0x199AB496
-      DockNode    ID=0x00000005 Parent=0x00000003 SizeRef=856,701 HiddenTabBar=1 Selected=0x13926F0B
+        DockNode  ID=0x00000001 Parent=0x00000004 SizeRef=370,236 CentralNode=1 Selected=0x2E9237F7
+        DockNode  ID=0x00000002 Parent=0x00000004 SizeRef=370,455 Selected=0x199AB496
+      DockNode    ID=0x00000005 Parent=0x00000003 SizeRef=1661,701 Split=Y Selected=0x13926F0B
+        DockNode  ID=0x00000009 Parent=0x00000005 SizeRef=856,632 HiddenTabBar=1 Selected=0x13926F0B
+        DockNode  ID=0x0000000A Parent=0x00000005 SizeRef=856,245 Selected=0xBF096F38
     DockNode      ID=0x00000006 Parent=0x00000007 SizeRef=313,701 Selected=0x54723243
   DockNode        ID=0x00000008 Parent=0x3BC79352 SizeRef=370,701 HiddenTabBar=1 Selected=0x2E4EBCAA
 

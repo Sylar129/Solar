@@ -18,6 +18,8 @@
 
 namespace solar {
 
+constexpr float kFontSize = 18.0f;
+
 ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer"), time_(0.0f) {}
 
 ImGuiLayer::~ImGuiLayer() {}
@@ -41,9 +43,9 @@ void ImGuiLayer::OnAttach() {
   // io.ConfigViewportsNoTaskBarIcon = true;
 
   io.FontDefault = io.Fonts->AddFontFromFileTTF(
-      "assets/fonts/FiraCode/FiraCode-Regular.ttf", 15.0f);
+      "assets/fonts/FiraCode/FiraCode-Regular.ttf", kFontSize);
   io.Fonts->AddFontFromFileTTF("assets/fonts/FiraCode/FiraCode-Bold.ttf",
-                               15.0f);
+                               kFontSize);
 
   // Setup Dear ImGui style
   ImGui::StyleColorsDark();
