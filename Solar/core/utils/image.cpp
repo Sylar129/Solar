@@ -5,7 +5,7 @@
 #include "core/debug/assert.h"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "stb_image.h"  // NOLINT
 
 namespace solar {
 Image::Image(const std::string& file_path, FlipVerticallyOnLoad filp_vertical)

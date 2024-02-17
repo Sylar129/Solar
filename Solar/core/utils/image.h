@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <string>
+
 namespace solar {
 
 enum class FlipVerticallyOnLoad {
