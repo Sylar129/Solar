@@ -6,6 +6,7 @@
 
 #include "core/debug/instrumentor.h"
 #include "core/renderer/render_command.h"
+#include "core/renderer/renderer2d_data.h"
 #include "core/renderer/shader.h"
 #include "core/renderer/vertex_array.h"
 #include "glm/fwd.hpp"
@@ -13,76 +14,17 @@
 namespace solar {
 
 namespace {
-constexpr int kQuadVertexCount = 4;
-constexpr int kQuadIndexCount = 6;
-
-constexpr uint32_t kMaxQuads = 10000;
-constexpr uint32_t kMaxVertices = kMaxQuads * kQuadVertexCount;
-constexpr uint32_t kMaxIndices = kMaxQuads * kQuadIndexCount;
-constexpr uint32_t kMaxTextureSlots = 32;  // TODO(sylar): Render capability
-
 constexpr uint32_t kTextureIndex = 0;  // White texture
 constexpr uint32_t kWhiteTextureData = 0xffffffff;
 
 constexpr float kTilingFactor = 1;
 constexpr std::array<glm::vec2, kQuadVertexCount> kTextureCoords = {
     glm::vec2{0, 0}, glm::vec2{1, 0}, glm::vec2{1, 1}, glm::vec2{0, 1}};
-}  // namespace
-
-struct QuadVertex {
-  glm::vec3 position;
-  glm::vec4 color;
-  glm::vec2 tex_coord;
-  uint32_t tex_index;
-  float tiling_factor;
-
-  // Editor-only
-  int entity_id;
-};
-
-struct Renderer2DData {
-  Ref<VertexArray> quad_vertex_array;
-  Ref<VertexBuffer> quad_vertex_buffer;
-  Ref<Shader> texture_shader;
-  Ref<Texture2D> white_texture;
-
-  uint32_t quad_index_count = 0;
-  QuadVertex* quad_vertex_buffer_base = nullptr;
-  QuadVertex* quad_vertex_buffer_ptr = nullptr;
-
-  std::array<Ref<Texture2D>, kMaxTextureSlots> texture_slots;
-  uint32_t texture_slot_index = 1;  // 0 = white texture
-
-  std::array<glm::vec4, kQuadVertexCount> quad_vertex_positions;
-
-  Renderer2D::Statistics stats;
-
-  uint32_t DataSize() const {
-    auto data_size = reinterpret_cast<uint8_t*>(quad_vertex_buffer_ptr) -
-                     reinterpret_cast<uint8_t*>(quad_vertex_buffer_base);
-    return data_size;
-  }
-
-  void Setup(const glm::mat4& transform, const glm::vec4& color,
-             const std::array<glm::vec2, 4>& texture_coords,
-             uint32_t texture_index, float tiling_factor, int entity_id) {
-    for (int i = 0; i < kQuadVertexCount; ++i) {
-      quad_vertex_buffer_ptr->position = transform * quad_vertex_positions[i];
-      quad_vertex_buffer_ptr->color = color;
-      quad_vertex_buffer_ptr->tex_coord = texture_coords[i];
-      quad_vertex_buffer_ptr->tex_index = texture_index;
-      quad_vertex_buffer_ptr->tiling_factor = tiling_factor;
-      quad_vertex_buffer_ptr->entity_id = entity_id;
-      quad_vertex_buffer_ptr++;
-    }
-    quad_index_count += kQuadIndexCount;
-
-    stats.quad_count++;
-  }
-};
 
 // TODO(sylar): move
-static Renderer2DData s_data;
+Renderer2DData s_data;
+
+}  // namespace
 
 void Renderer2D::Init() {
   SOLAR_PROFILE_FUNCTION();
@@ -370,7 +312,7 @@ void Renderer2D::ResetStats() {
   memset(&s_data.stats, 0, sizeof(s_data.stats));
 }
 
-Renderer2D::Statistics Renderer2D::GetStats() { return s_data.stats; }
+Statistics Renderer2D::GetStats() { return s_data.stats; }
 
 void Renderer2D::StartBatch() {
   s_data.quad_vertex_buffer_ptr = s_data.quad_vertex_buffer_base;

@@ -25,10 +25,10 @@ set(SolarSrc
     core/base/entrypoint.h
     core/base/input.h
     core/base/key_codes.h
-    core/base/layer.cpp
-    core/base/layer.h
     core/base/layer_stack.cpp
     core/base/layer_stack.h
+    core/base/layer.cpp
+    core/base/layer.h
     core/base/log.cpp
     core/base/log.h
     core/base/mouse_codes.h
@@ -44,6 +44,7 @@ set(SolarSrc
     core/imgui/imgui_layer.h
     core/math/math.cpp
     core/math/math.h
+    core/math/size.h
     core/renderer/buffer.cpp
     core/renderer/buffer.h
     core/renderer/camera.h
@@ -52,18 +53,20 @@ set(SolarSrc
     core/renderer/framebuffer.cpp
     core/renderer/framebuffer.h
     core/renderer/graphics_context.h
-    core/renderer/orthographic_camera.cpp
-    core/renderer/orthographic_camera.h
     core/renderer/orthographic_camera_controller.cpp
     core/renderer/orthographic_camera_controller.h
-    core/renderer/render_Command.cpp
-    core/renderer/render_Command.h
-    core/renderer/renderer.cpp
-    core/renderer/renderer.h
-    core/renderer/renderer2d.cpp
-    core/renderer/renderer2d.h
+    core/renderer/orthographic_camera.cpp
+    core/renderer/orthographic_camera.h
+    core/renderer/render_command.cpp
+    core/renderer/render_command.h
     core/renderer/renderer_api.cpp
     core/renderer/renderer_api.h
+    core/renderer/renderer.cpp
+    core/renderer/renderer.h
+    core/renderer/renderer2d_data.h
+    core/renderer/renderer2d.cpp
+    core/renderer/renderer2d.h
+    core/renderer/shader_data_type.h
     core/renderer/shader.cpp
     core/renderer/shader.h
     core/renderer/subtexture2d.cpp
@@ -75,12 +78,12 @@ set(SolarSrc
     core/scene/components.h
     core/scene/entity.cpp
     core/scene/entity.h
-    core/scene/scene.cpp
-    core/scene/scene.h
     core/scene/scene_camera.cpp
     core/scene/scene_camera.h
     core/scene/scene_serializer.cpp
     core/scene/scene_serializer.h
+    core/scene/scene.cpp
+    core/scene/scene.h
     core/scene/scriptable_entity.h
     core/utils/misc.h
     core/utils/platform_utils.h
