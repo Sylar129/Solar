@@ -42,8 +42,11 @@ void ContentBrowserPanel::OnImGuiRender() {
 
     Ref<Texture2D> icon = p.is_directory() ? directory_icon_ : file_icon_;
 
+    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
     ImGui::ImageButton((ImTextureID)icon->GetRendererID(),
                        {kThumbnailSize, kThumbnailSize}, {0, 1}, {1, 0});
+    ImGui::PopStyleColor();
+
     if (ImGui::IsItemHovered() &&
         ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
       if (p.is_directory()) {
