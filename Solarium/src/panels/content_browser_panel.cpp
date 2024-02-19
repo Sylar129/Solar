@@ -2,6 +2,7 @@
 
 #include "src/panels/content_browser_panel.h"
 
+#include <algorithm>
 #include <filesystem>
 #include <string>
 #include <string_view>
