@@ -15,6 +15,7 @@ constexpr std::string_view kAssertDirectory = "assets";
 ContentBrowserPanel::ContentBrowserPanel()
     : current_directory_(kAssertDirectory) {
   directory_icon_ = Texture2D::Create("resources/icons/open-folder.png");
+  file_icon_ = Texture2D::Create("resources/icons/files.png");
 }
 
 void ContentBrowserPanel::OnImGuiRender() {

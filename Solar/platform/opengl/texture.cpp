@@ -32,20 +32,9 @@ OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : path_(path) {
   width_ = image.GetWidth();
   height_ = image.GetHeight();
 
+  // hard-code for now
   internale_format_ = GL_RGBA8;
   data_format_ = GL_RGBA;
-
-  auto channels = image.GetChannels();
-  if (channels == 4) {
-    internale_format_ = GL_RGBA8;
-    data_format_ = GL_RGBA;
-  } else if (channels == 3) {
-    internale_format_ = GL_RGB8;
-    data_format_ = GL_RGB;
-  }
-
-  // SOLAR_CORE_ASSERT(internal_format && data_format, "Format not
-  // supported!!");
 
   glCreateTextures(GL_TEXTURE_2D, 1, &renderer_id_);
   glTextureStorage2D(renderer_id_, 1, internale_format_, width_, height_);

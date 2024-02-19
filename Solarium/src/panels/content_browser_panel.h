@@ -17,5 +17,6 @@ class ContentBrowserPanel {
  private:
   std::filesystem::path current_directory_;
   Ref<Texture2D> directory_icon_;
+  Ref<Texture2D> file_icon_;
 };
 }  // namespace solar
