@@ -40,17 +40,17 @@ void ContentBrowserPanel::OnImGuiRender() {
        std::filesystem::directory_iterator(current_directory_)) {
     const auto& filename = p.path().filename().string();
 
-    ImGui::ImageButton((ImTextureID)directory_icon_->GetRendererID(),
+    Ref<Texture2D> icon = p.is_directory() ? directory_icon_ : file_icon_;
+
+    ImGui::ImageButton((ImTextureID)icon->GetRendererID(),
                        {kThumbnailSize, kThumbnailSize}, {0, 1}, {1, 0});
+    if (ImGui::IsItemHovered() &&
+        ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
+      if (p.is_directory()) {
+        current_directory_ /= p.path().filename();
+      }
+    }
     ImGui::Text("%s", filename.c_str());
-    // if (p.is_directory()) {
-    //   if (ImGui::Button(filename.c_str())) {
-    //     current_directory_ /= p.path().filename();
-    //   }
-    // } else {
-    //   if (ImGui::Button(filename.c_str())) {
-    //   }
-    // }
     ImGui::NextColumn();
   }
 
