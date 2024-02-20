@@ -30,7 +30,7 @@ void ContentBrowserPanel::OnImGuiRender() {
 
   // temporary
   constexpr float kPadding = 16;
-  constexpr float kThumbnailSize = 256;
+  constexpr float kThumbnailSize = 128;
   constexpr float kCellSize = kPadding + kThumbnailSize;
 
   float browser_width = ImGui::GetContentRegionAvail().x;
@@ -54,7 +54,7 @@ void ContentBrowserPanel::OnImGuiRender() {
         current_directory_ /= p.path().filename();
       }
     }
-    ImGui::Text("%s", filename.c_str());
+    ImGui::TextWrapped("%s", filename.c_str());
     ImGui::NextColumn();
   }
 
