@@ -289,6 +289,7 @@ void EditorLayer::OnImGuiRender() {
     if (const auto* payload =
             ImGui::AcceptDragDropPayload("CONTENT BROWSER ITEM")) {
       const wchar_t* path = (const wchar_t*)payload->Data;
+      // TODO(sylar): expose "assets"
       OpenScene(std::filesystem::path("assets") / path);
     }
 

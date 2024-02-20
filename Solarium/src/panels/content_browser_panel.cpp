@@ -44,6 +44,10 @@ void ContentBrowserPanel::OnImGuiRender() {
     for (const auto& p :
          std::filesystem::directory_iterator(current_directory_)) {
       const auto& filename = p.path().filename().string();
+
+      // temporary until new id
+      ImGui::PushID(filename.c_str());
+
       if (column >= count) {
         ImGui::TableNextRow();
         column = 0;
@@ -55,6 +59,7 @@ void ContentBrowserPanel::OnImGuiRender() {
       Ref<Texture2D> icon = p.is_directory() ? directory_icon_ : file_icon_;
 
       ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+      // TODO(sylar): use ImageButtonEx for id
       ImGui::ImageButton((ImTextureID)icon->GetRendererID(),
                          {kThumbnailSize, kThumbnailSize}, {0, 1}, {1, 0});
       ImGui::PopStyleColor();
@@ -62,6 +67,7 @@ void ContentBrowserPanel::OnImGuiRender() {
       if (ImGui::BeginDragDropSource()) {
         auto relative_path =
             std::filesystem::relative(p.path(), kAssertDirectory);
+        // TODO(sylar): disaster wchar_t
         ImGui::SetDragDropPayload(
             "CONTENT BROWSER ITEM", relative_path.c_str(),
             (wcslen(relative_path.c_str()) + 1) * sizeof(wchar_t));
@@ -75,6 +81,7 @@ void ContentBrowserPanel::OnImGuiRender() {
         }
       }
       ImGui::TextWrapped("%s", filename.c_str());
+      ImGui::PopID();
     }
 
     ImGui::EndTable();
