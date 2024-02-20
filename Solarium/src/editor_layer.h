@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <filesystem>
+
 #include "core/base/layer.h"
 #include "core/events/key_event.h"
 #include "core/math/size.h"
@@ -33,6 +35,7 @@ class EditorLayer : public Layer {
 
   void NewScene();
   void OpenScene();
+  void OpenScene(const std::filesystem::path& path);
   void SaveSceneAs();
 
   OrthographicCameraController camera_controller_;

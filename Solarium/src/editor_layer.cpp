@@ -285,6 +285,16 @@ void EditorLayer::OnImGuiRender() {
                ImVec2(viewport_size_.width, viewport_size_.height),
                ImVec2{0, 1}, ImVec2{1, 0});
 
+  if (ImGui::BeginDragDropTarget()) {
+    if (const auto* payload =
+            ImGui::AcceptDragDropPayload("CONTENT BROWSER ITEM")) {
+      const wchar_t* path = (const wchar_t*)payload->Data;
+      OpenScene(std::filesystem::path("assets") / path);
+    }
+
+    ImGui::EndDragDropTarget();
+  }
+
   auto window_size = ImGui::GetWindowSize();
   ImVec2 min_bound = ImGui::GetWindowPos();
   min_bound.x += viewport_offset.x;
@@ -434,13 +444,17 @@ void EditorLayer::OpenScene() {
   std::string filepath =
       FileDialogs::OpenFile("Solar Scene(*.solar)\0*.solar\0");
   if (!filepath.empty()) {
-    active_scene_ = CreateRef<Scene>();
-    active_scene_->OnViewportResize(viewport_size_);
-    scene_hierarchy_panel_.SetContext(active_scene_);
-
-    SceneSerializer serializer(active_scene_);
-    serializer.Deserialize(filepath);
+    OpenScene(filepath);
   }
+}
+
+void EditorLayer::OpenScene(const std::filesystem::path& path) {
+  active_scene_ = CreateRef<Scene>();
+  active_scene_->OnViewportResize(viewport_size_);
+  scene_hierarchy_panel_.SetContext(active_scene_);
+
+  SceneSerializer serializer(active_scene_);
+  serializer.Deserialize(path.string());
 }
 
 void EditorLayer::SaveSceneAs() {

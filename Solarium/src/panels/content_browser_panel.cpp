@@ -3,6 +3,7 @@
 #include "src/panels/content_browser_panel.h"
 
 #include <algorithm>
+#include <cwchar>
 #include <filesystem>
 #include <string>
 #include <string_view>
@@ -57,6 +58,15 @@ void ContentBrowserPanel::OnImGuiRender() {
       ImGui::ImageButton((ImTextureID)icon->GetRendererID(),
                          {kThumbnailSize, kThumbnailSize}, {0, 1}, {1, 0});
       ImGui::PopStyleColor();
+
+      if (ImGui::BeginDragDropSource()) {
+        auto relative_path =
+            std::filesystem::relative(p.path(), kAssertDirectory);
+        ImGui::SetDragDropPayload(
+            "CONTENT BROWSER ITEM", relative_path.c_str(),
+            (wcslen(relative_path.c_str()) + 1) * sizeof(wchar_t));
+        ImGui::EndDragDropSource();
+      }
 
       if (ImGui::IsItemHovered() &&
           ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
