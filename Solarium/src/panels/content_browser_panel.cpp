@@ -30,35 +30,46 @@ void ContentBrowserPanel::OnImGuiRender() {
 
   // temporary
   constexpr float kPadding = 16;
-  constexpr float kThumbnailSize = 256;
+  constexpr float kThumbnailSize = 128;
   constexpr float kCellSize = kPadding + kThumbnailSize;
 
   float browser_width = ImGui::GetContentRegionAvail().x;
   int count = std::max(1, static_cast<int>(browser_width / kCellSize));
-  ImGui::Columns(count, 0, false);
 
-  for (const auto& p :
-       std::filesystem::directory_iterator(current_directory_)) {
-    const auto& filename = p.path().filename().string();
+  if (ImGui::BeginTable("Content Browser", count)) {
+    int column = 0;
+    ImGui::TableNextColumn();
 
-    Ref<Texture2D> icon = p.is_directory() ? directory_icon_ : file_icon_;
-
-    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
-    ImGui::ImageButton((ImTextureID)icon->GetRendererID(),
-                       {kThumbnailSize, kThumbnailSize}, {0, 1}, {1, 0});
-    ImGui::PopStyleColor();
-
-    if (ImGui::IsItemHovered() &&
-        ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
-      if (p.is_directory()) {
-        current_directory_ /= p.path().filename();
+    for (const auto& p :
+         std::filesystem::directory_iterator(current_directory_)) {
+      const auto& filename = p.path().filename().string();
+      if (column >= count) {
+        ImGui::TableNextRow();
+        column = 0;
+      } else {
+        ImGui::TableSetColumnIndex(column);
+        ++column;
       }
+
+      Ref<Texture2D> icon = p.is_directory() ? directory_icon_ : file_icon_;
+
+      ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+      ImGui::ImageButton((ImTextureID)icon->GetRendererID(),
+                         {kThumbnailSize, kThumbnailSize}, {0, 1}, {1, 0});
+      ImGui::PopStyleColor();
+
+      if (ImGui::IsItemHovered() &&
+          ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
+        if (p.is_directory()) {
+          current_directory_ /= p.path().filename();
+        }
+      }
+      ImGui::TextWrapped("%s", filename.c_str());
     }
-    ImGui::Text("%s", filename.c_str());
-    ImGui::NextColumn();
+
+    ImGui::EndTable();
   }
 
-  ImGui::Columns(1);
   ImGui::End();
 }
 }  // namespace solar
