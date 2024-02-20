@@ -36,7 +36,7 @@ void ContentBrowserPanel::OnImGuiRender() {
   float browser_width = ImGui::GetContentRegionAvail().x;
   int count = std::max(1, static_cast<int>(browser_width / kCellSize));
 
-  if (ImGui::BeginTable("Content browser", count)) {
+  if (ImGui::BeginTable("Content Browser", count)) {
     int column = 0;
     ImGui::TableNextColumn();
 
