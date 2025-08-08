@@ -6,17 +6,69 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-include_directories(
+include(FetchContent)
+set(FETCHCONTENT_BASE_DIR ${CMAKE_SOURCE_DIR}/Vendor)
+
+# spdlog
+FetchContent_Declare(
+    spdlog
+    URL https://github.com/gabime/spdlog/archive/refs/tags/v1.15.3.zip
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+FetchContent_MakeAvailable(spdlog)
+# include_directories(AFTER ${spdlog_SOURCE_DIR}/include)
+
+# glm
+FetchContent_Declare(
+    glm
+    URL https://github.com/g-truc/glm/archive/refs/tags/1.0.1.zip
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+add_compile_definitions(GLM_ENABLE_EXPERIMENTAL)
+FetchContent_MakeAvailable(glm)
+# include_directories(AFTER ${glm_SOURCE_DIR}/include)
+
+# glfw
+FetchContent_Declare(
+    glfw
+    URL https://github.com/glfw/glfw/archive/refs/tags/3.4.zip
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+FetchContent_MakeAvailable(glfw)
+include_directories(AFTER ${glfw_SOURCE_DIR}/include)
+
+# entt
+FetchContent_Declare(
+    entt
+    URL https://github.com/skypjack/entt/archive/refs/tags/v3.15.0.zip
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+FetchContent_MakeAvailable(entt)
+include_directories(AFTER ${entt_SOURCE_DIR}/src)
+
+# stb
+FetchContent_Declare(
+    stb
+    URL https://github.com/nothings/stb/archive/refs/heads/master.zip
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+FetchContent_MakeAvailable(stb)
+include_directories(AFTER ${stb_SOURCE_DIR})
+
+# yaml-cpp
+FetchContent_Declare(
+    yaml-cpp
+    URL https://github.com/jbeder/yaml-cpp/archive/refs/heads/master.zip
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+FetchContent_MakeAvailable(yaml-cpp)
+# include_directories(AFTER ${yaml-cpp_SOURCE_DIR})
+
+include_directories(PUBLIC
   ./
   ../Vendor/imgui/
-  ../Vendor/glfw/include/
   ../Vendor/glad/include/
-  ../Vendor/spdlog/include/
-  ../Vendor/glm/
-  ../Vendor/entt/src/
-  ../Vendor/ImGuizmo/
-  ../Vendor/yaml-cpp/include/
-  ../Vendor/stb/)
+  ../Vendor/ImGuizmo/)
 
 # Solar
 set(SolarSrc
@@ -102,14 +154,8 @@ set(SolarSrc
     platform/opengl/texture.cpp
     platform/opengl/texture.h
     platform/opengl/vertex_array.cpp
-    platform/opengl/vertex_array.h
-    platform/windows/input.cpp
-    platform/windows/platform_utils.cpp
-    platform/windows/window.cpp
-    platform/windows/window.h)
+    platform/opengl/vertex_array.h)
 add_library(Solar STATIC ${SolarSrc})
-target_compile_definitions(Solar PUBLIC GLM_ENABLE_EXPERIMENTAL)
-target_compile_definitions(Solar PUBLIC YAML_CPP_STATIC_DEFINE)
 target_precompile_headers(Solar PRIVATE solpch.h)
 
 # Imgui
@@ -137,15 +183,9 @@ add_library(ImGui STATIC ${ImGuiSrc})
 set(ImGuizmoSrc ../Vendor/ImGuizmo/ImGuizmo.cpp ../Vendor/ImGuizmo/ImGuizmo.h)
 add_library(ImGuizmo STATIC ${ImGuizmoSrc})
 
-# glfw
-add_subdirectory(../Vendor/glfw/ glfwlib/)
-
 # glad
 set(gladSrc ../Vendor/glad/src/glad.c ../Vendor/glad/include/glad/glad.h
             ../Vendor/glad/include/KHR/khrplatform.h)
 add_library(glad STATIC ${gladSrc})
 
-# yaml-cpp
-add_subdirectory(../Vendor/yaml-cpp/ yamllib/)
-
-target_link_libraries(Solar PUBLIC ImGui ImGuizmo glfw glad yaml-cpp)
+target_link_libraries(Solar PUBLIC glfw ImGui ImGuizmo glad yaml-cpp::yaml-cpp spdlog::spdlog glm::glm)
