@@ -60,7 +60,7 @@ void ContentBrowserPanel::OnImGuiRender() {
 
       ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
       // TODO(sylar): use ImageButtonEx for id
-      ImGui::ImageButton((ImTextureID)icon->GetRendererID(),
+      ImGui::ImageButton("", (ImTextureRef)icon->GetRendererID(),
                          {kThumbnailSize, kThumbnailSize}, {0, 1}, {1, 0});
       ImGui::PopStyleColor();
 

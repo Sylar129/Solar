@@ -107,10 +107,6 @@ set(SolarSrc
     Solar/platform/windows/platform_utils.cpp
     Solar/platform/windows/window.cpp)
 
-
-
-
-
 add_executable(
   Solar
   Solar/editor/panels/content_browser_panel.cpp

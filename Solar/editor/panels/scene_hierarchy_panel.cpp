@@ -29,7 +29,7 @@ void DrawVec3Control(const std::string& label, glm::vec3& values,
   ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{0, 0});
 
   float line_height =
-      GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+      GImGui->Font->LegacySize + GImGui->Style.FramePadding.y * 2.0f;
   ImVec2 button_size = {line_height + 3.0f, line_height};
 
   // X Button
@@ -101,7 +101,7 @@ void DrawComponent(const std::string& label, Entity entity,
 
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{4, 4});
     float line_height =
-        GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+        GImGui->Font->LegacySize + GImGui->Style.FramePadding.y * 2.0f;
     ImGui::Separator();
     // NOLINTNEXTLINE
     bool open = ImGui::TreeNodeEx((void*)typeid(T).hash_code(), kTreeNodeFlags,
