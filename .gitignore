@@ -3,4 +3,5 @@
 .vscode/
 .vs/
 build/
+Vendor/
 imgui.ini

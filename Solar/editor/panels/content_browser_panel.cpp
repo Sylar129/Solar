@@ -1,6 +1,6 @@
 // Copyright (c) 2024 Sylar129
 
-#include "src/panels/content_browser_panel.h"
+#include "editor/panels/content_browser_panel.h"
 
 #include <algorithm>
 #include <cwchar>

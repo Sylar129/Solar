@@ -12,8 +12,8 @@
 #include "core/renderer/orthographic_camera_controller.h"
 #include "core/renderer/shader.h"
 #include "core/renderer/vertex_array.h"
-#include "src/panels/content_browser_panel.h"
-#include "src/panels/scene_hierarchy_panel.h"
+#include "editor/panels/content_browser_panel.h"
+#include "editor/panels/scene_hierarchy_panel.h"
 
 namespace solar {
 

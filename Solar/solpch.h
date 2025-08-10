@@ -3,6 +3,7 @@
 #pragma once
 
 #include <algorithm>
+#include <array>
 #include <chrono>
 #include <fstream>
 #include <functional>
@@ -21,5 +22,6 @@
 #include "glm/glm.hpp"
 
 #ifdef SOLAR_PLATFORM_WINDOWS
+#define NOMINMAX
 #include <Windows.h>
 #endif
