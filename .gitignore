@@ -3,5 +3,6 @@
 .vscode/
 .vs/
 build/
-Vendor/
+Vendor/*
+!Vendor/CMakeLists.txt
 imgui.ini
