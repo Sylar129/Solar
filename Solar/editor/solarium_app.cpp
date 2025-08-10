@@ -2,7 +2,7 @@
 
 #include "core/base/entrypoint.h"
 #include "core/utils/misc.h"
-#include "src/editor_layer.h"
+#include "editor/editor_layer.h"
 
 namespace solar {
 
